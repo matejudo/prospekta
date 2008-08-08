@@ -1,0 +1,12 @@
+﻿<div class="container_16" id="midsection">
+	<div class="grid_12 prefix_2 suffix_2">
+		<div id="content" class="grid_12">
+			<h1><?=$this->baseUrl()?></h1>
+			<?php foreach($this->news as $entry) : ?>
+				<h3><?= $this->escape($entry->title) ?></h3>
+				<?php echo $entry->intro;?>
+				<?php echo $entry->text;?>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</div>

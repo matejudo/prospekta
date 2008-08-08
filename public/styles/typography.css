@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document **************************/
+
+body 			{ font-family: 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; font-size: 62.5%; }
+
+ul, ol, dl, h1, h2, h3, h4, h5, h6, td, th, caption, pre, p, blockquote, input, textarea 
+				{ line-height: 1.6em; font-weight: normal; color: #6C6C6C; text-align: left; }
+
+h1, h2, h3, 
+h4, h5, h6      { margin: 0; font-family: 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; font-weight: normal; color: #555; }
+h1              { font-size: 3.6em; line-height: 36px; padding-top: 18px; padding-bottom: 18px; }
+h2              { font-size: 2.3em; line-height: 36px; padding-top: 9px; padding-bottom: 9px; }
+h3              { font-size: 1.6em; line-height: 18px; padding-top: 9px; padding-bottom: 9px; font-weight: normal; }
+h4              { font-size: 1.4em; line-height: 18px; padding-top: 9px; }
+h5              { font-size: 1.2em; line-height: 18px; padding-top: 9px; padding-bottom: 9px; }
+h6              { font-size: 1.0em; line-height: 18px; padding-top: 9px; padding-bottom: 9px; }
+
+a               { color:  #4d83bb; text-decoration: none; }
+a:hover         { color: #F70; }
+em              { font-style: italic; }
+p               { margin: 0 0 18px 0; font-size: 1.4em;  }
+small           { font-size: 80%; }
+strong          { font-weight: bold; }
+
+ul, ol          { margin-top: 18px; margin-bottom: 18px; padding-left: 16px; list-style-position: outside; list-style-type: disc; }
+ol              { list-style-type: decimal; padding-left: 17px; }
+    
+dl              { margin-top: 18px; margin-bottom: 18px; }
+dl dt           { font-weight: bold; }
+
+blockquote      { border-left: 1px solid #666; margin-top: 18px; margin-bottom: 18px; padding-left: 17px; font-style: italic; }
+blockquote *    { color: #666; }
+
+textarea        { resize: none; } /* Prevents that little handle from showing up in Safari. */
+
+sup             { font-size: 70%; vertical-align: super; }
+
+
+/* Matej Udovičić **************************/
+
+#content p		{ text-align: justify; }
+
+#sidebar h2		{ font-size: 1.5em; padding: 0; margin-top: 10px; text-transform: uppercase; font-weight: bold; font-family: 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; }
+#sidebar h3		{ font-size: 1.2em; padding: 0 0 0 10px; font-weight: bold; font-family: 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; }
+#sidebar p		{ font-size: 1.2em; padding: 0 0 0 10px; margin: 0 0 9px 0;  }
+
+#sidebar .icon	{ padding: 0 0 0 20px; margin-top: 10px;}
+#sidebar .cal	{ background: url("../images/icon_calendar.png") no-repeat left; }
+#sidebar .phone	{ background: url("../images/icon_home.png") no-repeat left; }
+
+#menu a			{ color: #aaa; }
+#menu a:hover	{ color: #fff; }
+#menu strong	{ text-transform: uppercase; font-size: 1.4em; font-weight: normal; }
+#menu small		{ text-transform: lowercase; }
+
+#submenu ul		{ color: #fff; list-style: none; font-size: 1.3em; text-shadow: black; line-height: 16px;  }
+#submenu ul li 	{ padding: 3px 0 3px 0; background: url("../images/icon_arrow.png") left center no-repeat; padding-left: 20px; }
+#submenu a		{ color: #fff; text-shadow: 0.1em 0.1em #333; display: block; }
+#submenu a:hover{ color: #F70; }
+#submenu big	{ text-transform: uppercase; font-weight: bold; }
+
+.orange			{ color: white; }
+.orange h2		{ color: white; font-family: Tahoma, Arial, sans-serif; text-shadow: 0.1em 0.1em #333;
+				  font-size: 1.3em; font-weight: bold; text-align: center; text-transform: uppercase; margin: 0px;
+				  line-height: auto; padding: 0px; letter-spacing: 1px;  }
+.orange p		{ color: white; }

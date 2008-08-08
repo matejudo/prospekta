@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/styles/master.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="<?=$this->baseUrl()?>/scripts/jquery-1.2.6.min.js" type="text/javascript"></script>
+	<title>Prospekta - Edukacija i zapošljavanje mladih: <?=$this->escape($this->title)?></title>
+</head>
+<body>
+<div id="header"><div class="logo"></div><h1>Ljekarna Udovičić-Martinis: <?=$this->escape($this->title); ?></h1></div>
+<div id="menu">
+	<ul><!-- 
+		<li class="med"><a href="<?=$this->baseUrl()?>" onclick=""><strong>Početna</strong></a></li>		
+		<li class="med"><a href="<?=$this->baseUrl()?>/o-nama"><strong>O nama</strong></a></li>
+		<li class="big"><a href="<?=$this->baseUrl()?>/programi"><strong>Programi edukacija</strong></a></li>
+		<li class="big"><a href="<?=$this->baseUrl()?>/posao-karijera"><strong>Posao i karijera</strong></a></li>
+		<li class="med"><a href="<?=$this->baseUrl()?>/preporuke"><strong>Preporuke</strong></a></li>
+		<li class="med"><a href="<?=$this->baseUrl()?>/kontakt"><strong>Kontakt</strong></a></li>
+		-->
+		<script type="text/javascript">
+		 	function showTab(number)
+		 	{
+		 		for(i=1; i<5; i++)
+		 		{
+		 			$('#submenu-tab'+i).hide(500);
+		 		}
+		 		$('#submenu-tab'+number).show(500);
+		 	}
+		</script>
+		<li class="med"><a href="#" onclick="showTab(1);"><strong>Početna</strong></a></li>		
+		<li class="med"><a href="#" onclick="showTab(2);"><strong>O nama</strong></a></li>
+		<li class="big"><a href="#" onclick="showTab(3);"><strong>Programi edukacija</strong></a></li>
+		<li class="big"><a href="#" onclick="showTab(4);"><strong>Posao i karijera</strong></a></li>
+		<li class="med"><a href="#" onclick="showTab(5);"><strong>Preporuke</strong></a></li>
+		<li class="med"><a href="#" onclick="showTab(6);"><strong>Kontakt</strong></a></li>
+	</ul>
+</div>
+<div id="submenu" class="blue">
+	<div class="container_12">
+		<div class="grid_8 alpha">
+			<div id="submenu-tab1" style="display:block;">
+			<p>PROSPEKTA predstavlja program edukacije i zapošljavanja mladih, pokrenut u okviru agencije za razvoj ljudskih potencijala Horizont Internacional d.o.o.</p>
+			<p>Težimo stalnom usmjeravanju i poticanju mladih ljudi na svjesno ulaganje u svoj osobni razvoj, a cilj nam je stvarati grupe mladih, uspješnih pojedinaca koji će biti traženi na tržištu rada zbog svojih izuzetnih vještina i sposobnosti.</p>
+			</div>
+			<ul id="submenu-tab2" style="display:none;">
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/trazim-posao"><big>Tko smo mi?</big> - Kako i gdje tražiti posao? Savjeti za pisanje vašeg prvog CV-a</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/korisno"><big>Naše vrijednosti</big> - Zakon o radu. Ugovori o radu. Zapošljavanja osoba sa invaliditetom.</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/radna-mjesta"><big>Vizija</big> - U različitim granama</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/karijera"><big>Misija</big> - Intervjui HR managera - njihova vizija. Organizacijska kultura.</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/oglasi"><big>Naš management i treneri</big></a></li>
+			</ul>
+			<ul id="submenu-tab3" style="display:none;">
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/trazim-posao"><big>Career Coaching</big> - Kako i gdje tražiti posao? Savjeti za pisanje vašeg prvog CV-a</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/korisno"><big>Self-Development</big> - Zakon o radu. Ugovori o radu. Zapošljavanja osoba sa invaliditetom.</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/radna-mjesta"><big>Student management</big> - U različitim granama</a></li>
+			</ul>
+			<ul id="submenu-tab4" style="display:none;">
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/trazim-posao"><big>Tražim posao!</big> - Kako i gdje tražiti posao? Savjeti za pisanje vašeg prvog CV-a</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/korisno"><big>Korisno je znati</big> - Zakon o radu. Ugovori o radu. Zapošljavanja osoba sa invaliditetom.</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/radna-mjesta"><big>Opisi radnih mjesta</big> - U različitim granama</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/karijera"><big>Karijera u...</big> - Intervjui HR managera - njihova vizija. Organizacijska kultura.</a></li>
+				<li><a href="<?=$this->baseUrl()?>/posao-karijera/oglasi"><big>Oglasi za poslove</big></a></li>
+			</ul>
+		</div>
+		<div class="grid_4 omega">Polaroid</div>
+	</div>
+</div>
+<div id="programi" class="orange">
+	<div class="container_12">
+		<div class="grid_4 alpha"><h2>Career coaching program</h2></div>
+		<div class="grid_4"><h2>Self-Development program</h2></div>
+		<div class="grid_4 omega"><h2>Student management program</h2></div>
+	</div>
+</div>
+<div class="border-bottom"></div>
+
+<?= $this->layout()->content; ?>
+</body>
+</html>

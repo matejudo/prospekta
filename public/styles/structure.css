@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+
+#header 		{ background: url("../images/ui_header_background.jpg") center; width: 100%; height: 185px; margin: 0px; }
+#header h1 		{ display: none; }
+#header .logo	{ background: url("../images/ui_logo.gif"); width: 382px; height: 105px; position: absolute;
+				  left: 50%; margin-left: -460px; top: 20px; }
+
+#midsection 	{ margin-top: 20px; }
+
+#menu			{ position: absolute; top: 142px; left: 50%; height: 42px; width: 960px; margin-left: -480px;  }
+#menu a			{ display: block; }
+#menu ul li		{ height: 36px; float: left; display: block; margin-right: 25px; }
+#menu small		{ display: block; }
+
+#submenu		{ background: url("../images/ui_blue_background.jpg"); height: 150px; margin: 0px;}
+#programi		{ background: url("../images/ui_orange_background.jpg"); height: 150px; border-top: 2px solid white; }
+
+.border-bottom	{ background: url("../images/ui_border_bottom.jpg") repeat-x; height: 15px; }
+
+#najave p		{ margin: 0; padding: 0; border-bottom: 1px solid #ccc; }
