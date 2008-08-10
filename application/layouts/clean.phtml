@@ -4,21 +4,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/styles/master.css" type="text/css" media="screen" charset="utf-8" />
-	<script src="<?=$this->baseUrl()?>/scripts/jquery-1.2.6.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/styles/admin.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="<?=$this->baseUrl()?>/scripts/mootools-release-1.11.js" type="text/javascript"></script>
 	<title>Prospekta - Edukacija i zapošljavanje mladih: <?=$this->escape($this->title)?></title>
 </head>
 <body>
 <div id="header"><div class="logo"></div><h1>Prospekta - Edukacija i zapošljavanje mladih: <?=$this->escape($this->title); ?></h1></div>
-<div id="menu">
-	<ul id="tab1">
-		<li class="med"><a href="<?=$this->baseUrl()?>"><strong>Početna</strong></a></li>		
-		<li class="med"><a href="<?=$this->baseUrl()?>/o-nama"><strong>O nama</strong></a></li>
-		<li class="big"><a href="<?=$this->baseUrl()?>/programi"><strong>Programi edukacija</strong></a></li>
-		<li class="big"><a href="<?=$this->baseUrl()?>/posao-karijera"><strong>Posao i karijera</strong></a></li>
-		<li class="med"><a href="<?=$this->baseUrl()?>/preporuke"><strong>Preporuke</strong></a></li>
-		<li class="med"><a href="<?=$this->baseUrl()?>/kontakt"><strong>Kontakt</strong></a></li>
-	</ul>
-</div>
 <div class="border-bottom"></div>
 <?= $this->layout()->content; ?>
 </body>

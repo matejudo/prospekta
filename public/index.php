@@ -9,6 +9,7 @@
 		. PATH_SEPARATOR . '../application/models'
 		. PATH_SEPARATOR . get_include_path());		
 	require_once 'Zend/Loader.php';
+	Zend_Loader::loadClass('Zend_Auth');
 	
 	Zend_Loader::registerAutoload();	
 	
@@ -25,11 +26,15 @@
 		
 		// setup database
 		$db = Zend_Db::factory($config->db);
+		$db->setFetchMode(Zend_Db::FETCH_OBJ);
 		Zend_Db_Table::setDefaultAdapter($db);
 		$db->query("SET NAMES 'utf8' COLLATE 'utf8_unicode_ci'");
+		Zend_Registry::set('db', $db);
+		
+		// Create auth object
+		$auth = Zend_Auth::getInstance();
 	
-		// setup custom router
-		require_once '../application/catRoute.php';
+		// Front Controller
 		$frontController = Zend_Controller_Front::getInstance();
 		$router = $frontController->getRouter();
 	
@@ -38,9 +43,21 @@
 														"default" => "../application/controllers",
 														"admin" => "../application/modules/admin/controllers"
 													));
+													
+		$defaultModules = array(
+			'../application',
+			'../application/modules/admin'
+		);
+													
+		foreach($defaultModules as $key => $module) {	 
+			// add default controller directories
+			$frontController->addControllerDirectory($module . DIRECTORY_SEPARATOR . 'controllers', $key);	 
+			// add models directory to include path
+			set_include_path(get_include_path() . PATH_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'models');
+	 
+		}									
 		
-		// učitaj strukturu stranice
-		
+		// učitaj strukturu stranice		
 		$struct = new Structure();
 		$mainmenu = $struct->getChildren("prospekta");	
 	

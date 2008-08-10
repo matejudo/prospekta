@@ -1,0 +1,26 @@
+<div class="container_12" id="midsection">
+
+	<div id="content" class="grid_4 prefix_4 suffix_4">
+	<?php if(!empty($this->message)) :?>
+		<div class="warning">
+			<p><?php echo $this->escape($this->message);?></p>
+		</div>
+	<?php endif; ?>
+		<?= $this->form("login", array("method" => "post", "action" => $this->baseUrl . "/admin/auth/login")) ?>
+			<div id="login">
+				<p>
+					<label for="username">Korisničko ime:</label><br/>
+					<?= $this->formText("username", null, array("id" => "username")); ?>
+				</p>
+				<p>
+					<label for="password">Lozinka:</label><br/>
+					<?= $this->formPassword("password", null, array("id" => "password")); ?>
+				</p>
+				<p>
+					<br/><?= $this->formSubmit("login", "ulaz »", array("id" => "submit")); ?>
+				</p>
+			</div>
+		</form>
+	</div>
+
+</div>
