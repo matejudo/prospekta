@@ -16,7 +16,8 @@
 #userinfo		{ position: absolute; top: 156px; right: 50%; margin-right: -480px; }
 #userinfo p		{ color: white; font-size: 1.3em; }
 
-.toolbar		{ margin: 0px; padding: 0px; display: block; clear: both; height: 27px; }
+
+.toolbar			{ margin: 0px; padding: 0px; display: block; clear: both; height: 27px; }
 .toolbar li		{ float: left; display: block; margin-right: 5px; list-style: none;  }
 .toolbar li.separator		{ border-left: 1px solid #ddd; height: 27px; margin: 0px 10px 0px 5px;  }
 .toolbar li a	{ display: block; height: 15px; border: 1px solid #ddd; padding: 6px 10px 6px 24px; font-size: 1.3em; background-color: #fff; }
@@ -27,9 +28,15 @@
 .toolbar li.delarticle	a	{ background: url("../images/icon_notebook_minus.png") no-repeat 3px center; }
 .toolbar li.pubarticle	a	{ background: url("../images/icon_light_bulb.png") no-repeat 3px center; }
 .toolbar li.unpubarticle a	{ background: url("../images/icon_light_bulb_off.png") no-repeat 3px center; }
+.toolbar li.save a			{ background: url("../images/icon_notebook_save.png") no-repeat 3px center; }
 
 table.list		{ font-size: 1.3em; border-top: 3px solid #ddd; border-left: 1px solid #ddd; border-bottom: 1px solid #ddd; border-right: 1px solid #ddd; margin-top: 20px; clear: both; }
 table.list th	{ border-bottom: 3px solid #ddd; padding: 6px 2px; font-weight: bold; color: black; background: #eee; }
 table.list td	{ border-bottom: 1px solid #ddd; padding: 4px 2px; vertical-align: middle; }
 table.list tr.hilite { background: #eee; }
 table.list tr:hover, table.list tr.hilite:hover	{ background: #e4e4e4;  }
+
+.editor input[type="text"]	{ width: 50%; border: 1px solid #ddd; }
+.editor input.big[type="text"]	{ font-size: 1.6em; }
+
+#lock		{ vertical-align: text-top; }

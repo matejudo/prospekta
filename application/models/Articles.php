@@ -62,4 +62,39 @@ class Articles extends Zend_Db_Table
 		$stmt->execute();
 	}
 	
+	public function setPublish($data, $value)
+	{
+		$db = Zend_Registry::get("db");
+		
+		$inlist = "(";		
+		foreach($data as $id)
+		{
+			$inlist .= "$id, ";
+		}
+		$inlist = substr($inlist, 0, strlen($inlist)-2);
+		$inlist .= ")";
+		$stmt = $db->query("
+			UPDATE pros_article p
+				SET p.published = $value
+				WHERE p.id in $inlist
+		");	
+	}
+	
+	public function delete($data)
+	{
+		$db = Zend_Registry::get("db");
+		
+		$inlist = "(";		
+		foreach($data as $id)
+		{
+			$inlist .= "$id, ";
+		}
+		$inlist = substr($inlist, 0, strlen($inlist)-2);
+		$inlist .= ")";
+		$stmt = $db->query("
+			DELETE FROM pros_article
+				WHERE id IN $inlist;
+		");	
+	}
+	
 }

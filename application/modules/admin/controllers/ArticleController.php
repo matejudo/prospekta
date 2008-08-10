@@ -30,47 +30,90 @@ class Admin_ArticleController extends Zend_Controller_Action
 		
 	}
 	
+	public function newAction()
+	{
+		$this->view->baseUrl();
+		$users = new Users();
+		$this->view->users = $users->getUsers();
+	}
+	
 	public function publishAction()
 	{
+
+		$articles = new Articles();
+		$data = array();
 		if($this->getRequest()->isPost())
 		{
+			
 			$params = $this->_request->getParams();
-			foreach($params as $param)
+			
+			foreach($params as $key => $value)
 			{
-				Zend_Debug::dump($param);
+				if($value == "1")
+				{
+					$id = substr($key, 2);
+					array_push($data, $id);
+				}
 			}
 		}
 		else
-		{
-			$data = array("published" => 1);
+		{	
+			array_push( $data, $this->_getParam("id") );
 		}
-		$articles = new Articles();
-		$id = $this->_getParam("id");
-		$where = $articles->getAdapter()->quoteInto('id = ?', $id);
-		$articles->update($data, $where);
+		
+		$articles->setPublish($data, 1);
+		Zend_Debug::dump($articles);
 		$this->_redirect('admin/article');
+
+
 	}
 	
 	public function unpublishAction()
 	{
+		$articles = new Articles();
+		$data = array();
 		if($this->getRequest()->isPost())
 		{
+			
 			$params = $this->_request->getParams();
-			foreach($params as $param)
+			
+			foreach($params as $key => $value)
 			{
-				Zend_Debug::dump($param);
+				if($value == "1")
+				{
+					$id = substr($key, 2);
+					array_push($data, $id);
+				}
 			}
 		}
 		else
 		{
-			$data = array("published" => 0);
+			array_push( $data, $this->_request->getParam("id") );
 		}
-		$articles = new Articles();
-		$id = $this->_getParam("id");
-		$where = $articles->getAdapter()->quoteInto('id = ?', $id);
-		$articles->update($data, $where);
+		$articles->setPublish($data, 0);
 		$this->_redirect('admin/article');
 	}
+	
+	public function deleteAction()
+	{
+		if($this->getRequest()->isPost())
+		{
+			$articles = new Articles();
+			$data = array();
+			$params = $this->_request->getParams();			
+			foreach($params as $key => $value)
+			{
+				if($value == "1")
+				{
+					$id = substr($key, 2);
+					array_push($data, $id);
+				}
+			}
+			$articles->delete($data, 0);
+		}
+		$this->_redirect('admin/article');
+	}
+	
 	
 	public function moveupAction()
 	{
@@ -85,6 +128,25 @@ class Admin_ArticleController extends Zend_Controller_Action
 		$articles = new Articles();
 		$id = $this->_getParam("id");
 		$articles->movedown($id);		
+		$this->_redirect('admin/article');
+	}
+	
+	public function saveAction()
+	{		
+		if($this->getRequest()->isPost())
+		{
+			$articles = new Articles();
+			$params = $this->_request->getParams();
+			Zend_Debug::dump($params);
+			$data = array(
+			    'title'      	=> $this->_request->getParam("title"),
+			    'slug' 			=> $this->_request->getParam("slug"),
+			    'text'			=> $this->_request->getParam("text"),
+				'category'		=> $this->_request->getParam("category"),
+				'published'		=> $this->_request->getParam("published")
+			);
+			$articles->insert($data); 
+		}
 		$this->_redirect('admin/article');
 	}
 

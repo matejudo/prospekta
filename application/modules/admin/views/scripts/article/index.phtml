@@ -2,7 +2,7 @@
 <div class="container_12" id="midsection">
 	<div id="content" class="grid_12">
 			<ul class="toolbar">
-				<li class="button newarticle" id="new"><a href="#">Novi članak</a></li>
+				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/article/new">Novi članak</a></li>
 				<li class="button editarticle" id="edit"><a href="#">Izmjeni članak</a></li>
 				<li class="button delarticle" id="delete"><a href="#">Izbriši izabrane</a></li>
 				<li class="separator"></li>
@@ -11,7 +11,35 @@
 			</ul>
 		    <script type="text/javascript">
 		    	 $(document).ready(function() {
-			    	$("#publish").click(function(event) { $("#articles").attr({action: "<?= $this->baseUrl . "/admin/article/publish" ?>"});  testCheckboxes(); event.preventDefault(); });
+			    	$("#publish").click(
+			    		function(event) { 
+			    			$("#articles").attr({action: "<?= $this->baseUrl . "/admin/article/publish" ?>"});  
+			    			if(testCheckboxes()) $("#articles").submit(); 
+			    			else window.alert("Nije selektiran ni jedan članak.");
+			    			event.preventDefault(); 
+			    		});
+			    		
+			    	$("#unpublish").click(
+			    		function(event) { 
+			    			$("#articles").attr({action: "<?= $this->baseUrl . "/admin/article/unpublish" ?>"});  
+			    			if(testCheckboxes()) $("#articles").submit(); 
+			    			else window.alert("Nije selektiran ni jedan članak.");
+			    			event.preventDefault(); 
+			    		});
+			    		
+			    	$("#delete").click(
+			    		function(event) {
+			    			if(testCheckboxes())
+			    			{
+					    		if(window.confirm("Da li stvarno želite izbrisati "+countChecked()+" članak(a)?"))
+					    		{
+					    			$("#articles").attr({action: "<?= $this->baseUrl . "/admin/article/delete" ?>"});
+									$("#articles").submit();  
+					    		}
+					    	}
+					    	else window.alert("Nije selektiran ni jedan članak.");
+			    		});
+			    		
 			    	$("#checkall").click(function() { checkAll(); } );
 			    	function testCheckboxes()
 			    	{
@@ -21,7 +49,6 @@
 			    			if($("#id"+i+":checked").length) return true;
 			    			i++;
 			    		}
-			    		window.alert("False");
 			    		return false;
 			    	}
 			    	
@@ -35,6 +62,13 @@
 			    			$("#id"+i).attr("checked", ch);
 			    			i++;
 			    		}
+			    	}
+			    	
+			    	function countChecked()
+			    	{
+						var res = $("input[@type=checkbox][@checked]").length;
+						if($("#checkall[@checked]").length) res--;
+						return res;
 			    	}
 			    });
 		    </script>
@@ -76,7 +110,7 @@
 	
 					<tr<?= $c ?>>					
 						<td width="3%" class="center"><?= $i ?>.</td>
-						<td width="3%" class="center"><?= $this->formCheckbox('id'.$i, ''); ?></td>
+						<td width="3%" class="center"><?= $this->formCheckbox('id'.$article->id, '1'); ?></td>
 						<td width="3%" class="center"><a href="<?= $this->baseUrl() . "/admin/article/" . $a . "/id/" . $article->id; ?>" title="<?= $t ?>"><img src="<?= $this->baseUrl() . "/images/" . $p; ?>" /></a></td>
 						<td width="36%"><?= $article->title; ?></td>
 						<td width="20%"><?= $article->slug; ?></td>
