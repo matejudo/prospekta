@@ -1,26 +1,54 @@
-<div class="container_12" id="midsection">
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#username").focus(function() {
+			if($("#username").attr("value") == "korisničko ime")
+				$("#username").attr("value", "");
+		});
+		$("#username").blur(function() {
+			if($("#username").attr("value") == "")
+				$("#username").attr("value", "korisničko ime");
+		});
+	});
+	
+	function activatePass()
+	{
+		if($("#password").attr("value") == "lozinka")
+		{
+			$("#password").hide();
+			$("#password2").show();
+			$("#password").attr("id", "password3");
+			$("#password2").attr("id", "password");
+			$("#password3").attr("id", "password2");
+			$("#password").focus();
+		}
+	}
+	function deactivatePass()
+	{	
+		if($("#password").attr("value") == "")
+		{
+			$("#password").hide();
+			$("#password2").show();
+			$("#password").attr("id", "password3");
+			$("#password2").attr("id", "password");
+			$("#password3").attr("id", "password2");
+		}
+	}
 
-	<div id="content" class="grid_4 prefix_4 suffix_4">
+</script>
 	<?php if(!empty($this->message)) :?>
-		<div id="message">
+		<div id="loginmessage">
 			<p><?php echo $this->escape($this->message);?></p>
 		</div>
 	<?php endif; ?>
 		<?= $this->form("login", array("method" => "post", "action" => $this->baseUrl . "/admin/auth/login")) ?>
-			<div id="login">
 				<p>
-					<label for="username">Korisničko ime:</label><br/>
-					<?= $this->formText("username", null, array("id" => "username")); ?>
+					<?= $this->formText("username", "korisničko ime", array("id" => "username")); ?>
 				</p>
 				<p>
-					<label for="password">Lozinka:</label><br/>
-					<?= $this->formPassword("password", null, array("id" => "password")); ?>
+					<input type="text" name="password" id="password" value="lozinka" onfocus="javascript:activatePass();" />
+					<input type="password" name="password" id="password2" value="" style="display:none" onblur="javascript:deactivatePass()"/>
 				</p>
 				<p>
 					<br/><?= $this->formSubmit("login", "ulaz »", array("id" => "submit")); ?>
 				</p>
-			</div>
 		</form>
-	</div>
-
-</div>

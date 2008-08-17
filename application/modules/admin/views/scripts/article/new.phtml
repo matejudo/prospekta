@@ -1,12 +1,14 @@
 <div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
-<div class="container_12" id="midsection">
-	<div class="grid_12">
-		<ul class="toolbar">
+<div class="toolbar">
+	<div class="container_12" id="midsection">
+			<ul>
 			<li class="button save" id="save"><a href="#">Spremi</a></li>
 			<li class="button save" id="publish"><a href="#">Spremi i objavi</a></li>
 			<li class="button delarticle" id="delete"><a href="#">Odustani</a></li>
 		</ul>
 	</div>
+</div>
+<div class="container_12" id="midsection">
 	<script language="javascript" type="text/javascript">
 		var lock = false; 
 		$(document).ready(function() {
@@ -26,8 +28,6 @@
 					lock = false;
 				}
 			});
-			$("#title").focus( function() { if($("#title").attr("value") == "Naslov") $("#title").attr("value", ""); } );
-			$("#title").blur ( function() { if($("#title").attr("value") == "") $("#title").attr("value", "Naslov"); } );
 			
 			$("#save").click( function () {
 				if($("#slug").attr("value") == "" ) { window.alert("Ispunite polje za slug."); return; }
@@ -61,13 +61,13 @@
 	<div class="grid_12">
 		<form method="post" action="<?= $this->baseUrl(); ?>/admin/article/save" class="editor" name="editor" id="editor">
 			<input type="hidden" name="category" value="news" />
-			<div id="content" style="margin-top: 20px;" class="grid_9 alpha">				
-					<p><input type="text" name="title" id="title" class="big" value="Naslov" /></p>
-					<p><input type="text" name="slug" id="slug" class="slug"  /> <a href="#"><img id="lock" src="<?= $this->baseUrl(); ?>/images/icon_lock_unlock.png" title="Otključano - Promjena naslova mjenja i slug."/></a></p>
-					<p><textarea name="text" style="width: 100%;" rows="15" id="text">This is some content that will be editable with TinyMCE.</textarea></p>				
+			<div id="content" style="margin-top: 20px;" class="grid_9 alpha">
+		
+				<p><label for="title">Naslov:</label><input type="text" name="title" id="title" class="big" value="" /></p>
+				<p><label for="slug">Slug:</label><input type="text" name="slug" id="slug" class="slug"  /> <a href="#"><img id="lock" src="<?= $this->baseUrl(); ?>/images/icon_lock_unlock.png" title="Otključano - Promjena naslova mjenja i slug."/></a></p>
+				<p><textarea name="text" style="width: 100%;" rows="15" id="text">This is some content that will be editable with TinyMCE.</textarea></p>				
 			</div>
 			<div class="grid_3 omega sidebar">
-				<h3>Opcije</h3>
 				<p><?= $this->formCheckbox("published") ?> Članak je objavljen</p>
 			</div>
 		</form>

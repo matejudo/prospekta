@@ -25,6 +25,8 @@ class Admin_ArticleController extends Zend_Controller_Action
 	{
 		$this->view->baseUrl();
 		
+		$this->view->message = $this->_getParam('message', 'Unknown Error');
+		
 		$articles = new Articles();
 		$this->view->articles = $articles->fetchCategory("news");
 		
@@ -42,6 +44,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 
 		$articles = new Articles();
 		$data = array();
+
 		if($this->getRequest()->isPost())
 		{
 			
@@ -55,15 +58,20 @@ class Admin_ArticleController extends Zend_Controller_Action
 					array_push($data, $id);
 				}
 			}
+			
 		}
 		else
 		{	
 			array_push( $data, $this->_getParam("id") );
 		}
 		
+		
 		$articles->setPublish($data, 1);
-		Zend_Debug::dump($articles);
-		$this->_redirect('admin/article');
+		
+		//$this->_setParam('message','Article(s) published.');
+		//$this->_forward('index');
+				
+		$this->_redirect('admin/article', array("message" => "Article(s) published"));
 
 
 	}
@@ -91,7 +99,11 @@ class Admin_ArticleController extends Zend_Controller_Action
 			array_push( $data, $this->_request->getParam("id") );
 		}
 		$articles->setPublish($data, 0);
-		$this->_redirect('admin/article');
+		
+		//$this->_setParam('message','Article(s) published.');
+		//$this->_forward('index');
+		
+		$this->_redirect('admin/article', array("message" => "Article(s) unpublished"));
 	}
 	
 	public function deleteAction()
@@ -111,6 +123,8 @@ class Admin_ArticleController extends Zend_Controller_Action
 			}
 			$articles->delete($data, 0);
 		}
+		//$this->_setParam('message','Article(s) deleted.');
+		//$this->_forward('index');
 		$this->_redirect('admin/article');
 	}
 	

@@ -1,0 +1,139 @@
+<div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
+<div class="toolbar">
+	<div class="container_12" id="midsection">
+			<ul>
+				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/article/new">Nova stranica</a></li>
+				<li class="button editarticle" id="edit"><a href="#">Izmjeni stranicu</a></li>
+				<li class="button delarticle" id="delete"><a href="#">Izbriši izabrane</a></li>
+				<li class="separator"></li>
+				<li class="button pubarticle" id="publish"><a href='#'>Objavi izabrane</a></li>
+				<li class="button unpubarticle" id="unpublish"><a href="#">Makni izabrane</a></li>
+			</ul>
+	</div>
+</div>
+
+<div class="container_12" id="midsection">
+	<div id="content" class="grid_12">
+		<?= $this->path . " (" . $this->depth . ")" ?>
+		<table width="100%" class="list">
+			<tr>					
+				
+				<th width="3%" class="center"><?= $this->formCheckbox('checkall', '', array('title' => 'Uključi/isključi sve', 'class' => 'nocount')); ?></th>
+				<th width="3%" class="center"><acronym title="Objavljen - Pokazuje da li je članak objavljen ili ne.">Obj.</acronym></th>
+				<th width="39%">Naslov</th>
+				<th width="20%"><acronym title="Kratki naslov za članak bez razmaka i specijalnih znakova. Mora biti jedinstven.">Slug</acronym></th>
+				<th width="5%">Red.</th>
+				<th width="15%">Zadnja promjena</th>
+				<th width="15%">Autor</th>
+			</tr>
+			<?php 
+				$checkdepth = 1; 
+				$counter = array(1, 1);	
+				$slugpath = array();
+			?>
+			
+			<?php
+				function printRow($item, $counter, $total, $baseurl, $class = "", $branches = NULL)
+				{	
+				
+					if($branches === NULL)
+						$branches = array();
+					
+
+					
+					for($i = 2; $i < $item->depth; $i++)
+					{
+						if($branches[$i] == "2") $branches[$i] = "3";
+					}
+					
+					for($i = 2; $i < $item->depth; $i++)
+					{
+						if($branches[$i] == "1") $branches[$i] = "4";
+					}
+						
+					if($counter < $total)						
+						$branches[$item->depth] = "1";
+					elseif($counter == $total) 
+						$branches[$item->depth] = "2";
+					else
+						$branches[$item->depth] = "3";
+				
+					$arrows = "";
+					if($counter != 1)
+						$arrows .= '<a href="' . $baseurl . "/admin/page/moveup/id/" . $item->id . '"><img src="' . $baseurl . "/images/icon_arrow_small_up.png" . "\" title=\"Pomakni gore\" /></a>";
+					else
+						$arrows .= '<img src="'. $baseurl . "/images/icon_spacer.png" . '" />';
+					if($counter != $total)
+						$arrows .= '<a href="' . $baseurl . "/admin/page/movedown/id/" . $item->id . '"><img src="' . $baseurl . "/images/icon_arrow_small_down.png" . '" title="Pomakni dole" /></a>';
+					$class .= "tr-" . $item->slug . " ";
+					?>
+					<tr class="<?= $class ?>" onmouseover="$('.tr-<?= $item->slug ?>').attr('style', 'background: #e6e6e6; border: #999 solid 1px;')" onmouseout="$('.tr-<?= $item->slug ?>').attr('style', '')" >						
+						<td width="3%" class="center"><input type="checkbox" name="<?= $item->id ?>" id="<?= $item->id ?>" value="1" /></td>
+						<td width="3%" class="center"></td>
+						<td width="39%">
+							<?php if($item->depth == 1): ?><strong><?php endif; ?>
+							
+							<?php
+								for($i = 2; $i <= $item->depth; $i++)
+								{
+									if($branches[$i] != NULL)
+										switch($branches[$i])
+										{
+										case 1:
+											?> <img src="<?= $baseurl ?>/images/tree_node.gif" style="vertical-align: middle" /> <?php
+											break;
+										case 2:
+											?> <img src="<?= $baseurl ?>/images/tree_lastnode.gif" style="vertical-align: middle" /> <?php
+											break;
+										case 3:
+											?> <img src="<?= $baseurl ?>/images/tree_nobranch.gif" style="vertical-align: middle" /> <?php
+											break;
+										case 4:
+											?> <img src="<?= $baseurl ?>/images/tree_branch.gif" style="vertical-align: middle" /> <?php
+											break;
+										default:
+											?> <?php
+										}
+								}
+							
+							?>
+							<?= $counter . ". " . $item->title ?>
+							<?php if($item->depth == 1): ?></strong><?php endif; ?>
+						</td>
+						<td width="20%"><acronym title="Kratki naslov za članak bez razmaka i specijalnih znakova. Mora biti jedinstven.">
+							<?= $item->slug ?></acronym></td>
+						<td width="5%"><?= $arrows ?></td>
+						<td width="15%"></td>
+						<td width="15%"></td>
+					</tr>
+					<?php
+					
+					if($counter == $total)
+						$branchdone = 1;
+					
+					if($item->children)
+					{			
+						$counter = 0;
+						$total = count($item->children);
+						foreach($item->children as $child)
+						{			
+							$counter++;								
+							printRow($child, $counter, $total, $baseurl, $class, $branches);
+						}
+					}
+				}
+			?>
+			<?php
+				$counter = 0;
+				$total = count($this->tree);
+
+				foreach ($this->tree as $item):
+					$counter++;		
+					printRow($item, $counter, $total, $this->baseUrl(), NULL);
+				endforeach; 
+			?>
+		</table>
+		<p> . </p>
+
+	</div>
+</div>

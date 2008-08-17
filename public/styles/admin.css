@@ -1,8 +1,19 @@
 @CHARSET "UTF-8";
 
+body			{ background: #f8f8f8; }
+
+p				{ font-size: 1.3em; }
+
+#adminmenu ul	{ color: white; background: #222; margin: 0px; height: 32px; font-size: 1.4em; }
+#adminmenu li	{ list-style: none; float: left; display: block; line-height: 32px; vertical-align: middle; margin-right: 10px; }
+
+#messagebar		{ position: absolute; width: 500px; left: 50%; margin-left: -250px; top: 20%;}
+#message		{ background: #222; padding: 15px; color: white; font-weight: bold; margin-left: auto; margin-right: auto;
+					font-size: 1.3em; text-align: center; line-height: 1.3em; }
+
 #header .logo	{ background: url("../images/ui_logo_admin.gif"); }
 
-#login	 		{ width: 100%; text-align: left; }
+#login	 		{ width: 300px; text-align: left; position: absolute; top: 30%; left: 50%; margin-left: -150px; }
 #login p 		{ text-align: left; font-size: 1.2em; }
 
 #login input	{ width: 100%; border: 1px solid #666; text-align: center; font-size: 1.6em; font-weigt: bold; font-family: Corbel, Tahoma, sans-serif;}
@@ -13,14 +24,17 @@
 .success		{ width: 100%; border: 4px solid #070; margin-bottom: 20px; }
 .success p 		{ margin: 10px; font-size: 1.3em; color: #070; text-align: center; }
 
-#userinfo		{ position: absolute; top: 156px; right: 50%; margin-right: -480px; }
-#userinfo p		{ color: white; font-size: 1.3em; }
+#userinfo		{ position: absolute; top: 0; right: 20px; height: 32px; margin-left: 700px; width: 260px; }
+#userinfo p		{ color: white; font-size: 1.4em; line-height: 32px; text-align: right; }
+
+#midsection		{ margin-top: 0px; }
 
 
-.toolbar			{ margin: 0px; padding: 0px; display: block; clear: both; height: 27px; }
-.toolbar li		{ float: left; display: block; margin-right: 5px; list-style: none;  }
+.toolbar					{ margin: 0px 0px 10px 0px; padding: 10px; display: block; clear: both; height: 27px; border-bottom: 1px solid #ddd; background: #eee; }
+.toolbar ul					{ padding: 0px; margin: 0px 10px; }
+.toolbar li					{ float: left; display: block; margin-right: 5px; list-style: none; background: #fff; }
 .toolbar li.separator		{ border-left: 1px solid #ddd; height: 27px; margin: 0px 10px 0px 5px;  }
-.toolbar li a	{ display: block; height: 15px; border: 1px solid #ddd; padding: 6px 10px 6px 24px; font-size: 1.3em; background-color: #fff; }
+.toolbar li a				{ display: block; height: 15px; border: 1px solid #ddd; padding: 6px 10px 6px 24px; font-size: 1.3em; background: #fff; }
 .toolbar li a:hover			{ border-color: #999; color: #4d83bb; }
 
 .toolbar li.newarticle 	a	{ background: url("../images/icon_notebook_plus.png") no-repeat 3px center; }
@@ -32,7 +46,7 @@
 
 table.list		{ font-size: 1.3em; border-top: 3px solid #ddd; border-left: 1px solid #ddd; border-bottom: 1px solid #ddd; border-right: 1px solid #ddd; margin-top: 20px; clear: both; }
 table.list th	{ border-bottom: 3px solid #ddd; padding: 6px 2px; font-weight: bold; color: black; background: #eee; }
-table.list td	{ border-bottom: 1px solid #ddd; padding: 4px 2px; vertical-align: middle; }
+table.list td	{ border-bottom: 1px solid #ddd; padding: 0px; vertical-align: middle; height: 28px; vertical-align: middle;}
 table.list tr.hilite { background: #eee; }
 table.list tr:hover, table.list tr.hilite:hover	{ background: #e4e4e4;  }
 
@@ -40,3 +54,7 @@ table.list tr:hover, table.list tr.hilite:hover	{ background: #e4e4e4;  }
 .editor input.big[type="text"]	{ font-size: 1.6em; }
 
 #lock		{ vertical-align: text-top; }
+
+h2			{ padding: 0px; border-bottom: 1px solid #ddd; margin-bottom: 20px; line-height: 1.6em; font-size: 1.6em; font-weight: bold; }
+
+label		{ display: block; width: 50px; float: left; text-align: right; margin-right: 10px; }

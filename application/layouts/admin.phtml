@@ -7,33 +7,24 @@
 	<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/styles/admin.css" type="text/css" media="screen" charset="utf-8" />
 	<script src="<?=$this->baseUrl()?>/scripts/jquery-1.2.6.min.js" type="text/javascript"></script>
 	<script src="<?=$this->baseUrl()?>/scripts/jquery.slug.js" type="text/javascript"></script>
+	<script src="<?=$this->baseUrl()?>/scripts/jquery.pause.js" type="text/javascript"></script>
+	<script src="<?=$this->baseUrl()?>/scripts/jquery.custom.js" type="text/javascript"></script>
 	<script src="<?=$this->baseUrl()?>/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 	<title>Prospekta - Edukacija i zapošljavanje mladih: <?=$this->escape($this->title)?></title>
 </head>
 <body>
-<div id="header"><div class="logo"></div><h1>Prospekta - Edukacija i zapošljavanje mladih: <?=$this->escape($this->title); ?></h1></div>
-<div id="menu">
+<div id="adminmenu">
 	<ul>
-		<script type="text/javascript">
-		 	function showTab(number)
-		 	{
-		 		for(i=1; i<5; i++)
-		 		{
-		 			$('#submenu-tab'+i).hide(500);
-		 		}
-		 		$('#submenu-tab'+number).show(500);
-		 	}
-		</script>
-		<li class="med"><a href="<?= $this->baseUrl() ?>/admin"><strong>Početna</strong></a></li>
-		<li class="med"><a href="<?= $this->baseUrl() ?>/admin/article"><strong>Članci</strong></a></li>				
-		<li class="med"><a href="<?= $this->baseUrl() ?>/admin/page"><strong>Stranice</strong></a></li>
-		<li class="big"><a href="<?= $this->baseUrl() ?>/admin/menu"><strong>Izbornik</strong></a></li>
-		<li class="big"><a href="<?= $this->baseUrl() ?>/admin/module"><strong>Moduli</strong></a></li>
-		<li class="big"><a href="<?= $this->baseUrl() ?>/admin/module"><strong>Korisnici</strong></a></li>
-		<li class="big"><a href="<?= $this->baseUrl() ?>/admin/files"><strong>Datoteke</strong></a></li>
+		<li><strong>Prospekta Administracija: </strong></li>
+		<li><a href="<?= $this->baseUrl() ?>/admin">Pregled</a></li>
+		<li><a href="<?= $this->baseUrl() ?>/admin/article">Članci</a></li>				
+		<li><a href="<?= $this->baseUrl() ?>/admin/page">Stranice</a></li>
+		<li><a href="<?= $this->baseUrl() ?>/admin/menu">Izbornik</a></li>
+		<li><a href="<?= $this->baseUrl() ?>/admin/module">Moduli</a></li>
+		<li><a href="<?= $this->baseUrl() ?>/admin/module">Korisnici</a></li>
+		<li><a href="<?= $this->baseUrl() ?>/admin/files">Datoteke</a></li>
 	</ul>
 </div>
-<div class="border-bottom"></div>
 <?= $this->layout()->content; ?>
 </body>
 </html>

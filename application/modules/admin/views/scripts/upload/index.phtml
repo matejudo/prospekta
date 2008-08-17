@@ -1,0 +1,40 @@
+<div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
+<div class="container_12" id="midsection">
+	<div id="content" class="grid_12">
+			<ul class="toolbar">
+				<li class="button upload" id="new"><a href="#">Upload</a></li>
+				<li class="button download" id="edit"><a href="#">Download</a></li>
+				<li class="button delete" id="delete"><a href="#">Izbriši izabrane</a></li>
+				<li class="separator"></li>
+				<li class="button pack" id="publish"><a href='#'>Zapakiraj izabrane</a></li>
+				<li class="button unpack" id="unpublish"><a href="#">Raspakiraj</a></li>
+			</ul>
+			<?= $this->form("articles", array("method" => "post", "action" => "noaction")) ?>
+			<?= $this->files; ?>
+				<table width="100%" class="list">
+					<tr>						
+						<th width="3%" class="center"><?= $this->formCheckbox('checkall', '', array('title' => 'Uključi/isključi sve')); ?></th>
+						<th width="47%">Ime datoteke</th>
+						<th width="10%">Veličina (KB)</th>
+						<th width="10%">Tip</th>
+						<th width="15%">Zadnja promjena</th>
+						<th width="15%">Vlasnik</th>
+					</tr>
+					<?php $i = 1; ?>
+					<?php foreach($this->articles as $article): ?>
+					
+	
+						<tr<?= $c ?>>					
+							<td width="3%" class="center"><?= $this->formCheckbox('checkall', '', array('title' => 'Uključi/isključi sve')); ?></th>
+							<td width="47%">Ime datoteke</td>
+							<td width="10%">Veličina (KB)</td>
+							<td width="10%">Tip</td>
+							<td width="15%">Zadnja promjena</td>
+							<td width="15%">Vlasnik</td>
+							<?php $i++; ?>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+			</form>
+	</div>
+</div>
