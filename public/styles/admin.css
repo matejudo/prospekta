@@ -50,11 +50,17 @@ table.list td	{ border-bottom: 1px solid #ddd; padding: 0px; vertical-align: mid
 table.list tr.hilite { background: #eee; }
 table.list tr:hover, table.list tr.hilite:hover	{ background: #e4e4e4;  }
 
-.editor input[type="text"]	{ width: 50%; border: 1px solid #ddd; }
+a.bigbutton			{ display: block; border: 1px solid #ddd; padding: 16px 10px 16px 24px; font-size: 1.6em; background: #fff; }
+a.bigbutton:hover	{ border-color: #999; color: #4d83bb; }
+
+.editor input[type="text"]	{ width: 688px; border: 1px solid #ddd; padding: 3px 5px 3px 5px; }
 .editor input.big[type="text"]	{ font-size: 1.6em; }
+#slugbutton	{ border: 1px solid #ddd; border-right: none; padding: 3px 0px 3px 5px; height: 18px; }
+#slug		{ border-left: none; width: 672px; padding: 3px 0px 3px 5px; line-height: 16px; height: 18px;}
 
 #lock		{ vertical-align: text-top; }
 
 h2			{ padding: 0px; border-bottom: 1px solid #ddd; margin-bottom: 20px; line-height: 1.6em; font-size: 1.6em; font-weight: bold; }
 
-label		{ display: block; width: 50px; float: left; text-align: right; margin-right: 10px; }
+label		{ cursor: pointer; }
+

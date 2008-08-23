@@ -97,4 +97,28 @@ class Articles extends Zend_Db_Table
 		");	
 	}
 	
+	public function getBySlug($slug)
+	{
+		$db = Zend_Registry::get("db");
+		$stmt = $db->query("SELECT * FROM pros_article WHERE slug = $slug");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		return $stmt->fetchObject();		
+	}
+	
+	public function getById($id)
+	{
+		$db = Zend_Registry::get("db");
+		$stmt = $db->query("SELECT * FROM pros_article WHERE id = $id");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		return $stmt->fetchObject();		
+	}
+	
+	public function getCategories()
+	{
+		$db = Zend_Registry::get("db");
+		$stmt = $db->query("SELECT category, COUNT(category) AS count FROM pros_article GROUP BY category");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		return $stmt->fetchAll();
+	}
+	
 }

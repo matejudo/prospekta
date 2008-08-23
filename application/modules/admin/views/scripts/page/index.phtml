@@ -80,16 +80,16 @@
 										switch($branches[$i])
 										{
 										case 1:
-											?> <img src="<?= $baseurl ?>/images/tree_node.gif" style="vertical-align: middle" /> <?php
+											?> <img src="<?= $baseurl ?>/images/tree_node.gif" style="vertical-align: middle" /><?php
 											break;
 										case 2:
-											?> <img src="<?= $baseurl ?>/images/tree_lastnode.gif" style="vertical-align: middle" /> <?php
+											?> <img src="<?= $baseurl ?>/images/tree_lastnode.gif" style="vertical-align: middle" /><?php
 											break;
 										case 3:
-											?> <img src="<?= $baseurl ?>/images/tree_nobranch.gif" style="vertical-align: middle" /> <?php
+											?> <img src="<?= $baseurl ?>/images/tree_nobranch.gif" style="vertical-align: middle" /><?php
 											break;
 										case 4:
-											?> <img src="<?= $baseurl ?>/images/tree_branch.gif" style="vertical-align: middle" /> <?php
+											?> <img src="<?= $baseurl ?>/images/tree_branch.gif" style="vertical-align: middle" /><?php
 											break;
 										default:
 											?> <?php
@@ -97,7 +97,14 @@
 								}
 							
 							?>
-							<?= $counter . ". " . $item->title ?>
+							
+							<?php if($item->text == ""): ?>
+							<img src="<?= $baseurl ?>/images/icon_notebook_empty.png" style="vertical-align: middle; " />
+							<?php else: ?>
+							<img src="<?= $baseurl ?>/images/icon_notebook.png" style="vertical-align: middle; " />
+							<?php endif; ?>
+							
+							<?= $item->title ?>
 							<?php if($item->depth == 1): ?></strong><?php endif; ?>
 						</td>
 						<td width="20%"><acronym title="Kratki naslov za članak bez razmaka i specijalnih znakova. Mora biti jedinstven.">

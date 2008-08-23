@@ -73,12 +73,19 @@
 			$router->addRoute($menuitem->slug, $route);
 		}
 		
-			$route = new Zend_Controller_Router_Route(	'woot/ffs/lol/wtf',
+			$route = new Zend_Controller_Router_Route(	'article/:slug',
 												array(	'module' => 'default',
-														'controller' => 'cat', 
+														'controller' => 'article', 
 														'action' => 'index', 
-														'slug' => 'wtf',
+														'slug' => null,
 														'topslug' => 'wtf'),
+												array(	'slug' => '(.*)'));
+			$router->addRoute($menuitem->slug, $route);
+			
+			$route = new Zend_Controller_Router_Route(	'admin/article/category/:name',
+												array(	'module' => 'admin',
+														'controller' => 'article',
+														'action' => 'category'),
 												array(	'slug' => '(.*)'));
 			$router->addRoute($menuitem->slug, $route);
 		

@@ -25,18 +25,34 @@ class Admin_ArticleController extends Zend_Controller_Action
 	{
 		$this->view->baseUrl();
 		
-		$this->view->message = $this->_getParam('message', 'Unknown Error');
-		
+	}
+	
+	public function categoryAction()
+	{
+		$this->view->baseUrl();
+		$cat = $this->_getParam('name', 'Novosti');
+		$this->view->category = $cat;
 		$articles = new Articles();
-		$this->view->articles = $articles->fetchCategory("news");
-		
+		$this->view->articles = $articles->fetchCategory($cat);
 	}
 	
 	public function newAction()
 	{
 		$this->view->baseUrl();
-		$users = new Users();
-		$this->view->users = $users->getUsers();
+		$this->view->category = $this->_getParam('category', '');
+		$editor = new TextEditor();
+		$this->view->editor = $editor->getHTML("text", "");
+	}
+	
+	public function editAction()
+	{
+		$this->view->baseUrl();
+		$id = $this->_getParam("id");
+		$articles = new Articles();
+		$this->view->article = $articles->getById($id);
+		$this->view->categories = $articles->getCategories();
+		$editor = new TextEditor();		
+		$this->view->editor = $editor->getHTML("text", $this->view->article->text);
 	}
 	
 	public function publishAction()
@@ -44,7 +60,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 
 		$articles = new Articles();
 		$data = array();
-
+		$id = null;
 		if($this->getRequest()->isPost())
 		{
 			
@@ -59,6 +75,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 				}
 			}
 			
+			
 		}
 		else
 		{	
@@ -68,10 +85,13 @@ class Admin_ArticleController extends Zend_Controller_Action
 		
 		$articles->setPublish($data, 1);
 		
+		
 		//$this->_setParam('message','Article(s) published.');
 		//$this->_forward('index');
+		
+		Zend_Debug::dump($id);
 				
-		$this->_redirect('admin/article', array("message" => "Article(s) published"));
+		$this->_redirect('admin/article/', array("message" => "Article(s) published"));
 
 
 	}
@@ -160,6 +180,30 @@ class Admin_ArticleController extends Zend_Controller_Action
 				'published'		=> $this->_request->getParam("published")
 			);
 			$articles->insert($data); 
+		}
+		$this->_redirect('admin/article');
+	}
+	
+	public function updateAction()
+	{
+		if($this->getRequest()->isPost())
+		{
+			require_once 'Zend/Date.php';
+			$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);
+		
+			$articles = new Articles();
+			$params = $this->_request->getParams();
+			Zend_Debug::dump($params);
+			$where = $articles->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));
+			$data = array(
+			    'title'      	=> $this->_request->getParam("title"),
+			    'slug' 			=> $this->_request->getParam("slug"),
+			    'text'			=> $this->_request->getParam("text"),
+				'category'		=> $this->_request->getParam("category"),
+				'published'		=> $this->_request->getParam("published"),
+				'modified'		=> $date->toString("YYYY-MM-dd HH:mm:ss")
+			);
+			$articles->update($data, $where);
 		}
 		$this->_redirect('admin/article');
 	}

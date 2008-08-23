@@ -2,7 +2,8 @@
 
 <div class="container_12" id="maincontent">
 	<div class="grid_12">
-		<div id="content" class="grid_6 alpha">
+		<div id="content" class="grid_2 alpha">woot</div>
+		<div id="content" class="grid_5">
 			<?php foreach($this->news as $entry) : ?>
 				<h3><a href="<?= $this->baseUrl()?>/novosti/<?= $this->escape($entry->slug) ?>"><?= $this->escape($entry->title) ?></a></h3>
 				<?= $entry->intro;?>
@@ -18,7 +19,7 @@
 				<?php endif; ?>
 			<?php endforeach; ?>
 		</div>
-		<div id="content2" class="grid_6 omega">
+		<div id="content2" class="grid_5 omega">
 			<?php foreach($this->news as $entry) : ?>
 				<h3><a href="<?= $this->baseUrl()?>/novosti/<?= $this->escape($entry->slug) ?>"><?= $this->escape($entry->title) ?></a></h3>
 				<?= $entry->intro;?>

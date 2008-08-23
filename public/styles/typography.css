@@ -49,16 +49,26 @@ sup             { font-size: 70%; vertical-align: super; }
 #sidebar .cal	{ background: url("../images/icon_calendar.png") no-repeat left; }
 #sidebar .phone	{ background: url("../images/icon_home.png") no-repeat left; }
 
-#menu a			{ color: #aaa; }
-#menu a:hover	{ color: #fff; }
-#menu strong	{ text-transform: uppercase; font-size: 1.4em; font-weight: normal; }
-#menu small		{ text-transform: lowercase; }
+#menu			{ background: url("../images/ui_menu_background.jpg"); display: block; min-height: 200px;  }
+#menu li		{ list-style: none; }
+#topmenu		{ margin-top: 0px; width: 960px; left: 50%; position: relative; margin-left: -480px; padding-left: 0px; }
+.topitem		{ display: block; float: left; margin-right: 30px;}
+.topitem a		{ color: #fff; font: normal 1.2em/1.3em 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; text-transform: uppercase;
+				  display: block; }
+#menu ul li	a:hover	{ color: #f70; }
+.li-small		{ width: 110px;}
+.li-medium		{ width: 140px; }
+.li-big			{ width: 150px;}
 
-#submenu ul		{ color: #fff; list-style: none; font-size: 1.3em; text-shadow: black; line-height: 16px;  }
-#submenu ul li 	{ padding: 3px 0 3px 0; background: url("../images/icon_arrow.png") left center no-repeat; padding-left: 20px; }
-#submenu a		{ color: #fff; text-shadow: 0.1em 0.1em #333; display: block; }
-#submenu a:hover{ color: #F70; }
-#submenu big	{ text-transform: uppercase; font-weight: bold; }
+#topmenu		{ padding-top: 15px; }
+
+ul.submenu		{ padding: 0px; margin-top: 14px; }
+ul.submenu li	{ clear: both; }
+ul.submenu li a { text-transform: none !important; }
+
+.submenu		{ position: absolute; width: 960px; height: 160px; left: 50%; margin-left: -480px; top: 180px; }
+.submenu p		{ color: white; }
+.submenu li a	{ color: white; }
 
 .orange			{ color: white; }
 .orange h2		{ color: white; font-family: Tahoma, Arial, sans-serif; text-shadow: 0.1em 0.1em #333;
