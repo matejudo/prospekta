@@ -42,6 +42,15 @@ class Admin_ArticleController extends Zend_Controller_Action
 		$this->view->category = $this->_getParam('category', '');
 		$editor = new TextEditor();
 		$this->view->editor = $editor->getHTML("text", "");
+		$this->view->article = new stdClass();
+		$this->view->article->title = "";
+		$this->view->article->slug = "";
+		$this->view->article->text = "";
+		$this->view->article->published = "1";
+		$this->view->article->comments = "1";
+		$this->view->article->id = "-1";
+		$this->view->article->category = $this->view->category;
+		$this->render("edit");
 	}
 	
 	public function editAction()
@@ -73,24 +82,13 @@ class Admin_ArticleController extends Zend_Controller_Action
 					$id = substr($key, 2);
 					array_push($data, $id);
 				}
-			}
-			
-			
+			}			
 		}
 		else
 		{	
 			array_push( $data, $this->_getParam("id") );
-		}
-		
-		
-		$articles->setPublish($data, 1);
-		
-		
-		//$this->_setParam('message','Article(s) published.');
-		//$this->_forward('index');
-		
-		Zend_Debug::dump($id);
-				
+		}		
+		$articles->setPublish($data, 1);			
 		$this->_redirect('admin/article/', array("message" => "Article(s) published"));
 
 
@@ -101,8 +99,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 		$articles = new Articles();
 		$data = array();
 		if($this->getRequest()->isPost())
-		{
-			
+		{			
 			$params = $this->_request->getParams();
 			
 			foreach($params as $key => $value)
@@ -119,10 +116,6 @@ class Admin_ArticleController extends Zend_Controller_Action
 			array_push( $data, $this->_request->getParam("id") );
 		}
 		$articles->setPublish($data, 0);
-		
-		//$this->_setParam('message','Article(s) published.');
-		//$this->_forward('index');
-		
 		$this->_redirect('admin/article', array("message" => "Article(s) unpublished"));
 	}
 	
@@ -143,8 +136,6 @@ class Admin_ArticleController extends Zend_Controller_Action
 			}
 			$articles->delete($data, 0);
 		}
-		//$this->_setParam('message','Article(s) deleted.');
-		//$this->_forward('index');
 		$this->_redirect('admin/article');
 	}
 	
@@ -166,46 +157,44 @@ class Admin_ArticleController extends Zend_Controller_Action
 	}
 	
 	public function saveAction()
-	{		
-		if($this->getRequest()->isPost())
-		{
-			$articles = new Articles();
-			$params = $this->_request->getParams();
-			Zend_Debug::dump($params);
-			$data = array(
-			    'title'      	=> $this->_request->getParam("title"),
-			    'slug' 			=> $this->_request->getParam("slug"),
-			    'text'			=> $this->_request->getParam("text"),
-				'category'		=> $this->_request->getParam("category"),
-				'published'		=> $this->_request->getParam("published")
-			);
-			$articles->insert($data); 
-		}
-		$this->_redirect('admin/article');
-	}
-	
-	public function updateAction()
 	{
+
 		if($this->getRequest()->isPost())
 		{
-			require_once 'Zend/Date.php';
-			$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);
 		
+			require_once 'Zend/Date.php';
+			$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);			
 			$articles = new Articles();
 			$params = $this->_request->getParams();
-			Zend_Debug::dump($params);
-			$where = $articles->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));
 			$data = array(
 			    'title'      	=> $this->_request->getParam("title"),
 			    'slug' 			=> $this->_request->getParam("slug"),
 			    'text'			=> $this->_request->getParam("text"),
 				'category'		=> $this->_request->getParam("category"),
 				'published'		=> $this->_request->getParam("published"),
+				'comments'		=> $this->_request->getParam("comments"),
 				'modified'		=> $date->toString("YYYY-MM-dd HH:mm:ss")
-			);
-			$articles->update($data, $where);
+			);	
+		
+		
+			// New article -> SQL insert the data
+			if($this->_request->getParam("id") == "-1")
+			{
+				$articles->insert($data); 
+			}
+			// Existing article -> SQL update the data
+			else
+			{
+				$where = $articles->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));			
+				$articles->update($data, $where);
+			}
+			
+			if($this->_request->getParam("continue") == "1")
+				$redirecturl = 'admin/article/edit/id/' . $this->_request->getParam("id");
+			else
+				$redirecturl = '/admin/article/category/' . $this->_request->getParam("category");
 		}
-		$this->_redirect('admin/article');
-	}
 
+		$this->_redirect($redirecturl);
+	}
 }

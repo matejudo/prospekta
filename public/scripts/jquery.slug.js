@@ -8,9 +8,7 @@ jQuery.fn.slug = function(options) {
 		slug: 'slug', // Class used for slug destination input and span. The span is created on $(document).ready() 
 		hide: true	 // Boolean - By default the slug input field is hidden, set to false to show the input field and hide the span. 
 	};
-	
-	if(lock) return;
-	
+		
 	if(options) {
 		jQuery.extend(settings, options);
 	}
@@ -25,7 +23,7 @@ jQuery.fn.slug = function(options) {
 	});
 	
 	makeSlug = function() {
-		if(!lock)
+		if(!lock )
 		{
 			var slugcontent = $this.val();
 			var slugcontent = slugcontent.replace(/[ČčĆć]/g,'c');
@@ -41,5 +39,27 @@ jQuery.fn.slug = function(options) {
 		
 	$(this).keyup(makeSlug);
 		
+	return $this;
+};
+
+
+
+jQuery.fn.myslug = function(options) {
+	
+	$this = $(this);
+	makeSlug = function() {
+		if(!lock || $(this).attr("id") == "slug" )
+		{
+			var slugcontent = $(this).val();
+			var slugcontent = slugcontent.replace(/[ČčĆć]/g,'c');
+			var slugcontent = slugcontent.replace(/[Šš]/g,'s');
+			var slugcontent = slugcontent.replace(/[Đđ]/g,'dj');
+			var slugcontent = slugcontent.replace(/[Žž]/g,'z');
+			var slugcontent_hyphens = slugcontent.replace(/\s/g,'-');
+			var finishedslug = slugcontent_hyphens.replace(/[^a-zA-Z0-9\-]/g,'');
+			$('#slug').val(finishedslug.toLowerCase());
+		}
+	}		
+	$(this).keyup(makeSlug);
 	return $this;
 };

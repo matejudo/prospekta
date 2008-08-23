@@ -3,7 +3,7 @@
 	<div class="container_12" id="midsection">
 			<ul>
 			<li class="button save" id="save"><a href="#">Spremi</a></li>
-			<li class="button save" id="savepublish"><a href="#">Spremi i objavi</a></li>
+			<li class="button save" id="savecont"><a href="#">Spremi i nastavi</a></li>
 			<li class="button delarticle" id="delete"><a href="#">Odustani</a></li>
 		</ul>
 	</div>
@@ -13,7 +13,9 @@
 		var lock = false; 
 		$(document).ready(function() {
 			
-			$("#title").slug({hide: false, lock: lock });
+			$("#title").myslug({lock: lock });
+			$("#slug").myslug({lock: lock });
+			
 			$("#lock").click( function(event) {
 				if(lock == false)
 				{
@@ -35,13 +37,21 @@
 				$("#editor").submit();
 			} );
 			
-			$("#savepublish").click( function () {
+			$("#savecont").click( function () {
 			
-				$("#published").attr("checked", "checked");
+				$("#continue").attr("value", "1");
 				if($("#slug").attr("value") == "" ) { window.alert("Ispunite polje za slug."); return; }
 				if($("#title").attr("value") == "" ) { window.alert("Ispunite polje za naslov."); return; }
 				$("#editor").submit();
 			} );
+			
+			$("#title").focus(function() { 
+				if($("#title").attr("value") == "Naslov") $("#title").attr("value", "");
+			 });
+			 
+			$("#title").blur(function() { 
+				if($("#title").attr("value") == "") $("#title").attr("value", "Naslov");
+			 });
 			
 		});
 	
@@ -55,34 +65,34 @@
 	</script>
 
 	<div class="grid_12">
-		<h2>Izmjena članka</h2>
-		<form method="post" action="<?= $this->baseUrl(); ?>/admin/article/update" class="editor" name="editor" id="editor">
+		<h2><?= ($this->article->id == "-1") ? "Novi članak" : "Izmjena članka" ?></h2>
+		<form method="post" action="<?= $this->baseUrl(); ?>/admin/article/save" class="editor" name="editor" id="editor">
 			<input type="hidden" name="category" value="<?= $this->article->category; ?>" />
 			<input type="hidden" name="id" value="<?= $this->article->id; ?>" />
-			<input type="hidden" name="modified" value="<?= $this->article->modified; ?>" />
+			<input type="hidden" id="continue" name="continue" value="0" />
 			<div id="content" class="grid_9 alpha">
-				<p><input type="text" name="title" id="title" class="big" value="<?= $this->article->title; ?>" /></p>
+				<p><input type="text" name="title" id="title" class="big" value="<?= ($this->article->title != "") ? $this->article->title : "Naslov" ; ?>" /></p>
 				<p><a href="#" id="slugbutton"><img id="lock" src="<?= $this->baseUrl(); ?>/images/icon_lock_unlock.png" title="Otključano - Promjena naslova mjenja i slug."/></a><input type="text" name="slug" id="slug" class="slug" value="<?= $this->article->slug; ?>"  /> </p>
 				<p><?= $this->editor ?></p>		
-				<h2>Attachmenti</h2>
-				<p>
-					Ovaj članak trenutno nema ni jedan attachment.<br/>
-					<a href="#">Izaberi attachment</a> | <a href="#">Uploadaj novi attachment</a>
-				</p> 
+				<h3>Slike i attachmenti</h3>
+					<p><a href="#">Dodaj sliku u tekst</a> | <a href="#">Izaberi attachment</a> | <a href="#">Uploadaj novu datoteku</a><br/></p>
+					<p>Ovaj članak trenutno nema ni jedan attachment.</p> 
 			</div>
 
 			<div class="grid_3 omega sidebar">
-				<p><input type="checkbox" name="published" id="published" <?= $this->article->published ? "checked='checked'" : ""; ?> value="1" /> <label for="published">Članak je objavljen</label><br/>
-				<input type="checkbox" name="published" id="comments" <?= $this->article->comments ? "checked='checked'" : ""; ?> value="1" /> <label for="comments">Komentari su dozvoljeni</label></p>
+				<h3>Opcije</h3>
+				<p>
+					<input type="checkbox" name="published" id="published" <?= $this->article->published ? "checked='checked'" : ""; ?> value="1" /> <label for="published">Članak je objavljen</label><br/>
+					<input type="checkbox" name="comments" id="comments" <?= $this->article->comments ? "checked='checked'" : ""; ?> value="1" /> <label for="comments">Komentari su dozvoljeni</label>
+				</p>
+				<h3>Kategorija članka</h3>
 				<p>
 					<select name="category">
-						<optgroup label="Kategorija">
-						<?php foreach($this->categories as $cat): ?>
-							<option value="<?= $cat->category ?>"<?php if($this->article->category == $cat->category) echo ' selected="selected"' ?>><?= $cat->category ?></option>
-						<?php endforeach; ?>
-						</optgroup>
+						<option value="Novosti"<?php if($this->article->category == "Novosti") echo ' selected="selected"' ?>>Novosti</option>
+						<option value="Zanimljivosti"<?php if($this->article->category == "Zanimljivosti") echo ' selected="selected"' ?>>Zanimljivosti</option>
 					</select>
 				</p>
+
 			</div>
 		</form>
 	</div>

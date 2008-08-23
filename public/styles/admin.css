@@ -55,12 +55,14 @@ a.bigbutton:hover	{ border-color: #999; color: #4d83bb; }
 
 .editor input[type="text"]	{ width: 688px; border: 1px solid #ddd; padding: 3px 5px 3px 5px; }
 .editor input.big[type="text"]	{ font-size: 1.6em; }
+select		{ width: 100%; border: 1px solid #ddd; background: #fff; }
 #slugbutton	{ border: 1px solid #ddd; border-right: none; padding: 3px 0px 3px 5px; height: 18px; }
 #slug		{ border-left: none; width: 672px; padding: 3px 0px 3px 5px; line-height: 16px; height: 18px;}
 
 #lock		{ vertical-align: text-top; }
 
 h2			{ padding: 0px; border-bottom: 1px solid #ddd; margin-bottom: 20px; line-height: 1.6em; font-size: 1.6em; font-weight: bold; }
+h3			{ font-weight: bold; padding: 0 0 2px 0; margin: 0 0 4px 0;  border-bottom: 1px solid #ddd; }
 
 label		{ cursor: pointer; }
 

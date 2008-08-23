@@ -1,0 +1,62 @@
+<div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
+<div class="toolbar">
+	<div class="container_12" id="midsection">
+			<ul>
+			<li class="button save" id="save"><a href="#">Spremi</a></li>
+			<li class="button save" id="publish"><a href="#">Spremi i objavi</a></li>
+			<li class="button delarticle" id="delete"><a href="#">Odustani</a></li>
+		</ul>
+	</div>
+</div>
+<div class="container_12" id="midsection">
+	<script language="javascript" type="text/javascript">
+		var lock = false; 
+		$(document).ready(function() {
+			
+			$("#title").slug({hide: false, lock: lock });
+			$("#lock").click( function(event) {
+				if(lock == false)
+				{
+					$("#lock").attr("src", "<?= $this->baseUrl(); ?>/images/icon_lock.png");
+					$("#lock").attr("title", "Zaključano - Moguća je samo ručna promjena sluga.");
+					lock = true;
+				}
+				else
+				{
+					$("#lock").attr("src", "<?= $this->baseUrl(); ?>/images/icon_lock_unlock.png");
+					$("#lock").attr("title", "Otključano - Promjena naslova mjenja i slug");
+					lock = false;
+				}
+			});
+			
+			$("#save").click( function () {
+				if($("#slug").attr("value") == "" ) { window.alert("Ispunite polje za slug."); return; }
+				if($("#title").attr("value") == "" ) { window.alert("Ispunite polje za naslov."); return; }
+				$("#editor").submit();
+			} );
+		});
+	
+		function generateSlug(text)
+		{
+		    var text_array = text.split(" ");
+		    text = text_array.join("-");
+		    text = text.toLowerCase()
+			return text;
+		}
+	</script>
+
+	<div class="grid_12">
+		<form method="post" action="<?= $this->baseUrl(); ?>/admin/article/save" class="editor" name="editor" id="editor">
+			<input type="hidden" name="category" value="<?= $this->category ?>" />
+			<div id="content" style="margin-top: 20px;" class="grid_9 alpha">
+		
+				<p><input type="text" name="title" id="title" class="big" value="" /></p>
+				<p><input type="text" name="slug" id="slug" class="slug"  /> <a href="#"><img id="lock" src="<?= $this->baseUrl(); ?>/images/icon_lock_unlock.png" title="Otključano - Promjena naslova mjenja i slug."/></a></p>
+				<p><?= $this->editor ?></p>				
+			</div>
+			<div class="grid_3 omega sidebar">
+				<p><?= $this->formCheckbox("published") ?> Članak je objavljen</p>
+			</div>
+		</form>
+	</div>
+</div>
