@@ -2,7 +2,7 @@
 <div class="toolbar">
 	<div class="container_12" id="midsection">
 			<ul>
-				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/article/new">Nova stranica</a></li>
+				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/page/new">Nova stranica</a></li>
 				<li class="button editarticle" id="edit"><a href="#">Izmjeni stranicu</a></li>
 				<li class="button delarticle" id="delete"><a href="#">Izbriši izabrane</a></li>
 				<li class="separator"></li>
@@ -14,7 +14,7 @@
 
 <div class="container_12" id="midsection">
 	<div id="content" class="grid_12">
-		<?= $this->path . " (" . $this->depth . ")" ?>
+		<h2>Pregled stranica</h2>
 		<table width="100%" class="list">
 			<tr>					
 				
@@ -38,8 +38,6 @@
 				
 					if($branches === NULL)
 						$branches = array();
-					
-
 					
 					for($i = 2; $i < $item->depth; $i++)
 					{

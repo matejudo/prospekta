@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="/prospekta/public/styles/master.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="/prospekta/public/scripts/jquery-1.2.6.min.js" type="text/javascript"></script>
+	<title>Prospekta - Edukacija i zapošljavanje mladih:</title>
+</head>
+<body>
+<script type="text/javascript">
+
+
+	$.fn.togglemenu = function()
+	{
+		this.siblings(".submenu").fadeOut(200);
+		this.fadeIn(200);
+	}
+	
+
+	$(document).ready(function() {
+		$('#menuitem1').mouseover(function() { $('#subtab1').togglemenu(); });
+		$('#menuitem2').mouseover(function() { $('#subtab2').togglemenu(); });
+		$('#menuitem3').mouseover(function() { $('#subtab3').togglemenu(); });
+		$('#menuitem4').mouseover(function() { $('#subtab4').togglemenu(); });
+		$('#menuitem5').mouseover(function() { $('#subtab5').togglemenu(); });
+		$('#menuitem6').mouseover(function() { $('#subtab6').togglemenu(); });
+		$('#menuitem7').mouseover(function() { $('#subtab7').togglemenu(); });
+		$('#menu').hover(function() {}, function() { $('#subtab1').togglemenu(); });
+
+	});
+</script>
+<div id="header"><div class="logo"></div><h1>Prospekta - Edukacija i zapošljavanje mladih:</h1></div>
+<div id="menu"> 		
+		<ul id="topmenu" >
+			<li class="topitem" id="menuitem1"><a href="#">Početna</a></li>
+			<li class="topitem" id="menuitem2"><a href="#">O nama</a>	</li>
+			<li class="topitem" id="menuitem3"><a href="#">Programi edukacija</a></li>
+			<li class="topitem" id="menuitem4"><a href="#">Posao i karijera</a></li>
+			<li class="topitem" id="menuitem5"><a href="#">Zanimljivo i korisno</a></li>
+			<li class="topitem" id="menuitem6"><a href="#">Kontakt</a></li>
+		</ul>
+		<div id="subtab1" class="submenu"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras volutpat nunc lacinia dolor. Mauris enim justo, vehicula et, commodo vel, tincidunt eget, ipsum. Donec justo orci, luctus sit čamet, placerat ćeu, malesuada sit amet, libero. Duis volutpat tempor lectus. Morbi placerat malesuada nulla. Duis viverra nisl at nibh. Nam eget sem sit amet šest varius auctor. Cras sem. Ut hendrerit, libero đut porta ornare, žipsum ipsum consectetuer est, ut tristique lectus mi ac eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p></div>
+
+		<ul class="submenu" id="subtab2" style="display: none">
+			<li><a href="#">Tko smo mi?</a></li>
+			<li><a href="#">Naše vrijednosti</a></li>
+			<li><a href="#">Naša vizija</a></li>
+			<li><a href="#">Naša misija</a></li>
+			<li><a href="#">Management<br />i treneri</a></li>
+		</ul>	
+		<ul class="submenu" id="subtab3" style="display: none;">
+			<li><a href="#">Career coaching</a></li>
+			<li><a href="#">Self-development</a></li>
+			<li><a href="#">Student management</a></li>
+		</ul>
+		<ul class="submenu" id="subtab4" style="display: none;">
+			<li><a href="#">Tražim posao!</a></li>
+			<li><a href="#">Korisno je znati...</a></li>
+			<li><a href="#">Opisi radnih mjesta</a></li>
+			<li><a href="#">Karijera u...</a></li>
+			<li><a href="#">Oglasi za posao</a></li>
+		</ul>
+		<ul class="submenu" id="subtab5" style="display: none;">
+			<li><a href="#">Što čitati?</a></li>
+			<li><a href="#">Što gledati?</a></li>
+			<li><a href="#">Što posjetiti</a></li>
+			<li><a href="#">Što slušati</a></li>
+			<li><a href="#">Linkovi za studente</a></li>
+			<li><a href="#">Za vašu inspiraciju</a></li>
+			<li><a href="#">Nepoznato o poznatima</a></li>
+			<li><a href="#">Znate li da...?</a></li>
+
+		</ul>
+
+		<ul class="submenu" id="subtab6" style="display: none;">
+			<li><a href="#">Kako do nas?</a></li>
+			<li><a href="#">Prijave</a></li>
+		</ul>
+</div>
+<div id="programi" class="orange"> 
+	<div class="container_12">
+		<div id="prog1" class="grid_4 alpha"><h2>Career Coaching Program</h2><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras volutpat nunc lacinia dolor. Mauris enim justo, vehicula et, commodo vel, tincidunt eget, ipsum.</p></div>
+		<div id="prog2" class="grid_4"><h2>Self-Development Program</h2><p> Donec justo orci, luctus sit čamet, placerat ćeu, malesuada sit amet, libero. Duis volutpat tempor lectus. Morbi placerat malesuada nulla. Duis viverra nisl at nibh. </p></div>
+		<div id="prog3" class="grid_4 omega"><h2>Student Management Program</h2><p>Nam eget sem sit amet šest varius auctor. Cras sem. Ut hendrerit, libero đut porta ornare, žipsum ipsum consectetuer est, ut tristique lectus mi ac eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p></div>
+	</div>
+	<span class="clear"></span>
+</div>
+<div class="border-bottom"></div>
+<div class="container_12">
+	<div class="grid_2 alpha sidebar">
+		<ul class="menu">
+			<li><a href="#">Grupe Prospekta</a></li>
+			<li><a href="#">Studentske udruge</a></li>
+			<li><a href="#">Zanimljivo i zabavno</a></li>
+			<li><a href="#">Korisni linkovi</a></li>
+			<li><a href="#">Preporuči prospektu</a></li>
+		</ul>
+		<div class="border-bottom"></div>
+	</div>
+	<div class="grid_8">
+		<h1>Lorem ipsum</h1>
+		<h2>Dolor</h2>
+		<p>
+		Lorem ipsum dolor sit amet, <strong>consectetuer</strong> adipiscing elit. Cras ornare congue urna. Nam nec libero. Suspendisse ac augue eu tortor pulvinar rhoncus. Phasellus posuere lorem quis justo. Nam at urna. Morbi ac urna. Praesent quis eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce sapien. Fusce cursus tempor nisi. Etiam quis risus vel dolor iaculis consequat. Fusce sit amet eros ac eros accumsan venenatis. Quisque varius lectus eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam vitae libero pharetra quam pharetra ultrices. Integer vitae lectus in nibh bibendum egestas. Cras magna nunc, lobortis quis, sagittis at, sollicitudin vitae, ligula.
+		</p>
+		<h2>Lorem</h2>
+		<h3>Vitae</h3>
+		<p>
+		Suspendisse ipsum erat, luctus a, feugiat vitae, <a href="#">fringilla</a> sit amet, magna. Donec aliquam nulla eget massa. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin iaculis mauris. Maecenas euismod. Mauris massa odio, pharetra ac, ullamcorper eget, dictum sit amet, quam. Etiam velit eros, ornare sit amet, ullamcorper eu, sodales ut, tortor. Nullam consequat, leo a posuere porttitor, arcu tortor dapibus elit, nec commodo ligula tellus in mi. Suspendisse lacus velit, varius a, porta non, sollicitudin eget, orci. Aliquam ante. Ut eu pede id turpis fringilla cursus. Etiam vitae neque. Donec fermentum vehicula libero. Etiam egestas augue vel risus.
+		</p>
+		<ol>
+			<li>Što čitati? Što gledati? Što posjetiti? Što slušati?</li>
+			<li>Linkovi za studente</li>
+			<li>Za vašu inspiraciju</li>
+			<li>Nepoznato o poznatima</li>
+			<li>Znate li da...?</li>
+			<li>Tema tjedna</li>
+		</ol>
+		<h3>Mattis</h3>
+		<h4>Auctor</h4>
+		<p>
+		Integer dolor lorem, mattis non, suscipit eu, auctor sed, nibh. Vestibulum consectetuer, leo at sagittis pretium, metus libero accumsan est, tincidunt tincidunt libero augue consequat est. Quisque varius turpis ut dui. Fusce lectus pede, placerat ut, sagittis id, bibendum in, eros. Mauris a dolor non sapien bibendum faucibus. Aliquam suscipit ultrices risus. Nulla eleifend egestas eros. Curabitur mauris turpis, vehicula quis, molestie ut, consectetuer id, dolor. Mauris commodo, ligula a lobortis sagittis, velit ipsum bibendum dui, sed sollicitudin pede libero sed neque. Donec vitae risus vel elit ornare ornare. Donec velit sapien, interdum nec, gravida a, adipiscing pellentesque, lacus. Duis vel tellus vel libero lobortis sodales. Quisque rutrum. Duis ipsum sem, interdum sed, accumsan nec, porttitor ac, nulla. Aenean commodo commodo neque.
+		</p>
+		<h2>Porttitor</h2>
+		<ul>
+			<li>Što čitati? Što gledati? Što posjetiti? Što slušati?</li>
+			<li>Linkovi za studente</li>
+			<li>Za vašu inspiraciju</li>
+			<li>Nepoznato o poznatima</li>
+			<li>Znate li da...?</li>
+			<li>Tema tjedna</li>
+		</ul>
+		<p>
+		Nam porttitor ipsum quis sapien. In et mauris. Aliquam erat volutpat. Mauris scelerisque. Nullam orci turpis, egestas pulvinar, hendrerit sed, rutrum a, dolor. Maecenas dignissim sem in dolor vehicula dignissim. Ut porta hendrerit nibh. Vestibulum ut metus. Proin hendrerit, turpis eget auctor rutrum, nisl turpis cursus lorem, at condimentum dui sem pulvinar augue. Donec vitae nisl. Integer enim dolor, consectetuer non, aliquet sit amet, aliquet eget, ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam a lectus. Suspendisse potenti. Pellentesque rutrum sem id tortor. Ut facilisis. Cras eleifend, ante eget pulvinar egestas, nisl justo elementum quam, at auctor nulla nisi sed nibh.
+		</p>
+		<p>
+		Integer imperdiet. Sed ut urna. Ut luctus. Aenean sapien magna, fermentum quis, vestibulum et, feugiat nec, lorem. Duis augue pede, vestibulum et, hendrerit a, sagittis id, velit. Nam odio. Fusce mauris tellus, lacinia accumsan, consequat id, fringilla ut, mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus placerat auctor arcu. Sed mauris velit, porttitor eget, tincidunt quis, ultrices id, mi. Nullam blandit. Morbi fermentum turpis sit amet ligula. Ut vel nulla semper enim aliquam interdum.
+		</p>
+		<blockquote>Suspendisse ipsum erat, luctus a, feugiat vitae, fringilla sit amet, magna. Donec aliquam nulla eget massa. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin iaculis mauris. Maecenas euismod. Mauris massa odio, pharetra ac, ullamcorper eget, dictum sit amet, quam. Etiam velit eros, ornare sit amet, ullamcorper eu, sodales ut, tortor. Nullam consequat, leo a posuere porttitor, arcu tortor dapibus elit, nec commodo ligula tellus in mi. Suspendisse lacus velit, varius a, porta non, sollicitudin eget, orci. Aliquam ante. Ut eu pede id turpis fringilla cursus. Etiam vitae neque. Donec fermentum vehicula libero. Etiam egestas augue vel risus.</blockquote>
+		<p>
+		Integer dolor lorem, mattis non, suscipit eu, auctor sed, nibh. Vestibulum consectetuer, leo at sagittis pretium, metus libero accumsan est, tincidunt tincidunt libero augue consequat est. Quisque varius turpis ut dui. Fusce lectus pede, placerat ut, sagittis id, bibendum in, eros. Mauris a dolor non sapien bibendum faucibus. Aliquam suscipit ultrices risus. Nulla eleifend egestas eros. Curabitur mauris turpis, vehicula quis, molestie ut, consectetuer id, dolor. Mauris commodo, ligula a lobortis sagittis, velit ipsum bibendum dui, sed sollicitudin pede libero sed neque. Donec vitae risus vel elit ornare ornare. Donec velit sapien, interdum nec, gravida a, adipiscing pellentesque, lacus. Duis vel tellus vel libero lobortis sodales. Quisque rutrum. Duis ipsum sem, interdum sed, accumsan nec, porttitor ac, nulla. Aenean commodo commodo neque.
+		</p>
+	</div>
+	<div class="grid_2 omega sidebar">
+		<h2>Lorem ipsum</h2>
+		<p>
+		Integer imperdiet. Sed ut urna. Ut luctus. Aenean sapien magna, fermentum quis, vestibulum et, feugiat nec, lorem. Duis augue pede, vestibulum et, hendrerit a, sagittis id, velit. 
+		</p>
+		<p>Nam odio. Fusce mauris tellus, lacinia accumsan, consequat id, fringilla ut, mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus placerat auctor arcu. Sed mauris velit, porttitor eget, tincidunt quis, ultrices id, mi. Nullam blandit. Morbi fermentum turpis sit amet ligula. Ut vel nulla semper enim aliquam interdum.</p>
+	</div>
+</div>
+</body>
+</html>

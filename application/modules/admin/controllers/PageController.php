@@ -44,7 +44,21 @@ class Admin_PageController extends Zend_Controller_Action
 		$this->_redirect('admin/page');
 	}
 	
-
+	public function newAction()
+	{
+		$editor = new TextEditor();
+		$this->view->editor = $editor->getHTML("text", "");
+		$this->view->article = new stdClass();
+		$this->view->article->title = "";
+		$this->view->article->slug = "";
+		$this->view->article->text = "";
+		$this->view->article->published = "1";
+		$this->view->article->comments = "1";
+		$this->view->article->id = "-1";
+		$pages = new Pages();
+		$this->view->pages = $pages->getAllPaths();	
+		$this->render("edit");
+	}
 	
 
 }

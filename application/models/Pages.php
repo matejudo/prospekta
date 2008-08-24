@@ -7,7 +7,7 @@ class Pages extends Zend_Db_Table
 	{
 		$db = Zend_Registry::get("db");
 		$stmt = $db->query("
-			SELECT * FROM pros_pagee p
+			SELECT * FROM pros_page p
 				WHERE p.parentid = 
 					(SELECT q.id FROM pros_structure q WHERE q.slug = '$parentSlug');
 		");
@@ -49,7 +49,6 @@ class Pages extends Zend_Db_Table
 			$stmt = $db->query("SELECT * FROM pros_page WHERE parentid = $id  order by ordering");
 		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
 		$result = $stmt->fetchAll();
-		//Zend_Debug::dump($result);
 		foreach($result as $item)
 		{
 			$item->depth = $this->getDepth($item->slug);
@@ -57,6 +56,61 @@ class Pages extends Zend_Db_Table
 		}
 		return $result;		
 	}
+	
+	public function getFlatTree($id = NULL, $array = NULL)
+	{
+		if($array === NULL) $array = array();
+		
+		$db = Zend_Registry::get("db");
+		if($id === NULL) 
+			$stmt = $db->query("SELECT * FROM pros_page WHERE parentid IS NULL order by ordering");
+		else
+			$stmt = $db->query("SELECT * FROM pros_page WHERE parentid = $id  order by ordering");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $stmt->fetchAll();
+		//Zend_Debug::dump($result);
+		foreach($result as $item)
+		{
+			$item->depth = $this->getDepth($item->slug);	
+			array_push($array, $item);
+			$this->getFlatTree($item->id, &$array);
+			
+		}
+		return $array;		
+	}
+	
+	public function getAllPaths($id = NULL)
+	{
+		$return = array();
+		$result = $this->getFlatTree();
+		
+		foreach($result as $item)
+		{
+			array_push($return, $this->getPath($item->slug));
+		}
+		return $return;		
+	}
+	
+	
+//	public function getPath($slug)
+//	{
+//		$return = "";
+//		$db = Zend_Registry::get("db");
+//		$stmt = $db->query("SELECT * FROM pros_page WHERE slug = '$slug' order by ordering");
+//		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+//		$result = $stmt->fetchObject();
+//		$return = " &raquo; " . $result->slug;
+//		while(!($result->parentid === NULL))
+//		{
+//			$stmt = $db->query("SELECT * FROM pros_page WHERE id = '$result->parentid'");
+//			$result = $stmt->fetchObject();
+//			$return = " &raquo; " . $result->slug . $return;
+//		}
+//		
+//		return $return;
+//	}
+	
+	
 	
 	public function moveUp($id)
 	{

@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS Document **************************/
+
+body 			{ font-family: 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; font-size: 62.5%; }
+
+ul, ol, dl, h1, h2, h3, h4, h5, h6, td, th, caption, pre, p, blockquote, input, textarea 
+				{ line-height: 1.6em; font-weight: normal; color: #6C6C6C; text-align: left; }
+
+h1, h2, h3, 
+h4, h5, h6      { margin: 0; font-family: 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; font-weight: bold; color: #555; }
+h1              { font-size: 2.0em; padding-top: 10px; padding-bottom: 4px; text-transform: uppercase; }
+h2              { font-size: 1.8em; padding-top: 4px; padding-bottom: 4px; text-transform: uppercase; }
+h3              { font-size: 1.6em; padding-top: 4px; padding-bottom: 4px; }
+h4              { font-size: 1.4em; padding-top: 4px; padding-bottom: 4px; }
+h5              { font-size: 1.2em; padding-top: 4px; padding-bottom: 4px; }
+h6              { font-size: 1.0em; padding-top: 4px; padding-bottom: 4px; }
+
+a               { color: #4d83bb; text-decoration: none; }
+a:hover         { color: #F70; }
+em              { font-style: italic; }
+p               { margin: 0 0 18px 0; font-size: 1.4em;  }
+small           { font-size: 80%; }
+strong          { font-weight: bold; }
+
+ul, ol          { margin-top: 18px; margin-bottom: 18px; padding-left: 16px; list-style-position: outside; list-style-type: disc; font-size: 1.4em; }
+ol              { list-style-type: decimal; padding-left: 17px; }
+ul				{ list-style: square; }    
+dl              { margin-top: 18px; margin-bottom: 18px; font-size: 1.4em; }
+dl dt           { font-weight: bold; font-size: 1.4em; }
+
+blockquote      { border-left: 6px solid #ddd; margin-top: 18px; margin-bottom: 18px; padding-left: 17px; font-style: italic; font-size: 1.4em; }
+blockquote *    { color: #666; }
+
+textarea        { resize: none; } /* Prevents that little handle from showing up in Safari. */
+
+sup             { font-size: 70%; vertical-align: super; }
+
+.center			{ text-align: center; }
+
+/* Matej Udovičić **************************/
+
+.clear			{ clear: both; }
+
+#header 		{ width: 100%; height: 135px; margin: 0px; }
+#header h1 		{ display: none; }
+#header .logo	{ background: url("../images/ui_logo.gif"); width: 382px; height: 105px; position: absolute;
+				  left: 50%; margin-left: -460px; top: 20px; }
+				  
+#midsection 	{ margin-top: 20px; }
+
+p		{ text-align: justify; }
+
+#menu			{ background: url("../images/ui_menu_background.jpg"); display: block; min-height: 200px;  }
+#menu ul		{  }
+#menu li		{ list-style: none; }
+#topmenu		{ margin-top: 0px; width: 960px; left: 50%; position: relative; margin-left: -480px; padding-left: 0px; margin-bottom: 0px; }
+.topitem		{ display: block; float: left; margin-right: 30px;}
+.topitem a		{ color: #fff; font: normal 1.0em/1.3em 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; text-transform: uppercase;
+				  display: block; }
+#menu ul li	a:hover	{ color: #f70; }
+.li-small		{ width: 110px;}
+.li-medium		{ width: 140px; }
+.li-big			{ width: 150px;}
+
+#topmenu		{ padding-top: 15px; }
+
+ul.submenu		{ padding: 0px; margin-top: 14px; }
+ul.submenu li	{ clear: both; }
+ul.submenu li a { text-transform: none !important; }
+
+.submenu		{ position: absolute; width: 960px; left: 50%; margin-left: -480px; top: 180px; }
+.submenu p		{ color: white; }
+.submenu li a	{ color: white; }
+
+.sidebar		{  }
+.sidebar p		{ text-align: left; font-size: 1.2em;  }
+.sidebar h2		{ text-transform: none; font-size: 1.7em; }
+
+.sidebar .menu	{ list-style: none; padding: 0; font-weight: bold; height: auto; }
+.sidebar .menu li a	{ display: block; float: left; width: 100%; border: 1px solid #ddd; text-align: center; padding: 4px 0px; margin-bottom: 4px; background: url("../images/ui_orange_background.jpg"); color: white; }
+.sidebar .menu li a:hover { color: black; }
+
+.blue			{ background: url("../images/ui_blue_background.jpg"); }
+.orange			{ background: url("../images/ui_orange_background.jpg"); color: white; margin: 0px; padding: 8px 0px; }
+.orange h2		{ color: white; font-family: Tahoma, Arial, sans-serif; text-shadow: 0.1em 0.1em #333;
+				  font-size: 1.3em; font-weight: bold; text-align: center; text-transform: uppercase; margin: 0px;
+				  line-height: auto; padding: 0px; letter-spacing: 1px;  }
+.orange p		{ color: white; }
+
+.border-bottom	{ height: 15px; background-image: url("../images/ui_border_bottom.jpg"); }
+
+#programi 		{ border-top: 2px solid white;  }
+#programi p		{ line-height: 1.3em; text-align: justify; }

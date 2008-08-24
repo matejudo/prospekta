@@ -25,3 +25,17 @@ $.fn.checkCount = function() {
 	});
 	return count;
 };
+
+
+   	function delayFadeOut()
+   	{
+   		setTimeout('$("#message").fadeOut(2000)', 4000);
+   	}
+
+  	function showMessage(message)
+  	{
+  				$("#message").fadeOut(0);
+  				$("#message").text(message);
+  				$("#message").fadeIn(0);
+  				delayFadeOut();
+  	}

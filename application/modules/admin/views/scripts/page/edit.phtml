@@ -70,7 +70,7 @@
 	</script>
 
 	<div class="grid_12">
-		<h2><?= ($this->article->id == "-1") ? "Novi članak" : "Izmjena članka" ?></h2>
+		<h2><?= ($this->article->id == "-1") ? "Nova stranica" : "Izmjena stranice" ?></h2>
 		<form method="post" action="<?= $this->baseUrl(); ?>/admin/article/save" class="editor" name="editor" id="editor">
 			<input type="hidden" name="category" value="<?= $this->article->category; ?>" />
 			<input type="hidden" name="id" value="<?= $this->article->id; ?>" />
@@ -78,24 +78,23 @@
 			<div id="content" class="grid_9 alpha">
 				<p><input type="text" name="title" id="title" class="big" value="<?= ($this->article->title != "") ? $this->article->title : "Naslov" ; ?>" /></p>
 				<p><a href="#" id="slugbutton"><img id="lock" src="<?= $this->baseUrl(); ?>/images/icon_lock<?php if($this->article->id == -1) echo "_unlock" ?>.png" title="Otključano - Promjena naslova mjenja i slug."/></a><input type="text" name="slug" id="slug" class="slug" value="<?= $this->article->slug; ?>"  /> </p>
+				<p>
+					<select name="name">
+						<option value="value">Uvrsti na najvišoj razini</option>
+						<optgroup label="Uvrsti pod:" >							
+							<?php foreach($this->pages as $curpage): ?>
+								<option><?= str_replace("/", " &raquo; ", $curpage) ?></option>
+							<?php endforeach; ?>
+						</optgroup>
+					</select>
+				</p>
 				<p><?= $this->editor ?></p>		
-				<h3>Slike i attachmenti</h3>
-					<p><a href="#">Dodaj sliku u tekst</a> | <a href="#">Izaberi attachment</a> | <a href="#">Uploadaj novu datoteku</a><br/></p>
-					<p>Ovaj članak trenutno nema ni jedan attachment.</p> 
 			</div>
 
 			<div class="grid_3 omega sidebar">
 				<h3>Opcije</h3>
 				<p>
-					<input type="checkbox" name="published" id="published" <?= $this->article->published ? "checked='checked'" : ""; ?> value="1" /> <label for="published">Članak je objavljen</label><br/>
-					<input type="checkbox" name="comments" id="comments" <?= $this->article->comments ? "checked='checked'" : ""; ?> value="1" /> <label for="comments">Komentari su dozvoljeni</label>
-				</p>
-				<h3>Kategorija članka</h3>
-				<p>
-					<select name="category">
-						<option value="Novosti"<?php if($this->article->category == "Novosti") echo ' selected="selected"' ?>>Novosti</option>
-						<option value="Zanimljivosti"<?php if($this->article->category == "Zanimljivosti") echo ' selected="selected"' ?>>Zanimljivosti</option>
-					</select>
+					<input type="checkbox" name="published" id="published" <?= $this->article->published ? "checked='checked'" : ""; ?> value="1" /> <label for="published">Stranica je objavljen</label><br/>
 				</p>
 
 			</div>

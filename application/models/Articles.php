@@ -121,4 +121,5 @@ class Articles extends Zend_Db_Table
 		return $stmt->fetchAll();
 	}
 	
+
 }

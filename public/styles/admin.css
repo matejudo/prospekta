@@ -9,23 +9,23 @@ p				{ font-size: 1.3em; }
 
 #messagebar		{ position: absolute; width: 500px; left: 50%; margin-left: -250px; top: 20%;}
 #message		{ background: #222; padding: 15px; color: white; font-weight: bold; margin-left: auto; margin-right: auto;
-					font-size: 1.3em; text-align: center; line-height: 1.3em; }
+					font-size: 13px; text-align: center; line-height: 1.3em; }
 
 #header .logo	{ background: url("../images/ui_logo_admin.gif"); }
 
-#login	 		{ width: 300px; text-align: left; position: absolute; top: 30%; left: 50%; margin-left: -150px; }
-#login p 		{ text-align: left; font-size: 1.2em; }
+#login	 		{ width: 300px; padding-top: 170px; text-align: left; position: absolute; top: 15%; left: 50%; margin-left: -150px; background: url("../images/ui_padlock.jpg") no-repeat; }
+#login p 		{ text-align: left; font-size: 12px; }
 
-#login input	{ width: 100%; border: 1px solid #666; text-align: center; font-size: 1.6em; font-weigt: bold; font-family: Corbel, Tahoma, sans-serif;}
+#login input	{ width: 100%; border: 1px solid #666; text-align: center; font-size: 16px; font-weigt: bold; font-family: Corbel, Tahoma, sans-serif;}
 
 .warning		{ width: 100%; border: 4px solid #700; margin-bottom: 20px; }
-.warning p 		{ margin: 10px; font-size: 1.3em; color: #700; text-align: center; }
+.warning p 		{ margin: 10px; font-size: 13px; color: #700; text-align: center; }
 
 .success		{ width: 100%; border: 4px solid #070; margin-bottom: 20px; }
-.success p 		{ margin: 10px; font-size: 1.3em; color: #070; text-align: center; }
+.success p 		{ margin: 10px; font-size: 13px; color: #070; text-align: center; }
 
 #userinfo		{ position: absolute; top: 0; right: 20px; height: 32px; margin-left: 700px; width: 260px; }
-#userinfo p		{ color: white; font-size: 1.4em; line-height: 32px; text-align: right; }
+#userinfo p		{ color: white; font-size: 14px; line-height: 32px; text-align: right; }
 
 #midsection		{ margin-top: 0px; }
 
@@ -34,7 +34,7 @@ p				{ font-size: 1.3em; }
 .toolbar ul					{ padding: 0px; margin: 0px 10px; }
 .toolbar li					{ float: left; display: block; margin-right: 5px; list-style: none; background: #fff; }
 .toolbar li.separator		{ border-left: 1px solid #ddd; height: 27px; margin: 0px 10px 0px 5px;  }
-.toolbar li a				{ display: block; height: 15px; border: 1px solid #ddd; padding: 6px 10px 6px 24px; font-size: 1.3em; background: #fff; }
+.toolbar li a				{ display: block; height: 15px; border: 1px solid #ddd; padding: 6px 10px 6px 24px; font-size: 13px; background: #fff; line-height: 13px; }
 .toolbar li a:hover			{ border-color: #999; color: #4d83bb; }
 
 .toolbar li.newarticle 	a	{ background: url("../images/icon_notebook_plus.png") no-repeat 3px center; }
@@ -44,24 +44,24 @@ p				{ font-size: 1.3em; }
 .toolbar li.unpubarticle a	{ background: url("../images/icon_light_bulb_off.png") no-repeat 3px center; }
 .toolbar li.save a			{ background: url("../images/icon_notebook_save.png") no-repeat 3px center; }
 
-table.list		{ font-size: 1.3em; border-top: 3px solid #ddd; border-left: 1px solid #ddd; border-bottom: 1px solid #ddd; border-right: 1px solid #ddd; margin-top: 20px; clear: both; }
+table.list		{ font-size: 13px; border-top: 3px solid #ddd; border-left: 1px solid #ddd; border-bottom: 1px solid #ddd; border-right: 1px solid #ddd; margin-top: 20px; clear: both; }
 table.list th	{ border-bottom: 3px solid #ddd; padding: 6px 2px; font-weight: bold; color: black; background: #eee; }
 table.list td	{ border-bottom: 1px solid #ddd; padding: 0px; vertical-align: middle; height: 28px; vertical-align: middle;}
 table.list tr.hilite { background: #eee; }
 table.list tr:hover, table.list tr.hilite:hover	{ background: #e4e4e4;  }
 
-a.bigbutton			{ display: block; border: 1px solid #ddd; padding: 16px 10px 16px 24px; font-size: 1.6em; background: #fff; }
+a.bigbutton			{ display: block; border: 1px solid #ddd; padding: 16px 10px 16px 24px; font-size: 16px; background: #fff; }
 a.bigbutton:hover	{ border-color: #999; color: #4d83bb; }
 
 .editor input[type="text"]	{ width: 688px; border: 1px solid #ddd; padding: 3px 5px 3px 5px; }
-.editor input.big[type="text"]	{ font-size: 1.6em; }
-select		{ width: 100%; border: 1px solid #ddd; background: #fff; }
+.editor input.big[type="text"]	{ font-size: 16px; }
+select		{ width: 100%; border: 1px solid #ddd; background: #fff; padding: 3px 5px; height: 25px; }
 #slugbutton	{ border: 1px solid #ddd; border-right: none; padding: 3px 0px 3px 5px; height: 18px; }
 #slug		{ border-left: none; width: 672px; padding: 3px 0px 3px 5px; line-height: 16px; height: 18px;}
 
 #lock		{ vertical-align: text-top; }
 
-h2			{ padding: 0px; border-bottom: 1px solid #ddd; margin-bottom: 20px; line-height: 1.6em; font-size: 1.6em; font-weight: bold; }
+h2			{ padding: 0 0 3px 0; border-bottom: 1px solid #ddd; margin-bottom: 20px; line-height: 16px; font-size: 16px; font-weight: bold; }
 h3			{ font-weight: bold; padding: 0 0 2px 0; margin: 0 0 4px 0;  border-bottom: 1px solid #ddd; }
 
 label		{ cursor: pointer; }

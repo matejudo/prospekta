@@ -27,10 +27,7 @@
 			    			event.preventDefault(); 
 			    		});
 			    		
-			    	function delayFadeOut()
-			    	{
-			    		setTimeout('$("#message").fadeOut(2000)', 4000);
-			    	}
+
 			    	
 			    		
 			    	$("#unpublish").click(
@@ -41,13 +38,7 @@
 			    			event.preventDefault(); 
 			    		});
 			    	
-			    	function showMessage(message)
-			    	{
-			    				$("#message").fadeOut(0);
-			    				$("#message").text(message);
-			    				$("#message").fadeIn(0);
-			    				delayFadeOut();
-			    	}
+
 			    	
 			    	$("#delete").click(
 			    		function(event) {
@@ -58,9 +49,7 @@
 			    		});
 			    	
 
-			    	delayFadeOut();
-			    		
-		    	
+   	
 			    	$("#checkall").click( function ()
 			    	{
 						if($("#checkall").attr("checked"))

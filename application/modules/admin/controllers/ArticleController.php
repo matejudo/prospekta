@@ -38,7 +38,6 @@ class Admin_ArticleController extends Zend_Controller_Action
 	
 	public function newAction()
 	{
-		$this->view->baseUrl();
 		$this->view->category = $this->_getParam('category', '');
 		$editor = new TextEditor();
 		$this->view->editor = $editor->getHTML("text", "");
