@@ -1,0 +1,16 @@
+<div id="messagebar"><div id="message" style="display: none"><?= $this->message ?></div></div>
+<div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
+<div class="toolbar">
+	<div class="container_12" id="midsection">
+			<ul>
+
+			</ul>
+	</div>
+</div>
+<div class="container_12" id="midsection">
+	<div id="content" class="grid_12">
+		<h2>Kategorije članaka</h2>
+		<div class="grid_6 alpha"><a href="<?= $this->baseUrl() ?>/admin/article/category/Novosti" class="bigbutton">Novosti</a></div>
+		<div class="grid_6 omega"><a href="<?= $this->baseUrl() ?>/admin/article/category/Zanimljivosti" class="bigbutton">Zanimljivosti</a></div>
+	</div>
+</div>

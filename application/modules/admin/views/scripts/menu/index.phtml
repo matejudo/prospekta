@@ -2,7 +2,7 @@
 <div class="toolbar">
 	<div class="container_12" id="midsection">
 			<ul>
-				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/page/new">Nova stranica</a></li>
+				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/menu/new">Nova stavka</a></li>
 				<li class="button delarticle" id="delete"><a href="#">Izbriši izabrane</a></li>
 				<!-- 
 				<li class="separator"></li>
@@ -58,18 +58,21 @@
 		    </script>
 <div class="container_12" id="midsection">
 	<div id="content" class="grid_12">
-		<h2>Pregled stranica</h2>
+	    <h2>Izbornik: 
+	    <select onchange="window.open(this.options[this.selectedIndex].value,'_top')" >
+	    	<option value="<?= $this->baseUrl ?>/admin/menu/category/name/Glavni" <?php if($this->category == "Glavni") echo 'selected="selected"' ?>>Glavni</option>
+	    	<option value="<?= $this->baseUrl ?>/admin/menu/category/name/Lijevi" <?php if($this->category == "Lijevi") echo 'selected="selected"' ?>>Lijevi</option>		    
+	    </select>
+	    </h2>
 		<?= $this->form("pages", array("method" => "post", "action" => "noaction")) ?>
 		<table width="100%" class="list">
 			<tr>					
 				
 				<th width="3%" class="center"></th>
 				<th width="3%" class="center"><acronym title="Objavljen - Pokazuje da li je članak objavljen ili ne.">Obj.</acronym></th>
-				<th width="39%">Naslov</th>
-				<th width="20%"><acronym title="Kratki naslov za članak bez razmaka i specijalnih znakova. Mora biti jedinstven.">Slug</acronym></th>
+				<th width="30%">Naslov</th>				
 				<th width="5%">Red.</th>
-				<th width="15%">Zadnja promjena</th>
-				<th width="15%">Autor</th>
+				<th width="59%">Opis</th>
 			</tr>
 			<?php 
 				$checkdepth = 1; 
@@ -110,18 +113,18 @@
 						
 					$arrows = "";
 					if($counter != 1)
-						$arrows .= '<a href="' . $baseurl . "/admin/page/moveup/id/" . $item->id . '"><img src="' . $baseurl . "/images/icon_arrow_small_up.png" . "\" title=\"Pomakni gore\" /></a>";
+						$arrows .= '<a href="' . $baseurl . "/admin/menu/moveup/id/" . $item->id . '"><img src="' . $baseurl . "/images/icon_arrow_small_up.png" . "\" title=\"Pomakni gore\" /></a>";
 					else
 						$arrows .= '<img src="'. $baseurl . "/images/icon_spacer.png" . '" />';
 					if($counter != $total)
-						$arrows .= '<a href="' . $baseurl . "/admin/page/movedown/id/" . $item->id . '"><img src="' . $baseurl . "/images/icon_arrow_small_down.png" . '" title="Pomakni dole" /></a>';
-					$class .= "tr-" . $item->slug . " ";
+						$arrows .= '<a href="' . $baseurl . "/admin/menu/movedown/id/" . $item->id . '"><img src="' . $baseurl . "/images/icon_arrow_small_down.png" . '" title="Pomakni dole" /></a>';
+					$class .= "tr-" . $item->id . " ";
 					?>
-					<tr class="<?= $class ?>" onmouseover="$('.tr-<?= $item->slug ?>').attr('style', 'background: #e6e6e6; border: #999 solid 1px;')" onmouseout="$('.tr-<?= $item->slug ?>').attr('style', '')" >						
+					<tr class="<?= $class ?>" onmouseover="$('.tr-<?= $item->id ?>').attr('style', 'background: #e6e6e6; border: #999 solid 1px;')" onmouseout="$('.tr-<?= $item->id ?>').attr('style', '')" >						
 						<td width="3%" class="center"><input type="checkbox" name="id<?= $item->id ?>" id="id<?= $item->id ?>" value="1" /></td>
 						<td width="3%" class="center"><a href="<?= $baseurl . "/admin/page/" . $a . "/id/" . $item->id; ?>" title="<?= $t ?>"><img src="<?= $baseurl . "/images/" . $p; ?>" /></a></td>
-						<td width="39%">
-							<?php if($item->depth == 1): ?><strong><?php endif; ?>
+						<td width="30%">
+							
 							
 							<?php
 								for($i = 2; $i <= $item->depth; $i++)
@@ -147,23 +150,13 @@
 								}
 							
 							?>
-							
-							<a href="<?= $baseurl ?>/admin/page/edit/id/<?= $item->id ?>">
-								<?php if($item->text == ""): ?>
-								<img src="<?= $baseurl ?>/images/icon_notebook_empty.png" style="vertical-align: middle; " />
-								<?php else: ?>
-								<img src="<?= $baseurl ?>/images/icon_notebook.png" style="vertical-align: middle; " />
-								<?php endif; ?>
-								
-								<?= $item->title ?>
-							</a>
+							<?php if($item->depth == 1): ?><strong><?php endif; ?>
+							<a href="<?= $baseurl ?>/admin/page/edit/id/<?= $item->id ?>"><?= $item->title ?></a>
 							<?php if($item->depth == 1): ?></strong><?php endif; ?>
 						</td>
-						<td width="20%"><acronym title="Kratki naslov za članak bez razmaka i specijalnih znakova. Mora biti jedinstven.">
-							<?= $item->slug ?></acronym></td>
 						<td width="5%"><?= $arrows ?></td>
-						<td width="15%"></td>
-						<td width="15%"></td>
+
+						<td width="59%"></td>
 					</tr>
 					<?php
 					

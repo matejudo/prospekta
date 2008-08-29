@@ -1,3 +1,4 @@
+<div id="messagebar"><div id="message" style="display: none"><?= $this->message ?></div></div>
 <div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
 <div class="toolbar">
 	<div class="container_12" id="midsection">
@@ -6,16 +7,9 @@
 			</ul>
 	</div>
 </div>
+
 <div class="container_12" id="midsection">
-	<div class="grid_12">
-		<h2>Dobrodošli, <?= $this->user->fullname ?>.</h2>
-		<p>
-			TODO:
-		</p>
-		<ul>
-			<li>Pregled zadnjih promjena: Komentari, Pitanja, Poruke...</li>
-			<li>Last visited</li>
-			<li>Front Page</li>
-		</ul>
+	<div id="content" class="grid_12">
+		<p>Greška: Nije moguće brisati stavke koje imaju podstavke.</p>
 	</div>
 </div>

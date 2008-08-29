@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document **************************/
 
-body 			{ font-family: 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; font-size: 62.5%; }
+body 			{ font-family: 'Lucida Sans Unicode', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; font-size: 62.5%; }
 
 ul, ol, dl, h1, h2, h3, h4, h5, h6, td, th, caption, pre, p, blockquote, input, textarea 
 				{ line-height: 1.6em; font-weight: normal; color: #6C6C6C; text-align: left; }
@@ -62,31 +62,43 @@ p		{ text-align: justify; }
 .li-medium		{ width: 140px; }
 .li-big			{ width: 150px;}
 
-#topmenu		{ padding-top: 15px; }
+#topmenu		{ padding-top: 10px; }
 
-ul.submenu		{ padding: 0px; margin-top: 14px; }
-ul.submenu li	{ clear: both; }
-ul.submenu li a { text-transform: none !important; }
+ul.submenu		{ padding: 0px; margin-top: 4px; }
+ul.submenu li	{ clear: both; background: url("../images/ui_menu_arrow.gif") no-repeat left center; padding-left: 20px;  }
+ul.submenu li a {  }
 
-.submenu		{ position: absolute; width: 960px; left: 50%; margin-left: -480px; top: 180px; }
-.submenu p		{ color: white; }
-.submenu li a	{ color: white; }
+.submenu		{ position: absolute; width: 960px; left: 50%; margin-left: -480px; top: 190px; }
+.submenu p		{ color: white; font-size: 13px; }
+.submenu		{ font-size: 13px; line-height: 16px; }
+.submenu li a	{ color: white; font-size: 13px; line-height: 22px; text-shadow: 0.1em 0.1em #333; display: block; }
+.submenu li a strong	{ font-family: "Tahoma"; text-transform: uppercase; }
 
 .sidebar		{  }
 .sidebar p		{ text-align: left; font-size: 1.2em;  }
 .sidebar h2		{ text-transform: none; font-size: 1.7em; }
 
+.sidebar ul.menu {  border-top: 1px solid #ddd; margin-top: 45px; }
 .sidebar .menu	{ list-style: none; padding: 0; font-weight: bold; height: auto; }
-.sidebar .menu li a	{ display: block; float: left; width: 100%; border: 1px solid #ddd; text-align: center; padding: 4px 0px; margin-bottom: 4px; background: url("../images/ui_orange_background.jpg"); color: white; }
+.sidebar .menu li a	{ display: block; float: left; width: 100%;  padding: 8px 0px 8px 0px; margin: 0px; font-size: 12px; line-height: 12px; border-bottom: 1px solid #ddd;}
 .sidebar .menu li a:hover { color: black; }
 
-.blue			{ background: url("../images/ui_blue_background.jpg"); }
-.orange			{ background: url("../images/ui_orange_background.jpg"); color: white; margin: 0px; padding: 8px 0px; }
+.blue			{ background: url("../images/ui_blue_background.jpg"); color: white; }
+.orange			{ background: url("../images/ui_orange_background.jpg"); color: white; margin: 0px; padding: 16px 0px; }
+.orange p		{ font-size: 1.3em; line-height: 1.4em; }
 .orange h2		{ color: white; font-family: Tahoma, Arial, sans-serif; text-shadow: 0.1em 0.1em #333;
 				  font-size: 1.3em; font-weight: bold; text-align: center; text-transform: uppercase; margin: 0px;
 				  line-height: auto; padding: 0px; letter-spacing: 1px;  }
-.orange p		{ color: white; }
+.orange p				{ color: white; }
+.orange form div 		{ margin-top: 15px; vertical-align: center;}
+.orange label			{ width: 60px; vertical-align: center; display: block; margin-right: 10px; float: left; text-shadow: 0.1em 0.1em #333; font-size: 1.3em; font-weight: bold; text-align: right; text-transform: uppercase; }
+.orange input			{ color: #fff; }
+.orange input.text		{ width: 140px;  border: 1px solid #fff; background-color: #df7019; }
+.orange input.button	{ 	text-align: right; border: 0px; background-color: transparent; color: white; font-family: Tahoma, Arial, sans-serif; text-shadow: 0.1em 0.1em #333;
+				  			font-size: 1.3em; font-weight: bold; text-align: center; text-transform: uppercase; cursor: pointer; }
+.orange div.button 		{ text-align: right; }
 
+.border-top		{ height: 15px; background-image: url("../images/ui_border_top.jpg"); }
 .border-bottom	{ height: 15px; background-image: url("../images/ui_border_bottom.jpg"); }
 
 #programi 		{ border-top: 2px solid white;  }

@@ -11,30 +11,12 @@
 </div>
 <div class="container_12" id="midsection">
 	<script language="javascript" type="text/javascript">
-		<?php if($this->page->id == -1): ?>
+		<?php if($this->menu->id == -1): ?>
 			var lock = false; 
 		<?php else: ?>
 			var lock = true;
 		<?php endif; ?>
 		$(document).ready(function() {
-			
-			$("#title").myslug({lock: lock });
-			$("#slug").myslug({lock: lock });
-			
-			$("#lock").click( function(event) {
-				if(lock == false)
-				{
-					$("#lock").attr("src", "<?= $this->baseUrl(); ?>/images/icon_lock.png");
-					$("#lock").attr("title", "Zaključano - Moguća je samo ručna promjena sluga.");
-					lock = true;
-				}
-				else
-				{
-					$("#lock").attr("src", "<?= $this->baseUrl(); ?>/images/icon_lock_unlock.png");
-					$("#lock").attr("title", "Otključano - Promjena naslova mjenja i slug");
-					lock = false;
-				}
-			});
 			
 			$("#save").click( function () {
 				if($("#slug").attr("value") == "" ) { showMessage("Ispunite polje za slug."); return; }
@@ -57,6 +39,14 @@
 			$("#title").blur(function() { 
 				if($("#title").attr("value") == "") $("#title").attr("value", "Naslov");
 			 });
+			 
+			$("#description").focus(function() { 
+				if($("#description").attr("value") == "Opis") $("#description").attr("value", "");
+			 });
+			 
+			$("#description").blur(function() { 
+				if($("#description").attr("value") == "") $("#description").attr("value", "Opis");
+			 });
 			
 		});
 	
@@ -70,31 +60,40 @@
 	</script>
 
 	<div class="grid_12">
-		<h2><?= ($this->page->id == "-1") ? "Nova stranica" : "Izmjena stranice" ?></h2>
-		<!-- <?= $this->page->parentid ?>  -->
-		<form method="post" action="<?= $this->baseUrl(); ?>/admin/page/save" class="editor" name="editor" id="editor">
-			<input type="hidden" name="id" value="<?= $this->page->id; ?>" />
+		<h2><?= ($this->menu->id == "-1") ? "Nova stranica" : "Izmjena stranice" ?></h2>
+		<!-- <?= $this->menu->parentid ?>  -->
+		<form method="post" action="<?= $this->baseUrl(); ?>/admin/menu/save" class="editor" name="editor" id="editor">
+			<input type="hidden" name="id" value="<?= $this->menu->id; ?>" />
 			<input type="hidden" id="continue" name="continue" value="0" />
-			<input type="hidden" name="ordering" value="<?= $this->page->ordering; ?>" />
+			<input type="hidden" name="ordering" value="<?= $this->menu->ordering; ?>" />
 			<div id="content" class="grid_9 alpha">
-				<p><input type="text" name="title" id="title" class="big" value="<?= ($this->page->title != "") ? $this->page->title : "Naslov" ; ?>" /></p>
-				<p><a href="#" id="slugbutton"><img id="lock" src="<?= $this->baseUrl(); ?>/images/icon_lock<?php if($this->page->id == -1) echo "_unlock" ?>.png" title="Otključano - Promjena naslova mjenja i slug."/></a><input type="text" name="slug" id="slug" class="slug" value="<?= $this->page->slug; ?>"  /> </p>
+				<p><input type="text" name="title" id="title" class="big" value="<?= ($this->menu->title != "") ? $this->menu->title : "Naslov" ; ?>" /></p>
+				<p><input type="text" name="description" id="description" class="big" value="<?= ($this->menu->description != "") ? $this->menu->title : "Opis" ; ?>" /></p>
 				<p>
 					<select name="parentid">
 						<option value="-1">Uvrsti na najvišoj razini</option>
 						<optgroup label="Uvrsti pod:" >							
-							<?php foreach($this->paths as $curpath): ?><option value="<?= $curpath["id"] ?>" <?= ($curpath["id"] == $this->page->parentid) ? 'selected="selected"' : ""; ?>><?= str_replace("/", " &raquo; ", $curpath["path"]) ?></option>
+							<?php foreach($this->menuitems as $curpath): ?><option value="<?= $curpath["id"] ?>" <?= ($curpath["id"] == $this->menu->parentid) ? 'selected="selected"' : ""; ?>><?= str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $curpath["depth"]-1) . $curpath["title"] ?></option>
 							<?php endforeach; ?>
 						</optgroup>
 					</select>
 				</p>
-				<p><?= $this->editor ?></p>		
+				<p>
+					<input type="radio" name="type" value="page" id="radiopage"><label style="width: inherit;" for="radiopage">Stranica</label>&nbsp;&nbsp;<input type="radio" name="type" value="link" id="radiolink"><label style="width: inherit;" for="radiolink">Link</label>
+				</p>
+				<p>
+					<select name="page">
+						<option value="-1">Početna stranica</option>
+						<?php foreach($this->pages as $curpage): ?><option value="<?= $curpage["id"] ?>" <?= ($curpage["id"] == $this->menu->target) ? 'selected="selected"' : ""; ?>><?= str_replace("/", " &raquo; ", $curpage["path"]) ?></option><?php endforeach; ?>
+					</select>
+				</p>
+		
 			</div>
 
 			<div class="grid_3 omega sidebar">
 				<h3>Opcije</h3>
 				<p>
-					<input type="checkbox" name="published" id="published" <?= $this->page->published ? "checked='checked'" : ""; ?> value="1" /> <label for="published">Stranica je objavljen</label><br/>
+					<input type="checkbox" name="published" id="published" <?= $this->menu->published ? "checked='checked'" : ""; ?> value="1" /> <label for="published">Stavka je objavljen</label><br/>
 				</p>
 
 			</div>

@@ -24,16 +24,18 @@ class Admin_ArticleController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		$this->view->baseUrl();
+		$cat = $this->_getParam('name', 'Novosti');
+		$this->view->category = $cat;
+		$articles = new Articles();
+		$this->view->articles = $articles->fetchCategory($cat);
 		
 	}
 	
 	public function categoryAction()
 	{
-		$this->view->baseUrl();
-		$cat = $this->_getParam('name', 'Novosti');
-		$this->view->category = $cat;
-		$articles = new Articles();
-		$this->view->articles = $articles->fetchCategory($cat);
+		$category = $this->_getParam('name', 'Novosti');
+		$this->_setParam("category", $category);
+		$this->_forward("index", "article", "admin");
 	}
 	
 	public function newAction()
@@ -88,7 +90,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 			array_push( $data, $this->_getParam("id") );
 		}		
 		$articles->setPublish($data, 1);			
-		$this->_redirect('admin/article/', array("message" => "Article(s) published"));
+		$this->_redirect('admin/article/');
 
 
 	}
@@ -115,7 +117,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 			array_push( $data, $this->_request->getParam("id") );
 		}
 		$articles->setPublish($data, 0);
-		$this->_redirect('admin/article', array("message" => "Article(s) unpublished"));
+		$this->_redirect('admin/article');
 	}
 	
 	public function deleteAction()
@@ -157,7 +159,6 @@ class Admin_ArticleController extends Zend_Controller_Action
 	
 	public function saveAction()
 	{
-
 		if($this->getRequest()->isPost())
 		{
 		
@@ -173,8 +174,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 				'published'		=> $this->_request->getParam("published"),
 				'comments'		=> $this->_request->getParam("comments"),
 				'modified'		=> $date->toString("YYYY-MM-dd HH:mm:ss")
-			);	
-		
+			);			
 		
 			// New article -> SQL insert the data
 			if($this->_request->getParam("id") == "-1")

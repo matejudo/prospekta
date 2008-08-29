@@ -2,7 +2,7 @@
 
 require_once 'Zend/Controller/Action.php';
 
-class Admin_PageController extends Zend_Controller_Action
+class Admin_MenuController extends Zend_Controller_Action
 {
 
 	function preDispatch()
@@ -24,56 +24,67 @@ class Admin_PageController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		$this->view->baseUrl();
-		$pages = new Pages();		
-		$this->view->tree = $pages->getTree();	
+		$cat = $this->_getParam('name', 'Glavni');
+		$this->view->category = $cat;
+		$menu = new Menu();		
+		$this->view->tree = $menu->getTree("Glavni");	
+	}
+	
+	public function categoryAction()
+	{
+		$category = $this->_getParam('name', 'Glavni');
+		$this->_setParam("category", $category);
+		$this->_forward("index", "menu", "admin");
 	}
 	
 	public function moveupAction()
 	{
-		$pages = new Pages();
+		$menu = new Menu();
 		$id = $this->_getParam("id");
-		$page = $pages->getById($id);
-		$pages->fixOrdering($page->parentid);
-		$pages->moveUp($id);
-		$this->_redirect('admin/page');
+		$item = $menu->getById($id);
+		$menu->fixOrdering($item->parentid);
+		$menu->moveUp($id);
+		$this->_redirect('admin/menu');
 	}
 	
 	public function movedownAction()
 	{
-		$pages = new Pages();
+		$menu = new Menu();
 		$id = $this->_getParam("id");
-		$page = $pages->getById($id);
-		$pages->fixOrdering($page->parentid);
-		$pages->moveDown($id);
-		$this->_redirect('admin/page');
+		$item = $menu->getById($id);
+		$menu->fixOrdering($item->parentid);
+		$menu->moveDown($id);
+		$this->_redirect('admin/menu');
 	}
 	
 	public function newAction()
 	{
-		$editor = new TextEditor();
-		$this->view->editor = $editor->getHTML("text", "");
-		$this->view->page = new stdClass();
-		$this->view->page->title = "";
-		$this->view->page->slug = "";
-		$this->view->page->text = "";
-		$this->view->page->published = "1";
-		$this->view->page->id = "-1";
-		$this->view->page->parentid = "-1";
-		$this->view->page->ordering = "0";
+		$this->view->menu = new stdClass();
+		$this->view->menu->title = "";
+		$this->view->menu->description = "";
+		$this->view->menu->menu = "";
+		$this->view->menu->published = "1";
+		$this->view->menu->id = "-1";
+		$this->view->menu->parentid = "-1";
+		$this->view->menu->ordering = "0";
+		$this->view->menu->type = "page";
+		$this->view->menu->target = "0";
 		$pages = new Pages();
-		$this->view->paths = $pages->getAllPaths();	
+		$this->view->pages = $pages->getAllPaths();	
+		$menu = new Menu();
+		$this->view->menuitems = $menu->getAllPaths("Glavni");	
 		$this->render("edit");
 	}
 	
 	public function editAction()
 	{
-		$pages = new Pages();
+		$menu = new Menu();
 		$id = $this->_getParam("id");
-		$this->view->page = $pages->getById($id);
-		$this->view->paths = $pages->getAllPaths();	
-		if($this->view->page->parentid === NULL) $this->view->page->parentid = "-1";
+		$this->view->menu = $menu->getById($id);
+		$this->view->paths = $menu->getAllPaths();	
+		if($this->view->menu->parentid === NULL) $this->view->menu->parentid = "-1";
 		$editor = new TextEditor();
-		$this->view->editor = $editor->getHTML("text", $this->view->page->text);
+		$this->view->editor = $editor->getHTML("text", $this->view->menu->text);
 	}
 	
 	public function saveAction()
@@ -82,12 +93,11 @@ class Admin_PageController extends Zend_Controller_Action
 		{		
 			require_once 'Zend/Date.php';
 			$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);			
-			$pages = new Pages();
+			$menu = new Menu();
 			$params = $this->_request->getParams();
 			$data = array(
 				'parentid'     	=> ($this->_request->getParam("parentid") == "-1") ? NULL : $this->_request->getParam("parentid"),
 			    'title'      	=> $this->_request->getParam("title"),
-			    'slug' 			=> $this->_request->getParam("slug"),
 			    'text'			=> $this->_request->getParam("text"),
 				'ordering'		=> $this->_request->getParam("ordering"),
 				'published'		=> $this->_request->getParam("published"),
@@ -98,22 +108,22 @@ class Admin_PageController extends Zend_Controller_Action
 			// New article -> SQL insert the data
 			if($this->_request->getParam("id") == "-1")
 			{	
-				//$pages->increaseOrdering();
-				$pages->insert($data); 
+				//$menu->increaseOrdering();
+				$menu->insert($data); 
 			}
 			// Existing article -> SQL update the data
 			else
 			{
-				$where = $pages->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));			
-				$pages->update($data, $where);
+				$where = $menu->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));			
+				$menu->update($data, $where);
 			}
 			
-			$pages->fixOrdering($data["parentid"]);
+			$menu->fixOrdering($data["parentid"]);
 			
 			if($this->_request->getParam("continue") == "1")
-				$redirecturl = 'admin/page/edit/id/' . $this->_request->getParam("id");
+				$redirecturl = 'admin/menu/edit/id/' . $this->_request->getParam("id");
 			else
-				$redirecturl = '/admin/page/';
+				$redirecturl = '/admin/menu/';
 		}
 
 		$this->_redirect($redirecturl);
@@ -125,7 +135,7 @@ class Admin_PageController extends Zend_Controller_Action
 		if($this->getRequest()->isPost())
 		{
 			$this->view->deleted = 0;
-			$pages = new pages();
+			$menu = new menu();
 			$data = array();
 			$params = $this->_request->getParams();			
 			foreach($params as $key => $value)
@@ -136,11 +146,11 @@ class Admin_PageController extends Zend_Controller_Action
 					array_push($data, $id);
 				}
 			}
-			$this->view->deleted = $pages->delete($data);
+			$this->view->deleted = $menu->delete($data);
 		}
 		if($this->view->deleted)
 		{
-			$this->_redirect("/admin/page");
+			$this->_redirect("/admin/menu");
 		}
 		else
 		{
@@ -151,7 +161,7 @@ class Admin_PageController extends Zend_Controller_Action
 	public function publishAction()
 	{
 
-		$pages = new Pages();
+		$menus = new Menu();
 		$data = array();
 		$id = null;
 		if($this->getRequest()->isPost())
@@ -172,15 +182,15 @@ class Admin_PageController extends Zend_Controller_Action
 		{	
 			array_push( $data, $this->_getParam("id") );
 		}		
-		$pages->setPublish($data, 1);			
-		$this->_redirect('admin/page/');
+		$menu->setPublish($data, 1);			
+		$this->_redirect('admin/menu/');
 
 
 	}
 	
 	public function unpublishAction()
 	{
-		$pages = new Pages();
+		$menu = new Menu();
 		$data = array();
 		if($this->getRequest()->isPost())
 		{			
@@ -199,7 +209,28 @@ class Admin_PageController extends Zend_Controller_Action
 		{
 			array_push( $data, $this->_request->getParam("id") );
 		}
-		$pages->setPublish($data, 0);
-		$this->_redirect('admin/page');
+		$menu->setPublish($data, 0);
+		$this->_redirect('admin/menu');
+	}
+	
+	
+	public function fixOrdering($parentid)
+	{
+		$db = Zend_Registry::get("db");
+		if($parentid === NULL)
+			$stmt = $db->query("SELECT * FROM pros_page WHERE parentid IS NULL ORDER BY ordering ASC, modified DESC");
+		else
+			$stmt = $db->query("SELECT * FROM pros_page WHERE parentid = $parentid ORDER BY ordering ASC, modified DESC");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $stmt->fetchAll();
+		$counter = 1;
+		foreach($result as $curitem)
+		{
+			$stmt = $db->query("
+				UPDATE pros_page SET ordering = $counter WHERE id = $curitem->id
+			");
+			$stmt->execute();
+			$counter++;
+		}
 	}
 }

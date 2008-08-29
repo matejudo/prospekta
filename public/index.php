@@ -58,43 +58,37 @@
 		}									
 		
 		// učitaj strukturu stranice		
-		$struct = new Structure();
-		$mainmenu = $struct->getChildren("prospekta");	
+		$pages = new Pages();
+		$paths = $pages->getAllPaths();	
 	
-		foreach($mainmenu as $menuitem)
+		foreach($paths as $curpath)
 		{			
-			$route = new Zend_Controller_Router_Route(	$menuitem->slug . '/:slug/*',
+			$route = new Zend_Controller_Router_Route(	$curpath["path"] . '/',
 														array(	'module' => 'default',
-																'controller' => 'cat', 
+																'controller' => 'page', 
 																'action' => 'index', 
-																'slug' => null,
-																'topslug' => $menuitem->slug),
-														array(	'slug' => '(.*)'));
-			$router->addRoute($menuitem->slug, $route);
+																'id' => $curpath["id"]));
+			$router->addRoute($curpath["slug"], $route);
 		}
 		
-			$route = new Zend_Controller_Router_Route(	'article/:slug',
-												array(	'module' => 'default',
-														'controller' => 'article', 
-														'action' => 'index', 
-														'slug' => null,
-														'topslug' => 'wtf'),
-												array(	'slug' => '(.*)'));
-			$router->addRoute($menuitem->slug, $route);
-			
-			$route = new Zend_Controller_Router_Route(	'admin/article/category/:name',
-												array(	'module' => 'admin',
-														'controller' => 'article',
-														'action' => 'category'),
-												array(	'slug' => '(.*)'));
-			$router->addRoute($menuitem->slug, $route);
+		$route = new Zend_Controller_Router_Route(	'article/:slug',
+													array(	'module' => 'default',
+															'controller' => 'article', 
+															'action' => 'index', 
+															'slug' => null,
+															'topslug' => 'wtf'),
+													array(	'slug' => '(.*)'));
+		$router->addRoute("article", $route);
 		
-//		$route = new Zend_Controller_Router_Route(	'admin/:controller/:action/*',
-//    												array(	'module' => 'admin')
-//													);
-//		$router->addRoute('admin', $route);
+		$route = new Zend_Controller_Router_Route(	'admin/article/category/:name',
+													array(	'module' => 'admin',
+															'controller' => 'article',
+															'action' => 'category'),
+													array(	'slug' => '(.*)'));
+		$router->addRoute("admincat", $route);
+
 	
-	
+		//Zend_Debug::dump($router);
 	
 		
 		// setup controller
