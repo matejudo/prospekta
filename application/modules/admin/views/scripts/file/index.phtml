@@ -1,0 +1,18 @@
+<div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
+<div class="toolbar">
+	<div class="container_12" id="midsection">
+			<ul>
+				<li class="button download" id="new"><a href="#">Upload</a></li>
+				<li class="button upload" id="delete"><a href="#">Download</a></li>
+				<li class="separator"></li>
+				<li class="button folder" id="new"><a href="#">Novi folder</a></li>
+				<!-- 
+				<li class="separator"></li>
+				<li class="button pubarticle" id="publish"><a href='#'>Objavi izabrane</a></li>
+				<li class="button unpubarticle" id="unpublish"><a href="#">Makni izabrane</a></li> -->
+			</ul>
+	</div>
+</div>
+<div class="container_12">
+	<?= $this->files ?>
+</div>

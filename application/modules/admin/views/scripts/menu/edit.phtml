@@ -4,7 +4,6 @@
 	<div class="container_12" id="midsection">
 			<ul>
 			<li class="button save" id="save"><a href="#">Spremi</a></li>
-			<li class="button save" id="savecont"><a href="#">Spremi i nastavi</a></li>
 			<li class="button delarticle" id="delete"><a href="#">Odustani</a></li>
 		</ul>
 	</div>
@@ -19,14 +18,6 @@
 		$(document).ready(function() {
 			
 			$("#save").click( function () {
-				if($("#slug").attr("value") == "" ) { showMessage("Ispunite polje za slug."); return; }
-				if($("#title").attr("value") == "" ) { showMessage("Ispunite polje za naslov."); return; }
-				$("#editor").submit();
-			} );
-			
-			$("#savecont").click( function () {
-			
-				$("#continue").attr("value", "1");
 				if($("#slug").attr("value") == "" ) { showMessage("Ispunite polje za slug."); return; }
 				if($("#title").attr("value") == "" ) { showMessage("Ispunite polje za naslov."); return; }
 				$("#editor").submit();
@@ -60,16 +51,16 @@
 	</script>
 
 	<div class="grid_12">
-		<h2><?= ($this->menu->id == "-1") ? "Nova stavka" : "Izmjena stavke" ?></h2>
+		<h2><?= ($this->menu->id == "-1") ? 'Nova stavka u izborniku "' . $this->menu->menu . '"' : 'Izmjena stavke "' . $this->menu->menu . '"' ?></h2>
 		<!-- <?= $this->menu->parentid ?>  -->
 		<form method="post" action="<?= $this->baseUrl(); ?>/admin/menu/save" class="editor" name="editor" id="editor">
 			<input type="hidden" name="id" value="<?= $this->menu->id; ?>" />
 			<input type="hidden" id="continue" name="continue" value="0" />
 			<input type="hidden" name="type" value="page" />
-			<input type="hidden" name="menu" value="page" />
+			<input type="hidden" name="menu" value="<?= $this->menu->menu ?>" />
 			<div id="content" class="grid_9 alpha">
 				<p><input type="text" name="title" id="title" class="big" value="<?= ($this->menu->title != "") ? $this->menu->title : "Naslov" ; ?>" /></p>
-				<p><input type="text" name="description" id="description" class="big" value="<?= ($this->menu->description != "") ? $this->menu->title : "Opis" ; ?>" /></p>
+				<p><input type="text" name="description" id="description" class="big" value="<?= ($this->menu->description != "") ? $this->menu->description : "Opis" ; ?>" /></p>
 				<h3>Pozicija u izborniku</h3>
 				<p>
 					<select name="parentid">
@@ -82,8 +73,8 @@
 				</p>
 				<h3>Link</h3>
 				<p>
-					<select name="page">
-						<option value="-1">Bez linka</option>
+					<select name="target">
+						<option value="-2">Bez linka</option>
 						<option value="-1">Početna stranica</option>
 						<optgroup label="Ostale stranice">
 							<?php foreach($this->pages as $curpage): ?><option value="<?= $curpage["id"] ?>" <?= ($curpage["id"] == $this->menu->target) ? 'selected="selected"' : ""; ?>><?= str_replace("/", " &raquo; ", $curpage["path"]) ?></option><?php endforeach; ?>

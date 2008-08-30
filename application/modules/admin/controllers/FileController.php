@@ -1,10 +1,9 @@
 <?php
-	
+
 require_once 'Zend/Controller/Action.php';
 
-class Admin_IndexController extends Zend_Controller_Action
+class Admin_FileController extends Zend_Controller_Action
 {
-
 	function preDispatch()
 	{
 		$auth = Zend_Auth::getInstance();
@@ -12,7 +11,7 @@ class Admin_IndexController extends Zend_Controller_Action
 			$this->_redirect('admin/auth/login');
 		}
 	}
-	
+
 	function init()
 	{
 		$this->initView();
@@ -20,13 +19,10 @@ class Admin_IndexController extends Zend_Controller_Action
 		$this->_helper->layout->setLayout('admin'); 
 		$this->view->user = Zend_Auth::getInstance()->getIdentity();
 	}
-	
+
 	public function indexAction()
 	{
-		$this->view->baseUrl();
-		$this->_helper->layout->setLayout('admin'); 
-
+		$files = new Files();
+		$this->view->files = $files->listFiles();
 	}
-	
-
 }

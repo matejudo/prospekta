@@ -27,7 +27,7 @@ class Admin_MenuController extends Zend_Controller_Action
 		$cat = $this->_getParam('name', 'Glavni');
 		$this->view->category = $cat;
 		$menu = new Menu();		
-		$this->view->tree = $menu->getTree("Glavni");	
+		$this->view->tree = $menu->getTree($cat);	
 	}
 	
 	public function categoryAction()
@@ -44,7 +44,7 @@ class Admin_MenuController extends Zend_Controller_Action
 		$item = $menu->getById($id);
 		$menu->fixOrdering($item->parentid);
 		$menu->moveUp($id);
-		$this->_redirect('admin/menu');
+		$this->_redirect('admin/menu/category/name/'.$item->menu);
 	}
 	
 	public function movedownAction()
@@ -54,7 +54,7 @@ class Admin_MenuController extends Zend_Controller_Action
 		$item = $menu->getById($id);
 		$menu->fixOrdering($item->parentid);
 		$menu->moveDown($id);
-		$this->_redirect('admin/menu');
+		$this->_redirect('admin/menu/category/name/'.$item->menu);
 	}
 	
 	public function newAction()
@@ -63,7 +63,7 @@ class Admin_MenuController extends Zend_Controller_Action
 		$this->view->menu = new stdClass();	
 		$this->view->menu->id = "-1";
 		$this->view->menu->parentid = "-1";
-		$this->view->menu->menu = $this->_getParam("cat", "Glavni");
+		$this->view->menu->menu = $this->_getParam("category", "Glavni");
 		$this->view->menu->ordering = "0";
 		$this->view->menu->title = "";
 		$this->view->menu->description = "";
@@ -82,10 +82,10 @@ class Admin_MenuController extends Zend_Controller_Action
 		$menu = new Menu();
 		$id = $this->_getParam("id");
 		$this->view->menu = $menu->getById($id);
-		$this->view->paths = $menu->getAllPaths();	
 		if($this->view->menu->parentid === NULL) $this->view->menu->parentid = "-1";
-		$editor = new TextEditor();
-		$this->view->editor = $editor->getHTML("text", $this->view->menu->text);
+		$this->view->menuitems = $menu->getAllPaths($this->view->menu->menu);
+		$pages = new Pages();
+		$this->view->pages = $pages->getAllPaths();	
 	}
 	
 	public function saveAction()
@@ -101,7 +101,7 @@ class Admin_MenuController extends Zend_Controller_Action
 				'parentid'     	=> ($this->_request->getParam("parentid") == "-1") ? NULL : $this->_request->getParam("parentid"),
 			    'menu'      	=> $this->_request->getParam("menu"),
 				'title'			=> $this->_request->getParam("title"),
-				'description'	=> $this->_request->getParam("description"),
+				'description'	=> ($this->_request->getParam("description") == "Opis") ? "" : $this->_request->getParam("description"),
 				'type'			=> $this->_request->getParam("type"),
 				'target'		=> $this->_request->getParam("target"),
 				'published'		=> $this->_request->getParam("published")
@@ -121,11 +121,7 @@ class Admin_MenuController extends Zend_Controller_Action
 			}
 			
 			$menu->fixOrdering($data["parentid"]);
-			
-			if($this->_request->getParam("continue") == "1")
-				$redirecturl = 'admin/menu/edit/id/' . $this->_request->getParam("id");
-			else
-				$redirecturl = '/admin/menu/';
+			$redirecturl = '/admin/menu/category/name/' . $this->_request->getParam("menu");
 		}
 
 		$this->_redirect($redirecturl);
@@ -216,23 +212,5 @@ class Admin_MenuController extends Zend_Controller_Action
 	}
 	
 	
-	public function fixOrdering($parentid)
-	{
-		$db = Zend_Registry::get("db");
-		if($parentid === NULL)
-			$stmt = $db->query("SELECT * FROM pros_page WHERE parentid IS NULL ORDER BY ordering ASC, modified DESC");
-		else
-			$stmt = $db->query("SELECT * FROM pros_page WHERE parentid = $parentid ORDER BY ordering ASC, modified DESC");
-		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $stmt->fetchAll();
-		$counter = 1;
-		foreach($result as $curitem)
-		{
-			$stmt = $db->query("
-				UPDATE pros_page SET ordering = $counter WHERE id = $curitem->id
-			");
-			$stmt->execute();
-			$counter++;
-		}
-	}
+
 }

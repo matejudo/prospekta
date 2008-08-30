@@ -84,11 +84,12 @@ class Admin_PageController extends Zend_Controller_Action
 			$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);			
 			$pages = new Pages();
 			$params = $this->_request->getParams();
+			Zend_Debug::dump($params);
 			$data = array(
 				'parentid'     	=> ($this->_request->getParam("parentid") == "-1") ? NULL : $this->_request->getParam("parentid"),
 			    'title'      	=> $this->_request->getParam("title"),
 			    'slug' 			=> $this->_request->getParam("slug"),
-			    'text'			=> $this->_request->getParam("text"),
+			    'text'			=> stripslashes($this->_request->getParam("text")),
 				'ordering'		=> $this->_request->getParam("ordering"),
 				'published'		=> $this->_request->getParam("published"),
 				'modified'		=> $date->toString("YYYY-MM-dd HH:mm:ss"),

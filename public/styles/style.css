@@ -78,13 +78,18 @@ ul.submenu li a {  }
 .submenu p		{ color: white; font-size: 13px; }
 .submenu		{ font-size: 13px; line-height: 16px; }
 .submenu li		{ margin: 0px; }
-.submenu li a	{ color: white; font-size: 13px; line-height: 22px; text-shadow: 0.1em 0.1em #333; display: block; height: 22px; }
+.submenu li a	{ color: white; font-size: 13px; line-height: 22px; text-shadow: 0.1em 0.1em 0.2em #333; display: block; height: 22px; }
 .submenu li a strong	{ font-family: "Tahoma"; text-transform: uppercase; }
 
 .introtext		{ width: 640px; float: left; }
 .polaroids		{ width: 300px; height: 164px; background: url("../images/pol_background.jpg"); position: absolute; top: 0px; right: 0px; }
 #polaroid1		{ position: relative; top: 0px; left: 0px; width:208px; height: 164px; position: absolute; top: 0px; left: 37px; }
 #polaroid2		{ position: relative; top: 0px; left: 0px; width:208px; height: 164px; position: absolute; top: 0px; left: 37px; }
+
+.program img	{ border: 2px solid white; margin-top: 5px; margin-bottom: 5px; }
+
+.path			{ border-top: 2px solid white; background: url("../images/ui_orange_background.jpg");  }
+.path p			{ color: white; margin: 0px; padding: 8px 0px; }
 
 .sidebar		{  }
 .sidebar p		{ text-align: left; font-size: 1.2em;  }
@@ -101,7 +106,7 @@ ul.submenu li a {  }
 .orange p		{ font-size: 1.3em; line-height: 1.4em; }
 .orange a		{ color: white; text-decoration: underline; }
 .orange a:hover	{ color: black; text-decoration: underline; }
-.orange h2		{ color: white; font-family: Tahoma, Arial, sans-serif; text-shadow: 0.1em 0.1em #333;
+.orange h2		{ color: white; font-family: Tahoma, Arial, sans-serif; text-shadow: 0.1em 0.1em 0.2em #333;
 				  font-size: 1.3em; font-weight: bold; text-align: center; text-transform: uppercase; margin: 0px;
 				  line-height: auto; padding: 0px; letter-spacing: 1px;  }
 .orange p				{ color: white; }

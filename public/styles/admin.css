@@ -43,6 +43,9 @@ p				{ font-size: 1.3em; }
 .toolbar li.pubarticle	a	{ background: url("../images/icon_light_bulb.png") no-repeat 3px center; }
 .toolbar li.unpubarticle a	{ background: url("../images/icon_light_bulb_off.png") no-repeat 3px center; }
 .toolbar li.save a			{ background: url("../images/icon_notebook_save.png") no-repeat 3px center; }
+.toolbar li.download a		{ background: url("../images/icon_arrow_up.png") no-repeat 3px center; }
+.toolbar li.upload a		{ background: url("../images/icon_arrow_down.png") no-repeat 3px center; }
+.toolbar li.folder a		{ background: url("../images/icon_folder.png") no-repeat 3px center; }
 
 table.list		{ font-size: 13px; border-top: 3px solid #ddd; border-left: 1px solid #ddd; border-bottom: 1px solid #ddd; border-right: 1px solid #ddd; margin-top: 20px; clear: both; }
 table.list th	{ border-bottom: 3px solid #ddd; padding: 6px 2px; font-weight: bold; color: black; background: #eee; }

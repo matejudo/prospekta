@@ -18,7 +18,7 @@
 			    	
 			    	$("#delete").click(
 			    		function(event) {
-			    			$("#pages").attr({action: "<?= $this->baseUrl . "/admin/page/delete" ?>"});  
+			    			$("#pages").attr({action: "<?= $this->baseUrl . "/admin/menu/delete" ?>"});  
 			    			if($("input[@type='checkbox']").checkCount()) $("#pages").submit(); 
 			    			else showMessage("Greška: Nije selektiran ni jedan članak."); 
 			    			event.preventDefault(); 
@@ -151,12 +151,12 @@
 							
 							?>
 							<?php if($item->depth == 1): ?><strong><?php endif; ?>
-							<a href="<?= $baseurl ?>/admin/page/edit/id/<?= $item->id ?>"><?= $item->title ?></a>
+							<a href="<?= $baseurl ?>/admin/menu/edit/id/<?= $item->id ?>"><?= $item->title ?></a>
 							<?php if($item->depth == 1): ?></strong><?php endif; ?>
 						</td>
 						<td width="5%"><?= $arrows ?></td>
 
-						<td width="59%"></td>
+						<td width="59%"><?php if(strlen($item->description) > 80) echo substr($item->description, 0, 80) . "..."; else echo $item->description; ?></td>
 					</tr>
 					<?php
 					

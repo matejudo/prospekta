@@ -38,6 +38,29 @@ class Pages extends Zend_Db_Table
 		return $path;
 	}
 	
+	public function getPathById($id)
+	{
+		$db = Zend_Registry::get("db");
+		
+		$stmt = $db->query("SELECT * FROM pros_page WHERE id = $id");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $stmt->fetchObject();		
+		$path = $result->slug;
+		
+		if(!($result->parentid === NULL))
+		{
+			$done = 0;
+			while(!$done)
+			{
+				$stmt = $db->query("SELECT * FROM pros_page WHERE id = $result->parentid");
+				$result = $stmt->fetchObject();
+				$path = $result->slug . "/" . $path;
+				if($result->parentid === NULL) $done = 1;
+			}
+		}
+		return $path;
+	}
+	
 	public function getTree($id = NULL)
 	{
 		$db = Zend_Registry::get("db");
