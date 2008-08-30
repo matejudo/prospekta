@@ -60,15 +60,17 @@
 	</script>
 
 	<div class="grid_12">
-		<h2><?= ($this->menu->id == "-1") ? "Nova stranica" : "Izmjena stranice" ?></h2>
+		<h2><?= ($this->menu->id == "-1") ? "Nova stavka" : "Izmjena stavke" ?></h2>
 		<!-- <?= $this->menu->parentid ?>  -->
 		<form method="post" action="<?= $this->baseUrl(); ?>/admin/menu/save" class="editor" name="editor" id="editor">
 			<input type="hidden" name="id" value="<?= $this->menu->id; ?>" />
 			<input type="hidden" id="continue" name="continue" value="0" />
-			<input type="hidden" name="ordering" value="<?= $this->menu->ordering; ?>" />
+			<input type="hidden" name="type" value="page" />
+			<input type="hidden" name="menu" value="page" />
 			<div id="content" class="grid_9 alpha">
 				<p><input type="text" name="title" id="title" class="big" value="<?= ($this->menu->title != "") ? $this->menu->title : "Naslov" ; ?>" /></p>
 				<p><input type="text" name="description" id="description" class="big" value="<?= ($this->menu->description != "") ? $this->menu->title : "Opis" ; ?>" /></p>
+				<h3>Pozicija u izborniku</h3>
 				<p>
 					<select name="parentid">
 						<option value="-1">Uvrsti na najvišoj razini</option>
@@ -78,13 +80,14 @@
 						</optgroup>
 					</select>
 				</p>
-				<p>
-					<input type="radio" name="type" value="page" id="radiopage"><label style="width: inherit;" for="radiopage">Stranica</label>&nbsp;&nbsp;<input type="radio" name="type" value="link" id="radiolink"><label style="width: inherit;" for="radiolink">Link</label>
-				</p>
+				<h3>Link</h3>
 				<p>
 					<select name="page">
+						<option value="-1">Bez linka</option>
 						<option value="-1">Početna stranica</option>
-						<?php foreach($this->pages as $curpage): ?><option value="<?= $curpage["id"] ?>" <?= ($curpage["id"] == $this->menu->target) ? 'selected="selected"' : ""; ?>><?= str_replace("/", " &raquo; ", $curpage["path"]) ?></option><?php endforeach; ?>
+						<optgroup label="Ostale stranice">
+							<?php foreach($this->pages as $curpage): ?><option value="<?= $curpage["id"] ?>" <?= ($curpage["id"] == $this->menu->target) ? 'selected="selected"' : ""; ?>><?= str_replace("/", " &raquo; ", $curpage["path"]) ?></option><?php endforeach; ?>
+						</optgroup>
 					</select>
 				</p>
 		

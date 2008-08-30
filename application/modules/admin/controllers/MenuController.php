@@ -59,20 +59,21 @@ class Admin_MenuController extends Zend_Controller_Action
 	
 	public function newAction()
 	{
-		$this->view->menu = new stdClass();
-		$this->view->menu->title = "";
-		$this->view->menu->description = "";
-		$this->view->menu->menu = "";
-		$this->view->menu->published = "1";
+	// id 	parentid 	menu 	ordering 	title 	description 	type 	target 	published
+		$this->view->menu = new stdClass();	
 		$this->view->menu->id = "-1";
 		$this->view->menu->parentid = "-1";
+		$this->view->menu->menu = $this->_getParam("cat", "Glavni");
 		$this->view->menu->ordering = "0";
+		$this->view->menu->title = "";
+		$this->view->menu->description = "";
 		$this->view->menu->type = "page";
 		$this->view->menu->target = "0";
+		$this->view->menu->published = "1";
 		$pages = new Pages();
 		$this->view->pages = $pages->getAllPaths();	
 		$menu = new Menu();
-		$this->view->menuitems = $menu->getAllPaths("Glavni");	
+		$this->view->menuitems = $menu->getAllPaths($this->view->menu->menu);	
 		$this->render("edit");
 	}
 	
@@ -95,14 +96,15 @@ class Admin_MenuController extends Zend_Controller_Action
 			$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);			
 			$menu = new Menu();
 			$params = $this->_request->getParams();
+			
 			$data = array(
 				'parentid'     	=> ($this->_request->getParam("parentid") == "-1") ? NULL : $this->_request->getParam("parentid"),
-			    'title'      	=> $this->_request->getParam("title"),
-			    'text'			=> $this->_request->getParam("text"),
-				'ordering'		=> $this->_request->getParam("ordering"),
-				'published'		=> $this->_request->getParam("published"),
-				'modified'		=> $date->toString("YYYY-MM-dd HH:mm:ss"),
-				'author'		=> Zend_Auth::getInstance()->getIdentity()->fullname
+			    'menu'      	=> $this->_request->getParam("menu"),
+				'title'			=> $this->_request->getParam("title"),
+				'description'	=> $this->_request->getParam("description"),
+				'type'			=> $this->_request->getParam("type"),
+				'target'		=> $this->_request->getParam("target"),
+				'published'		=> $this->_request->getParam("published")
 			);			
 		
 			// New article -> SQL insert the data
