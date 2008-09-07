@@ -169,7 +169,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 			$data = array(
 			    'title'      	=> $this->_request->getParam("title"),
 			    'slug' 			=> $this->_request->getParam("slug"),
-			    'text'			=> $this->_request->getParam("text"),
+			    'text'			=> stripslashes($this->_request->getParam("text")),
 				'category'		=> $this->_request->getParam("category"),
 				'published'		=> $this->_request->getParam("published"),
 				'comments'		=> $this->_request->getParam("comments"),

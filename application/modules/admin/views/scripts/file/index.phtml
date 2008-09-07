@@ -2,10 +2,12 @@
 <div class="toolbar">
 	<div class="container_12" id="midsection">
 			<ul>
-				<li class="button download" id="new"><a href="#">Upload</a></li>
-				<li class="button upload" id="delete"><a href="#">Download</a></li>
+				<li class="button upload" id="upload"><a href="#">Upload</a></li>
+				<li class="button delfile" id="delete"><a href="#">Izbriši izabrane</a></li>
 				<li class="separator"></li>
-				<li class="button folder" id="new"><a href="#">Novi folder</a></li>
+				<li class="button folder" id="newfolder"><a href="#">Novi folder</a></li>
+				<li class="button extract" id="unzip"><a href="#">Raspakiraj</a></li>
+				<li class="button compress" id="zip"><a href="#">Zapakiraj</a></li>
 				<!-- 
 				<li class="separator"></li>
 				<li class="button pubarticle" id="publish"><a href='#'>Objavi izabrane</a></li>
@@ -13,6 +15,184 @@
 			</ul>
 	</div>
 </div>
+<script type="text/javascript">	    
+        
+     $(document).ready(function() {
+    	
+    	$("#upload").click(
+    		function(event) {
+    			$("#uploadform").animate({ height: "80px" }, "slow"); 
+    			event.preventDefault(); 
+    		}
+    	);
+    	
+    	$("#delete").click(
+    		function(event) {
+    			$("#files").attr("action", "<?= $this->baseUrl ?>/admin/file/delete");
+    			$("#files").submit(); 
+    			event.preventDefault(); 
+    		}
+    	);
+    	
+    	$("#unzip").click(
+    		function(event) {
+    			$("#files").attr("action", "<?= $this->baseUrl ?>/admin/file/unzip");
+    			$("#files").submit(); 
+    			event.preventDefault(); 
+    		}
+    	);
+    	
+    	$("#newfolder").click(
+    		function(event) {
+    			$("#folderform").animate({ height: "80px" }, "slow"); 
+    			event.preventDefault(); 
+    		}
+    	);
+    	
+    	$("#checkall").click(function() {
+	    		ch = $("#checkall").attr("checked");	    		
+    			$(".checkcount").attr("checked", ch);
+
+    	});
+    	
+    });
+</script>
+
 <div class="container_12">
-	<?= $this->files ?>
+			<?= $this->form("folderform", array("method" => "post", "action" => $this->baseUrl . "/admin/file/newfolder", "style" => "height: 0px; overflow: hidden;")) ?>
+				<h2>Ime novog foldera</h2>
+				<input type="hidden" name="curdir" value="<?= $this->folder ?>" />
+				<input type="text" name="newdir" style="width: 300px; margin-top: 10px;" /> <input type="submit" value="Stvori" class="button upload" style=" margin-top: 10px;" />
+			</form>
+			<?= $this->form("uploadform", array("method" => "post", "action" => $this->baseUrl . "/admin/file/upload", "enctype" => "multipart/form-data", "style" => "height: 0px; overflow: hidden;")) ?>
+			<h2>Upload nove datoteke</h2>
+			<p id="uploadinputs">
+				<input type="hidden" name="curdir" value="<?= $this->folder ?>" />
+				<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+				<input type="file" name="userfile" style="width: 300px; margin-top: 10px;" /> <input type="submit" value="Upload" class="button upload" style=" margin-top: 10px;" /> <small>(Max. 10MB, Za upload više datoteka koristite ZIP arhive.)</small>
+			</p>
+			</form>
+			<h2>Uploads &raquo; <?= str_replace("/", " &raquo; ", $this->folder); ?></h2>
+			<?= $this->form("files", array("method" => "post", "action" => "noaction")) ?>
+			<input type="hidden" name="curdir" value="<?= $this->folder ?>" />
+				<table width="100%" class="list">
+					<tr>
+						<th width="3%" class="center"></th>
+						<th width="3%" class="center"><?= $this->formCheckbox('checkall', '', array('title' => 'Uključi/isključi sve', 'class' => 'nocount')); ?></th>
+						<th width="45%">Datoteka</th>
+						<th width="10%" style="text-align: right">Veličina</th>
+						<th width="20%" style="text-align: center">Zad. promjena</th>
+						<th width="9%" style="text-align: center">Dozvole</th>
+						<th width="10%" style="text-align: center">Vlasnik</th>
+					</tr>
+					<?php $i = 1; ?>
+					
+					<?php foreach($this->files as $file):	
+//						if($file->name != "..") continue;
+						if($this->folder == "" && $file->name == "..") continue;
+						if($file->type != "dir") continue;
+						if($file->name == ".") continue;
+						if($i % 2 == 0):
+							$c = ' class="hilite" ';
+						else:
+							$c = '';
+						endif;
+						$icon = '<img src="'.$this->baseUrl().'/images/icon_folder.png" style="vertical-align: middle;"/> ';
+						if($file->name == "..") 
+						{
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_folder_up.png" style="vertical-align: middle;"/> ';
+						}
+						
+						$link = $this->baseUrl() . "/admin/file/folder/";
+						if($this->folder) $link .= $this->folder . "/";
+						$link .= $file->name;
+						?>
+						
+						
+						<?php if($file->name == ".."): ?>
+						
+						<tr<?= $c ?>>					
+							<td width="3%" class="center"></td>
+						<td width="3%" class="center"></td>
+							<td width="45%"><a href="<?= $link ?>"><?php if($file->name != "..") echo $icon . $file->name; else echo $icon . "<small>(Natrag na višu razinu)</small>"; ?></a></td>
+							<td width="10%" style="text-align: right;"></td>
+							<td width="20%" style="text-align: center"></td>
+							<td width="9%" style="text-align: center"></td>
+							<td width="10%" style="text-align: center"></td>
+							<?php $i++; ?>
+						</tr>
+						
+						<?php else: ?>
+						
+						<tr<?= $c ?>>					
+							<td width="3%" class="center"></td>
+						<td width="3%" class="center"><input type="checkbox" name="files[]" value="<?= $this->folder . "/" . $file->name ?>" class="checkcount" /></td>
+							<td width="45%"><a href="<?= $link ?>"><?php if($file->name != "..") echo $icon . $file->name; else echo $icon . "<small>(Natrag na višu razinu)</small>"; ?></a></td>
+							<td width="10%" style="text-align: right;"><?= $file->size ?></td>
+							<td width="20%" style="text-align: center"><?= $file->modified ?></td>
+							<td width="9%" style="text-align: center"><?= $file->perms ?></td>
+							<td width="10%" style="text-align: center"><?= $file->owner ?></td>
+							<?php $i++; ?>
+						</tr>
+						
+						<?php endif; ?>
+						
+					<?php endforeach; ?>
+					
+					<?php foreach($this->files as $file):
+						if($file->type == "dir") continue;
+						
+						if($i % 2 == 0):
+							$c = ' class="hilite" ';
+						else:
+							$c = '';
+						endif;
+
+						switch($file->extension)
+						{
+						case "png":
+						case "jpg":
+						case "jpeg":
+						case "gif":
+						case "bmp":
+						case "svg":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_picture.png" style="vertical-align: middle;"/> ';
+							break;
+						case "rar":
+						case "zip":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_archive.png" style="vertical-align: middle;"/> ';
+							break;
+						case "pdf":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_pdf.png" style="vertical-align: middle;"/> ';
+							break;
+						case "doc":
+						case "docx":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_doc.png" style="vertical-align: middle;"/> ';
+							break;
+						case "xls":
+						case "xlsx":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_xls.png" style="vertical-align: middle;"/> ';
+						default:
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_notebook.png" style="vertical-align: middle;"/> ';
+						}
+						
+						$link = $this->baseUrl() . "/uploads/";
+						if($this->folder != "") $link .= $this->folder . "/";
+						$link .= $file->name;
+						
+						?>
+	
+					<tr<?= $c ?>>					
+						<td width="3%" class="center"></td>
+						<td width="3%" class="center"><input type="checkbox" name="files[]" value="<?= $this->folder . "/" . $file->name ?>" class="checkcount ext-<?= $file->extension ?>" /></td>
+						<td width="50%"><a href="<?= $link ?>"><?= $icon . $file->name ?></td>
+						<td width="5%" style="text-align: right;"><?= $file->size ?></td>
+						<td width="20%" style="text-align: center"><?= $file->modified ?></td>
+						<td width="9%" style="text-align: center"><?= $file->perms ?></td>
+						<td width="10%" style="text-align: center"><?= $file->owner ?></td>
+						<?php $i++; ?>
+					</tr>
+					<?php endforeach; ?>
+				</table>
+			</form>
 </div>

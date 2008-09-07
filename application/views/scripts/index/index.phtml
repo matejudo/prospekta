@@ -1,10 +1,58 @@
-﻿<div class="container_12">
+﻿<script type="text/javascript">	 
+
+	$.fn.showsubmenu = function()
+	{
+		$(".sidesubmenu").hide("slow");
+		this.toggle("slow");
+	}
+	
+
+</script>
+
+<div class="container_12">
 		<div class="grid_2 alpha sidebar">
-			<ul class="menu">
-				<li><a href="#">Grupe Prospekta</a></li>
-				<li><a href="#">Studentske udruge</a></li>
-				<li><a href="#">Zanimljivo i zabavno</a></li>
-				<li><a href="#">Korisni linkovi</a></li>
+			<ul class="sidemenu">
+				<li>
+					<a href="#" onclick="$('#sidesubtab1').showsubmenu(); return false;">Grupe Prospekta</a>
+					<ul class="sidesubmenu" id="sidesubtab1" style="display: none;">
+						<li><a href="#">Galerija slika</a></li>
+						<li><a href="#">Video</a></li>
+						<li><a href="#">Uratci naših polaznika</a></li>
+						<li><a href="#">Caffe seminar</a></li>
+						<li><a href="#">PRO sportivo</a></li>
+						<li><a href="#">Feedback polaznika</a></li>
+					</ul>
+				
+				</li>
+				<li>
+					<a href="#" onclick="$('#sidesubtab2').showsubmenu(); return false;">Studentske udruge</a>
+					<ul class="sidesubmenu" id="sidesubtab2" style="display: none;">
+						<li><a href="#">eStudent</a></li>
+						<li><a href="#">AIESEC</a></li>
+						<li><a href="#">Udruge, javite se!</a></li>
+					</ul>	
+				</li>
+				<li>
+					<a href="#" onclick="$('#sidesubtab3').showsubmenu(); return false;">Zanimljivo i zabavno</a>
+					<ul class="sidesubmenu" id="sidesubtab3" style="display: none;">
+						<li><a href="#">Za vašu inspiraciju</a></li>
+						<li><a href="#">Nepoznato o poznatima</a></li>
+						<li><a href="#">Znate li da...</a></li>
+						<li><a href="#">Tema tjedna</a></li>
+					</ul>	
+				</li>
+				<li>
+					<a href="#" onclick="$('#sidesubtab4').showsubmenu(); return false;">Korisni linkovi</a>
+					<ul class="sidesubmenu" id="sidesubtab4" style="display: none;">
+						<li><a href="#">Student</a></li>
+						<li><a href="#">Posao</a></li>
+						<li><a href="#">Zabava</a></li>
+						<li><a href="#">Ljubav</a></li>
+						<li><a href="#">Podrška</a></li>
+						<li><a href="#">Prehrana</a></li>
+						<li><a href="#">Šport</a></li>
+					</ul>	
+				</li>
 				<li><a href="#">Preporuči prospektu</a></li>
 			</ul>
 		</div>

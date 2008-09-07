@@ -88,7 +88,12 @@
 						</optgroup>
 					</select>
 				</p>
-				<p><?= $this->editor ?></p>		
+				<p><?= $this->editor ?></p>
+				<h3>Slike i attachmenti</h3>
+				<p><a href="#" onclick="$('#filelist').toggle(); return false;">Dodaj sliku ili attachment u tekst</a> | <a href="#" onclick="$('#filelist').show(0); $('#filelist').contents().find('#uploadform').animate({ height: '80px' }, 'slow'); return false;">Upload nove datoteke</a></p>
+				
+				<iframe src="<?= $this->baseUrl(); ?>/admin/file/folderclear" class="filelist" name="filelist" id="filelist" style="display: none;"></iframe>
+
 			</div>
 
 			<div class="grid_3 omega sidebar">

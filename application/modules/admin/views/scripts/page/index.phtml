@@ -118,7 +118,7 @@
 					$class .= "tr-" . $item->slug . " ";
 					?>
 					<tr class="<?= $class ?>" onmouseover="$('.tr-<?= $item->slug ?>').attr('style', 'background: #e6e6e6; border: #999 solid 1px;')" onmouseout="$('.tr-<?= $item->slug ?>').attr('style', '')" >						
-						<td width="3%" class="center"><input type="checkbox" name="id<?= $item->id ?>" id="id<?= $item->id ?>" value="1" /></td>
+						<td width="3%" class="center"><input type="checkbox" name="id<?= $item->id ?>" id="id<?= $item->id ?>"  value="1" /></td>
 						<td width="3%" class="center"><a href="<?= $baseurl . "/admin/page/" . $a . "/id/" . $item->id; ?>" title="<?= $t ?>"><img src="<?= $baseurl . "/images/" . $p; ?>" /></a></td>
 						<td width="39%">
 							<?php if($item->depth == 1): ?><strong><?php endif; ?>

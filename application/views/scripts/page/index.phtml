@@ -1,20 +1,66 @@
-<div class="container_12" id="midsection">
-	<div class="grid_2 sidebar alpha">
-			<ul class="menu">
-				<li><a href="#">Grupe Prospekta</a></li>
-				<li><a href="#">Studentske udruge</a></li>
-				<li><a href="#">Zanimljivo i zabavno</a></li>
-				<li><a href="#">Korisni linkovi</a></li>
+<script type="text/javascript">	 
+
+	$.fn.showsubmenu = function()
+	{
+		$(".sidesubmenu").hide("slow");
+		this.toggle("slow");
+	}
+	
+
+</script>
+
+<div class="container_16" id="midsection">
+	<div class="grid_3 sidebar alpha">
+			<ul class="sidemenu">
+				<li>
+					<a href="#" onclick="$('#sidesubtab1').showsubmenu(); return false;">Grupe Prospekta</a>
+					<ul class="sidesubmenu" id="sidesubtab1" style="display: none;">
+						<li><a href="#">Galerija slika</a></li>
+						<li><a href="#">Video</a></li>
+						<li><a href="#">Uratci naših polaznika</a></li>
+						<li><a href="#">Caffe seminar</a></li>
+						<li><a href="#">PRO sportivo</a></li>
+						<li><a href="#">Feedback polaznika</a></li>
+					</ul>
+				
+				</li>
+				<li>
+					<a href="#" onclick="$('#sidesubtab2').showsubmenu(); return false;">Studentske udruge</a>
+					<ul class="sidesubmenu" id="sidesubtab2" style="display: none;">
+						<li><a href="#">eStudent</a></li>
+						<li><a href="#">AIESEC</a></li>
+						<li><a href="#">Udruge, javite se!</a></li>
+					</ul>	
+				</li>
+				<li>
+					<a href="#" onclick="$('#sidesubtab3').showsubmenu(); return false;">Zanimljivo i zabavno</a>
+					<ul class="sidesubmenu" id="sidesubtab3" style="display: none;">
+						<li><a href="#">Za vašu inspiraciju</a></li>
+						<li><a href="#">Nepoznato o poznatima</a></li>
+						<li><a href="#">Znate li da...</a></li>
+						<li><a href="#">Tema tjedna</a></li>
+					</ul>	
+				</li>
+				<li>
+					<a href="#" onclick="$('#sidesubtab4').showsubmenu(); return false;">Korisni linkovi</a>
+					<ul class="sidesubmenu" id="sidesubtab4" style="display: none;">
+						<li><a href="#">Student</a></li>
+						<li><a href="#">Posao</a></li>
+						<li><a href="#">Zabava</a></li>
+						<li><a href="#">Ljubav</a></li>
+						<li><a href="#">Podrška</a></li>
+						<li><a href="#">Prehrana</a></li>
+						<li><a href="#">Šport</a></li>
+					</ul>	
+				</li>
 				<li><a href="#">Preporuči prospektu</a></li>
 			</ul>
 	</div>
-	<div class="grid_8">
+	<div class="grid_10">
 		<h1><?= $this->page->title ?></h1>
 		<?= $this->page->text ?>
 	</div>
-	<div class="grid_2 omega"> &nbsp;
-		<?php
-			// TODO: Get right sidebar modules
-		?>
+	<div class="grid_3 omega sidebar"> &nbsp;
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc nec sapien eget leo volutpat vulputate. Morbi dui. Duis molestie, dui non ornare gravida, pede neque hendrerit ipsum, eget commodo velit erat in tellus. Sed ac orci. Vivamus tortor odio, dignissim quis, pulvinar in, euismod nec, arcu. Aenean auctor porttitor neque. Donec rhoncus augue at quam. Integer rhoncus, nisl sit amet auctor accumsan, leo arcu rutrum nisl, id suscipit lacus neque at mauris. Nam eget neque. Fusce sodales rhoncus massa. Proin venenatis sapien rhoncus nibh. Phasellus eget tellus eget diam egestas suscipit. Phasellus porttitor tempus mauris. Phasellus at neque. Nam tincidunt sapien a arcu. Pellentesque vel purus nec leo blandit malesuada. Phasellus viverra luctus massa. Integer viverra. Fusce blandit odio et felis. Proin justo.</p>
 	</div>
 </div>

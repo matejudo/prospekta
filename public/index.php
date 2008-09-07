@@ -87,7 +87,22 @@
 													array(	'slug' => '(.*)'));
 		$router->addRoute("admincat", $route);
 
-	
+		$route = new Zend_Controller_Router_Route_Regex(	'admin/file/folder/(.*)',
+															array(	'module' => 'admin',
+																	'controller' => 'file',
+																	'action' => 'folder'),
+															array(1 => 'curdir')
+															);
+		$router->addRoute("adminfolder", $route);
+		
+		$route = new Zend_Controller_Router_Route_Regex(	'admin/file/folderclear/(.*)',
+															array(	'module' => 'admin',
+																	'controller' => 'file',
+																	'action' => 'folderclear'),
+															array(1 => 'curdir')
+															);
+		$router->addRoute("adminfolderclear", $route);
+		
 		//Zend_Debug::dump($router);
 	
 		

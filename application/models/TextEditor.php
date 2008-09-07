@@ -18,6 +18,7 @@ class TextEditor
 					theme_advanced_statusbar_location : "bottom",
 					theme_advanced_resizing : true,
 					force_p_newlines : true,
+					relative_urls : false,
 					convert_newlines_to_brs : false,
 					force_br_newlines : false,
 					dialog_type : "modal",

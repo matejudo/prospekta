@@ -80,8 +80,9 @@
 				<p><a href="#" id="slugbutton"><img id="lock" src="<?= $this->baseUrl(); ?>/images/icon_lock<?php if($this->article->id == -1) echo "_unlock" ?>.png" title="Otključano - Promjena naslova mjenja i slug."/></a><input type="text" name="slug" id="slug" class="slug" value="<?= $this->article->slug; ?>"  /> </p>
 				<p><?= $this->editor ?></p>		
 				<h3>Slike i attachmenti</h3>
-					<p><a href="#">Dodaj sliku u tekst</a> | <a href="#">Izaberi attachment</a> | <a href="#">Uploadaj novu datoteku</a><br/></p>
-					<p>Ovaj članak trenutno nema ni jedan attachment.</p> 
+				<p><a href="#" onclick="$('#filelist').toggle(); return false;">Dodaj sliku ili attachment u tekst</a> | <a href="#" onclick="$('#filelist').show(0); $('#filelist').contents().find('#uploadform').animate({ height: '80px' }, 'slow'); return false;">Upload nove datoteke</a></p>
+				<iframe src="<?= $this->baseUrl(); ?>/admin/file/folderclear" class="filelist" name="filelist" id="filelist" style="display: none;"></iframe>
+				<h3>Komentari</h3>
 			</div>
 
 			<div class="grid_3 omega sidebar">

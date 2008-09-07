@@ -51,6 +51,8 @@ link, script	{ display: none; margin: 0; padding: 0; position: absolute; }
 #header .logo	{ background: url("../images/ui_logo.gif"); width: 382px; height: 105px; position: absolute;
 				  left: 50%; margin-left: -460px; top: 20px; }
 				  
+.prijava		{ position: absolute; top: 20px; left: 50%; margin-left: 100px; }
+				  
 #midsection 	{ margin-top: 20px; }
 
 p				{ text-align: justify; }
@@ -92,14 +94,17 @@ ul.submenu li a {  }
 .path p			{ color: white; margin: 0px; padding: 8px 0px; }
 
 .sidebar		{  }
-.sidebar p		{ text-align: left; font-size: 1.2em;  }
+.sidebar p		{ text-align: left; font-size: 1.2em; line-height: 1.3em;  }
 .sidebar h2		{ text-transform: none; font-size: 1.7em; }
 
-.sidebar ul.menu {  border-top: 1px solid #ddd; margin-top: 45px; }
-.sidebar .menu	{ list-style: none; padding: 0; font-weight: bold; height: auto; }
+.sidebar ul.sidemenu {  border-top: 0px solid #ddd; margin-top: 5px; }
+.sidebar .sidemenu	{ list-style: none; padding: 0; height: auto; }
 
-.sidebar .menu li a	{ display: block; width: 100%;  padding: 8px 0px 8px 0px; margin: 0px; font-size: 12px; line-height: 12px; border-bottom: 1px solid #ddd;}
-.sidebar .menu li a:hover { color: black; }
+.sidebar .sidemenu li a	{ display: block; width: 100%;  padding: 12px 0px 4px 0px; margin: 0px; font-size: 12px; line-height: 12px; border-bottom: 0px solid #ddd; font-weight: bold;}
+.sidebar .sidemenu li a:hover { color: black; }
+
+.sidebar .sidesubmenu	{ list-style: none; padding: 0; height: auto; margin: 0px; }
+.sidebar .sidesubmenu li a	{ font-weight: normal; margin: 0px; padding: 2px 8px;  }
 
 .blue			{ background: url("../images/ui_blue_background.jpg"); color: white; }
 .orange			{ background: url("../images/ui_orange_background.jpg"); color: white; margin: 0px; padding: 16px 0px; }
@@ -123,3 +128,5 @@ ul.submenu li a {  }
 
 #programi 		{ border-top: 2px solid white; margin-left: auto; }
 #programi p		{ line-height: 1.3em; text-align: justify; }
+
+.filelist		{ height: 200px; overflow: scroll; border: 1px solid #ddd; }

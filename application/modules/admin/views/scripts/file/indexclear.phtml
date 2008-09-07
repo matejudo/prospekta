@@ -1,0 +1,127 @@
+			<?= $this->form("uploadform", array("method" => "post", "action" => $this->baseUrl . "/admin/file/uploadclear", "enctype" => "multipart/form-data", "style" => "height: 0px; overflow: hidden;")) ?>
+			<h2>Upload nove datoteke</h2>
+			<p id="uploadinputs">
+				<input type="hidden" name="curdir" value="<?= $this->folder ?>" />
+				<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+				<input type="file" name="userfile" style="width: 300px; margin-top: 10px;" /> <input type="submit" value="Upload" class="button upload" style=" margin-top: 10px;" /> <small>(Max. 10MB, Za upload više datoteka koristite ZIP arhive.)</small>
+			</p>
+			</form>
+			<?= $this->form("files", array("method" => "post", "action" => "noaction")) ?>
+			<input type="hidden" name="curdir" value="<?= $this->folder ?>" />
+				<table width="100%" class="list">
+
+					<?php $i = 1; ?>
+					
+					<?php foreach($this->files as $file):	
+//						if($file->name != "..") continue;
+						if($this->folder == "" && $file->name == "..") continue;
+						if($file->type != "dir") continue;
+						if($file->name == ".") continue;
+						if($i % 2 == 0):
+							$c = ' class="hilite" ';
+						else:
+							$c = '';
+						endif;
+						$icon = '<img src="'.$this->baseUrl().'/images/icon_folder.png" style="vertical-align: middle;"/> ';
+						if($file->name == "..") 
+						{
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_folder_up.png" style="vertical-align: middle;"/> ';
+						}
+						
+						$link = $this->baseUrl() . "/admin/file/folderclear/";
+						if($this->folder) $link .= $this->folder . "/";
+						$link .= $file->name;
+						?>
+						
+						
+						<?php if($file->name == ".."): ?>
+						
+							<tr<?= $c ?>>
+								<td width="5%">&nbsp;</td>				
+								<td width="75%"><a href="<?= $link ?>"><?php if($file->name != "..") echo $icon . $file->name; else echo $icon . "<small>(Natrag na višu razinu)</small>"; ?></a></td>
+								<td width="15%" style="text-align: right;"></td>
+								<td width="5%">&nbsp;</td>	
+								<?php $i++; ?>
+							</tr>
+						
+						<?php else: ?>
+						
+							<tr<?= $c ?>>		
+								<td width="5%">&nbsp;</td>					
+								<td width="75%"><a href="<?= $link ?>"><?php if($file->name != "..") echo $icon . $file->name; else echo $icon . "<small>(Natrag na višu razinu)</small>"; ?></a></td>
+								<td width="15%" style="text-align: right;"></td>
+								<td width="5%">&nbsp;</td>	
+								<?php $i++; ?>
+							</tr>
+						
+						<?php endif; ?>
+						
+					<?php endforeach; ?>
+					
+					<?php foreach($this->files as $file):
+						if($file->type == "dir") continue;
+						
+						if($i % 2 == 0):
+							$c = ' class="hilite" ';
+						else:
+							$c = '';
+						endif;
+
+						switch($file->extension)
+						{
+						case "png":
+						case "jpg":
+						case "jpeg":
+						case "gif":
+						case "bmp":
+						case "svg":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_picture.png" style="vertical-align: middle;"/> ';
+							break;
+						case "rar":
+						case "zip":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_archive.png" style="vertical-align: middle;"/> ';
+							break;
+						case "pdf":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_pdf.png" style="vertical-align: middle;"/> ';
+							break;
+						case "doc":
+						case "docx":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_doc.png" style="vertical-align: middle;"/> ';
+							break;
+						case "xls":
+						case "xlsx":
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_xls.png" style="vertical-align: middle;"/> ';
+						default:
+							$icon = '<img src="'.$this->baseUrl().'/images/icon_notebook.png" style="vertical-align: middle;"/> ';
+						}
+						
+						$link = $this->baseUrl() . "/uploads/";
+						if($this->folder != "") $link .= $this->folder . "/";
+						$link .= $file->name;
+						
+						?>
+	
+					<tr<?= $c ?>>	
+						<td width="5%">&nbsp;</td>
+						<?php
+							switch($file->extension)
+							{
+								case "png":
+								case "jpg":
+								case "jpeg":
+								case "gif":
+								case "bmp":
+								case "svg":
+									?><td width="75%"><a href="#" onclick="parent.tinyMCE.execCommand('mceInsertContent',false,'<img src=\'<?= $link ?>\'/>');return false;"><?= $icon ?> <?= $file->name ?><br/></a></td><?php
+									break;
+								default:
+									?><td width="75%"><a href="#" onclick="parent.tinyMCE.execCommand('mceInsertContent',false,'<strong>Download:</strong> <a href=\'<?= $link ?>\'><strong><?= $file->name ?></strong></a>');return false;"><?= $icon ?> <?= $file->name ?><br/></a></td><?php
+							}
+						 ?>
+						<td width="15%" style="text-align: right;"><?= $file->size ?></td>
+						<td width="5%">&nbsp;</td>	
+						<?php $i++; ?>
+					</tr>
+					<?php endforeach; ?>
+				</table>
+			</form>

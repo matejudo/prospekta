@@ -61,7 +61,9 @@ class Admin_PageController extends Zend_Controller_Action
 		$this->view->page->parentid = "-1";
 		$this->view->page->ordering = "0";
 		$pages = new Pages();
-		$this->view->paths = $pages->getAllPaths();	
+		$this->view->paths = $pages->getAllPaths();		
+		$files = new Files();
+		$this->view->files = $files->listFiles();
 		$this->render("edit");
 	}
 	
