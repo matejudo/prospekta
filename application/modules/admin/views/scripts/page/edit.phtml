@@ -1,4 +1,4 @@
-<div id="messagebar"><div id="message" style="display: none"><?= $this->message ?></div></div>
+<div id="messagebar"><div id="message" style="display: none"></div></div>
 <div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
 <div class="toolbar">
 	<div class="container_12" id="midsection">
@@ -57,7 +57,20 @@
 			$("#title").blur(function() { 
 				if($("#title").attr("value") == "") $("#title").attr("value", "Naslov");
 			 });
-			
+			 
+			<?php
+			if($this->messages !== NULL):
+				$message = "";	
+				foreach($this->messages as $item)
+				{
+					$message = $item;
+				}
+	
+				if($message != ""):
+				?>
+				showMessage("<?= $message ?>");
+				<?php endif; ?>
+			<?php endif; ?>
 		});
 	
 		function generateSlug(text)
@@ -68,7 +81,9 @@
 			return text;
 		}
 	</script>
+	<?php
 
+	?>
 	<div class="grid_12">
 		<h2><?= ($this->page->id == "-1") ? "Nova stranica" : "Izmjena stranice" ?></h2>
 		<!-- <?= $this->page->parentid ?>  -->
@@ -76,6 +91,7 @@
 			<input type="hidden" name="id" value="<?= $this->page->id; ?>" />
 			<input type="hidden" id="continue" name="continue" value="0" />
 			<input type="hidden" name="ordering" value="<?= $this->page->ordering; ?>" />
+			<input type="hidden" name="oldslug" value="<?= $this->page->slug; ?>"  />
 			<div id="content" class="grid_9 alpha">
 				<p><input type="text" name="title" id="title" class="big" value="<?= ($this->page->title != "") ? $this->page->title : "Naslov" ; ?>" /></p>
 				<p><a href="#" id="slugbutton"><img id="lock" src="<?= $this->baseUrl(); ?>/images/icon_lock<?php if($this->page->id == -1) echo "_unlock" ?>.png" title="Otključano - Promjena naslova mjenja i slug."/></a><input type="text" name="slug" id="slug" class="slug" value="<?= $this->page->slug; ?>"  /> </p>

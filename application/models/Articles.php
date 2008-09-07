@@ -12,7 +12,7 @@ class Articles extends Zend_Db_Table
 				FROM pros_article article, pros_user user
 				WHERE article.category = '$category'
 					AND user.id = article.author
-				ORDER BY article.order ASC, article.id ASC
+				ORDER BY article.ordering ASC, article.id ASC
 		");
 		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
 		return $stmt->fetchAll();	
@@ -22,19 +22,19 @@ class Articles extends Zend_Db_Table
 	{
 		$db = Zend_Registry::get("db");
 		
-		$order = $db->fetchOne("SELECT p.order FROM pros_article p WHERE id = $id");
+		$order = $db->fetchOne("SELECT p.ordering FROM pros_article p WHERE id = $id");
 		$neworder = $order-1;
 		
 		$stmt = $db->query("
 			UPDATE pros_article p
-				SET p.order = $order
-				WHERE p.order = $neworder
+				SET p.ordering = $order
+				WHERE p.ordering = $neworder
 		");				
 		$stmt->execute();
 		
 		$stmt = $db->query("
 			UPDATE pros_article p
-				SET p.order = $neworder
+				SET p.ordering = $neworder
 				WHERE id = $id
 		");				
 		$stmt->execute();
@@ -44,19 +44,19 @@ class Articles extends Zend_Db_Table
 	{
 		$db = Zend_Registry::get("db");
 		
-		$order = $db->fetchOne("SELECT p.order FROM pros_article p WHERE id = $id");
+		$order = $db->fetchOne("SELECT p.ordering FROM pros_article p WHERE id = $id");
 		$neworder = $order+1;
 		
 		$stmt = $db->query("
 			UPDATE pros_article p
-				SET p.order = $order
-				WHERE p.order = $neworder
+				SET p.ordering = $order
+				WHERE p.ordering = $neworder
 		");				
 		$stmt->execute();
 		
 		$stmt = $db->query("
 			UPDATE pros_article p
-				SET p.order = $neworder
+				SET p.ordering = $neworder
 				WHERE id = $id
 		");				
 		$stmt->execute();
@@ -100,7 +100,7 @@ class Articles extends Zend_Db_Table
 	public function getBySlug($slug)
 	{
 		$db = Zend_Registry::get("db");
-		$stmt = $db->query("SELECT * FROM pros_article WHERE slug = $slug");
+		$stmt = $db->query("SELECT * FROM pros_article WHERE slug = '$slug'");
 		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
 		return $stmt->fetchObject();		
 	}
@@ -121,5 +121,32 @@ class Articles extends Zend_Db_Table
 		return $stmt->fetchAll();
 	}
 	
-
+	public function getArticles($category, $count = 1, $fulltext = 0)
+	{
+		$db = Zend_Registry::get("db");
+		$stmt = $db->query("SELECT * FROM pros_article WHERE category = '$category' AND published = 1 ORDER BY ordering LIMIT 0,$count");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		$return = $stmt->fetchAll();
+		foreach($return as $item)
+		{
+			$item->text = str_replace("<!-- pagebreak --></p>", "</p><!-- pagebreak -->", $item->text);
+		
+			if(!$fulltext)
+			{
+				$end = strpos($item->text, "<!-- pagebreak -->");
+				if($end > 0)
+				{
+					$item->text = substr($item->text, 0, $end); 
+					$item->more = true;
+				}
+				else
+					$item->more = false;
+			}
+			else
+			{
+				$item->more = false;
+			}
+		}
+		return $return;
+	}
 }

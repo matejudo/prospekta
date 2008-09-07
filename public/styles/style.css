@@ -130,3 +130,6 @@ ul.submenu li a {  }
 #programi p		{ line-height: 1.3em; text-align: justify; }
 
 .filelist		{ height: 200px; overflow: scroll; border: 1px solid #ddd; }
+
+.news h1, .news h2, .news h3, .news h4, .news h5, .news h6
+				{ font-size: 1.3em;}

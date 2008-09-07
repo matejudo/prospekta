@@ -19,6 +19,7 @@
 		$config = new Zend_Config_Ini('../application/config.ini', 'general');
 		$registry = Zend_Registry::getInstance();
 		$registry->set('config', $config);
+		Zend_Session::start();
 		
 		// setup the view
 		$view = new Zend_View();
@@ -74,10 +75,7 @@
 		$route = new Zend_Controller_Router_Route(	'article/:slug',
 													array(	'module' => 'default',
 															'controller' => 'article', 
-															'action' => 'index', 
-															'slug' => null,
-															'topslug' => 'wtf'),
-													array(	'slug' => '(.*)'));
+															'action' => 'index'));
 		$router->addRoute("article", $route);
 		
 		$route = new Zend_Controller_Router_Route(	'admin/article/category/:name',

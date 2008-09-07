@@ -75,6 +75,7 @@
 			<input type="hidden" name="category" value="<?= $this->article->category; ?>" />
 			<input type="hidden" name="id" value="<?= $this->article->id; ?>" />
 			<input type="hidden" id="continue" name="continue" value="0" />
+			<input type="hidden" name="oldslug" class="slug" value="<?= $this->article->slug; ?>"  /> 
 			<div id="content" class="grid_9 alpha">
 				<p><input type="text" name="title" id="title" class="big" value="<?= ($this->article->title != "") ? $this->article->title : "Naslov" ; ?>" /></p>
 				<p><a href="#" id="slugbutton"><img id="lock" src="<?= $this->baseUrl(); ?>/images/icon_lock<?php if($this->article->id == -1) echo "_unlock" ?>.png" title="Otključano - Promjena naslova mjenja i slug."/></a><input type="text" name="slug" id="slug" class="slug" value="<?= $this->article->slug; ?>"  /> </p>

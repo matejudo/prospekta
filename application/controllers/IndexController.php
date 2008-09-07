@@ -45,12 +45,11 @@ class IndexController extends Zend_Controller_Action
 			}
 			$this->view->submenu .= '</ul>';			
 		}
-		$this->view->menucounter = $counter;
+		$this->view->menucounter = $counter;		
 		
-		
-		$news = new News();
-		$this->view->news = $news->fetchAll();
-		$najave = new Najave();
-		$this->view->najave = $najave->fetchAll();
+		$articles = new Articles();
+		$this->view->novosti = $articles->getArticles("Novosti", 3, 0);
+		$this->view->zanimljivosti = $articles->getArticles("Zanimljivosti", 3, 0);
+
 	}
 }

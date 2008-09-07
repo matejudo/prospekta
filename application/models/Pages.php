@@ -309,5 +309,16 @@ class Pages extends Zend_Db_Table
 		");	
 	}
 	
+	public function slugExists($slug)
+	{
+		$db = Zend_Registry::get("db");
+		$stmt = $db->query("SELECT * FROM pros_page WHERE slug = '$slug'");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $stmt->fetchObject();
+		if($result == NULL)
+			return false;
+		return true;
+	}
+	
 	
 }

@@ -160,8 +160,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 	public function saveAction()
 	{
 		if($this->getRequest()->isPost())
-		{
-		
+		{		
 			require_once 'Zend/Date.php';
 			$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);			
 			$articles = new Articles();
@@ -175,25 +174,55 @@ class Admin_ArticleController extends Zend_Controller_Action
 				'comments'		=> $this->_request->getParam("comments"),
 				'modified'		=> $date->toString("YYYY-MM-dd HH:mm:ss")
 			);			
-		
-			// New article -> SQL insert the data
-			if($this->_request->getParam("id") == "-1")
+
+			if(($this->_request->getParam("slug") != $this->_request->getParam("oldslug")) && $pages->slugExists($this->_request->getParam("slug")))
 			{
-				$articles->insert($data); 
+				$this->view->baseUrl();
+				$this->render("slug");
+				return;
 			}
-			// Existing article -> SQL update the data
 			else
 			{
-				$where = $articles->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));			
-				$articles->update($data, $where);
+				// New article -> SQL insert the data
+				if($this->_request->getParam("id") == "-1")
+				{
+					$articles->insert($data); 
+				}
+				// Existing article -> SQL update the data
+				else
+				{
+					$where = $articles->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));			
+					$articles->update($data, $where);
+				}
+				
+				if($this->_request->getParam("continue") == "1")
+					$redirecturl = 'admin/article/edit/id/' . $this->_request->getParam("id");
+				else
+					$redirecturl = '/admin/article/category/' . $this->_request->getParam("category");
 			}
-			
-			if($this->_request->getParam("continue") == "1")
-				$redirecturl = 'admin/article/edit/id/' . $this->_request->getParam("id");
-			else
-				$redirecturl = '/admin/article/category/' . $this->_request->getParam("category");
 		}
 
 		$this->_redirect($redirecturl);
 	}
+	
+	public function getArticles($category, $count = 1, $fulltext = 0)
+	{
+		$articles = new Articles();
+		$return = $articles->getArticles($category, $count);
+		Zend_Debug::dump($return);
+		foreach($return as $item)
+		{
+			if(!$fulltext)
+			{
+				$item->text = substr($item->text, 0, 100); // strpos($item->text, "<!-- pagebreak -->")
+				$item->more = true;
+			}
+			else
+			{
+				$item->more = false;
+			}
+		}
+		return $return;
+	}
 }
+

@@ -44,14 +44,17 @@
 
 
 	$(document).ready(function() {
-		$('#menuitem1').mouseover(function() { $('#subtab1').showmenu(1); }); 
-		$('#menuitem2').mouseover(function() { $('#subtab2').showmenu(2); }); 
-		$('#menuitem3').mouseover(function() { $('#subtab3').showmenu(3); }); 
-		$('#menuitem4').mouseover(function() { $('#subtab4').showmenu(4); }); 
-		$('#menuitem5').mouseover(function() { $('#subtab5').showmenu(5); }); 
-		$('#menuitem6').mouseover(function() { $('#subtab6').showmenu(6); }); 
+		<?php for($i = 2; $i <= $this->menucounter; $i++): ?>
+			$('#menuitem<?= $i ?>').mouseover(function() { $('#subtab<?= $i ?>').showmenu(<?= $i ?>); });
+		<?php endfor; ?>
+		
+//		$('#menuitem1').mouseover(function() { $('#subtab1').showmenu(1); }); 
+//		$('#menuitem2').mouseover(function() { $('#subtab2').showmenu(2); }); 
+//		$('#menuitem3').mouseover(function() { $('#subtab3').showmenu(3); }); 
+//		$('#menuitem4').mouseover(function() { $('#subtab4').showmenu(4); }); 
+//		$('#menuitem5').mouseover(function() { $('#subtab5').showmenu(5); }); 
+//		$('#menuitem6').mouseover(function() { $('#subtab6').showmenu(6); }); 
 		$('#menu').hover(function() { clearTimeout(hidetimeout); }, function() { menushown = false; clearTimeout(showtimeout); hidetimeout = setTimeout("$('#menu').animate( { height: '35px' }); $('.submenu').fadeOut();", 500);   });
-		$
 
 	});
 </script>
@@ -59,44 +62,11 @@
 <div class="border-top"></div>
 <div id="menu" style="height: 35px; min-height: 0px;">		
 		<ul id="topmenu" >
-			<li class="topitem" id="menuitem1"><strong><a href="#">Početna</strong></a></li>
-			<li class="topitem" id="menuitem2"><strong><a href="#">O nama</strong></a></li>
-			<li class="topitem" id="menuitem3"><strong><a href="#">Programi edukacija</strong></a></li>
-			<li class="topitem" id="menuitem4"><strong><a href="#">Posao i karijera</strong></a></li>
-			<li class="topitem" id="menuitem5"><strong><a href="#">Zanimljivo i korisno</strong></a></li>
-			<li class="topitem" id="menuitem6"><strong><a href="#">Kontakt</strong></a></li>
+			<li class="topitem" id="menuitem1"><a href="<?= $this->baseUrl() ?>"><strong>Početna</strong></a></li>
+			<?= $this->topmenu ?>
 		</ul>
-		<div id="subtab1" class="submenu" style="display: none"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras volutpat nunc lacinia dolor. Mauris enim justo, vehicula et, commodo vel, tincidunt eget, ipsum. Donec justo orci, luctus sit čamet, placerat ćeu, malesuada sit amet, libero. Duis volutpat tempor lectus. Morbi placerat malesuada nulla. Duis viverra nisl at nibh. Nam eget sem sit amet šest varius auctor. Cras sem. Ut hendrerit, libero đut porta ornare, žipsum ipsum consectetuer est, ut tristique lectus mi ac eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque sit amet mauris sit amet urna bibendum faucibus. Vivamus lobortis ante quis nunc. Mauris ornare dolor ac nunc. Duis fringilla, lorem vel cursus gravida, augue augue hendrerit enim, sed imperdiet urna mauris sit amet quam.</p></div>
-		<ul class="submenu" id="subtab2" style="display: none">
-			<li><a href="#"><strong>Tko smo mi?</strong></a></li>
-			<li><a href="#"><strong>Naše vrijednosti</strong></a></li>
-			<li><a href="#"><strong>Naša vizija</strong></a></li>
-			<li><a href="#"><strong>Naša misija</strong></a></li>
-			<li><a href="#"><strong>Management i treneri</strong></a></li>
-		</ul>	
-		<ul class="submenu" id="subtab3" style="display: none;">
-			<li><a href="#"><strong>Career coaching</strong></a></li>
-			<li><a href="#"><strong>Self-development</strong></a></li>
-			<li><a href="#"><strong>Student management</strong></a></li>
-		</ul>
-		<ul class="submenu" id="subtab4" style="display: none;">
-			<li><a href="#"><strong>Tražim posao!</strong> - Kako i gdje tražiti posao? Savjeti za pisanje vašeg prvog CV-a. Kako zablistati na intervjuu?</a></li>
-			<li><a href="#"><strong>Korisno je znati...</strong> - Zakon o radu, Ugovori o radu, Zapošljavanje osoba s invaliditetom, Uvjeti rada</a></li>
-			<li><a href="#"><strong>Opisi radnih mjesta</strong> - u različitim granama... </a></li>
-			<li><a href="#"><strong>Karijera u...</strong> - (intervjuirati HR managere, približiti firme mladima - njihovu viziju, org. kulturu, objaviti oglase za posao...)</a></li>
-			<li><a href="#"><strong>Oglasi za posao</strong></a></li>
-		</ul>
-		<ul class="submenu" id="subtab5" style="display: none;">
-			<li><a href="#"><strong>Što čitati?</strong></a></li>
-			<li><a href="#"><strong>Što gledati?</strong></a></li>
-			<li><a href="#"><strong>Što posjetiti?</strong></a></li>
-			<li><a href="#"><strong>Što slušati?</strong></a></li>
-		</ul>
-
-		<ul class="submenu" id="subtab6" style="display: none;">
-			<li><a href="#"><strong>Kako do nas?</strong></a></li>
-			<li><a href="#"><strong>Prijave</strong></a></li>
-		</ul>
+		<!--  <div id="subtab1" class="submenu" style="display: none"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras volutpat nunc lacinia dolor. Mauris enim justo, vehicula et, commodo vel, tincidunt eget, ipsum. Donec justo orci, luctus sit čamet, placerat ćeu, malesuada sit amet, libero. Duis volutpat tempor lectus. Morbi placerat malesuada nulla. Duis viverra nisl at nibh. Nam eget sem sit amet šest varius auctor. Cras sem. Ut hendrerit, libero đut porta ornare, žipsum ipsum consectetuer est, ut tristique lectus mi ac eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque sit amet mauris sit amet urna bibendum faucibus. Vivamus lobortis ante quis nunc. Mauris ornare dolor ac nunc. Duis fringilla, lorem vel cursus gravida, augue augue hendrerit enim, sed imperdiet urna mauris sit amet quam.</p></div> -->
+		<?= $this->submenu ?>
 </div>
 <div class="path">
 	<div class="container_12"><p>Prospekta &raquo; Programi &raquo; Career coaching</p></div>

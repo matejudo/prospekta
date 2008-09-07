@@ -5,6 +5,8 @@ require_once 'Zend/Controller/Action.php';
 class Admin_PageController extends Zend_Controller_Action
 {
 
+	protected $_flashMessenger = null;
+
 	function preDispatch()
 	{
 		$auth = Zend_Auth::getInstance();
@@ -19,6 +21,7 @@ class Admin_PageController extends Zend_Controller_Action
 		$this->view->baseUrl = $this->_request->getBaseUrl();
 		$this->_helper->layout->setLayout('admin'); 
 		$this->view->user = Zend_Auth::getInstance()->getIdentity();
+		$this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
 	}
 	
 	public function indexAction()
@@ -75,6 +78,7 @@ class Admin_PageController extends Zend_Controller_Action
 		$this->view->paths = $pages->getAllPaths();	
 		if($this->view->page->parentid === NULL) $this->view->page->parentid = "-1";
 		$editor = new TextEditor();
+		$this->view->messages = $this->_flashMessenger->getMessages();
 		$this->view->editor = $editor->getHTML("text", $this->view->page->text);
 	}
 	
@@ -86,7 +90,6 @@ class Admin_PageController extends Zend_Controller_Action
 			$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);			
 			$pages = new Pages();
 			$params = $this->_request->getParams();
-			Zend_Debug::dump($params);
 			$data = array(
 				'parentid'     	=> ($this->_request->getParam("parentid") == "-1") ? NULL : $this->_request->getParam("parentid"),
 			    'title'      	=> $this->_request->getParam("title"),
@@ -98,25 +101,35 @@ class Admin_PageController extends Zend_Controller_Action
 				'author'		=> Zend_Auth::getInstance()->getIdentity()->fullname
 			);			
 		
-			// New article -> SQL insert the data
-			if($this->_request->getParam("id") == "-1")
-			{	
-				//$pages->increaseOrdering();
-				$pages->insert($data); 
+			if(($this->_request->getParam("slug") != $this->_request->getParam("oldslug")) && $pages->slugExists($this->_request->getParam("slug")))
+			{
+				$this->view->baseUrl();
+				$this->render("slug");
+				return;
 			}
-			// Existing article -> SQL update the data
 			else
 			{
-				$where = $pages->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));			
-				$pages->update($data, $where);
+	
+				// New article -> SQL insert the data
+				if($this->_request->getParam("id") == "-1")
+				{
+						$pages->insert($data);
+				}
+				// Existing article -> SQL update the data
+				else
+				{
+					$where = $pages->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));			
+					$pages->update($data, $where);
+				}
+				
+				$pages->fixOrdering($data["parentid"]);
+				
+				if($this->_request->getParam("continue") == "1")
+					$redirecturl = 'admin/page/edit/id/' . $this->_request->getParam("id");
+				else
+					$redirecturl = '/admin/page/';
 			}
-			
-			$pages->fixOrdering($data["parentid"]);
-			
-			if($this->_request->getParam("continue") == "1")
-				$redirecturl = 'admin/page/edit/id/' . $this->_request->getParam("id");
-			else
-				$redirecturl = '/admin/page/';
+
 		}
 
 		$this->_redirect($redirecturl);
