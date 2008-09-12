@@ -24,23 +24,37 @@ class IndexController extends Zend_Controller_Action
 		foreach($menuitems as $item)
 		{
 			$counter++;
-			if($item->target == "-2")
+			if($item->type == "")
 				$path = "#";
-			elseif($item->target == "-1")
-				$path = $this->view->baseUrl();
-			else
-				$path = $this->view->baseUrl() . "/" . $pages->getPathById($item->target);
+			if($item->type == "link")
+				$path = $item->target;
+			if($item->type == "page")
+			{
+				if($item->target == "-2")
+					$path = "#";
+				elseif($item->target == "-1")
+					$path = $this->view->baseUrl();
+				else
+					$path = $this->view->baseUrl() . "/" . $pages->getPathById($item->target);
+			}
 			$this->view->topmenu .= '<li class="topitem" id="menuitem' . $counter . '"><a href="' . $path . '"><strong>' . $item->title . '</strong></a></li>';
 			
 			$this->view->submenu .= '<ul class="submenu" id="subtab' . $counter . '" style="display: none">';
 			foreach($item->children as $subitem)
 			{
-				if($subitem->target == "-2")
+				if($item->type == "")
 					$path = "#";
-				elseif($subitem->target == "-1")
-					$path = $this->view->baseUrl();
-				else
-					$path = $this->view->baseUrl() . "/" . $pages->getPathById($subitem->target);
+				if($item->type == "link")
+					$path = $item->target;
+				if($item->type == "page")
+				{
+					if($subitem->target == "-2")
+						$path = "#";
+					elseif($subitem->target == "-1")
+						$path = $this->view->baseUrl();
+					else
+						$path = $this->view->baseUrl() . "/" . $pages->getPathById($subitem->target);
+				}
 				$this->view->submenu .= '<li><a href="' . $path . '"><strong>' . $subitem->title . '</strong>' . (($subitem->description != "") ? (" - " . $subitem->description) : "") . '</a></li>';
 			}
 			$this->view->submenu .= '</ul>';			

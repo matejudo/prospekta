@@ -66,22 +66,26 @@
 					<select name="parentid">
 						<option value="-1">Uvrsti na najvišoj razini</option>
 						<optgroup label="Uvrsti pod:" >							
-							<?php foreach($this->menuitems as $curpath): ?><option value="<?= $curpath["id"] ?>" <?= ($curpath["id"] == $this->menu->parentid) ? 'selected="selected"' : ""; ?>><?= str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $curpath["depth"]-1) . $curpath["title"] ?></option>
+							<?php foreach($this->menuitems as $curpath): if($curpath["id"] == $this->menu->id) continue; ?><option value="<?= $curpath["id"] ?>" <?= ($curpath["id"] == $this->menu->parentid) ? 'selected="selected"' : ""; ?>><?= str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $curpath["depth"]-1) . $curpath["title"] ?></option>
 							<?php endforeach; ?>
 						</optgroup>
 					</select>
 				</p>
-				<h3>Link</h3>
+				<h3>Vrsta stavke</h3>
 				<p>
-					<select name="target">
+					<input type="radio" name="type" value="page" id="radiopage" <?= ("page" == $this->menu->type) ? 'checked="checked"' : ""; ?> onclick="$('#targetlink').hide().attr('name', ''); $('#targetpage').show().attr('name', 'target');"/><label for="radiopage">Stranica</label> 
+					<input type="radio" name="type" value="link" id="radiolink" <?= ("link" == $this->menu->type) ? 'checked="checked"' : ""; ?> onclick="$('#targetpage').hide().attr('name', ''); $('#targetlink').show().attr('name', 'target');"/><label for="radiolink">Link</label>
+				</p>
+				<p>
+					<select name="target" id="targetpage" <?= ($this->menu->type == "link") ? 'style="display: none;"' : ""; ?>>
 						<option value="-2">Bez linka</option>
 						<option value="-1">Početna stranica</option>
 						<optgroup label="Ostale stranice">
 							<?php foreach($this->pages as $curpage): ?><option value="<?= $curpage["id"] ?>" <?= ($curpage["id"] == $this->menu->target) ? 'selected="selected"' : ""; ?>><?= str_replace("/", " &raquo; ", $curpage["path"]) ?></option><?php endforeach; ?>
 						</optgroup>
 					</select>
-				</p>
-		
+					<input type="text" name="targetx" id="targetlink" value="<?= $this->menu->target ?>" <?= ($this->menu->type == "page") ? 'style="display: none;"' : ""; ?> />
+				</p>		
 			</div>
 
 			<div class="grid_3 omega sidebar">

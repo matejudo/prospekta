@@ -1,0 +1,41 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:300px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<div class="wrap">
+				
+				<div class="content">
+								
+					<div id="alert">
+						<div class="red">
+							<div class="tr"></div>
+							<div class="content">
+								<div class="fixed icon">
+									<?php __('Oops'); ?>
+								</div>
+							</div>
+							<div class="bl"><div class="br"></div></div>
+						</div>
+					</div>
+					
+					<p><?php __('Director\'s XML feeds only work when used with SlideShowPro 1.6 or above. Plug your XML File Path into the component inspector and be sure to set the XML File Type to "Director".'); ?></p>
+				
+				</div> <!--close content-->
+		
+			</div> <!--close module wrap-->
+		
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+					
+		</div> <!--close module-->
+		
+	</div> <!--close login-content-->
+
+</div> <!--close login-container-->

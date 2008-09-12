@@ -1,0 +1,13 @@
+<div id="page">
+		
+	<div id="container">
+	
+		<?php e($this->renderElement("album_$tab")); ?>
+	
+		<div id="container-footer">
+			<div>&nbsp;</div>
+		</div>
+
+	</div>
+	
+</div>

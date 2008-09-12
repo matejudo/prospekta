@@ -1,0 +1,34 @@
+
+<div id="head">
+		
+	<div class="head-wrap">
+	
+		<?php if (!empty($other_albums)): ?>
+		
+			<div id="head-form">
+			
+				<div class="icon-bump">
+				
+					<label class="inline"><?php __('Switch album:'); ?></label>&nbsp;&nbsp;
+					<select class="inline" id="album-switcher" onchange="go_album('<?php e($tab); ?>');">
+						<?php foreach ($all_albums as $a): ?>
+							<option value="<?php e($a['Album']['id']); ?>"<?php ($a['Album']['id'] == $album['Album']['id']) ? e(' selected="selected"') : '' ; ?>><?php e($director->trunc(htmlspecialchars($a['Album']['name']), 50)); ?></option>
+						<?php endforeach; ?>
+					</select>								
+												
+				</div>
+			
+			</div>
+	
+		<?php endif; ?>
+
+		<h1 class="albums">
+			<?php e($html->link(__('Albums', true), '/albums', array('title' => __('Albums', true)))); ?>: <?php __('Edit album'); ?>
+		</h1>
+	
+
+	</div> <!--close head-wrap-->
+	
+
+</div>
+

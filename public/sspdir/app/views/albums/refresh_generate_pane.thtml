@@ -1,0 +1,1 @@
+<?php e($this->renderElement("{$type}_processing")); ?>

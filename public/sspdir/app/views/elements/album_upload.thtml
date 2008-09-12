@@ -1,0 +1,210 @@
+<?php e($this->renderElement('album_head')); ?>
+
+<script type="text/javascript">
+	var aid = <?php e($html->tagValue('Album/id')); ?>;
+	var webroot = '<?php e($this->webroot); ?>';
+</script>
+<?php
+	e($asset->js('upload'));
+?>
+
+<div id="container-wrap">
+	
+	<div class="col-wrap">
+		
+		<?php e($this->renderElement('album_subnav')); ?>
+	
+	
+	<?php if (!empty($noobs)) :?>
+	
+		<div class="left-col">
+	
+			<div class="left-col-inside">
+	
+				<div class="module">
+	
+					<div class="module-head">
+						<h3><?php __('New content found!'); ?></h3>
+					</div>
+	
+					<div class="wrap">
+					
+						<div class="content">
+	
+							<p><?php printf(__('Director has found %s new uploads in this album\'s directory and automatically added them for you.', true), '<strong>' . count($noobs) . '</strong>'); ?></p>
+							
+							<p>							
+								<?php printf(__('%s your new content, or %s to the uploader', true), $html->link(__('Edit', true), "/albums/edit/{$album['Album']['id']}/content", array('title' => __('Proceed to Content', true))), '<a href="' . $this->here . '">' . __('proceed', true) . '</a>'); ?>
+							</p>
+							
+					
+						</div> <!--close content-->
+					
+					</div> <!--close module wrap-->
+		
+					<div class="module-footer">
+						<div>&nbsp;</div>
+					</div>
+
+				</div> <!--close module-->
+	
+				</div> <!--close left-col-inside-->
+	
+			</div> <!--close left-col-->
+
+	<?php else: ?>
+
+	<?php if ($writable && $other_writable): ?>
+
+		<div class="left-col">
+			
+			<div class="left-col-inside">
+
+				<div id="uploader" class="left" style="display:none;">
+
+					<div class="module">
+
+						<div class="module-head">
+							<h3><?php __('Add content'); ?></h3>
+						</div>
+
+						<div class="wrap">
+
+							<div class="content">
+
+							<p><?php __('Use the browse button below to select files for upload. You can select as many files at once as you like.'); ?>
+							</p>
+
+							<fieldset class="embed">
+								<?php __('Browse for:'); ?>
+								<select id="upload_type">
+									<option value="1"><?php __('Content'); ?></option>
+									<option value="3"><?php __('Album preview'); ?></option>
+									<option value="4"><?php __('Album audio'); ?></option>
+								</select> 
+								&nbsp;&nbsp;
+								<input class="nomargin" id="browser" disabled="false" type="button" onclick="browse_for_upload(); return false;" value="<?php __('Browse'); ?>" />
+							</fieldset>
+
+							<span class="note"><strong><?php __('Note'); ?></strong>: <?php __('Your server limits the size of uploaded files to'); ?> <?php e(ini_get('upload_max_filesize')); ?><?php __('B per file.'); ?> <?php printf(__('%s to find out how to increase your upload limit.', true), $html->link(__('Click here', true), 'http://forums.slideshowpro.net/viewtopic.php?id=56')) ?></span>
+
+							</div> <!--close content-->
+
+						</div> <!--close wrap-->
+
+						<div class="module-footer">
+							<div>&nbsp;</div>
+						</div>
+
+					</div> <!--close module-->
+
+				</div> <!--close uploader-->
+
+				
+			</div> <!--close left-col-inside-->
+
+		</div> <!--close left-col-->
+
+		<div class="right-col">
+			
+			<div class="right-col-inside">
+
+				<div id="files" style="display:none;">
+		
+					<div class="module">
+
+						<div class="module-head">
+							<h3><?php __('File list'); ?></h3>
+						</div>
+
+						<div class="wrap">
+
+							<div class="content">
+
+							<div class="embed">
+
+								<p><?php __('You have selected the following images for upload.'); ?><br />(<span id="summary"></span>)</p>
+
+								<fieldset><input id="upload_btn" type="button" onclick="upload(); return false;" value="<?php __('Upload'); ?>" /></fieldset>
+								
+								<div id="file_list"></div>
+								
+							</div>
+
+							</div> <!--close content-->
+
+						</div> <!--close wrap-->
+
+						<div class="module-footer">
+							<div>&nbsp;</div>
+						</div>
+
+					</div> <!--close module-->
+			
+				</div> <!--close files-->
+				
+			</div> <!--close right-col-inside-->
+	
+		</div> <!--close right-col-->
+
+		<div id="viewer" class="left"><h3 class="error"><?php __('Error'); ?></h3><p><?php __('Director\'s uploader requires you have version 8 (or higher) of the Flash plugin installed.'); ?> <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" title="<?php __('Install the latest flash player'); ?>"><?php __('Click here'); ?></a> <?php __('to install the latest version of the Flash plugin.'); ?></p></div>
+
+		<script type="text/javascript">
+			// <![CDATA[
+			var swf = new SWFObject("<?php e($this->webroot . 'swf/upload.swf?nhsdhadfsd' . DIR_VERSION); ?>", "_uploader", "1", "1", "8", "#292929");
+			swf.addVariable("aid", <?php e($html->tagValue('Album/id')); ?>);
+			swf.addVariable("dash", 0);
+			swf.addVariable("max_size", <?php e(MAX_SIZE); ?>);
+			swf.addVariable("upload_url", '<?php e($html->url('/uploads/image/' . CUR_USER_ID)); ?>');
+			swf.addParam("allowScriptAccess", "always");
+			swf.write("viewer");
+	
+			var test = $('viewer').innerHTML;
+			if (test.substring(0,2).toLowerCase() != '<h') {
+				$('browser').disabled = false;
+				Element.show('uploader');
+			}
+			// ]]>
+		</script>
+
+		<?php else: ?>
+
+			<div class="left-col">
+				
+				<div class="left-col-inside">
+	
+					<div class="module">
+
+						<div class="module-head">
+							<h3 class="error"><?php __('Error'); ?></h3>
+						</div>
+		
+						<div class="wrap">
+						
+							<div class="content">
+
+							<p><?php __('Before uploading, Director must have the necessary permissions to place files on your server. Please make sure the following folders (and any folder they contain) is writable by the web server:'); ?> <strong>album-audio, <?php e('albums' . DS . $album['Album']['path']); ?></strong></p>
+
+							<p><?php printf(__('%s when you have properly set these permissions.', true), '<a href="<?php e($this->here); ?>">' . __('Click here', true) . '</a>'); ?></p>
+			
+							</div> <!--close content-->
+			
+						</div> <!--close wrap-->
+		
+						<div class="module-footer">
+							<div>&nbsp;</div>
+						</div>
+		
+					</div> <!--close module-->
+					
+				</div> <!--close left-col-inside-->
+				
+			</div> <!--close left-col-->
+
+			<?php endif; ?>
+
+		<?php endif; ?>
+		
+	</div> <!--close col-wrap-->
+
+</div> <!--close container-wrap-->

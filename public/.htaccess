@@ -1,4 +1,4 @@
 RewriteEngine on
 RewriteCond %{REQUEST_URI} !/images.*
 RewriteCond %{REQUEST_URI} !/uploads.*
-RewriteRule !\.(js|ico|gif|jpg|png|css|htm)$ index.php
+RewriteRule !\.(js|ico|gif|jpg|png|css|htm|swf)$ index.php

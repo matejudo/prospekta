@@ -1,0 +1,254 @@
+<div id="page">
+	
+	<div id="container">
+		
+		<div id="head">
+			<h1 class="noicon"><?php __('Help'); ?></h1>
+		</div>
+		
+		<div id="container-wrap">
+			
+			<div class="col-wrap">
+		
+				<div class="left-col" style="width:100%;">
+					
+					<div class="left-col-inside">
+						
+						<div class="header-radius">
+							<div class="tr"></div>
+							<div class="content">
+								<h3><?php __('Albums'); ?></h3>
+							</div>
+							<div class="bl"><div class="br"></div></div>
+						</div>
+						
+						<div class="indent">
+						
+							<h4><?php __('What is an album?'); ?></h4>
+					
+							<p>
+								<?php __('An album is a container for your images and/or videos. Every album contains a title, a description, an ID, and an XML file path that may be used to load its content in SlideShowPro. You may upload as much content as you want to an album, and edit that content\'s metadata (title, hyperlink, caption) as a group or individually.'); ?>
+							</p>
+																		
+							<h4><?php __('Can I upload images without creating an album?'); ?></h4>
+							
+							<p>
+								<?php __('No. Every image must belong to an album.'); ?>
+							</p>
+							
+							<h4><?php __('How do I create an album?'); ?></h4>
+								
+							<p>
+								<?php printf(__('Go to the %s page. Enter an album title in the form at the top right of the table, then click the "Create" button. Your album will be created, and Director will automatically move you to the "Upload" area for that album.', true), $html->link(__('Albums', true), '/albums', array('title' => __('Albums', true)))); ?>
+							</p>
+							
+							<h4><?php __('How does "Publish Status" work?'); ?></h4>
+							
+							<p>
+								<?php __('"Publish Status" controls whether an album is available for usage in a gallery. When set to "Active," an album can be included in any gallery you create, and will automatically be included in any smart gallery with search criteria that matches the published album. When set to "Inactive," an album is considered unfinished and not available for usage in any gallery you create, and is removed from consideration for smart galleries. All new albums start in "Inactive" status so  they can be constructed before being considered for inclusion in a gallery.'); ?>
+							</p>
+																			
+						</div>
+						
+						<div class="header-radius">
+							<div class="tr"></div>
+							<div class="content">
+								<h3><?php __('Galleries'); ?></h3>
+							</div>
+							<div class="bl"><div class="br"></div></div>
+						</div>
+						
+						<div class="indent">
+							
+							<h4><?php __('What is a gallery?'); ?></h4>
+					
+							<p><?php __('A gallery is a collection of albums. It serves one purpose: to group your albums together as a single collection for your slideshow. You may add or remove any album from a gallery you create.'); ?>
+							</p>
+							
+							<p><?php __('There are two types of gallery: "Custom" and "Smart." A "Custom" gallery is one you create and populate with albums. A "Smart" gallery is created by SlideShowPro Director and populated automatically. The content a smart gallery contains cannot be changed, nor can a smart gallery be deleted.'); ?>
+							</p>
+							
+							<h4><?php __('How does "Manage albums" work?'); ?></h4>
+							
+							<p>
+								<?php __('The Manage albums page (inside Edit gallery) is where you control which albums a gallery contains, and in what order they should be presented.'); ?>
+							</p>
+							
+							<p>
+								<?php __('When a custom gallery is created, "Manage albums" populates with any album that has a "Active" Publish Status (see "Albums" above). Each album is set to "Inactive," which means that it is not included in the gallery you are editing. To include an album, toggle that album\'s light-switch button. It will then be "Active" and part of that gallery. You can always set this back to "Inactive" if need be.'); ?>
+							</p>
+							
+							<p>
+								<?php __('Smart galleries don\'t allow user control for the album content they contain. They have built-in search criteria that automatically includes / removes any album with a "Publish" Publish Status.'); ?>
+							</p>
+							
+						</div>
+						
+						<div class="header-radius">
+							<div class="tr"></div>
+							<div class="content">
+								<h3><?php __('Slideshows'); ?></h3>
+							</div>
+							<div class="bl"><div class="br"></div></div>
+						</div>
+						
+						
+						<div class="indent">
+							
+							<h4><?php __('What is a slideshow?'); ?></h4>
+					
+							<p>
+								<?php printf(__('The %s page allows you to add bookmark links (in the form of absolute URLs) to SlideShowPro installations that retrieve data from Director. These bookmarks provide a quick way to preview changes made in Director.', true), $html->link(__('Slideshows', true), '/slideshows', array('title' => __('Slideshows', true)))); ?>		
+							</p>
+							
+						</div>
+						
+						<div class="header-radius">
+							<div class="tr"></div>
+							<div class="content">
+								<h3><?php __('Content publishing'); ?></h3>
+							</div>
+							<div class="bl"><div class="br"></div></div>
+						</div>
+						
+						<div class="indent">
+							
+							<h4><?php __('How does Director publish content?'); ?></h4>
+							
+							<p>
+								<?php __('Director uses an "on-demand publishing system" for your content. Meaning, when SlideShowPro requests images from Director, Director returns web-optimized duplicates of the original images you uploaded. Each duplicate is scaled / sized to fit SlideShowPro\'s interface and content area. These duplicates are automatically cached, and re-used for as long as SlideShowPro\'s dimensions or interface settings remain the same. If they change, or a completely separate slideshow requests the same content, Director will create new duplicates again, and cache them as well. This allows you to load a single album or gallery in multiple slideshows and each will receive imagery tailored to fit.'); ?>
+							</p>
+							
+							<p>
+								<?php __('Currently, Director <em>does not</em> create web-optimized duplicates of videos. Any videos you upload to an album will not be re-formatted, and will be delivered to SlideShowPro without any resizing or modifications.'); ?>
+							</p>
+							
+						</div>
+							
+						
+						<div class="header-radius">
+							<div class="tr"></div>
+							<div class="content">
+								<h3><?php __('Syncing with SlideShowPro'); ?></h3>
+							</div>
+							<div class="bl"><div class="br"></div></div>
+						</div>
+						
+						<div class="indent">
+							
+							<h4><?php __('How do I link SlideShowPro to my Director content?'); ?></h4>
+							
+							<p>
+								<?php __('You may load a single album or a gallery of albums in SlideShowPro. Here\'s how you do it.'); ?>
+							</p>
+							
+							<p>
+								<?php printf(__('You first need to copy the XML file path Director publishes for either the album or gallery you want to load. To find that path, click on the album title (in %s) or the gallery title (in %s). At the bottom left of the next page is a module titled "XML info." Click the "Copy path to clipboard" button.', true), $html->link(__('Albums', true), '/albums', array('title' => __('Albums', true))), $html->link(__('Galleries', true), '/galleries', array('title' => __('Galleries', true)))); ?>
+							</p>
+							
+							<p>
+								<?php __('Return to Flash, and select SlideShowPro on the stage of your FLA. Open the Component Inspector panel, and click inside the field to the right of "XML File Path" (if a value is already assigned, delete it). Paste the link you just copied. Then set the "XML File Type" parameter, also in the Component Inspector, to "Director." Publish a new slideshow, and your Director content should appear.'); ?>
+							</p>
+						</div>
+						
+						<div class="header-radius">
+							<div class="tr"></div>
+							<div class="content">
+								<h3><?php __('Images'); ?></h3>
+							</div>
+							<div class="bl"><div class="br"></div></div>
+						</div>
+
+						
+						<div class="indent">
+							
+							<h4><?php __('What type of images can I upload?'); ?></h4>
+						
+							<p>
+								<?php __('You may upload JPGs, GIFs, or PNGs. Optimized versions of your images are created in the same image format as their original.'); ?>
+							</p>
+							
+							<p>
+								<?php __('If you are publishing SlideShowPro using Flash Player 8 or higher, you will be able to load all three of these image formats. If however you are publishing to Flash Player 7, you will <em>only be able to load JPGs</em>. Keep that in mind when deciding what type of original imagery to upload.'); ?>
+							</p>
+							
+							<h4><?php __('What happens to an image when I delete it from an album?'); ?></h4>
+							
+							<p>
+								<?php __('The original image and all copies generated are permanently removed from the server.'); ?>
+							</p>
+							
+						</div>
+						
+						<div class="header-radius">
+							<div class="tr"></div>
+							<div class="content">
+								<h3><?php __('Videos'); ?></h3>
+							</div>
+							<div class="bl"><div class="br"></div></div>
+						</div>
+						
+						<div class="indent">
+							
+							<h4><?php __('What type of videos can I upload?'); ?></h4>
+							
+							<p>
+								<?php __('You may upload FLVs, or H.264 encoded videos rendered as MP4, M4V, M4A, MOV and/or 3GP. Note though that H.264 formats are considered "bleeding-edge" formats that only work in the very latest version of the Flash Player (Flash Player 9 Update 3). So while it\'s technically possible to upload those formats, and SlideShowPro will load them, your users may not be able to see them without this player version. For that reason, it is recommended (for now) that you only upload FLVs.'); ?>
+	</p>
+	<p>							
+								<?php __('If you have a video in an alternate format, we recommend converting the video to FLV using Macromedia Flash 8 Video Encoder or Adobe Flash CS3 Video Encoder. Both are standalone applications that ship with Flash.'); ?>
+							</p>
+							
+							<h4><?php __('How do I upload an FLV?'); ?></h4>
+						
+							<p>
+								<?php __('You may upload an FLV through either the "Upload Content" shortcut on the Snapshot page or through the Edit album > Upload area. Browse and select an FLV just like you would an image or any other asset.'); ?>
+							</p>
+							
+							<h4><?php __('How large can my FLV be?'); ?></h4>
+							
+							<p>
+								<?php __('Depends on your hosting provider. Director displays the maximum file size you may upload at the bottom of the "Add Content" module in Edit album > Upload. To raise this limit, contact your hosting provider.'); ?>
+							</p>
+							
+							<h4><?php __('How do I create a thumbnail image of my video?'); ?></h4>
+							
+							<p>
+								<?php __('If you are using the "Thumbnails" Navigation Link Type or link preview pop-ups in SlideShowPro, you\'ll want a thumbnail image for your video. First, upload an image (if one isn\'t in Director already) to the album containing the video. Then in the "Content" area, click and hold on the image you want to use, drag it over the image area of the video you wish to assign it to, and release.'); ?>
+							</p>
+							
+						</div>
+						
+						<div class="header-radius">
+							<div class="tr"></div>
+							<div class="content">
+								<h3><?php __('Accounts, Settings'); ?></h3>
+							</div>
+							<div class="bl"><div class="br"></div></div>
+						</div>
+						
+						<div class="indent">
+							
+							<h4><?php __('Can I create accounts for other people?'); ?></h4>
+							
+							<p>
+								<?php printf(__('Yes. Go to the %s page. There you may sign up new users for this installation of Director, and delegate how much control they have over content.', true), $html->link(__('Users', true), '/users/manage', array('title' => __('Edit users', true)))); ?>
+							</p>
+							
+						</div>
+					
+					</div> <!--close left-col-inside-->
+						
+				</div> <!--close left-col-->
+				
+			</div> <!--close col-wrap-->
+		
+		</div> <!--close container-wrap-->
+	
+		<div id="container-footer">
+			<div>&nbsp;</div>
+		</div>
+	
+	</div> <!--close container-->
+
+</div> <!--close page-->

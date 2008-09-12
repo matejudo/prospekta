@@ -1,0 +1,13 @@
+<p><?php __('The five most recently updated galleries.'); ?></p>
+
+
+<ul class="dash-strip module-first">
+	<?php foreach ($galleries as $gallery): ?>
+	<li>
+		<div class="rLink">
+			<div class="radBttn"><a class="rb_module_wrap" href="#" title="<?php __('Copy XML File Path to Clipboard'); ?>" onclick="Director.Utilities.copyToClipboard(this, true, '<?php e(DATA_LINK . '?gallery=' . $gallery['Gallery']['id']); ?>'); return false;"><span><?php __('Copy'); ?></span></a></div>
+		</div>
+		<span class="icon_label_gallery"><?php e($html->link(__($gallery['Gallery']['name'], true), "/galleries/edit/{$gallery['Gallery']['id']}")); ?></span>
+	</li>	
+	<?php endforeach; ?>
+</ul>

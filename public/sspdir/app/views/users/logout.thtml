@@ -1,0 +1,31 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:400px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<div class="wrap">
+				
+				<div class="content">
+					
+					<h6><?php __('You have been logged out.'); ?></h6>
+					<br />
+					<p><?php printf(__('%s to sign in to Director.', true), $html->link(__('Click here', true), '/users/login')); ?></p>	
+
+				</div> <!--close content-->
+
+			</div> <!--close module wrap-->
+
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

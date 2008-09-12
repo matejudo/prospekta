@@ -1,0 +1,9 @@
+<div id="page">
+		
+	<div id="container">
+		
+		<?php e($this->renderElement('galleries_list')); ?>
+			
+	</div> <!--close container-->
+	
+</div> <!--close page-->

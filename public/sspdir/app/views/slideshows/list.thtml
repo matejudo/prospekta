@@ -1,0 +1,1 @@
+<?php e($this->renderElement('slideshow_list')); ?>

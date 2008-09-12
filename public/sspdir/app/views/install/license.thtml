@@ -1,0 +1,76 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:600px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<ul id="process">
+				<li class="first active"><span><?php __('Step 1'); ?>: <?php __('License agreement'); ?></span></li>
+				<li class=""><span><?php __('Step 2'); ?></span></li>
+				<li class=""><span><?php __('Step 3'); ?></span></li>
+				<li class=""><span><?php __('Step 4'); ?></span></li>
+				<li class=""><span><?php __('Step 5'); ?></span></li>
+				<li class="last"><span><?php __('Step 6'); ?></span></li>
+			</ul>
+			
+			<h4><?php __('Installation and setup'); ?></h4>
+			
+			<div class="clear"></div>
+			
+			<div class="wrap">
+				
+				<div class="content">
+		
+						<h6><?php __('Welcome to SlideShowPro Director!'); ?></h6>
+						<p><?php __('Please read and agree to the following license agreement before installing.'); ?></p>
+						<form action="<?php e($html->url('/install/test')); ?>" method="post">
+
+						<input type="hidden" name="data[dummy]" value="1" />
+						
+						<div style="padding:5px;height:250px;overflow:auto;background:#111;margin-bottom:15px">
+						
+							<p>By purchasing and downloading SlideShowPro Director, You, the purchaser, agree to the following:</p>
+
+							<p>Bradleyboy Productions LLC and Dominey Design grants you the non-exclusive, non-transferable license to use SlideShowPro Director subject to the restrictions contained herein.</p>
+
+							<p>All SlideShowPro Director source code is copyright Bradleyboy Productions LLC and Dominey Design Inc. except for sections of code explicitly marked with their own license.</p>
+
+							<p>The license permits the use of SlideShowPro Director in personal and/or commercial client projects. Use in commercial projects must be under an existing agreement whose scope extends beyond solely SlideShowPro Director. You may not provide installation of SlideShowPro Director as a service.</p>
+
+							<p>The license permits the following uses of SlideShowPro Director: You may use Director on any web site/domain at which you have administrative access. You may use SlideShowPro Director on any third party web site/domain not owned by you as long as you are acting as the administrator for the owner.</p>
+
+							<p>The license DOES NOT permit the following uses of SlideShowPro Director: Director may not be used on any web site/domain at which you are not an administrator for a third party or where a third party has file level access to Director's source code. SlideShowPro Director may not be sub-licensed, resold, or otherwise made available for use or distribution separately or detached from a product, software application, or web page. SlideShowPro Director may not be redistributed or sold. SlideShowPro Director may not be included as a component or feature of any third-party software product or subscription-based area of a web site. SlideShowPro Director may not be placed on any electronic bulletin board, or on-line in a downloadable format.</p>
+
+							<p>You may make changes to the source code of SlideShowPro Director, but may not redistribute those changes, in part or the whole, in any way. No support shall be provided after the source code has been altered. No changes to the source code may be made that hide the copyright information to the end user.</p>
+
+							<p>You may not rent, transfer, or grant any rights to SlideShowPro Director contained herein, or any compilation, derivative or collective work containing SlideShowPro Director to any other person or organization without prior written consent of Dominey Design Inc. Using SlideShowPro Director in a way not covered by this Agreement or that is specifically prohibited, without prior written consent from Bradleyboy Productions LLC and Dominey Design Inc., is a violation of Federal copyright law. This license is in full force until it is terminated. If you do not comply with the terms and conditions above, the license automatically terminates.</p>
+
+							<p>SlideShowPro Director is copyright Bradleyboy Productions LLC and Dominey Design Inc. and is protected by the United States Copyright laws, international treaty provisions and other applicable laws. No title or intellectual property rights in SlideShowPro Director are transferred to you. Bradleyboy Productions LLC and Dominey Design Inc. retains all rights not expressly granted by this license.</p>
+
+							<p>SlideShowPro Director and files are provided "as is." You agree to hold Bradleyboy Productions LLC and Dominey Design Inc. harmless for any damages that may occur due to use, or inability to use, software from Bradleyboy Productions LLC and Dominey Design Inc.</p>
+						
+						</div>
+						
+						<fieldset class="install-button">
+							<input id="agree-btn" type="submit" value="<?php __('I Agree'); ?> &rarr;" />
+						</fieldset>
+						
+						</form>
+	
+				</div> <!--close content-->
+
+			</div> <!--close module wrap-->
+
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+		
+		</div> <!--close module-->
+
+	</div> <!--close login-content-->
+
+</div> <!--close login-container-->

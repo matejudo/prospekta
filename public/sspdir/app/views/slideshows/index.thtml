@@ -1,0 +1,81 @@
+<div id="page">
+	
+	<div id="container">
+		
+		<div id="head">
+			<h1 class="slideshow"><?php __('Slideshows'); ?></h1>
+		</div>
+		
+		<div id="container-wrap">
+			
+			<div class="col-wrap">
+		
+				<div class="left-col">
+					
+					<div class="left-col-inside">
+					
+						<div class="module">
+				
+							<div class="module-head">
+								
+								<?php if ($user['perms'] > 1): ?>
+									<div class="rLink">
+										<div class="radBttn">
+										<a href="#" onclick="Director.Interface.toggle('add-show'); Director.Interface.focusDelay('SlideshowName', 500); return false;"><span><?php __('Add a slideshow'); ?></span></a>
+										</div>
+									</div>
+								<?php endif; ?>
+								
+								<h3><?php __('Slideshow bookmarks'); ?></h3>
+								
+							</div>
+				
+							<div class="wrap">
+								
+								<div class="content">
+			
+									<div id="add-show" class="embed" style="display:none;">
+										<form name="show_form" action="#" onsubmit="add_slideshow(this); return false;">
+											<fieldset>
+												<label><?php __('Name'); ?>:</label>
+												<?php e($form->text('Slideshow/name', array('size' => 20,'class' => 'wide'))); ?>
+											</fieldset>
+											<fieldset>
+												<label><?php __('URL'); ?>:</label>
+												<?php e($form->text('Slideshow/url', array('size' => 20,'class' => 'wide'))); ?>
+											</fieldset>
+											<fieldset>
+												<input type="submit" value="<?php __('Add slideshow'); ?>" class="button" />
+											</fieldset>
+										</form>
+									</div>
+									
+									<div id="slideshows">
+										<?php e($this->renderElement('slideshow_list')); ?>
+									</div>
+								
+								</div> <!--close content-->
+						
+							</div> <!--close module wrap-->
+						
+							<div class="module-footer">
+								<div>&nbsp;</div>
+							</div>
+				
+						</div> <!--close module-->
+					
+					</div> <!--close left-col-inside-->
+						
+				</div> <!--close left-col-->
+				
+			</div> <!--close col-wrap-->
+		
+		</div> <!--close container-wrap-->
+	
+		<div id="container-footer">
+			<div>&nbsp;</div>
+		</div>
+	
+	</div> <!--close container-->
+
+</div> <!--close page-->

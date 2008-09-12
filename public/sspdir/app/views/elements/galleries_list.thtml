@@ -1,0 +1,162 @@
+<div id="head">
+	
+	<div class="head-wrap">
+		
+		<div id="head-form">
+			
+			<?php if ($user['perms'] > 1): ?>
+			<div class="icon-bump">
+			
+				<form name="album_form" action="#" onsubmit="add_gallery(this); return false;">
+					<label class="inline"><?php __('Create a new gallery:'); ?></label>&nbsp;&nbsp;
+					<?php e($form->text('Gallery/name', array('size' => 30, 'class' => 'inline', 'value' => __('Gallery title', true), 'onfocus' => "if (this.value == __('Gallery title')) this.value='';", 'onblur' => "if (this.value == '') this.value = __('Gallery title');"))); ?>&nbsp;&nbsp;<input type="submit" value="<?php __('Create'); ?>" />										
+				</form>
+			
+			</div>
+			<?php endif; ?>
+
+		</div>
+		
+		<h1 class="galleries"><?php __('Galleries'); ?></h1>
+		
+	</div>
+	
+	<div class="clear"></div>
+
+</div>
+
+<div id="container-wrap">
+
+	<div class="col-wrap">
+		
+		<?php if ($imports): ?>
+		<div id="alert">
+			<div class="green">
+				<div class="tr"></div>
+				<div class="content">
+					<div class="fixed icon">
+						<?php __('Director has detected new galleries available for importing:'); ?> 
+						<form name="import_form" id="import_form" action="#" onsubmit="init_import(); return false" class="inline">
+							<select name="data[Import][folder]">
+								<?php foreach($imports as $import): ?>
+								<option><?php e($import); ?></option>
+								<?php endforeach; ?>
+							</select>&nbsp;&nbsp;<input type="submit" value="<?php __('Import now'); ?>" /></form>
+					</div>
+				</div>
+				<div class="bl"><div class="br"></div></div>
+			</div>
+		</div>
+		<?php endif; ?>
+		
+		<?php if (count($galleries) > 0): ?>
+		
+			<div class="header-radius">
+				<div class="tr"></div>
+				<div class="content">
+					<strong><?php __('Search'); ?>:</strong>&nbsp;&nbsp;<input type="text" name="search" value="<?php __('Search'); ?>" id="search" onkeyup="search(false)" size="30" onfocus="if (this.value == __('Search')) this.value='';" onblur="if (this.value == '') this.value = __('Search');" /> <div id="search-spin" class="form-msg icon-spin" style="display:none;">&nbsp;</div>
+				</div>
+				<div class="bl"><div class="br"></div></div>
+			</div>
+		
+		<?php endif; ?>
+		
+		<table cellspacing="0" cellpadding="0" id="galleries-table" class="sortable">
+			<tr>
+				<th class="tl title<?php $sort_on == __('Galleries', true) ? e(" $sort_str") : '' ; ?>"><?php __('Galleries'); ?> <span>(<?php __('Total'); ?>: <?php e(count($galleries)+1); ?>)</span></th>
+				<th<?php $sort_on == __('Type', true) ? e(" class=\"$sort_str\"") : '' ; ?>><?php __('Type'); ?></th>
+				<th class="number<?php $sort_on == __('Albums', true) ? e(" $sort_str") : '' ; ?>"><?php __('Albums'); ?></th>
+				<th class="<?php $sort_on == __('Modified', true) ? e("$sort_str") : '' ; ?>"><?php __('Modified'); ?></th>
+				<th class="<?php $sort_on == __('Created', true) ? e("$sort_str") : '' ; ?>"><?php __('Created'); ?></th>
+				<th class="nosort"><?php __('XML'); ?></th>
+				<th class="tr nosort"><?php __('Actions'); ?></th>
+			</tr>
+			<tr class="content">
+				<td class="title">
+					<h4 class="icon_label_smartgallery"><a href="<?php e($html->url("/galleries/edit/{$main['Gallery']['id']}")); ?>" title="<?php __('Edit gallery'); ?>: <?php __('All albums'); ?>"><?php __('All albums'); ?></a></h4><span><?php __('Smart gallery containing all published albums.'); ?></span>
+					
+				</td>
+				<td>
+					<?php __('Smart'); ?>
+				</td>
+				<td>
+					<?php e(count($main['Tags'])); ?>
+				</td>
+				
+				<td><?php e($director->_date(__('%m/%d/%Y %I:%M%p', true), $main['Gallery']['modified'])); ?><span class="sort_this" style="display:none;"><?php e(strtotime($main['Gallery']['modified'])); ?></span></td>
+				<td><?php e($director->_date(__('%m/%d/%Y %I:%M%p', true), $main['Gallery']['created'])); ?><span class="sort_this" style="display:none;"><?php e(strtotime($main['Gallery']['created'])); ?></span></td>
+				
+				<td class="fix">
+					<div style="margin:0 auto;display:block;">
+						<div class="radBttn" style="margin-left:0;"><a class="rb_module_wrap" href="#" title="<?php __('Copy XML File Path to Clipboard'); ?>" onclick="Director.Utilities.copyToClipboard(this, true, '<?php e(DATA_LINK . '?gallery=' . $main['Gallery']['id']); ?>'); return false;"><span><?php __('Copy'); ?></span></a></div>
+					</div>
+				</td>
+				
+				<td class="end">
+					<div style="margin:0 auto;display:block;width:20px;">
+						
+						<a title="<?php __('Edit gallery'); ?>" class="edit-image-btn" href="<?php e($html->url ("/galleries/edit/{$main['Gallery']['id']}")); ?>"></a>
+						
+					</div>
+				</td>
+			</tr>
+			
+			<?php if (!empty($galleries)): ?>
+				
+				<tr id="search-alert" style="display:none;">
+					<td colspan="8" class="title end">
+						<?php __('No galleries that match your query were found.'); ?>
+					</td>
+				</tr>
+			
+				<?php foreach ($galleries as $gallery): ?>
+				
+					<tr class="content">
+						<td class="title">
+							<h4 class="icon_label_gallery"><a href="<?php e($html->url("/galleries/edit/{$gallery['Gallery']['id']}")); ?>" title="<?php __('Edit gallery'); ?>: <?php e($gallery['Gallery']['name']); ?>"><?php e($gallery['Gallery']['name']); ?></a></h4><span><?php e(htmlspecialchars($gallery['Gallery']['description_clean'])); ?></span>
+
+						</td>
+						<td>
+							<?php __('Custom'); ?>
+						</td>
+						<td>
+							<?php e(count($gallery['Tags'])); ?>
+						</td>
+						<!-- Keep whitespace out of the following to cells, messes up sorting -->
+						<td><?php e($director->_date(__('%m/%d/%Y %I:%M%p', true), $gallery['Gallery']['modified'])); ?><span class="sort_this" style="display:none;"><?php e(strtotime($gallery['Gallery']['modified'])); ?></span></td>
+						<td><?php e($director->_date(__('%m/%d/%Y %I:%M%p', true), $gallery['Gallery']['created'])); ?><span class="sort_this" style="display:none;"><?php e(strtotime($gallery['Gallery']['created'])); ?></span></td>
+						
+						<td class="fix">
+							<div style="margin:0 auto;display:block;">
+								<div class="radBttn" style="margin-left:0;"><a class="rb_module_wrap" href="#" title="<?php __('Copy XML File Path to Clipboard'); ?>" onclick="Director.Utilities.copyToClipboard(this, true, '<?php e(DATA_LINK . '?gallery=' . $gallery['Gallery']['id']); ?>'); return false;"><span><?php __('Copy'); ?></span></a></div>
+							</div>
+						</td>
+						
+						<td class="end">
+							<div style="margin:0 auto;display:block;width:44px;">
+						
+							<a title="<?php __('Edit gallery'); ?>" class="edit-image-btn" href="<?php e($html->url ("/galleries/edit/{$gallery['Gallery']['id']}")); ?>"></a>
+						
+							<?php if ($user['perms'] > 1): ?><a title="<?php __('Delete gallery'); ?>" class="delete-image-btn" href="#" onclick="delete_gallery(<?php e($gallery['Gallery']['id']); ?>); return false;"></a><?php endif; ?>
+							
+							</div>
+						</td>
+					</tr>
+					
+				<?php endforeach; ?>
+
+			<?php endif;?>
+			
+		</table>
+		
+		<script type="text/javascript" charset="utf-8">
+			fix_col_widths();
+		</script>
+		
+	</div>
+
+</div> <!--close container-wrap-->
+
+<div id="container-footer">
+	<div>&nbsp;</div>
+</div>

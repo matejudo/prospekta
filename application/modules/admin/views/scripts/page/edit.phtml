@@ -99,7 +99,7 @@
 					<select name="parentid">
 						<option value="-1">Uvrsti na najvišoj razini</option>
 						<optgroup label="Uvrsti pod:" >							
-							<?php foreach($this->paths as $curpath): ?><option value="<?= $curpath["id"] ?>" <?= ($curpath["id"] == $this->page->parentid) ? 'selected="selected"' : ""; ?>><?= str_replace("/", " &raquo; ", $curpath["path"]) ?></option>
+							<?php foreach($this->paths as $curpath): if($curpath["id"] == $this->page->id) continue; ?><option value="<?= $curpath["id"] ?>" <?= ($curpath["id"] == $this->page->parentid) ? 'selected="selected"' : ""; ?>><?= str_replace("/", " &raquo; ", $curpath["path"]) ?></option>
 							<?php endforeach; ?>
 						</optgroup>
 					</select>

@@ -1,0 +1,94 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:550px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<ul id="process">
+				<li class="first<?php e(ife(($step == 1), ' active', ' ')); ?><?php e(ife(($step == 2), 'prevactive', '')); ?><?php e(ife(($step > 2), 'complete', '')); ?>"><span><?php __('Step 1'); ?><?php e(ife(($step == 1), ': ' . __('Get started', true), '')); ?></span></li>
+				<li class="<?php e(ife(($step == 2), 'active', '')); ?><?php e(ife(($step == 3), 'prevactive', '')); ?><?php e(ife(($step > 3), 'complete', '')); ?>"><span><?php __('Step 2'); ?><?php e(ife(($step == 2), ': ' . __('Database', true), '')); ?></span></li>
+				<li class="<?php e(ife(($step == 3), 'active', '')); ?><?php e(ife(($step  == 4), 'prevactive', '')); ?>"><span><?php __('Step 3'); ?><?php e(ife(($step == 3), ': ' . __('File system', true), '')); ?></span></li>
+				<li class="<?php e(ife(($step == 4), 'active', '')); ?>"><span><?php __('Step 4'); ?><?php e(ife(($step == 4), ': ' . __('Housecleaning', true), '')); ?></span></li>
+			</ul>
+			
+			<h4><?php __('Upgrade'); ?></h4>
+			
+			<div class="clear"></div>
+			
+			<div class="wrap">
+				
+				<div class="content">
+				
+					<?php if ($error): ?>
+						<h3 class="error"><?php __('Error!'); ?></h3><br />
+						<p><?php __('Director now requires PHP 4.3.2 or higher. Your installation of PHP is not adequate for this version of Director. You will need to contact your host to request an upgrade.'); ?></p>
+					<?php else: ?>
+						
+						<?php switch($step): case 1: ?>
+						
+							<p><?php printf(__('Welcome to %s. Upgrading will just take a moment, and it will be broken into steps to ensure it all completes successfully.', true), '<strong>SlideShowPro Director v' . DIR_VERSION . '</strong>'); ?></p>
+							
+							<form action="<?php e($html->url('/install/upgrade/2')); ?>" method="post">
+								<fieldset class="install-button">
+									<input type="submit" value="<?php __('Start upgrade'); ?> &rarr;" />
+								</fieldset>
+							</form>
+						<?php break; ?>
+						
+						<?php case(2): ?>
+						
+							<p><?php __('Your database has been successfully upgraded. Next, we\'ll make sure all your album files are in the right place and where this new version of Director expects them to be.'); ?></p>
+							
+							<form action="<?php e($html->url('/install/upgrade/3')); ?>" method="post">
+								<fieldset class="install-button">
+									<input type="submit" value="<?php __('Next step'); ?> &rarr;" />
+								</fieldset>
+							</form>
+						
+						<?php break; ?>
+						
+						<?php case(3): ?>
+							
+							<p><?php __('Almost done! Last but not least, a few housecleaning duties and then you\'ll be all set.'); ?></p>
+							
+							<form action="<?php e($html->url('/install/upgrade/4')); ?>" method="post">
+								<fieldset class="install-button">
+									<input type="submit" value="<?php __('Last step'); ?> &rarr;" />
+								</fieldset>
+							</form>
+						
+						<?php break; ?>
+						
+						<?php case(4): ?>
+						
+							<p><?php printf(__('Success! Director has been upgraded to v%s', true), DIR_VERSION); ?>.</p>
+							
+							<form action="<?php e($html->url('/users/login')); ?>" method="get">
+								<fieldset class="install-button">
+									<input type="submit" value="<?php __('Complete the upgrade by logging back in to Director'); ?> &rarr;" />
+								</fieldset>
+							</form>
+						
+						<?php break; ?>
+
+						<?php endswitch; ?>
+						
+					<?php endif; ?>
+					
+				</div> <!--close content-->
+
+			</div> <!--close module wrap-->
+
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+		
+		</div> <!--close module-->
+
+	</div> <!--close login-content-->
+
+</div> <!--close login-container-->

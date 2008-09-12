@@ -1,0 +1,162 @@
+<div id="page">
+	
+	<div id="container">
+		
+		<div id="head">
+			<h1 class="profile"><?php __('Your profile:'); ?> <?php e($html->link($user['usr'], '/users/profile')); ?></h1>
+		</div>
+		
+		<div id="container-wrap">
+			
+			<div class="col-wrap">
+		
+				<div class="left-col">
+					
+					<div class="left-col-inside">
+					
+					<div class="module">
+
+						<div class="module-head">
+							<h3><?php __('Edit profile settings'); ?></h3>
+						</div>
+						
+						<div class="wrap">
+							
+							<div class="content">
+							
+								<?php
+									if (empty($this->data['User']['email'])):
+								?>
+					
+								<div id="password">
+
+									<p class="error">
+										<?php __('Email address required'); ?>
+									</p>
+
+									<p>
+										<?php __('Director now requires each user to have an email address on file for easy login/password retrieval. Please enter your email address below.'); ?>
+									</p>
+
+								</div>
+					
+
+								<?php endif; ?>
+					
+								<form action="#" id="profile_form" onsubmit="update_profile(this, <?php e($html->tagValue('User/id')); ?>); return false;">
+									<fieldset>
+										<label><?php __('Username:'); ?></label>
+										<?php e($form->text('User/usr', array('class' =>'wide'))); ?>
+									</fieldset>
+
+									<fieldset>
+										<label><?php __('Email:'); ?></label>
+										<?php e($form->text('User/email', array('class' =>'wide'))); ?>
+									</fieldset>
+
+									<fieldset>
+										<label><?php __('Password:'); ?></label>
+										<input type="password" name="pass1" value="" id="pass1" class="wide" />
+									</fieldset>
+
+									<fieldset>
+										<label><?php __('Confirm password:'); ?></label>
+										<input type="password" name="pass2" value="" id="pass2" class="wide" />
+									</fieldset>
+
+									<input class="field-input" id="save-button" type="submit" value="<?php __('Save changes'); ?>" /> <span id="user-messenger" style="display:none;"></span>
+								</form>
+								
+							</div> <!--close content-->
+								
+						</div> <!--close module wrap-->
+						
+						<div class="module-footer">
+							<div>&nbsp;</div>
+						</div>
+						
+					</div> <!--close module-->
+					
+				</div> <!--close left-col-inside-->
+						
+			</div> <!--close left-col-->
+			
+			<?php
+				e($asset->js('upload'));
+			?>
+			
+			<script type="text/javascript">
+				var aid = 0;
+				var here = '<?php e($this->here); ?>';
+			</script>
+			
+			<div class="right-col">
+				
+				<div class="right-col-inside">
+	
+					<div class="module">
+		
+						<div class="module-head">
+							<h3><?php __('Edit profile avatar'); ?></h3>
+						</div>
+					
+						<div class="wrap">
+						
+							<div class="content">
+								
+								<h5><?php __('Current avatar'); ?>:</h5>
+	
+								<?php e($director->avatar(CUR_USER_ID, 48, 48)); ?>
+															
+								<br /><br />
+																	
+								<fieldset>
+										
+								<label><?php __('Upload a new avatar'); ?>:</label>
+								
+								<p><?php printf(__('You may upload a jpeg, png or gif (no animated gifs). Recommended size is 48px square. If you\'ve already created an avatar and need to reset it, %s.', true), '<a href="' . $html->url('/users/clear_avatar') . '" title="' . __('Reset avatar', true) . '">' . __('click here', true) . '</a>'); ?></p>
+								
+									<p id="av-feedback" style="display:none"></p>
+									<input type="button" value="<?php __('Choose file'); ?>" onclick="browse_for_upload_avatar();" /> <input id="av-upload" type="button" value="<?php __('Upload image'); ?>" onclick="upload_avatar();" disabled="true" />
+									
+								</fieldset>
+															
+							</div> <!--close content-->
+						
+						</div> <!--close module wrap-->
+					
+						<div class="module-footer">
+							<div>&nbsp;</div>
+						</div>
+				
+					</div> <!--close module-->
+	
+				</div> <!--close right-col-inside-->
+		
+			</div> <!--close right-col-->
+				
+		</div> <!--close col-wrap-->
+		
+	</div> <!--close container-wrap-->
+	
+	<div id="container-footer">
+		<div>&nbsp;</div>
+	</div>
+	
+	</div> <!--close container-->
+
+</div> <!--close page-->
+
+<div id="viewer" style="float:left;width:1px;height:1px;"></div>
+
+<script type="text/javascript">
+	// <![CDATA[
+	var swf = new SWFObject("<?php e($this->webroot . 'swf/upload.swf?' . DIR_VERSION); ?>", "_uploader", "1", "1", "8", "#292929");
+	swf.addVariable("aid", 0);
+	swf.addVariable("dash", 2);
+	swf.addVariable("max_size", <?php e(MAX_SIZE); ?>);
+	swf.addVariable("upload_url", '<?php e($html->url('/uploads/avatar/' . CUR_USER_ID)); ?>');
+	swf.addParam("allowScriptAccess", "always");
+	swf.write("viewer");
+	// ]]>
+</script>

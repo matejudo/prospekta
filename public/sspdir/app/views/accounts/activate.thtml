@@ -1,0 +1,29 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:450px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<div class="wrap">
+				
+				<div class="content">
+					
+						<p><?php printf(__('You do not need to activate this version. %s', true), $html->link(__('Return to the snapshot', true), '/snapshot')); ?>.</p>		
+					
+				</div> <!--close content-->
+		
+			</div> <!--close module wrap-->
+		
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+					
+		</div> <!--close module-->
+		
+	</div> <!--close login-content-->
+
+</div> <!--close login-container-->

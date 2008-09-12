@@ -1,0 +1,26 @@
+<?php
+
+	////
+	// If you are having trouble with the Director installation,
+	// you may need to create the conf.php file by hand. Edit 
+	// this file to contain the correct credentials to connect
+	// to your MySQL host.
+	////
+	
+	// MySQL Hostname (ex: mysql.yourserver.com or localhost)
+	$host = '';
+	
+	//  The name of the database to install Director in (you must create this first)
+	$db = '';
+	
+	// Your username and password for the database
+	$user = '';
+	$pass = '';
+
+	// Database table prefix
+	// You should only change this if it conflicts with existing tables in your database
+	$pre = 'ssp_';
+	
+	// IMPORTANT: Save this file as conf.php in this directory, then restart the install process
+
+?>

@@ -1,0 +1,32 @@
+<div id="head">
+	
+	<div class="head-wrap">
+	
+		<?php if (!empty($other_gals)): ?>
+		
+			<div id="head-form">
+			
+				<div class="icon-bump">
+				
+					<label class="inline"><?php __('Switch gallery:'); ?></label>&nbsp;&nbsp;
+					<select class="inline" id="gal-switcher" onchange="go_gal('<?php e($tab); ?>');">
+						<?php foreach ($all_gals as $g): ?>
+							<option value="<?php e($g['Gallery']['id']); ?>"<?php ($g['Gallery']['id'] == $gallery['Gallery']['id']) ? e(' selected="selected"') : '' ; ?>><?php e($director->trunc(htmlspecialchars(__($g['Gallery']['name'], true)), 50)); ?></option>
+						<?php endforeach; ?>
+					</select>								
+												
+				</div>
+			
+			</div>
+	
+		<?php endif; ?>
+		
+		<h1 class="galleries">
+			<?php e($html->link(__('Galleries', true), '/galleries', array('title' => __('Galleries', true)))); ?>: <?php __('Edit gallery'); ?>
+		</h1>
+	
+		<div class="clear"></div>
+		
+	</div> <!--close head-wrap-->
+	
+</div>

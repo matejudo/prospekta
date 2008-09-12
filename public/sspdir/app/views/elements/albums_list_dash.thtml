@@ -1,0 +1,20 @@
+<?php if (empty($albums)): ?>
+
+	<p><?php printf(__('You have not added any albums yet. %s to add one now.', true), $html->link(__('Click here', true), '#', array('onclick' => "Messaging.dialogue('add-album'); Director.Interface.focusDelay('AlbumName', 0.5); return false;"))); ?></p>	
+
+<?php else: ?>
+
+<p><?php __('The five most recently updated albums.'); ?></p>
+
+<ul class="dash-strip module-first">
+	<?php foreach ($albums as $album): ?>
+	<li>
+		<div class="rLink">
+			<div class="radBttn"><a class="rb_module_wrap" href="#" title="<?php __('Copy XML File Path to Clipboard'); ?>" onclick="Director.Utilities.copyToClipboard(this, true, '<?php e(DATA_LINK . '?album=' . $album['Album']['id']); ?>'); return false;"><span><?php __('Copy'); ?></span></a></div>
+		</div>
+		<span class="icon_label_album"><?php e($html->link($album['Album']['name'], "/albums/edit/{$album['Album']['id']}")); ?></span>
+	</li>	
+	<?php endforeach; ?>
+</ul>
+
+<?php endif; ?>

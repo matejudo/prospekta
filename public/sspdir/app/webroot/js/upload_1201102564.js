@@ -1,0 +1,30 @@
+
+var list_count=0;var tn_count=0;var audio_count=0;var thumb_count=0;var complete=false;function browse_for_upload(){var opt=$F("upload_type");$("_uploader").js_browse(opt);}
+function browse_for_upload_dash(){$("_uploader").js_browse(1);}
+function browse_for_upload_avatar(){$("_uploader").js_browse(5);}
+function upload_set_aid(id){if(id==0){$('browse-button').disabled=true;}else{$('browse-button').disabled=false;$("_uploader").js_set_aid(id);aid=id;}}
+function upload(){Messaging.hello(__("Uploading new files..."),1,false,true);$("_uploader").js_upload();on_progress();}
+function upload_dash(){Messaging.dialogueToHello('quick-upload',__("Uploading new files..."),1,false,true);$("_uploader").js_upload();on_progress();}
+function upload_avatar(){Messaging.hello(__("Uploading avatar..."),1,false,true);$("_uploader").js_upload();on_progress();}
+function on_select_dash(list,tn_list,thumb_list,audio_list,rejects){list_count=list.length;tn_count=tn_list.length;audio_count=audio_list.length;thumb_count=thumb_list.length;$('upload-stat').innerHTML=sprintf(__('You have selected %d files to upload.'),list_count);$('upload-stat').show();if(list_count>0){$('upload-button').show();$('browse-button').value=__('Browse for more content');}else{$('upload-button').hide();$('browse-button').value=__('Browse for content');}}
+function on_select_avatar(list,tn_list,thumb_list,audio_list,rejects){if(list.length>0){var new_av=list[0].name;$('av-feedback').innerHTML='<strong>'+__('File selected')+':</strong> '+new_av;$('av-feedback').show();$('av-upload').disabled=false;}}
+function kill_quick_upload(){$("_uploader").js_rm_all();Messaging.kill('quick-upload');$('upload-stat').hide();list_count=tn_count=audio_count=thumb_count=0;$('upload-button').hide();$('browse-button').value=__('Browse for content');$('create-q-album-btn').value=__('Create album and browse for content');$('create-q-album-btn').disabled=true;$('AlbumName2').value='';$('quick-up-form').hide();}
+function on_select(list,tn_list,thumb_list,audio_list,rejects){list_count=list.length;tn_count=tn_list.length;audio_count=audio_list.length;thumb_count=thumb_list.length;var tgt=$("file_list");if(list_count==0&&tn_count==0&&rejects.length==0&&audio_count==0&&thumb_count==0){Effect.BlindUp('files');}else if(list_count==0&&tn_count==0&&audio_count==0&&thumb_count==0&&rejects.length>0){Effect.BlindUp('files');Messaging.hello(__('All of the selected files exceed the maximum size allowed by the server.'),3,false);}else{var summary=new Array();str='<table id="file_list" border="0" cellspacing="0" cellpadding="5"><tr><th class="left">';str+=__('File name');str+='</th><th>';str+=__('Size');str+='</th><th>'+__('Action')+'</th></tr>';if(list_count>0){summary.push(list_count+' '+__('images'));str+="<tr><td class=\"left error\" colspan=\"3\">"+__('Full size images')+":</td></tr>";for(i=0;i<list_count;i++)
+{str+="<tr><td class=\"left\">"+list[i].name+"</td><td>"+convert_bits(list[i].size)+"</td><td><a href=\"#\" onclick=\"rm_file('"+list[i].name+"', 1); return false;\">"+__("Remove")+"</a></td></tr>";}}
+if(tn_count>0){summary.push(tn_count+' '+__('thumbnails'));str+="<tr><td class=\"left error\" colspan=\"3\">"+__("Thumbnails")+":</td></tr>";for(i=0;i<tn_count;i++)
+{str+="<tr><td class=\"left\">"+tn_list[i].name+"</td><td>"+convert_bits(tn_list[i].size)+"</td><td><a href=\"#\" onclick=\"rm_file('"+tn_list[i].name+"', 2); return false;\">"+__("Remove")+"</a></td></tr>";}}
+if(thumb_count>0){summary.push(thumb_count+' '+__('album preview'));str+="<tr><td class=\"left error\" colspan=\"3\">"+__('Album preview')+":</td></tr>";for(i=0;i<thumb_count;i++)
+{str+="<tr><td class=\"left\">"+thumb_list[i].name+"</td><td>"+convert_bits(thumb_list[i].size)+"</td><td><a href=\"#\" onclick=\"rm_file('"+thumb_list[i].name+"', 3); return false;\">"+__("Remove")+"</a></td></tr>";}}
+if(audio_count>0){summary.push(audio_count+' audio file');str+="<tr><td class=\"left error\" colspan=\"3\">"+__('Audio')+":</td></tr>";for(i=0;i<audio_count;i++)
+{str+="<tr><td class=\"left\">"+audio_list[i].name+"</td><td>"+convert_bits(audio_list[i].size)+"</td><td><a href=\"#\" onclick=\"rm_file('"+audio_list[i].name+"', 4); return false;\">"+__("Remove")+"</a></td></tr>";}}
+if(rejects.length>0){str+="<tr><td class=\"left error\" colspan=\"3\">"+__('The following files exceed the maximum allowed size and will not be uploaded')+":</td></tr>";for(i=0;i<rejects.length;i++){str+="<tr><td class=\"left\">"+rejects[i].name+"</td><td>"+convert_bits(rejects[i].size)+"</td><td></td></tr>";}}
+str+='</table>';$('file_list').innerHTML=str;$('summary').innerHTML=summary.join(', ');if(!Element.visible('files')){Effect.BlindDown('files');}}}
+function on_progress(){if(!complete){var progress=$("_uploader").js_check_progress();if(progress>=100){$('progress').style.width='100%';}else{Messaging.pingProgress(progress);window.setTimeout(on_progress,500);}}}
+function done(){$('progress').style.width='100%';complete=true;on_complete();}
+function rm_file(file_name,t){$("_uploader").js_remove_file(file_name,t);}
+function on_complete(){if(aid==0){Messaging.hello(__("Avatar uploaded...refreshing..."),2,false);window.setTimeout(redirect_av,2000);}else{Messaging.hello(__("Files uploaded...redirecting..."),2,false);window.setTimeout(redirect,2000);}}
+function redirect_av(){location.href=here;}
+function http_error(){Messaging.hello(__("An error occured when trying to upload your images. Please read the \"Troubleshooting: Errors when uploading\" portion of the of the user guide for how to fix this issue."),3,false);Effect.BlindUp('files');}
+function redirect(){var redir='';if(list_count>0||tn_count>0||thumb_count>0){redir="albums/reorder/"+aid+'/'+redir;}else{redir='albums/edit/'+aid+'/audio';}
+location.href=base_url+redir;}
+function convert_bits(bytes){kb=bytes/1024;if(kb<1024){return Math.round(kb)+' KB';}else{mb=kb/1024;return Math.round(mb*10)/10+' MB';}}

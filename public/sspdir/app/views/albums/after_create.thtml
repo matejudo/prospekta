@@ -1,0 +1,13 @@
+<?php if (isset($all_albums)): ?>
+
+<?php e($this->renderElement('target_collection')); ?>
+
+<?php elseif (isset($albums)): ?>
+
+<?php e($this->renderElement('albums_list_dash')); ?>
+
+<?php else: ?>
+
+<?php e($html->image('transparent.gif', array('width' => 0, 'height' => 0, 'onload' => "redirect_new_album($new_id, '$tab')"))); ?>
+
+<?php endif; ?>

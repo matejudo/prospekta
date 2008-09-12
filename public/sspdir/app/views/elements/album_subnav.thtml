@@ -1,0 +1,29 @@
+<div id="sub-nav">
+	
+	<div class="wrap">
+
+	<ul>
+	<li class="title" id="title-description">
+		<?php e($this->renderElement('album_title')) ?>
+	</li>
+	<li class="spacer">&nbsp;</li>
+	<li class="<?php e($tab == 'summary' ? 'selected first' : 'first'); ?>">
+		<?php e($html->link(__('Summary', true), "/albums/edit/{$album['Album']['id']}", array('title' => __('Album summary', true)))); ?>
+	</li>
+	<li<?php e($tab == 'content' ? ' class="selected"' : ''); ?>>
+		<?php e($html->link(__('Content', true), "/albums/edit/{$album['Album']['id']}/content", array('title' => __('Edit content in this album', true)))); ?>
+	</li>
+	<li<?php e($tab == 'audio' ? ' class="selected"' : ''); ?>>
+		<?php e($html->link(__('Audio', true), "/albums/edit/{$album['Album']['id']}/audio", array('title' => __('Edit audio for this album', true)))); ?>
+	</li>
+	<li<?php e($tab == 'upload' ? ' class="selected"' : ''); ?>>
+		<?php e($html->link(__('Upload', true), "/albums/edit/{$album['Album']['id']}/upload", array('title' => __('Upload content to this album', true)))); ?>
+	</li>
+	<li<?php e($tab == 'options' ? ' class="selected"' : ''); ?>>
+		<?php e($html->link(__('Settings', true), "/albums/edit/{$album['Album']['id']}/options", array('title' => __('Edit settings for this album', true)))); ?>
+	</li>
+</ul>
+
+	</div>
+
+</div>

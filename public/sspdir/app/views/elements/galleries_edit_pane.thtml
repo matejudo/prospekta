@@ -1,0 +1,142 @@
+<div class="module">
+
+	<div class="module-head">
+		
+		<h3 class="yanker">&nbsp;</h3>
+		
+		<div id="edit-head">
+		
+			<div id="sort_type">
+				
+				<ul class="small-nav">
+					
+					<li class="title"><?php __('Album order'); ?>:</li>
+					
+					<li>
+					
+					<?php 
+						$sort = $gallery['Gallery']['sort_type']; 
+						$id = 	$gallery['Gallery']['id'];
+						$options = array(array('manual', __('Manual', true)), array('album title', __('Album title', true)), array('date (newest first)', __('Date (newest first)', true)), array('date (oldest first)', __('Date (oldest first)', true)), array('date (modified)', __('Date (modified)', true)));
+						$o = array();
+						foreach($options as $option):
+							if ($sort == $option[0]):
+								$o[] = '<div class="radBttn"><a class="rb_module_head_sel"><span>' . $option[1] . '</span></a></div>';
+							else:
+								$o[] = '<div class="radBttn"><a href="#" onclick="change_gallery_order_type(' . $id . ', \'' . $option[0] . '\', \'' . $sort . '\'); return false;"><span>' . $option[1] . '</span></a></div>';
+							endif;
+						endforeach;
+
+						e(join('  ', $o));
+						if ($sort == 'manual') {
+							$sorting = true;
+							$sort_s = 'true';
+						} else {
+							$sorting = false;
+							$sort_s = 'false';
+						}
+					?>
+					
+					</li>
+				
+				</ul>
+										
+			</div> <!-- close sort_type-->
+			
+		</div> <!--close edit-head-->
+		
+		<div class="clear"></div>
+		
+	</div> <!--close module-head-->
+	
+	<div class="wrap">
+	
+		<div class="content">
+
+				<ul id="galleries-view" class="album-view" style="padding:0;">	
+					<?php $t = count($gallery['Tags']); $n = 1; foreach($gallery['Tags'] as $album): ?>
+					
+					<li id="tag_<?php e($album['id']); ?>"<?php e(ife($sorting, ' class="sort"', '')) ?>>
+						
+						<div class="title"><h5 class="icon_label_album"><?php e($director->trunc(htmlspecialchars($album['Album']['name']), 50)); ?></h5></div>
+						
+						<div class="meta">
+							
+							<div class="album-thumb-bg">
+								<div class="album-thumb-img" style="background:<?php e($director->albumBg($album['Album']['aTn'], $album['Album']['path'])); ?>"></div>
+							</div>
+							
+							<div class="copy">
+								<?php __('No. of images'); ?>: <?php e($album['Album']['images_count']); ?><br />
+								<?php __('Created'); ?>: <?php e($director->_date(__('%m/%d/%Y', true), $album['Album']['created'])); ?><br />
+								<?php __('Modified'); ?>: <?php e($director->_date(__('%m/%d/%Y', true), $album['Album']['modified'])); ?>
+							</div>
+							
+							<div id="counter_<?php e($album['id']); ?>" class="counter"><span><?php e("$n/$t") ?></span></div>
+						</div>
+						<div class="info">
+														
+							<div class="editBttns" style="width:<?php e(ife($is_main, '22px', '44px')); ?>">
+								<a title="<?php __('Edit album'); ?>: <?php e($album['Album']['name']); ?>" class="edit-image-btn" href="<?php e($html->url("/albums/edit/{$album['Album']['id']}")); ?>"></a><?php if (!$is_main): ?><a title="<?php __('Exclude album from this gallery'); ?>" class="active-image-btn" href="#" onclick="delete_gallery_link(<?php e($album['id']); ?>); return false;"></a><?php endif; ?>
+							</div>
+													
+						</div>
+						
+					</li>
+					
+					<?php $n++; endforeach; ?>
+					
+				</ul>
+					
+					<?php if (!empty($non_members)): ?>
+					<ul id="albums-repo" class="album-view" style="margin:0;padding:0;">	
+						<?php $t = count($gallery['Tags']); $n = 1; foreach($non_members as $album): ?>
+
+						<li id="tag_<?php e($album['Album']['id']); ?>" class="inactive">
+							<div class="title"><h5 class="icon_label_album"><?php e($director->trunc(htmlspecialchars($album['Album']['name']), 50)); ?></h5></div>
+
+							<div class="meta">
+
+								<div class="album-thumb-bg">
+									<div class="album-thumb-img" style="background:<?php e($director->albumBg($album['Album']['aTn'], $album['Album']['path'])); ?>"></div>
+								</div>
+
+								<div class="copy">
+									<?php __('No. of images'); ?>: <?php e($album['Album']['images_count']); ?><br />
+									<?php __('Created'); ?>: <?php e($director->_date(__('%m/%d/%Y', true), $album['Album']['created'])); ?><br />
+									<?php __('Modified'); ?>: <?php e($director->_date(__('%m/%d/%Y', true), $album['Album']['modified'])); ?>
+								</div>
+								
+								<div class="counter-off"><span><?php __('Excluded'); ?></span></div>
+							</div>
+
+							<div class="info">
+
+								<div class="editBttns">
+									<a title="<?php __('Edit album'); ?>: <?php e($album['Album']['name']); ?>" class="edit-image-btn" href="<?php e($html->url("/albums/edit/{$album['Album']['id']}")); ?>"></a><a title="<?php __('Include album in this gallery'); ?>" class="active-image-btn" href="#" onclick="add_gallery_link(<?php e($gallery['Gallery']['id'] . ', ' . $album['Album']['id']); ?>); return false;"></a>
+								</div>
+								
+							</div>
+
+						</li>
+
+						<?php $n++; endforeach; ?>
+
+					</ul>
+					
+					<?php endif; ?>
+				
+				<?php if ($sorting): ?>
+				<script type="text/javascript">
+					gallery_sort_init();
+				</script>		
+				<?php endif; ?>	
+		</div>
+		
+	</div> <!--close module wrap-->
+	
+	<div class="module-footer">
+		<div>&nbsp;</div>
+	</div>
+	
+</div>

@@ -1,0 +1,51 @@
+<div id="header-links">
+	<div class="wrap">
+	<?php __('Hello, '); ?> <?php e($html->link($user['usr'], '/users/profile', array('title' => __('Edit your user profile', true)))); ?>
+	<?php if ($user['perms'] > 2): ?>
+		&nbsp;/&nbsp;
+		<?php e($html->link(__('Users', true), '/users/manage', array('title' => __('Edit users', true)))); ?>
+		&nbsp;/&nbsp; 
+		<?php e($html->link(__('Preferences', true), '/accounts/preferences', array('title' => __('Edit account preferences', true)))); ?>
+	<?php endif; ?>
+	&nbsp;/&nbsp;
+	<?php e($html->link(__('Logout', true), '/users/logout', array('title' => __('Logout', true)))); ?>
+	</div>
+</div>
+
+<div id="header">
+	
+	<div class="top-half">
+	
+		<div id="header-logo">
+					<a href="<?php e($html->url('/snapshot')); ?>" title="<?php __('Home'); ?>" class="img"></a>
+				</div>
+		
+	</div>
+	
+	<div id="header-nav">
+		
+		<?php if (!empty($shows)): ?>
+		<div id="header-slideshow">
+			<div class="wrap">
+			<span>
+			
+			<select id="ss_select" onchange="toggle_view_btn(this.value)">
+				<option value="0"><?php __('Slideshows'); ?></option>
+				<?php foreach ($shows as $s): ?>
+					<option value="<?php e($s['Slideshow']['url']); ?>"><?php e($s['Slideshow']['name']); ?></option>
+				<?php endforeach; ?>
+			</select>
+			&nbsp;
+			<input id="view_ss_btn" type="button" value="<?php __('View'); ?>" onclick="fetch_slideshow()" disabled="disabled" class="button" />
+
+			</span>
+			</div>
+		</div>
+		<?php endif; ?>
+	
+	
+		<ul id="main-nav"><li class="<?php $controller->name == 'Site' ? e('selected ') : ''; ?>first"><?php e($html->link(__('Snapshot', true), '/snapshot', array('title' => __('Snapshot', true)))); ?></li><li<?php $controller->name == 'Albums' ? e(' class="selected"') : ''; ?>><?php e($html->link(__('Albums', true), '/albums', array('title' => __('Albums', true)))); ?></li><li<?php $controller->name == 'Galleries' ? e(' class="selected"') : ''; ?>><?php e($html->link(__('Galleries', true), '/galleries', array('title' => __('Galleries', true)))); ?></li><li<?php $controller->name == 'Slideshows' ? e(' class="selected"') : ''; ?>><?php e($html->link(__('Slideshows', true), '/slideshows', array('title' => __('Slideshows', true)))); ?></li><li<?php $controller->name == 'Help' ? e(' class="selected"') : ''; ?>><?php e($html->link(__('Help', true), '/help', array('title' => __('Help', true)))); ?></li></ul>
+	
+	</div>
+	
+</div>

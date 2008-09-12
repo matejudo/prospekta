@@ -1,0 +1,86 @@
+<?php e($this->renderElement('album_head')); ?>
+
+<div id="rebuild">
+	<?php e($this->renderElement('album_image_list')); ?>
+</div>
+<?php if (count($images) != 0): ?>
+<script type="text/javascript">
+	var edit_images = true;
+</script>
+<?php endif; ?>
+<div id="multi-footer" style="display:none;">
+	<ul>
+		<li><strong><span id="multi-count"></span></strong>&nbsp;<?php __('image(s) selected'); ?>  / <strong><?php __('Action'); ?>:</strong></li>
+		<li>
+				<a title="<?php __('Deactivate'); ?>" class="active-image-btn" href="#" onclick="mass_deactivate(); return false;"></a>
+				<a title="<?php __('Activate'); ?>" class="inactive-image-btn" href="#" onclick="mass_activate(); return false;"></a>
+				<a title="<?php __('Rotate images counter-clockwise'); ?>" class="rotleft-image-btn" href="#" onclick="mass_rotate_image(90); return false;"></a>
+				<a title="<?php __('Rotate images clockwise'); ?>" class="rotright-image-btn" href="#" onclick="mass_rotate_image(-90); return false;"></a>				
+				<?php if (!empty($other_albums)): ?>
+				<a title="<?php __('Copy'); ?>" class="move-image-btn" href="#" onclick="mass_copy(); return false;"></a>
+				<?php endif; ?>
+				<a title="<?php __('Delete'); ?>" class="delete-image-btn" href="#" onclick="mass_delete(); return false;"></a>
+		</li>
+		<li>
+			<div class="radBttn"><a href="#" onclick="clear_selection(); return false;"><span><?php __('Clear selection'); ?></span></a></div>
+		</li>
+	</ul>
+</div>
+
+<?php if (!empty($other_albums)): ?>
+
+	<?php e($director->preDialogue('image-copy')); ?>
+				
+		<h1><?php __('Copy content to another album'); ?></h1>
+
+		<p><?php __('Select the album you would like to copy this content to.'); ?></p>
+
+		<form action="#" method="post" onsubmit="copy_image(); return false;">
+			<fieldset class="embed" style="margin-bottom:10px;">
+				<label class="inline"><?php __('Copy content to'); ?>:&nbsp;&nbsp;</label>
+				<select id="album-to-copy">
+					<?php foreach ($other_albums as $a): ?>
+						<option value="<?php e($a['Album']['id']); ?>"><?php e($a['Album']['name']); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</fieldset>
+			
+			<p><input type="checkbox" value="1" id="single-move" />&nbsp;<?php __('Delete content from current album after copy'); ?></p>
+
+			<fieldset>
+				<input id="copy-button" type="submit" value="<?php __('Copy content'); ?>" /> <input id="copy-cancel-button" type="button" value="Cancel" onclick="Messaging.kill('image-copy'); image_to_copy = 0; return false;" />
+			</fieldset>
+		</form>
+
+	<?php e($director->postDialogue()); ?>
+	
+	<?php e($director->preDialogue('image-copy-mass')); ?>
+				
+		<h1><?php __('Copy content to another album'); ?></h1>
+
+		<p><?php __('Select the album you would like to copy this content to.'); ?></p>
+
+		<form action="#" method="post" onsubmit="mass_copy_image(); return false;">
+			<fieldset class="embed">
+				<label class="inline"><?php __('Copy content to'); ?>:&nbsp;&nbsp;</label>
+				<select id="album-to-copy-mass">
+					<?php foreach ($other_albums as $a): ?>
+						<option value="<?php e($a['Album']['id']); ?>"><?php e($a['Album']['name']); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</fieldset>
+
+			<p><input type="checkbox" value="1" id="mass-move" />&nbsp;<?php __('Delete content from current album after copy'); ?></p>
+			
+			<fieldset>
+				<input id="mass-copy-button" type="submit" value="<?php __('Copy content'); ?>" /> <input id="mass-copy-cancel-button" type="button" value="Cancel" onclick="Messaging.kill('image-copy-mass'); image_to_copy = 0; return false;" />
+			</fieldset>
+		</form>
+
+	<?php e($director->postDialogue()); ?>
+
+<?php endif; ?>
+
+<script type="text/javascript">
+	var selected_id = <?php e($selected_id); ?>
+</script>

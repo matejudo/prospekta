@@ -1,0 +1,6 @@
+<?php
+	$filler = $html->image("transparent.gif", array('width' => 0, 'height' => 0, 'onload' => "album_process_failure(\'{$path}\'); this.parentNode.removeChild(this);"));
+?>
+<script type="text/javascript">
+	window.parent.document.getElementById('messenger-span').innerHTML = '<?php e($filler); ?>';
+</script>

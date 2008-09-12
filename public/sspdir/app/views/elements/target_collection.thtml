@@ -1,0 +1,5 @@
+<?php if (!isset($new_id)) { $new_id = 0; }; ?>
+<option value="0"><?php __('No album selected'); ?></option>
+<?php foreach ($all_albums as $album): ?>
+<option value="<?php e($album['Album']['id']) ?>"<?php e(ife($new_id == $album['Album']['id'], ' selected="selected"', '')); ?>><?php e($director->trunc(htmlspecialchars($album['Album']['name']), 50)); ?></option>	
+<?php endforeach ?>

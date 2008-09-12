@@ -1,0 +1,1 @@
+<?php e($html->link($director->trunc(htmlspecialchars(__($gallery['Gallery']['name'], true)), 50), "/galleries/edit/{$gallery['Gallery']['id']}/summary")); ?>

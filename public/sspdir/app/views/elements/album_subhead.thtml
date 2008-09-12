@@ -1,0 +1,3 @@
+<div id="sub-header">
+	<div class="thumbBG"><div id="album-preview" class="thumb" style="background:<?php e($director->albumBg($album['Album']['aTn'])); ?>"></div></div>
+</div>

@@ -1,0 +1,362 @@
+/*
+
+"WHITE" STYLE FOR SLIDESHOWPRO DIRECTOR
+
+Modifies:
+	* TEXT COLOR
+	* BACKGROUNDS
+	
+*/
+
+/* 
+-----------------------------------------------------------------------------
+GLOBAL DEFAULT ELEMENTS
+-----------------------------------------------------------------------------*/
+body {background:#bfbfbf;color:#3d3d3d;border-top:1px solid #000;}
+
+a {color:#000;}
+
+h1,h2,h3,h4,h5,h6 {color:#222;}
+
+/* 
+-----------------------------------------------------------------------------
+HEADER CLASSES
+-----------------------------------------------------------------------------*/
+h2 a {color:#b4b4b4;}
+h2 a:hover {color:#fff;}
+h2 span {color:#555;}
+h3 small {color:#999;text-shadow: #000 0px 0px 0px;}
+h3.dash {color:#202020;border:1px solid #999;}
+h3.dash a {color:#202020;}
+h3.dash a:hover {color:#447200;}
+h3.logo {background:transparent url(../white/img/bg_module_head_logo.gif) 0 0 no-repeat;}
+h4.error {background:#76b41c;border-bottom:1px solid #bcf573;}
+h4.smart {background:transparent url(../white/img/icon_gears.gif) 0 0 no-repeat;}
+
+
+/* 
+-----------------------------------------------------------------------------
+LAYOUT: Global
+-----------------------------------------------------------------------------*/
+
+div#helper {
+	background:#76b41c;
+	border:1px solid #bcf573;
+	color:#fff;
+}
+#pop-image-preview, #pop-image {
+	background:#fff url(../white/img/loading_preview.gif) no-repeat bottom center;
+	color:#000;
+	border-right:2px solid #ababab;
+	border-bottom:2px solid #ababab;
+}
+#pop-image-preview a, #pop-image a {color:#000;}
+span.preview-me {color:#fff;}
+
+div#header .top-half {background:transparent url(../white/img/bg_header.gif);}
+div#header-logo a.img {background:transparent url(../white/img/bg_header_logo.gif);}
+
+div#header-links {background:#bfbfbf;color:#666;border-bottom:1px solid #eee;}
+
+div#header-slideshow div.wrap {background:transparent url(../white/img/bg_main_nav_tab.gif) no-repeat scroll 0 0;}
+div#header-slideshow span {background:transparent url(../white/img/bg_main_nav_tab.gif) no-repeat scroll 100% 0;}
+
+div#container {background:#dedede;}
+div#container-footer {background:#dedede url(../white/img/bg_container_bl.gif) bottom left no-repeat;}
+div#container-footer div {background:transparent url(../white/img/bg_container_br.gif) bottom right no-repeat;}
+
+div#head {background:transparent url(../white/img/bg_container_tr.gif) top right no-repeat;color:#fff;}
+div#head div.album-head {border-bottom:1px solid #c3c3c3;}
+
+div#head h1 {border-bottom:1px solid #c3c3c3;}
+div#head h1.albums {background:transparent url(../white/img/icon_header_albums.gif) 0 0 no-repeat;}
+div#head h1.galleries {background:transparent url(../white/img/icon_header_galleries.gif) 0 0 no-repeat;}
+div#head h1.profile {background:transparent url(../white/img/icon_header_profile.gif) 0 0 no-repeat;}
+div#head h1.slideshow {background:transparent url(../white/img/icon_header_slideshow.gif) 0 0 no-repeat;}
+div#head h1.snapshot {background:transparent url(../white/img/icon_header_snapshot.gif) 0 0 no-repeat;}
+
+div#head h3 span.desc {color:#666;text-shadow:none;}
+
+div#container h1 a.instruction-link {color:#76b41c;}
+div#container h1 a.instruction-link:hover {color:#fff;}
+
+div#page-info {background:#222;}
+
+div#page-info strong {color:#fff;}
+
+div.module {background:#fff url(../white/img/bg_module_tl.gif) top left no-repeat;}
+div.module-head {background:transparent url(../white/img/bg_module_tr.gif) top right no-repeat;}
+div.module div.wrap {background:#ebebeb;}
+div.module div.divider {border-bottom:1px solid #cfcfcf;}
+div.module-footer {background:#ebebeb url(../white/img/bg_module_bl.gif) bottom left no-repeat;}
+div.module-footer div {background:transparent url(../white/img/bg_module_br.gif) bottom right no-repeat;}
+
+div.embed, div.embedlast {background:#dbdbdb;border:1px solid #bbb;}
+
+div#footer span {color:#666;}
+div#footer a, div#footer strong {color:#000;}
+
+div#multi-footer {background:#fafafa;border-top:1px solid #666;color:#000;}
+div#multi-footer strong, div#multi-footer a {color:#000;}
+
+/* 
+-----------------------------------------------------------------------------
+NAVIGATION: MAIN
+-----------------------------------------------------------------------------*/
+ul#main-nav li {background:transparent url(../white/img/bg_main_nav_tab.gif) no-repeat scroll 0 0;}
+ul#main-nav li a {color:#444;font-size:11px;text-transform:uppercase;background:transparent url(../white/img/bg_main_nav_tab.gif) no-repeat scroll 100% 0;}
+ul#main-nav li a:hover {color:#000;}
+ul#main-nav li.selected {background-image:url(../white/img/bg_main_nav_tab_selected.gif);}
+ul#main-nav li.selected a {color:#000;background-image:url(../white/img/bg_main_nav_tab_selected.gif);}
+
+
+/* 
+-----------------------------------------------------------------------------
+NAVIGATION: SUB
+-----------------------------------------------------------------------------*/
+div#sub-nav {background:transparent url(../white/img/bg_subnav.gif) no-repeat scroll 100% 0;}
+div#sub-nav ul li a {color:#4f4f4f;}
+div#sub-nav ul li a:hover {color:#000;}
+div#sub-nav ul li.selected a {color:#000;}
+div#sub-nav ul li.title {background:transparent url(../white/img/bg_subnav.gif) no-repeat scroll 0 0;color:#000;font-weight:bold;}
+div#sub-nav ul li.spacer {background:transparent url(../white/img/bg_subnav_spacer.gif) no-repeat scroll 0 0;}
+
+
+/* 
+-----------------------------------------------------------------------------
+FORMS GENERAL
+-----------------------------------------------------------------------------*/
+input.file {color:#fff;}
+fieldset.solo {border-top:1px solid #dbdbdb;border-bottom:1px solid #dbdbdb;}
+label {color:#000;}
+label.white {color:#fff;}
+label span.req {color:#e4675c;}
+form.quad label {color:#000;}
+
+
+/* 
+-----------------------------------------------------------------------------
+LISTS
+-----------------------------------------------------------------------------*/
+ul.album {background:#e1e1e1;}
+ul.dash-strip li {border-bottom:1px solid #cfcfcf;}
+ul.dash-strip li strong {color:#000;}
+
+fieldset.embed {border-bottom:1px solid #bbb;border-top:1px solid #bbb;background:#dbdbdb;}
+
+ul.dash-strip li div.thumb {background:#383838;border:1px solid #1f1f1f;}
+ul.dash-strip div.no-thumb div {background:#444;}
+
+ol.photo-thumbs-list li img {border-right:1px solid #ababab;border-bottom:1px solid #ababab;background:#fff;}
+ol.photo-thumbs-list li img.video-overlay {border:0;}
+
+
+/* 
+-----------------------------------------------------------------------------
+ALBUM THUMBNAILS
+-----------------------------------------------------------------------------*/
+.album-thumb-bg {border-right:1px solid #ababab;border-bottom:1px solid #ababab;background:#fff;}
+
+/* 
+-----------------------------------------------------------------------------
+GRAPHICAL BUTTONS
+-----------------------------------------------------------------------------*/
+div.radBttn a {background: transparent url(../white/img/radBttn.gif) no-repeat top left;}
+div.radBttn span {color: #000;background: transparent url(../white/img/radBttn.gif) no-repeat top right;}
+
+
+
+/* 
+-----------------------------------------------------------------------------
+LAYOUT: Snapshot
+-----------------------------------------------------------------------------*/
+div.header-radius {background:#eee url(../white/img/bg_dashpro_tl.gif) top left no-repeat;}
+div.header-radius img.gray-edge {float:left;}
+div.header-radius div.tr {background:transparent url(../white/img/bg_dashpro_tr.gif) top right no-repeat;}
+div.header-radius div.bl {background:#eee url(../white/img/bg_dashpro_bl.gif) bottom left no-repeat;}
+div.header-radius div.br {background:transparent url(../white/img/bg_dashpro_br.gif) bottom right no-repeat;}
+div.header-radius span.subtext {color:#444;}
+div.header-radius label {font-weight:bold;}
+
+
+/* 
+-----------------------------------------------------------------------------
+LAYOUT: Edit images / Manage albums (shared)
+-----------------------------------------------------------------------------*/
+div.counter, div.counter-off {background:transparent url(../white/img/bg_counter_active.gif) no-repeat scroll 0 0;}
+div.counter span, div.counter-off span {background:transparent url(../white/img/bg_counter_active.gif) no-repeat scroll 100% 0;}
+
+
+/* 
+-----------------------------------------------------------------------------
+LAYOUT: Edit images
+-----------------------------------------------------------------------------*/
+a.active-image-btn {background: url(../white/img/radBttn_active.gif) no-repeat 0 0;}
+a.inactive-image-btn {background: url(../white/img/radBttn_inactive.gif) 0 0 no-repeat;}
+a.delete-image-btn {background: url(../white/img/radBttn_delete.gif) no-repeat 0 0;}
+a.edit-image-btn {background: url(../white/img/radBttn_edit.gif) 0 0 no-repeat;}
+a.move-image-btn {background: url(../white/img/radBttn_move.gif) no-repeat 0 0;}
+a.rotleft-image-btn {background: url(../white/img/radBttn_rotate_left.gif) no-repeat 0 0;}
+a.rotright-image-btn {background: url(../white/img/radBttn_rotate_right.gif) no-repeat 0 0;}
+a.focal-point-btn {background: url(../white/img/radBttn_focal.gif) no-repeat 0 0;}
+
+div#sort_type .selected {color:#76B41C;}
+
+ul#image-view li {background:#f6f6f6;border-top:1px solid #d1d1d1;border-left:1px solid #b8b8b8;border-right:1px solid #b8b8b8;border-bottom:1px solid #b8b8b8;}
+ul#image-view li.current {border-top:1px solid #c5fb77;border-right:1px solid #666;border-bottom:1px solid #666;border-left:1px solid #666;}
+ul#image-view li.current, ul#image-view li.current div.meta, ul#image-view li.current div.scale-image {background:#76b41c;color:#fff;}
+ul#image-view li.current div.counter, ul#image-view li.current div.counter-off, ul#image-view li.current div.inactive div.counter, ul#image-view li.current div.inactive div.counter-off {background-image: url(../white/img/bg_counter_current.gif);}
+ul#image-view li.current div.counter span, ul#image-view li.current div.counter-off span, ul#image-view li.current div.inactive div.counter span, ul#image-view li.current div.inactive div.counter-off span {background-image: url(../white/img/bg_counter_current.gif);}
+ul#image-view li.select {background:#666;color:#fff;border-top:1px solid #999;}
+ul#image-view li.select div.counter, ul#image-view li.select div.counter-off {background-image: url(../white/img/bg_counter_select.gif);}
+ul#image-view li.select div.counter span, ul#image-view li.select div.counter-off span {background-image: url(../white/img/bg_counter_select.gif);}
+ul#image-view li.inactive a.active-image-btn, ul.album-view li.inactive a.active-image-btn {background: url(../white/img/radBttn_inactive.gif) 0 0 no-repeat;}
+ul#image-view li img.video-overlay {background:#f6f6f6;}
+
+div#edit-box {background:#f6f6f6;border-top:1px solid #d1d1d1;border-left:1px solid #b8b8b8;border-right:1px solid #b8b8b8;border-bottom:1px solid #b8b8b8;}
+div#edit-box a {color:#fff;}
+div#edit-box-head strong {color:#000;}
+
+div#resize-label {color:#000;}
+div#track1 {background: url(../white/img/bg_thumb_resize_track.gif) no-repeat center left;}
+div#handle1 {background:transparent url(../white/img/scaler_slider.gif) no-repeat;}
+div#track {background: #fafafa url(../white/img/slider_track_m.gif) repeat-x center;}
+div#track_l {background: url(../white/img/slider_track_l.gif) no-repeat center;}
+div#track_r {background: url(../white/img/slider_track_r.gif) no-repeat center;}
+div#handle {background: url(../white/img/slider_btn_m.gif) repeat-x center;}
+div#handle_l {background: url(../white/img/slider_btn_l.gif) no-repeat center;}
+div#handle_r {background: url(../white/img/slider_btn_r.gif) no-repeat center;}
+div#edit-images-scroll {background:#f6f6f6;border-top:1px solid #d1d1d1;border-right:1px solid #b8b8b8;border-left:1px solid #b8b8b8;border-bottom:1px solid #b8b8b8;}
+
+
+/* 
+-----------------------------------------------------------------------------
+LAYOUT: Gallery - Manage Albums
+-----------------------------------------------------------------------------*/
+ul.album-view li {background:#f6f6f6;border-top:1px solid #d1d1d1;border-left:1px solid #b8b8b8;border-right:1px solid #b8b8b8;border-bottom:1px solid #b8b8b8;}
+ul.album-view li div.meta {border-top:1px solid #c2c2c2;border-bottom:1px solid #c2c2c2;}
+
+
+/* 
+-----------------------------------------------------------------------------
+LAYOUT: Albums - Upload Content
+-----------------------------------------------------------------------------*/
+table#file_list th, table#file_list td  {border-bottom:1px solid #aaa;}
+table#file_list th, table#file_list td.error {color:#000;}
+
+
+/* 
+-----------------------------------------------------------------------------
+LAYOUT: Sortable Table
+-----------------------------------------------------------------------------*/
+table.sortable {background:#fafafa url(../white/img/bg_module_tl.gif) top left no-repeat;}
+table.sortable th {color:#444;border-right:1px solid #cfcfcf;}
+table.sortable th.tr {background:#fafafa url(../white/img/bg_module_tr.gif) top right no-repeat;border-right:none;}
+table.sortable th span {color:#999;}
+table.sortable th.sortdesc {background: url(../white/img/sort_arrow_down.gif) 97% 50% no-repeat;}
+table.sortable th.sortasc {background: url(../white/img/sort_arrow_up.gif) 97% 50% no-repeat;}
+table.sortable td {background:#eee;border:1px solid #cfcfcf;}
+table.sortable td.title {border-left:0;}
+table.sortable td.title span {color:#666;}
+table.sortable td.end {border-right:0;}
+table.sortable tr.even td {background:#f2f2f2;}
+table.sortable td.bl {background:#222 url(../white/img/bg_module_bl.gif) bottom left no-repeat;}
+table.sortable td.br {background:#222 url(../white/img/bg_module_br.gif) bottom right no-repeat;}
+table.sortable tr.subth td {background:#444;}
+
+
+/* 
+-----------------------------------------------------------------------------
+MESSAGE DIALOGS
+-----------------------------------------------------------------------------*/
+div.dialogue-wrap {background: url(../white/img/msg-bg.png);}
+div#messenger-wrap span.accept {background: #76b41c url(../../img/icon_accept.png) no-repeat top left;}
+div#messenger-wrap span.hourglass {background: #76b41c url(../../img/icon_loading_pie.gif) no-repeat top left;}
+div#messenger-wrap span.exclamation {background: #76b41c url(../../img/icon_exclamation.png) no-repeat top left;}  
+div#messenger-wrap span.stop {background: #76b41c url(../../img/icon_green_stop.gif) no-repeat top left;}
+span#messenger-span {color:#fff;}
+div.dialogue-content p {color:#fff;}
+div.dialogue-content h1 {color:#fff;}
+div.dialogue-content .wrap {background:#76b41c;border:1px solid #89cf21;}
+div.dialogue-content fieldset.embed {background:transparent;border-color:#89cf21;}
+div.dialogue-content {background:#679c19;border:1px solid #000;}
+
+
+/* 
+-----------------------------------------------------------------------------
+FORM FEEDBACK
+-----------------------------------------------------------------------------*/
+div.icon-spin {background: transparent url(../white/img/icon_spinner_10px.gif) top left no-repeat;}
+div.icon-check {background: transparent url(../white/img/icon_check_10px.gif) top left no-repeat;}
+
+
+/*
+-----------------------------------------------------------------------------
+ALERTS
+-----------------------------------------------------------------------------*/
+/* Info alerts */
+div#alert .green {color:#fff;background:#76b41c url(../white/img/bg_alert_gr_tl.gif) top left no-repeat;}
+div#alert .green div.tr {background:transparent url(../white/img/bg_alert_gr_tr.gif) top right no-repeat;}
+div#alert .green div.bl {background:#76b41c url(../white/img/bg_alert_gr_bl.gif) bottom left no-repeat;}
+div#alert .green div.br {background:transparent url(../white/img/bg_alert_gr_br.gif) bottom right no-repeat;}
+div#alert .green div.icon {background:transparent url(../white/img/bg_alert_excl.gif) top left no-repeat;}
+
+/* Error alerts */
+div#alert .red {color:#fff;background:#b4001c url(../white/img/bg_alert_red_tl.gif) top left no-repeat;}
+div#alert .red div.tr {background:transparent url(../white/img/bg_alert_red_tr.gif) top right no-repeat;}
+div#alert .red div.bl {background:#b4001c url(../white/img/bg_alert_red_bl.gif) bottom left no-repeat;}
+div#alert .red div.br {background:transparent url(../white/img/bg_alert_red_br.gif) bottom right no-repeat;}
+div#alert .red div.icon {background:transparent url(../white/img/bg_alert_error.gif) top left no-repeat;}
+
+div#alert a.suppress {color:#fff;background:transparent url(../white/img/radBttn_delete_76b41c.gif) 100% 50% no-repeat;}
+
+
+/*
+-----------------------------------------------------------------------------
+PROGRESS DISPLAY
+-----------------------------------------------------------------------------*/
+span#progress_container {background:#446c13;border:1px solid #446c13;}
+span#progress {background:transparent url(../default/img/progress_anim.gif) top left repeat;}
+
+
+/* 
+-----------------------------------------------------------------------------
+LOGIN
+-----------------------------------------------------------------------------*/
+body#login {background:#e2e2e2;border-top:none;}
+
+
+/* 
+-----------------------------------------------------------------------------
+ICON LABELS
+-----------------------------------------------------------------------------*/
+tr.publish .icon_label_album, .icon_label_album {background:transparent url(../white/img/icon_label_album.gif) 0 0 no-repeat;}
+tr.draft .icon_label_album {background:transparent url(../white/img/icon_label_album_draft.gif) 0 0 no-repeat;}
+.icon_label_feed {background:transparent url(../white/img/icon_label_feed.gif) 0 0 no-repeat;}
+.icon_label_gallery {background:transparent url(../white/img/icon_label_gallery.gif) 0 0 no-repeat;}
+.icon_label_newalbum {background:transparent url(../white/img/icon_label_newalbum.gif) 0 0 no-repeat;}
+.icon_label_newgallery {background:transparent url(../white/img/icon_label_newgallery.gif) 0 0 no-repeat;}
+.icon_label_photo {background:transparent url(../white/img/icon_label_photo.gif) 0 0 no-repeat;}
+.icon_label_profile {background:transparent url(../white/img/icon_label_profile.gif) 0 0 no-repeat;}
+.icon_label_qt {background:transparent url(../white/img/icon_label_qt.gif) 0 0 no-repeat;}
+.icon_label_smartgallery {background:transparent url(../white/img/icon_label_smartgallery.gif) 0 0 no-repeat;}
+.icon_label_uploadimg {background:transparent url(../white/img/icon_label_uploadimg.gif) 0 0 no-repeat;}
+.icon_label_video {background:transparent url(../white/img/icon_label_video.gif) 0 0 no-repeat;}
+
+
+
+/* 
+-----------------------------------------------------------------------------
+MISC
+-----------------------------------------------------------------------------*/
+img.wide {background:#777;}
+img.gray-edge {border-right:1px solid #ababab;border-bottom:1px solid #ababab;background:#fff;}
+
+span.warn strong {color:#F60;}
+span.note strong {color:#76B41C;}
+span.slash {color:#666;}
+span.help {color:#76B41C;}
+span.news-date {color:#666;font-weight:normal;font-size:10px;}
+                             
+.dialogue-spacer {border-bottom:1px solid #89cf21;border-top:1px solid #89cf21;}
+

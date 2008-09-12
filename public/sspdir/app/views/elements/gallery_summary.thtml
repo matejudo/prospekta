@@ -1,0 +1,147 @@
+<?php e($this->renderElement('gallery_head')); ?>
+
+<div id="container-wrap">
+
+	<div class="col-wrap">
+		
+		<?php e($this->renderElement('gallery_subnav')); ?>
+
+		<div class="left-col" style="width:40%;">
+	
+			<div class="left-col-inside">
+	
+			<div class="module">
+
+				<div class="module-head">
+					<h3><?php __('Gallery title &amp; description'); ?></h3>
+				</div>
+
+				<div class="wrap">
+			
+					<div class="content">
+
+					<?php if ($is_main): ?>
+			
+					<fieldset>
+						<label><?php __('Gallery title:'); ?></label>
+		   				<?php __($gallery['Gallery']['name']); ?>
+		   			</fieldset>
+
+					<fieldset>
+						<label><?php __('Gallery description:'); ?></label>
+		   				<?php __($gallery['Gallery']['description']); ?>
+		   			</fieldset>
+			
+					<?php else: ?>
+			
+					<form name="gallery_name_form" action="#" onsubmit="update_dg_name(this, <?php e($html->tagValue('Gallery/id')); ?>); return false;">
+						<fieldset>
+							<label><?php __('Edit gallery title:'); ?> <span class="help">[?]<span><?php __('This identifies this gallery within Director. It does not appear in SlideShowPro.'); ?></span></span></label>
+			   				<?php e($form->text('Gallery/name', array('class' => 'wide'))); ?>
+			   			</fieldset>
+	
+						<fieldset>
+							<label><?php __('Edit gallery description:'); ?> <span class="help">[?]<span><?php __('Provides extra information about this gallery for organizational purposes within Director. It does not appear in SlideShowPro.'); ?></span></span></label>
+			   				<?php e($form->textarea('Gallery/description', array('rows' => 5, 'class' => 'wide'))); ?>
+			   			</fieldset>
+	
+						<fieldset><input id="dg-name-btn" type="submit" value="<?php __('Save changes'); ?>" /> <span id="dg-messenger" style="display:none;"></span></fieldset>
+					</form>
+			
+					<?php endif; ?>
+			
+					</div>
+		
+				</div> <!--close module wrap-->
+	
+				<div class="module-footer">
+					<div>&nbsp;</div>
+				</div>
+	
+			</div> <!--close module-->
+		
+			<div class="module">
+
+				<div class="module-head">
+					<h3><?php __('XML info'); ?></h3>
+				</div>
+				
+				<div class="wrap">
+
+					<div class="content">
+							<form name="publish_state" action="#" onsubmit="Director.Utilities.copyToClipboard('xml_path'); return false;">
+							
+							<fieldset class="short">
+								<label><?php __('XML file path:'); ?> <span class="help">[?]<span><?php __('Copy this URL and paste it into SlideShowPro\'s "XML File Path" parameter field in the Component Inspector. SlideShowPro will then load content from this gallery.'); ?></span></span></label>
+								
+								<div class="rLink">
+											<div class="radBttn"><a class="rb_module_wrap" href="#" title="<?php __('Copy XML File Path to Clipboard'); ?>" onclick="Director.Utilities.copyToClipboard(this, true, '<?php e(DATA_LINK . '?gallery=' . $html->tagValue('Gallery/id')); ?>'); return false;"><span><?php __('Copy'); ?></span></a></div>
+										</div>
+								
+								<span id="xml_path"><?php e(DATA_LINK . '?gallery=' . $html->tagValue('Gallery/id')); ?></span>
+							
+							</fieldset>
+					
+						</form>
+					
+					</div> <!--close content-->
+				
+				</div> <!--close wrap-->
+
+				<div class="module-footer">
+					<div>&nbsp;</div>
+				</div>
+
+			</div> <!--close module-->
+			
+			</div>
+	
+		</div>
+		
+		<div class="right-col" style="width:60%;">
+			
+			<div class="right-col-inside">
+			
+			<table cellspacing="0" cellpadding="0" id="galleries-table" class="sortable">
+				<tr>
+					<th class="title nosort"><?php __('Albums in this gallery'); ?> <span>(<?php __('Total'); ?>: <?php e(count($gallery['Tags'])); ?>)</span></th>
+					<th class="nosort"><?php __('Preview'); ?></th>
+					<th class="tr nosort"><?php __('Order'); ?></th>
+				</tr>
+				
+				<?php if (empty($gallery['Tags'])): ?>
+				<tr>
+					<td colspan="3" class="title">
+						<?php if ($is_main): ?>
+						<?php __('This gallery is a smart gallery containing all published albums. To add an album, visit the album summary page for that album and change its publish status to "Active"'); ?>.
+						<?php else: ?>
+						<?php printf(__('You have not added any albums to this gallery. To add albums, visit %s.', true), $html->link(__('Manage albums', true), "/galleries/edit/{$gallery['Gallery']['id']}/albums")); ?>
+						<?php endif; ?> 
+					</td>
+				</tr>
+				
+				<?php else: ?>
+				
+				<?php $i = 1; foreach($gallery['Tags'] as $album): ?>
+				<tr>
+					
+					<td class="title">
+						<h5 class="icon_label_album"><a href="<?php e($html->url("/albums/edit/{$album['Album']['id']}")); ?>" title="Edit <?php e($album['Album']['name']); ?>"><?php e($album['Album']['name']); ?></a></h5><span><?php e(htmlspecialchars($album['Album']['description_clean'])); ?></span>
+					</td>
+					<td class="thumb">
+						<a href="<?php e($html->url("/albums/edit/{$album['Album']['id']}")); ?>" title="<?php __('Edit album'); ?>"><div class="album-thumb-bg"><div class="album-thumb-img" style="background:<?php e($director->albumBg($album['Album']['aTn'], $album['Album']['path'])); ?>"></div></div></a>
+					</td>
+					<td class="end"><?php e($i); ?></td>
+				</tr>
+				<?php $i++; endforeach; ?>
+				
+				<?php endif; ?>
+			</table>
+			
+			</div>
+			
+		</div>
+							
+	</div> <!--close col-wrap-->			
+	
+</div> <!--close container-wrap-->

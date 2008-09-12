@@ -1,0 +1,61 @@
+<?php
+
+	/*
+	
+		This file contains translations for strings found outisde
+		the views folder.
+	
+	*/
+	
+	// Locale for use in date/time functions
+	__('en_US', true);
+	
+	// app/models/album.php
+	__('This album does not have a description.', true);
+	
+	// app/models/gallery.php
+	__('This gallery does not have a description.', true);
+	
+	__('This gallery contains all published albums.', true);
+	
+	// app/models/user.php
+	__('You are an Editor', true);
+	
+	__('You are a Contributor', true);
+		
+	__('You are an Administrator', true);
+	
+	// Link types in album options
+	__('No links populated', true);
+	
+	__('Custom links', true);
+	
+	// Link templates
+	__('Open original image in same browser window', true);
+	
+	__('Open original image in new browser window', true);
+	
+	__('Open original image in chromeless popup window', true);
+
+	// Installing header
+	__('Installing', true);	
+	
+	// Email that goes out to new users and login reminder emails
+	__('Login here', true);
+	
+	__('Username', true);
+	
+	__('Password', true);
+
+	__('Once you login you can change your password to something more familiar.', true);
+	
+	__('SlideShowPro Director Login', true);
+	
+	__('SlideShowPro Director Login Reminder', true);
+	
+	__('This is a password reminder sent from SlideShowPro Director.',  true)
+	
+	// Login/Password management
+	
+	__('Login incorrect', true);
+?>

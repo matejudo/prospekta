@@ -116,8 +116,8 @@
 	{
 		$contentType = 'text/html';
 		header("Content-Type: $contentType; charset=utf-8");
-		echo 'an unexpected error occurred.';
-		echo '<h2>Unexpected Exception: ' . $ex->getMessage() . '</h2><br /><pre>';
+		echo 'Došlo je do pogreške. Molimo da probate ponovo.';
+		echo '<h2 style="display: block;">Unexpected Exception: ' . $ex->getMessage() . '</h2><pre style="display: block;">';
 		echo $ex->getTraceAsString();
 	}
 	

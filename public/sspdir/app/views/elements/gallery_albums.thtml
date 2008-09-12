@@ -1,0 +1,25 @@
+<?php e($this->renderElement('gallery_head')); ?>
+
+<div id="container-wrap">
+	
+	<div class="col-wrap">
+		
+		<?php e($this->renderElement('gallery_subnav')); ?>
+		
+		<div class="clear"></div>
+		
+		<?php if ($is_main && empty($members)): ?>
+			<p><?php __('No albums have been added to the "All albums" feed. To add an album to this gallery, set its publish state to "Publish".'); ?></p>
+		<?php elseif (!$is_main && empty($members) && empty($non_members)): ?>
+			<p><?php __('There are no available albums to add to this gallery. To make an album available, set its publish state to "Publish".'); ?></p>
+		<?php else: ?>
+			
+			<div id="fill">
+				<?php e($this->renderElement("galleries_edit_pane")); ?>
+			</div>
+		
+		<?php endif; ?>
+
+	</div>
+	
+</div>

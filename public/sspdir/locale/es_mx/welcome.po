@@ -1,0 +1,6 @@
+msgid "Welcome to Director"
+msgstr "Bienvenido a Director"
+msgid "Click here to begin the installation in english."
+msgstr "Da clic aquí para continuar en español (Latinoamérica)."
+msgid "Language"
+msgstr "Español - Latinoamérica"

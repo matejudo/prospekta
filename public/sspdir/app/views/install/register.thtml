@@ -1,0 +1,85 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:600px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<ul id="process">
+				<li class="first complete"><span><?php __('Step 1'); ?></span></li>
+				<li class="complete"><span><?php __('Step 2'); ?></span></li>
+				<li class="complete"><span><?php __('Step 3'); ?></span></li>
+				<li class="prevactive"><span><?php __('Step 4'); ?></span></li>
+				<li class="active"><span><?php __('Step 5'); ?>: <?php __('User setup'); ?></span></li>
+				<li class="last"><span><?php __('Step 6'); ?></span></li>
+			</ul>
+			
+			<h4><?php __('Installation and setup'); ?></h4>
+			
+			<div class="clear"></div>
+			
+			<div class="wrap">
+				
+				<div class="content">
+					<p><?php __('Your configuration file was successfully created. The last step before installing is to set up a username and password to use when logging in to your new installation of Director.'); ?></p>
+					
+					<form id="theForm" action="<?php e($html->url('/install/finish')); ?>" method="post" onsubmit="return validate_register()">
+						
+						<table cellspacing="0" cellpadding="0" style="width:100%">
+							<tr>
+								<td style="width:50%;padding-right:15px">
+									<fieldset>
+										<label class="twin-top"><?php __('Username'); ?>:</label>
+										<label class="sub"><?php __('The username you will use to login to Director.'); ?></label>
+										<?php e($form->text('User/usr', array('class' => 'wide'))); ?>
+									</fieldset>
+								</td>
+								
+								<td>
+									<fieldset>
+										<label class="twin-top"><?php __('Email'); ?>:</label>
+										<label class="sub"><?php __('In case your forget your login details.'); ?></label>
+										<?php e($form->text('User/email', array('class' => 'wide'))); ?>
+									</fieldset>
+								</td>
+							</tr>
+							
+							<tr>
+								<td style="padding-right:15px">
+									<fieldset>
+										<label class="twin-top"><?php __('Password'); ?>:</label>
+										<label class="sub"><?php __('The password you will use to login to Director.'); ?></label>
+										<?php e($form->password('User/pwd', array('class' => 'wide'))); ?>
+									</fieldset>
+								</td>
+								
+								<td>
+									<fieldset>
+										<label class="twin-top"><?php __('Password again'); ?>:</label>
+										<label class="sub"><?php __('Confirm your password.'); ?></label>
+										<input type="password" name="pwd2" id="pwd2" class="wide" />
+									</fieldset>
+								</td>
+							</tr>
+						</table>
+						
+						<fieldset class="install-button">
+							<input type="submit" value="<?php __('Install Director'); ?> &rarr;" />
+						</fieldset>
+					</form>
+				</div> <!--close content-->
+
+			</div> <!--close module wrap-->
+
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+		
+		</div> <!--close module-->
+
+	</div> <!--close login-content-->
+
+</div> <!--close login-container-->

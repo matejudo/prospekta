@@ -15,7 +15,8 @@ class ArticleController extends Zend_Controller_Action
 		$this->view->baseUrl();
 		$this->view->slug = $this->_getParam("slug");
 		$articles = new Articles();
-		$this->view->article = $articles->getBySlug($this->view->slug);
+		$this->view->article = $articles->getBySlug($this->view->slug, 1);
+		$this->view->path = array(array("path" => "article/" . $this->view->article->slug, "title" => "Članak: " . $this->view->article->title));
 		
 		$menu = new Menu();
 		$menuitems = $menu->getTree("Glavni");

@@ -13,7 +13,7 @@
 		<div class="grid_2 alpha sidebar">
 			<ul class="sidemenu">
 				<li>
-					<a href="#" onclick="$('#sidesubtab1').showsubmenu(); return false;">Grupe Prospekta</a>
+					<a href="#" onclick="$('#sidesubtab1').showsubmenu(); return false;"><img src="<?= $this->baseUrl() ?>/images/icon_prospekta.png" class="icon"/>Grupe<br/> Prospekta</a>
 					<ul class="sidesubmenu" id="sidesubtab1" style="display: none;">
 						<li><a href="#">Galerija slika</a></li>
 						<li><a href="#">Video</a></li>
@@ -25,7 +25,7 @@
 				
 				</li>
 				<li>
-					<a href="#" onclick="$('#sidesubtab2').showsubmenu(); return false;">Studentske udruge</a>
+					<a href="#" onclick="$('#sidesubtab2').showsubmenu(); return false;"><img src="<?= $this->baseUrl() ?>/images/icon_group.png" class="icon"/>Studentske<br/> udruge</a>
 					<ul class="sidesubmenu" id="sidesubtab2" style="display: none;">
 						<li><a href="#">eStudent</a></li>
 						<li><a href="#">AIESEC</a></li>
@@ -33,7 +33,7 @@
 					</ul>	
 				</li>
 				<li>
-					<a href="#" onclick="$('#sidesubtab3').showsubmenu(); return false;">Zanimljivo i zabavno</a>
+					<a href="#" onclick="$('#sidesubtab3').showsubmenu(); return false;"><img src="<?= $this->baseUrl() ?>/images/icon_game.png" class="icon"/>Zanimljivo<br/> i zabavno</a>
 					<ul class="sidesubmenu" id="sidesubtab3" style="display: none;">
 						<li><a href="#">Za vašu inspiraciju</a></li>
 						<li><a href="#">Nepoznato o poznatima</a></li>
@@ -42,7 +42,7 @@
 					</ul>	
 				</li>
 				<li>
-					<a href="#" onclick="$('#sidesubtab4').showsubmenu(); return false;">Korisni linkovi</a>
+					<a href="#" onclick="$('#sidesubtab4').showsubmenu(); return false;"><img src="<?= $this->baseUrl() ?>/images/icon_link.png" class="icon"/>Korisni<br/> linkovi</a>
 					<ul class="sidesubmenu" id="sidesubtab4" style="display: none;">
 						<li><a href="#">Student</a></li>
 						<li><a href="#">Posao</a></li>
@@ -53,10 +53,11 @@
 						<li><a href="#">Šport</a></li>
 					</ul>	
 				</li>
-				<li><a href="#">Preporuči prospektu</a></li>
+				<li><a href="#"><img src="<?= $this->baseUrl() ?>/images/icon_mail_send.png" class="icon"/>Preporuči<br/> prospektu</a></li>
 			</ul>
 		</div>
 		<div id="content" class="grid_5">
+			<h1>Novosti</h1>
 			<?php foreach($this->novosti as $entry) : ?>
 
 				<h3><a href="<?= $this->baseUrl()?>/article/<?= $this->escape($entry->slug) ?>"><?= $this->escape($entry->title) ?></a></h3>
@@ -70,6 +71,7 @@
 			<?php endforeach; ?>
 		</div>
 		<div id="content2" class="grid_5 omega">
+			<h1>Zanimljivosti</h1>
 			<?php foreach($this->zanimljivosti as $entry) : ?>
 
 				<h3><a href="<?= $this->baseUrl()?>/article/<?= $this->escape($entry->slug) ?>"><?= $this->escape($entry->title) ?></a></h3>

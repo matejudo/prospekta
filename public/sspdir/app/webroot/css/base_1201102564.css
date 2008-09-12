@@ -1,0 +1,331 @@
+/* MASTER STYLE SHEET FOR SLIDESHOWPRO DIRECTOR Modifies: * LAYOUT * POSITIONING * TYPOGRAPHY */ /* ----------------------------------------------------------------------------- NULL BROWSER DEFAULTS -----------------------------------------------------------------------------*/ * {margin:0; padding:0;}
+table {border-collapse:collapse;border-spacing:0;}
+ul {list-style:none;}
+iframe {border:0;}
+/* ----------------------------------------------------------------------------- GLOBAL DEFAULT ELEMENTS -----------------------------------------------------------------------------*/ body {text-align:left;font:12px/18px 'Lucida Grande', 'Lucida Sans Unicode','Lucida Sans Regular', Verdana, sans-serif;}
+a {text-decoration:none;cursor:pointer;}
+a:focus {-moz-outline:0;outline:0;outline-offset:0;}
+a:hover {text-decoration:none;}
+a img {border:0;}
+h1,h2,h3,h4,h5,h6 {font-weight:bold;font-family:'Lucida Grande', 'Trebuchet MS','Lucida Sans Unicode','Lucida Sans Regular', Verdana, sans-serif;}
+h1 {font-weight:normal;font-size:24px;}
+h2 {font-size:15px;}
+h3 {font-size:10px;text-shadow:none;text-transform:uppercase;}
+h4 {font-size:13px;}
+h5 {font-size:13px;}
+h6 {font-size:12px;}
+p {margin:0 0 14px 0;}
+small {font-size:9px;}
+strong {font-weight:bold;}
+/* ----------------------------------------------------------------------------- HEADER CLASSES -----------------------------------------------------------------------------*/ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {text-decoration:none;}
+h2 span {font-weight:normal;}
+div.left-col h4, div.left-col-solo h4 {margin:0 0 6px 0;}
+h3 small {font-size:10px;font-weight:normal;word-spacing:0em;}
+h3.dash {padding:3px;}
+h3.dash a {text-decoration:none;}
+h4 span {top:6px;right:8px;font-size:10px;}
+h4 small {font-weight:normal;}
+h3.logo {width:252px;height:48px;}
+h4.error {padding:6px;font-size:12px;font-weight:bold;}
+h4.smart {padding-left:24px;}
+/* ----------------------------------------------------------------------------- LAYOUT: Global (cascading order) -----------------------------------------------------------------------------*/ div#helper {position:absolute;width:200px;padding:5px;z-index:500;}
+div#helper p {padding:0;margin:0;font-size:11px;}
+span.preview-me span, span.preview-me-prv span {display:none;}
+span.preview-me:hover, span.preview-me-prv:hover {cursor:pointer;}
+#pop-image-preview, #pop-image {position:absolute; z-index:501; padding:6px; float:left; display:table}
+#pop-image img {border:0;}
+#pop-image-preview img {float:left;}
+#pop-image-preview ul, #pop-image ul {list-style:none; margin-bottom:10px; font-size:10px}
+#pop-image-preview ul {float:right;margin-left:8px;}
+#pop-image-preview a, #pop-image a {text-decoration:underline;}
+div#header-links {font-size:9px;padding:2px 0;text-align:right}
+div#header-links .wrap {margin-right:36px;display:block;}
+div#header-links a {text-decoration:none;}
+div#header-links a:hover {text-decoration:underline;}
+div#header {display:block; width:100%; float:left; position:relative}
+div#header .top-half {height:77px;display:block;position:relative;}
+div#header-logo {display:block;margin-left:30px;}
+div#header-logo a.img {width:337px;height:77px;display:block;}
+div#header-nav {position:relative;}
+ul#main-nav {list-style:none; width:100%; height:31px; min-width:400px}
+ul#main-nav li {float:left; margin:0 3px 0 0; padding:0 0 0 7px; height:31px}
+ul#main-nav li.first {margin-left:30px;}
+ul#main-nav li a {float:left; display:block; text-decoration:none; font-weight:bold; font-size:13px; margin:0; padding:8px 10px 10px 3px; font-family:'Lucida Grande', 'Trebuchet MS','Lucida Sans Unicode','Lucida Sans Regular', Verdana, sans-serif}
+ul#main-nav li a:hover {text-decoration:none;}
+div#header-slideshow {height:31px; position:absolute; right:42px; top:0}
+div#header-slideshow div.wrap {padding:0 0 0 7px; float:left}
+div#header-slideshow span {display:block; padding:8px 13px 8px 3px; height:31px; float:left}
+div#header-slideshow select, div#header-slideshow input {font-size:9px;}
+div#page {float:left;width:100%;display:block;padding:0 0 20px 0;}
+div#container {margin:0 30px;min-width:940px;}
+div#head {padding:18px 15px 0 15px;}
+div#head div.head-wrap {position:relative;width:100%;clear:left;}
+div#head div.album-head {padding:8px 0 0;float:left;position:relative;width:100%;}
+div#head h1 {padding:6px 0 18px 42px;margin:8px 0 0 0;}
+div#head h1.noicon {padding-left:0;}
+div#head h2 {margin-top:3px;}
+div#head h2 span.desc {font-size:12px;margin-top:5px;display:block;}
+div#head-form {float:right;}
+div#head-form div.icon-bump {padding-top:8px;}
+div#container h1 a.instruction-link {font-size:10px;}
+div#page-info {margin:0 0 12px 0; float:left; font-size:14px; line-height:1.4; display:block; width:100%}
+div#container-wrap {position:relative;float:left;width:100%;}
+div#container-footer {line-height:0.5;}
+div#container-footer div {padding-top:2px;}
+div.col-wrap {margin:15px 15px 0;}
+div.left-col {float:left;width:50%;}
+div.left-col-solo {float:left;width:100%;}
+div.left-col-inside {margin-right:8px;}
+div.right-col {float:left;width:50%;}
+div.right-col-inside {margin-left:7px;}
+div.left-full {float:left;width:100%;}
+div.module {margin-bottom:15px;font-size:11px;position:relative;width:100%;}
+div.module-head {padding:9px 7px 9px 15px;}
+div.module-head h3 {display:block;}
+div.module-head h3.yanker {line-height:0;height:0;}
+div.module h5 {margin:0 0 2px 0;}
+div.module p {padding:0 0 4px 0;}
+div.module div.wrap {float:left;width:100%;margin:0 0 -15px 0;_margin:0 0 -8px 0;padding:10px 0 0 0;}
+div.module div.content {margin:0 15px;}
+div.module div.divider {margin-bottom:10px;overflow:auto;width:100%;}
+div.module-footer div {display:block;}
+div.embed, div.embedlast {padding:8px 10px 0 10px;margin:0 0 8px 0;}
+div.embedlast {border-bottom:0;}
+div.embed fieldset, fieldset.solo p {font-size:11px;}
+div.embed fieldset span {font-size:10px;}
+div.boxy ul, ul.styled {margin-bottom:20px; padding-left:20px; list-style:disc}
+div#footer {display:block; font-size:9px; clear:both; height:80px}
+div#footer span {padding:0 36px;font-size:10px;}
+div#multi-footer {display:block; width:100%; padding:10px 0; position: fixed; left: 0px; bottom: 0px; text-align:center; font-size:11px; z-index:10000}
+div#multi-footer ul {display:block; margin:0 auto; width:400px; overflow:auto; list-style:none}
+div#multi-footer ul li {float:left;margin:0 4px 0 0;}
+body>div#multi-footer {width:100%;}
+/* ----------------------------------------------------------------------------- LAYOUT: SNAPSHOT -----------------------------------------------------------------------------*/ #dash-left-col {width:676px; _width:678px; float:left; position:relative}
+#dash-left-col .inner-left {width:240px; _width:237px; float:left; margin-right:15px}
+#dash-left-col .inner-right {width:421px; float:left}
+#dash-right-col {margin-left:692px; _margin-left:685px; _display:inline-block}
+#dash-right-col .inner {float:left; width:100%}
+/* ----------------------------------------------------------------------------- NAVIGATION: SUB -----------------------------------------------------------------------------*/ div#sub-nav {height:36px;line-height:36px;position:relative;float:left;display:block;width:100%;margin-bottom:15px;}
+div#sub-nav ul {list-style:none;height:36px;width:100%;display:block;}
+div#sub-nav ul li {float:left;margin:0 18px 0 0;}
+div#sub-nav ul li a {font-weight:bold; font-size: 11px; float:left; display:block; text-decoration: none; font-family:'Lucida Grande', 'Trebuchet MS','Lucida Sans Unicode','Lucida Sans Regular', Verdana, sans-serif}
+div#sub-nav ul li.title {padding:0 0 0 15px;margin-right:10px;}
+div#sub-nav ul li.spacer {width:21px;margin-right:10px;}
+/* ----------------------------------------------------------------------------- FORMS GENERAL -----------------------------------------------------------------------------*/ input, textarea {font-family:'Lucida Grande', 'Lucida Sans Unicode','Lucida Sans Regular', Verdana, sans-serif; font-size:11px; margin:0; padding:0}
+input.radio {width:auto;margin:0;background:transparent;}
+input.field-input {margin:2px 0 14px 0;}
+/* subsitute for fieldset b/c IE 6 doesnt like inputs wrapped within fieldsets */ input.wide, textarea.wide {width:100%;}
+input.nomargin {margin:0;}
+fieldset {border:0;margin:0;padding:2px 0 14px 0;display:block;position:relative;}
+fieldset.short {padding-bottom:8px;}
+fieldset.solo {padding:10px 0;margin:0 0 14px 0;display:block;}
+fieldset.install-button {text-align:right;}
+label {font-weight:bold; display:block; margin:0; padding:0 0 6px 0; font-size:1.1em; font-family:'Lucida Grande', 'Trebuchet MS','Lucida Sans Unicode','Lucida Sans Regular', Verdana, sans-serif}
+fieldset span img {margin-bottom:-2px;}
+select {font-size:11px;font-weight:bold;}
+form.quad {padding-bottom:8px;}
+form.quad td {font-size:10px;width:33%;}
+form.quad label {font-weight:normal;}
+/* ----------------------------------------------------------------------------- LISTS -----------------------------------------------------------------------------*/ ul.album {background:#e1e1e1;font-size:.9em;padding:3px 10px;margin:0 10px;}
+ul.dash-strip li {padding:10px 0;position:relative;}
+ul.dash-strip li.inactive, ul#albums-repo li {opacity:0.4;filter:alpha(opacity:40);}
+ul.dash-strip li.inactive:hover {opacity:0.9;filter:alpha(opacity:90);}
+ul.dash-strip li.solo {padding-top:0;border-bottom:0;}
+ul.dash-strip li.last, ul.dash-strip li.force-last {border-bottom:0;}
+ul.dash-strip li strong {font-weight:bold;}
+ul.dash-strip li span small a {font-size:9px;line-height:2.5;}
+ul.dash-strip li.sort {cursor: move;}
+ul.dash-strip li.sort span small {cursor:pointer;}
+ul.dash-strip div.no-thumb {height:25px;}
+ul.dash-strip div.no-thumb div {width:30px;height:100%;}
+ul.dash-strip li div.thumb {float:left; margin-right:8px; width:34px; height:29px; overflow:hidden; background-image-position:center}
+fieldset.embed {margin:0 0 15px 0;padding:8px 10px;font-size:10px;}
+ol.photo-thumbs-list {list-style:none;}
+ol.photo-thumbs-list li {float:left;margin:0 9px 10px 0;position:relative;}
+ol.photo-thumbs-list li.end {margin-right:0;}
+ol.photo-thumbs-list li img {padding:3px;}
+ol.photo-thumbs-list li img.video-overlay, ul#image-view li img.video-overlay {position:absolute;top:0;left:0;padding:2px;margin:0;}
+/* ----------------------------------------------------------------------------- ALBUM THUMBNAILS -----------------------------------------------------------------------------*/ .album-thumb-bg {display:block; width:48px; height:37px; margin-right:12px; position:relative; float:left}
+.album-thumb-img {margin:1px 0 0 1px; width:46px; height:35px; overflow:hidden; background-image-position:center; display:block}
+/* ----------------------------------------------------------------------------- GRAPHICAL RADIUS BUTTONS -----------------------------------------------------------------------------*/ div.radBttn {float:left;margin-left:4px;display:block;width:auto;}
+div.radBttn a {width:auto; padding:0 0 0 4px; text-decoration: none; float:left; height:18px; line-height:18px; font-family:'Lucida Grande', 'Trebuchet MS','Lucida Sans Unicode','Lucida Sans Regular', Verdana, sans-serif}
+div.radBttn a span {display:block;padding:0 9px 0 5px;font-weight:bold;font-size:9px;float:left;}
+div.radBttn a.rb_module_head_dis span, div.radBttn a.rb_sup span {padding-right:23px;}
+div.radBttn a.rb_module_head_dis span {background-position:right -18px;}
+div.radBttn a.rb_module_head_sel {background-position:0 -36px;}
+div.radBttn a.rb_module_head_sel span {background-position:right -36px;}
+div.radBttn a.rb_module_wrap {background-position:0 -54px;}
+div.radBttn a.rb_module_wrap span {background-position:right -54px;}
+div.radBttn a.rb_embed {background-position:0 -72px;}
+div.radBttn a.rb_embed span {background-position:right -72px;}
+div.radBttn a.rb_sup {background-position:0 -90px;}
+div.radBttn a.rb_sup span {background-position:right -90px;}
+/* ----------------------------------------------------------------------------- LAYOUT: Header radius -----------------------------------------------------------------------------*/ div.header-radius {margin:0 0 15px 0;position:relative;}
+div.header-radius h6 {margin-bottom:-2px;}
+div.header-radius div.content {padding:3px 15px;margin:0;}
+div.header-radius img.gray-edge {float:left;position:relative;margin:2px 8px 0 0;padding:1px;}
+div.header-radius span.subtext {font-size:9px;display:block;}
+div.header-radius div.tr {padding:4px 0 0 4px;}
+div.header-radius div.br {padding:4px 0 0 0;}
+div.header-radius select, div.header-radius input {font-size:9px;}
+/* ----------------------------------------------------------------------------- LAYOUT: Edit images / Manage albums (shared) -----------------------------------------------------------------------------*/ div#edit-head {position:relative;}
+ul.small-nav {list-style:none;}
+ul.small-nav li {float:left;margin:0 3px 0 0;}
+ul.small-nav li div.radBttn {margin-right:3px;}
+ul.small-nav li.title {font-weight:bold;margin:0 8px 0 0;}
+div.counter, div.counter-off {margin:6px 0 0 0; height:16px; text-align:center; display:block; position:relative; clear:left}
+div.counter span, div.counter-off span {display:block; margin-left:5px; padding:0 5px 1px 0; font-size:9px}
+div.editBttns {display:block;margin:0 auto;}
+ul#galleries-view div.editBttns, ul#albums-repo div.editBttns {width:44px;}
+/* ----------------------------------------------------------------------------- LAYOUT: Edit images -----------------------------------------------------------------------------*/ a.active-image-btn, a.inactive-image-btn, a.inactive-image-btn, a.c-active-image-btn, a.c-inactive-image-btn, a.edit-image-btn, a.move-image-btn, a.rotleft-image-btn, a.rotright-image-btn, a.delete-image-btn, a.focal-point-btn {display:block;height:18px;width:20px;float:left;margin:0 2px 0 0;}
+a.delete-image-btn {margin-right:0;}
+a:hover.active-image-btn, a:hover.inactive-image-btn, a:hover.delete-image-btn, a:hover.edit-image-btn, a:hover.move-image-btn, a:hover.rotleft-image-btn, a:hover.rotright-image-btn, a:hover.focal-point-btn {background-position:0 -18px;}
+div#multi-footer a.active-image-btn, div#multi-footer a.inactive-image-btn, div#multi-footer a.delete-image-btn, div#multi-footer a.move-image-btn, div#multi-footer a.rotleft-image-btn, div#multi-footer a.rotright-image-btn {background-position:0 -72px;}
+div#multi-footer a:hover.active-image-btn, div#multi-footer a:hover.inactive-image-btn, div#multi-footer a:hover.delete-image-btn, div#multi-footer a:hover.move-image-btn, div#multi-footer a:hover.rotleft-image-btn, div#multi-footer a:hover.rotright-image-btn {background-position:0 -90px;}
+div#image-view-wrap.wide {overflow:hidden;height:218px;position:relative;}
+div#image-view-wrap {height:auto;}
+div#image-view-wrap.wide ul#image-view {position:absolute;}
+ul#image-view {padding:2px 0 12px;}
+ul#image-view li {float:left;padding:0 6px;margin: 0 8px 8px 0;position:relative;font-size:9px}
+ul#image-view li.inactive {opacity:0.4;filter:alpha(opacity:40);}
+ul#image-view li.end {margin-right:0;}
+ul#image-view li.current a.active-image-btn, ul#image-view li.current a.delete-image-btn, ul#image-view li.current a.edit-image-btn, ul#image-view li.current a.move-image-btn, ul#image-view li.current a.rotleft-image-btn, ul#image-view li.current a.rotright-image-btn {background-position: 0 -36px;}
+ul#image-view li.current a:hover.active-image-btn, ul#image-view li.current a:hover.edit-image-btn, ul#image-view li.current a:hover.delete-image-btn, ul#image-view li.current a:hover.move-image-btn, ul#image-view li.current a:hover.rotleft-image-btn, ul#image-view li.current a:hover.rotright-image-btn {background-position: 0 -54px;}
+ul#image-view li.current div.inactive a.active-image-btn {background-position:0 -36px;}
+ul#image-view li.current div.inactive a:hover.active-image-btn {background-position:0 -54px;}
+ul#image-view li.inactive a:hover.active-image-btn, ul.album-view li.inactive a:hover.active-image-btn {background-position:0 -18px;}
+ul#image-view li div.info {text-align:center; display:block; font-size:9px; position:relative; height:24px; margin-top:5px}
+ul#image-view li div.meta {height:22px; line-height:22px; display:block; text-align:center; overflow:hidden; width:100%; z-index:800; font-family:'Lucida Grande','Lucida Sans Unicode','Lucida Sans Regular',Verdana,sans-serif}
+div#edit-box {padding:0 0 15px 0; margin:6px 0 0 0; z-index:500}
+div#edit-box p {font-size:.8em; padding:3px 15px; text-align:right; margin-bottom:0}
+div#edit-box p.src {margin:0; clear:both; padding:0; text-align:center}
+div#edit-box p.src a img {border:0; padding:0 0 4px}
+div#edit-box-head {display:block;width:100%;float:left;padding:0 0 8px 0;position:relative;}
+div#edit-box-head div.radBttn {position:absolute;right:0;top:-4px;}
+div#edit-box-left-col {width:49%;float:left;text-align:center;}
+div#edit-box-right-col {width:49%;margin-left:2%;float:left;}
+div#rotator {width:100%;display:block;position:relative;}
+div#rotator table {margin:12px auto;width:100%;}
+div#target {padding:10px 10px 0;}
+div#target p {font-size:.9em; padding:4px; text-align:center; margin-bottom:1em}
+div#resize-thumbs-ctrl {position:absolute;right:0;width:400px;}
+div#resize-label {font-weight:bold;margin-top:1px;text-align:right;}
+div#slider {float:right;margin:0 4px 0 0;position:relative;}
+div#track1 {width:197px;height:21px;}
+div#handle1 {width: 21px;height: 21px;cursor:pointer;}
+div#edit-images-scroll {padding:10px 10px 8px 10px;margin:12px 0 14px 0;}
+div#track {width: 100%;height:21px;margin:0;text-align:left}
+div#track_l {float:left;width: 5px;height:21px}
+div#track_r {float:right;width: 5px;height:21px}
+div#handle {float:left;width: 200px;height: 21px;cursor:pointer}
+div#handle_l {float:left;width: 5px;height:21px}
+div#handle_r {float:right;width: 5px;height:21px}
+div.scale-image, div.scale-image-off {padding:0;margin:0;text-align:center;height:100%;width:175px;position:relative;}
+div.scale-image.sort, li.sort div.meta, li.sort div.title {cursor:move;}
+div.scale-image div.thumbimg, div.scale-image-off div.thumbimg {height:100%;position:relative;}
+div.scale-image div span.meta {display:block;width:100%;position:absolute;bottom:0;text-align:center;}
+/* ----------------------------------------------------------------------------- LAYOUT: Gallery - Manage Albums -----------------------------------------------------------------------------*/ div#album-view-wrap.wide {overflow:hidden;height:218px;position:relative;}
+div#album-view-wrap {height:auto;}
+div#album-view-wrap.wide ul.album-view {position:absolute;}
+ul.album-view {padding:2px 0 12px;}
+ul.album-view li {float:left; padding:8px 8px 0; margin: 0 8px 8px 0; position:relative; width:200px}
+ul.album-view li div.title {display:block; margin-bottom:6px; overflow:hidden; height:16px; line-height:16px}
+ul.album-view li div.info {text-align:right; display:block; font-size:9px; position:relative; clear:left; height:24px}
+ul.album-view li div.meta {float:left; width:100%; padding:6px 0; margin:0 0 4px 0}
+ul.album-view li div.copy {font-size:9px;line-height:1.65;}
+ul.album-view li div.album-thumb-bg {float:left;}
+/* ----------------------------------------------------------------------------- LAYOUT: Albums - Generate Content -----------------------------------------------------------------------------*/ div#select-thumb {height:138px;overflow:auto;text-align:left;}
+/* ----------------------------------------------------------------------------- LAYOUT: Albums - Upload Content -----------------------------------------------------------------------------*/ table#file_list {width:100%;margin:0 0 12px 0;}
+table#file_list td, table#file_list th {text-align:center;padding:4px;}
+table#file_list th {font-size:1.1em;padding-left:0;}
+table#file_list td.left, table#file_list th.left {text-align:left;width:50%;}
+table#file_list td.error {font-weight:bold;padding-left:0;}
+/* ----------------------------------------------------------------------------- LAYOUT: Sortable Table -----------------------------------------------------------------------------*/ table.sortable {width:100%;margin:0 0 12px 0;}
+table.sortable th {padding:9px 15px 8px 15px;text-align:center;font-family:'Lucida Grande', 'Trebuchet MS','Lucida Sans Unicode','Lucida Sans Regular', Verdana, sans-serif;text-transform:uppercase;}
+table.sortable td {padding:12px 15px;text-align:center;}
+table.sortable th {font-size:10px;}
+table.sortable th.sortcol {cursor:pointer;}
+table.sortable th.nosort {cursor:default;}
+table.sortable th span.sm {font-size:9px;}
+table.sortable td {vertical-align:middle;}
+table.sortable th.title, table.sortable td.title {text-align:left;}
+table.sortable th.right {text-align:right;}
+table.sortable td.title {vertical-align:top;}
+table.sortable td.title span {font-size:11px;}
+table.sortable td.thumb {text-align:left;padding-right:0;width:40px;vertical-align:top;}
+table.sortable tr.foot td {text-align:left;}
+table.sortable tr.subth td {padding:4px 10px;}
+table.sortable div.album-thumb-bg {margin-right:0;}
+table.sortable a.edit-image-btn, table.sortable a.delete-image-btn, table.sortable a.inactive-image-btn, table.sortable a.active-image-btn {background-position:0 -108px;}
+table.sortable a.edit-image-btn:hover, table.sortable a.delete-image-btn:hover, table.sortable a.active-image-btn:hover, table.sortable a.active-image-btn:hover {background-position:0 -126px;}
+table.sortable tr.even a.active-image-btn, table.sortable tr.even a.inactive-image-btn, table.sortable tr.even a.delete-image-btn {background-position:0 -144px;}
+table.sortable tr.even a.active-image-btn:hover, table.sortable tr.even a.inactive-image-btn:hover, table.sortable tr.even a.delete-image-btn:hover {background-position:0 -162px;}
+/* ----------------------------------------------------------------------------- MESSAGE DIALOGS -----------------------------------------------------------------------------*/ div.dialogue-wrap {position:fixed; width:100%; height:100%; top:0; left:0; display:table; z-index:1000}
+div.dialogue {display:table-cell; vertical-align:middle; text-align:center}
+div.dialogue-content {margin: -30px auto 0; text-align:center}
+p#messenger-p {margin:0;text-align:center;}
+div#messenger-wrap input {margin-top:6px;}
+span#messenger-span {padding:2px 0 2px 20px; margin:0 auto; font-weight:bold}
+div.dialogue-content {width:420px;text-align:left !important;}
+div.dialogue-content a {text-decoration:underline;}
+div.dialogue-content h1 {text-shadow:none;font-size:1.7em;margin:0 0 10px 0;font-weight:bold;}
+div.dialogue-content .wrap {padding:12px;margin:6px;}
+div.dialogue-content fieldset.embed {padding-left:0;}
+/* ----------------------------------------------------------------------------- FORM FEEDBACK -----------------------------------------------------------------------------*/ div.form-msg {font-size:9px;padding-left:13px;margin-left:4px;display:inline;}
+/* ----------------------------------------------------------------------------- ALERTS -----------------------------------------------------------------------------*/ div#alert {margin:0 0 15px 0;font-size:1.1em;position:relative;clear:left;}
+div#alert div.tr {padding:4px 0 0 4px;}
+div#alert div.br {padding:4px 0 0 0;}
+div#alert div.content {padding:0 6px;margin:0;}
+div#alert div.fluid {min-height:30px;padding:0 0 0 36px;}
+div#alert div.fixed {height:30px;line-height:30px;padding:0 0 0 36px;}
+div#alert div.radBttn {float:right;}
+div#alert div.fixed div.radBttn {margin-top:5px;}
+/* ----------------------------------------------------------------------------- PROGRESS DISPLAY -----------------------------------------------------------------------------*/ span#progress_wrap {display:block;width:100%;text-align:center;}
+span#progress_container {margin:7px auto 0;width:300px;height:10px;position:relative;display:block;}
+span#progress {width:0;height:10px;position:absolute;top:0; left:0;font-size:0;}
+/* ----------------------------------------------------------------------------- LOGIN -----------------------------------------------------------------------------*/ body#login h4 {padding:15px;font-size:22px;font-weight:normal;}
+div#login-container {text-align:center;width:100%;}
+div#login-content {margin:120px auto 0;text-align:left;}
+label.twin-top {padding-bottom:2px;}
+label.sub {font-weight:normal;font-size:10px;}
+/* ----------------------------------------------------------------------------- PARAGRAPH CLASSES -----------------------------------------------------------------------------*/ p.accept, h3.accept {padding-left:18px !important;}
+p.error, h3.error {padding-left:22px !important;display:block;}
+p.halfstep {margin:0 0 4px 0;}
+/* ----------------------------------------------------------------------------- CLEARFIXES -----------------------------------------------------------------------------*/ div.clear {clear:both;line-height:0;}
+.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden}
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* ----------------------------------------------------------------------------- ICON LABELS -----------------------------------------------------------------------------*/ .icon_label_album, .icon_label_album_draft, .icon_label_gallery, .icon_label_newalbum, .icon_label_newgallery, .icon_label_photo, .icon_label_profile, .icon_label_qt, .icon_label_feed, .icon_label_smartgallery, .icon_label_uploadimg, .icon_label_video {padding:0 0 0 24px; display:block}
+/* ----------------------------------------------------------------------------- MISC -----------------------------------------------------------------------------*/ .indent {padding:0 15px;}
+.inline {display:inline;}
+.module-first {margin-top:-10px;}
+.gray-edge {padding:1px;}
+.rLink {float:right;}
+.dialogue-spacer {padding-top:4px;margin:8px 0;display:block;width:100%;}
+span.warn, span.note {font-size:9px;line-height:16px;display:block;padding:0 0 12px 0;}
+span.help {cursor:help;font-weight:normal;font-size:11px;}
+span.help span {display:none;font-size:10px;}
+span.more a {font-size:10px;}
+small.link {text-decoration:underline;}
+div#the_img .tall {height:400px;}
+div#the_img .wide {width:100%;}
+img.drop_target {opacity:0.2;filter:alpha(opacity:20);}
+img.wide {width:98%;padding:2px;}
+/* ----------------------------------------------------------------------------- FOCAL POINT -----------------------------------------------------------------------------*/ img#anchor {position:absolute;}
+img#anchor:hover {cursor:move;}
+div#img_wrapper {position:relative;margin:0 auto;}/* STATIC STYLE SHEET FOR SLIDESHOWPRO DIRECTOR For elements not affected by themes */ ul#process {background:#444;list-style:none;float:left;display:block;width:100%;margin-bottom:24px;}
+ul#process.end {background:#76b41c;}
+ul#process li {background:transparent url(../styles/default/img/bg_process_default.gif) top right no-repeat; text-shadow: #222 0px 0px 2px; float:left; height:24px; line-height:24px; padding:0 20px 0 6px; font-weight:bold; font-family:"Lucida Grande", Verdana}
+ul#process li.last {background:none;}
+ul#process li.first {padding-left:15px;}
+ul#process li.active {color:#fff; text-shadow:#3a5810 0px 0px 2px; background:#76b41c url(../styles/default/img/bg_process_active.gif) top right no-repeat; padding-right:20px}
+ul#process li.prevactive {color:#fff; text-shadow:#3a5810 0px 0px 2px; background:#679c19 url(../styles/default/img/bg_process_prevactive.gif) top right no-repeat}
+ul#process li.complete {color:#fff; text-shadow:#3a5810 0px 0px 2px; background:#679c19 url(../styles/default/img/bg_process_complete.gif) top right no-repeat}
+ul#process li.complete span, ul#process li.prevactive span {background:transparent url(../styles/default/img/icon_check_process_12px.gif) 0 50% no-repeat;}
+ul#process li span {display:block;}
+ul#process li.complete span, ul#process li.prevactive span {padding-left:18px;}
+ul#process.end li.active {background:none;}
+div.lang-btn:hover {background:#2a2a2a}
+div.lang-btn a {color: #999;}
+div.lang-btn a:hover {color: #fff;}
+div.lang-btn h4 {background:transparent !important}

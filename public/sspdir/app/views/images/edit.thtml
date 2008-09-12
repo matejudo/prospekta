@@ -1,0 +1,143 @@
+<?php
+
+	////
+	// Form the display depending on file type
+	////
+	
+	if (isSwf($i['src'])) {
+		$i_str = '
+		<div id="mov_cont" style="width:100%;height:400px;"></div>
+		<script type="text/javascript">
+			var swf = new SWFObject("' . $rel_path . '", "ei_video", "100%", "100%", "8", "#111111");
+			swf.addParam("allowScriptAccess", "always");
+			swf.write("mov_cont");
+		</script>';
+	} elseif (isVideo($i['src'])) {
+		if (eregi('.flv', $i['src'])) {
+			$i_str = '
+				<div id="mov_cont" style="width:100%;height:400px;"></div>
+				<script type="text/javascript">
+					var swf = new SWFObject("' . DIR_HOST . '/app/webroot/swf/ei_video.swf?videoURL=' . $rel_path . '", "ei_video", "100%", "100%", "8", "#111111");
+					swf.addParam("allowScriptAccess", "always");
+					swf.addParam("wmode", "transparent");
+					swf.addVariable("skinPath", "' . DIR_HOST . '/app/webroot/swf/ClearOverAll.swf");
+					swf.write("mov_cont");
+				</script>
+				';
+	 	} else {
+			$i_str = '<div id="mov_cont" style="width:100%;height:400px;"></div>	
+			<script type="text/javascript">
+				// <![CDATA[
+					var myQTObject = new QTObject("' . $rel_path . '", "qt", "100%", "400");
+					myQTObject.addParam("autoplay", "true");
+					myQTObject.addParam("scale", "aspect");
+					myQTObject.addParam("enablejavascript", "true");
+					myQTObject.write("mov_cont");
+				// ]]>
+			</script>';
+		}
+	} else {
+		$info = getimagesize($full_path);
+		if ($info[0] >= $info[1])
+			$attr = ' class="wide"';
+		else
+			$attr = ' class="tall"';
+		$i_str = '<div id="the_img"';
+		$i_str .= '><div id="img_wrapper"><img id="anchor" src="' . DIR_HOST . '/app/webroot/img/focal_point.png" style="display:none" /><img id="img_edit" src="' . $rel_path . '?' . filemtime($full_path) . '"' . $attr . ' onload="" /></div></div>';
+	}
+	
+	$i_str .= '<div id="rotator"><table cellspacing="0" cellpadding="0"><tr>';
+		
+	$i_str .= '<td width="25%"><div class="radBttn" style="margin-left:0;"><a title="' . __('Edit previous piece of content in this album', true) . '" class="rb_embed" href="#" onclick="prev_image(); return false;"><span>' . __('Previous', true) . '</span></a></div></td>';
+		
+	if ((function_exists('imagerotate') || DIR_GD_VERSION >= 3) && !isNotImg($i['src'])):
+		$rotate = true;
+	else:
+		$rotate = false;
+	endif;
+	
+	if (!isNotImg($i['src'])):
+		$i_str .= '<td width="50%" align="center"><div style="position:relative;width:';
+		if ($rotate):
+			$i_str .= '66';
+		else:
+			$i_str .= '22';
+		endif;
+		$i_str .= 'px;margin:0 auto;">';
+		if ($rotate):
+			$i_str .= '<a title="' . __('Rotate image counter-clockwise', true) . '" class="rotleft-image-btn" href="#" onclick="rotate_img(' . $i['id'] . ', ' . $a['id'] . ', 90); return false"></a>';
+		endif;
+		$i_str .= '<a title="' . __('Toggle focal point selection',true) . '" class="focal-point-btn" href="#" onclick="toggleAnchor(); return false;"></a>';
+		if ($rotate):
+			$i_str .= '<a title="' . __('Rotate image clockwise', true) . '" class="rotright-image-btn" href="#" onclick="rotate_img(' . $i['id'] . ', ' . $a['id'] . ', -90); return false"></a>';
+		endif;
+		$i_str .= '</div></td>';
+	endif;
+		
+	$i_str .= '<td width="25%"><div style="float:right;"><div class="radBttn" style="margin-right:0;"><a title="' . __('Edit next piece of content in this album', true) . '"  class="rb_embed" href="#" onclick="next_image(); return false;"><span>' . __('Next', true) . '</span></a></div></div></td>';
+	
+	$i_str .= '</tr></table></div>';
+	                                     
+?><div id="edit-box-head">
+	<div class="radBttn"><a class="rb_embed" href="#" onclick="hide_image_edit(); return false;" title="<?php __('Close window'); ?>"><span><?php __('Close'); ?></span></a></div>
+	<strong><?php __('File'); ?>:</strong> <?php e($i['src']); ?>
+</div>
+
+<div id="edit-box-left-col">
+	<?php e($i_str); ?>
+</div>
+
+<div id="edit-box-right-col">
+	<form id="image_form" method="post" action="#" onsubmit="save_image(this, <?php e($html->tagValue('Image/id')); ?>); return false;">
+	
+	<fieldset>
+		<label><?php __('Title'); ?>: <span class="help">[?]<span><?php __('This title appears in SlideShowPro if you set "Caption Header Type" to "Image Title" in SlideShowPro\'s Component Inspector.'); ?></span></span></label>
+		<?php e($form->text('Image/title', array('size' => 50,'class' => 'wide'))); ?>
+	</fieldset>
+	
+	<fieldset>
+		<label><?php __('Hyperlink'); ?>: <span class="help">[?]<span><?php __('The URL your browser will load if this image is clicked. Links should be absolute (http://)'); ?></span></span></label>
+		<?php e($form->text('Image/link', array('size' => 50,'class' => 'wide','style' => 'margin-bottom:4px;'))); ?>
+		<?php e($html->checkbox('Image/target', array('class' => 'radio'))); ?> <?php __('Open link in same browser window'); ?>
+	</fieldset>
+	
+	<?php if (!isNotImg($i['src'])): ?>
+		<fieldset>
+			<label><?php __('Use as album preview'); ?>: <span class="help">[?]<span><?php __('You can set this image to show as the album preview in the gallery view of SlideShowPro.'); ?></span></span></label>
+			<input id="album-thumb" class="radio" type="radio" name="album-thumb" value="2" <?php e(($is_album_thumb && $i['active']) ? 'checked="checked"' : '') ?> /> <?php __('Use as album preview and keep in slideshow'); ?> <br />
+			<input id="album-thumb-inactive" class="radio" type="radio" name="album-thumb" value="1" <?php e(($is_album_thumb && !$i['active']) ? 'checked="checked"' : '') ?> /> <?php __('Use as album preview and remove from slideshow'); ?> <br />
+			<input id="album-thumb-off" class="radio" type="radio" name="album-thumb" value="0" <?php e((!$is_album_thumb) ? 'checked="checked"' : '') ?> /> <?php __('Do not use as album preview'); ?>
+		</fieldset>
+	<?php endif; ?>
+	
+	<fieldset>
+		<label><?php __('Caption'); ?>:</label>
+		<?php e($form->textarea('Image/caption', array('cols' => 40, 'rows' => 5, 'class' => 'wide'))); ?>
+	</fieldset>
+	
+	<?php if (!isVideo($i['src'])): ?>
+	<fieldset><label><?php __('Transition pause'); ?>: <span class="help">[?]<span><?php __('0 is default. Only modify this if you want SlideShowPro to pause on this image (before loading the next) for a period of time that\'s different than the "Transition Pause" parameter in SlideShowPro\'s Component Inspector.'); ?></span></span></label>
+		<?php e($form->text('Image/pause', array('size' => 2))); ?>
+	</fieldset>
+	<?php endif; ?>
+	
+	<fieldset>
+		<input type="submit" value="<?php __('Save'); ?>" /> 
+		<span id="image-messenger" style="display:none;"></span>
+	</fieldset>
+	
+	</form>
+</div>
+<?php
+
+	$arr = unserialize($i['anchor']);
+	if (empty($arr)) {
+		$arr['x'] = $arr['y'] = 50; 
+	}
+
+?>
+<script type="text/javascript">
+	Helper.init();
+	anc_x = <?php e($arr['x']); ?>;
+	anc_y = <?php e($arr['y']); ?>;
+</script>

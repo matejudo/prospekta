@@ -5,6 +5,8 @@ require_once 'Zend/Controller/Action.php';
 class Admin_ArticleController extends Zend_Controller_Action
 {
 
+	protected $currentCategory = null;
+
 	function preDispatch()
 	{
 		$auth = Zend_Auth::getInstance();
@@ -19,28 +21,38 @@ class Admin_ArticleController extends Zend_Controller_Action
 		$this->view->baseUrl = $this->_request->getBaseUrl();
 		$this->_helper->layout->setLayout('admin'); 
 		$this->view->user = Zend_Auth::getInstance()->getIdentity();
+		
+		$session = new Zend_Session_Namespace('Default');
+		
+		if (isset($session->articleCategory))
+	    	$this->currentCategory = $session->articleCategory;
+		else
+		{
+		    $session->articleCategory = "Novosti";
+		    $this->currentCategory = $session->articleCategory;		    
+		}
 	}
 	
 	public function indexAction()
 	{
 		$this->view->baseUrl();
-		$cat = $this->_getParam('name', 'Novosti');
-		$this->view->category = $cat;
+		$this->view->category = $this->currentCategory;
 		$articles = new Articles();
-		$this->view->articles = $articles->fetchCategory($cat);
+		$this->view->articles = $articles->fetchCategory($this->currentCategory);
 		
 	}
 	
 	public function categoryAction()
 	{
 		$category = $this->_getParam('name', 'Novosti');
-		$this->_setParam("category", $category);
-		$this->_forward("index", "article", "admin");
+		$session = new Zend_Session_Namespace('Default');
+		$session->articleCategory = $category;
+		$this->_redirect("admin/article");
 	}
 	
 	public function newAction()
 	{
-		$this->view->category = $this->_getParam('category', '');
+		$this->view->category = $this->currentCategory;
 		$editor = new TextEditor();
 		$this->view->editor = $editor->getHTML("text", "");
 		$this->view->article = new stdClass();
@@ -198,7 +210,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 				if($this->_request->getParam("continue") == "1")
 					$redirecturl = 'admin/article/edit/id/' . $this->_request->getParam("id");
 				else
-					$redirecturl = '/admin/article/category/' . $this->_request->getParam("category");
+					$redirecturl = '/admin/article/';
 			}
 		}
 

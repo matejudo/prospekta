@@ -1,0 +1,64 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:600px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<ul id="process">
+				<li class="first prevactive"><span><?php __('Step 1'); ?></span></li>
+				<li class="active"><span><?php __('Step 2'); ?>: <?php __('Server test'); ?></span></li>
+				<li class=""><span><?php __('Step 3'); ?></span></li>
+				<li class=""><span><?php __('Step 4'); ?></span></li>
+				<li class=""><span><?php __('Step 5'); ?></span></li>
+				<li class="last"><span><?php __('Step 6'); ?></span></li>
+			</ul>
+			
+			<h4><?php __('Installation and setup'); ?></h4>
+			
+			<div class="clear"></div>
+			
+			<div class="wrap">
+				
+				<div class="content">
+					<h6><?php __('Basic server compatibility test'); ?></h6>
+					<?php if ($success): ?>
+					
+						<form action="<?php e($html->url('/install/activate')); ?>" method="post">
+
+						<input type="hidden" name="data[dummy]" value="1" />
+					
+						<p><?php print(__('Your server meets the basic requirements for Director.', true)); ?></p>
+
+						<?php umask(0); ?>
+						
+						<?php if (is_writable($config_path) || @chmod($config_path, 0777)): ?>
+
+						<?php else: ?>
+							<p><?php printf(__('Before continuing, please set the permissions on the %s folder to 777. The full path to the config folder on your server is', true), '<strong>config</strong>'); ?> <strong><?php e($config_path); ?></strong>. </p>
+						<?php endif; ?>
+
+						<fieldset class="install-button">
+							<input type="submit" value="<?php __('Continue installation'); ?> &rarr;" />
+						</fieldset>
+						</form>
+
+					<?php else: ?>
+						<p><?php print(__('Your server does not meet the basic requirements for an installation of Director.', true)); ?></p>
+					<?php endif; ?>
+				</div> <!--close content-->
+
+			</div> <!--close module wrap-->
+
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+		
+		</div> <!--close module-->
+
+	</div> <!--close login-content-->
+
+</div> <!--close login-container-->

@@ -27,12 +27,19 @@ class Pages extends Zend_Db_Table
 		if(!($result->parentid === NULL))
 		{
 			$done = 0;
+			$maxdepth = 100;
 			while(!$done)
 			{
 				$stmt = $db->query("SELECT * FROM pros_page WHERE id = $result->parentid");
 				$result = $stmt->fetchObject();
 				$path = $result->slug . "/" . $path;
 				if($result->parentid === NULL) $done = 1;
+				$maxdepth--;
+				if($maxdepth == 0)
+				{
+					$path .= "ERROR";
+					break;
+				}
 			}
 		}
 		return $path;
@@ -44,21 +51,59 @@ class Pages extends Zend_Db_Table
 		
 		$stmt = $db->query("SELECT * FROM pros_page WHERE id = $id");
 		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $stmt->fetchObject();	
+		if($result != NULL)
+		{ 
+			$path = $result->slug;		
+			if(!($result->parentid === NULL))
+			{
+				$done = 0;
+				$maxdepth = 100;
+				while(!$done)
+				{
+					$stmt = $db->query("SELECT * FROM pros_page WHERE id = $result->parentid");
+					$result = $stmt->fetchObject();
+					if($result === NULL) break;
+					if($result->parentid === NULL) $done = 1;
+					$path = $result->slug . "/" . $path;
+					$maxdepth--;
+					if($maxdepth == 0)
+					{
+						$path .= "ERROR";
+						break;
+					}
+				}
+			}
+			return $path;
+		}
+		return "";
+	}
+	
+	public function getBreadcrumbs($id)
+	{
+		$db = Zend_Registry::get("db");		
+		$stmt = $db->query("SELECT * FROM pros_page WHERE id = $id");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
 		$result = $stmt->fetchObject();		
-		$path = $result->slug;
+		
+		$return[0]["title"] = $result->title;
+		$return[0]["path"] = $result->slug;
 		
 		if(!($result->parentid === NULL))
 		{
 			$done = 0;
+			$i = 1;
 			while(!$done)
 			{
 				$stmt = $db->query("SELECT * FROM pros_page WHERE id = $result->parentid");
 				$result = $stmt->fetchObject();
-				$path = $result->slug . "/" . $path;
+				$return[$i]["title"] = $result->title;
+				$return[$i]["path"] = $result->slug;
 				if($result->parentid === NULL) $done = 1;
 			}
+			$i++;
 		}
-		return $path;
+		return $return;
 	}
 	
 	public function getTree($id = NULL)
@@ -281,10 +326,11 @@ class Pages extends Zend_Db_Table
 		$count = 0;
 		foreach($ids as $id)
 		{
-			$stmt = $db->query("
-				DELETE FROM pros_page WHERE id = $id
-			");
+			$stmt = $db->query("DELETE FROM pros_page WHERE id = $id");
 			$stmt->execute();
+			$stmt = $db->query("UPDATE pros_menu SET type = 'link', target = '#' WHERE target = $id AND type = 'page'");
+			$stmt->execute();
+			
 			$count++;
 		}
 		return $count;

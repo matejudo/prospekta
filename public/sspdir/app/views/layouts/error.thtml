@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>SlideShowPro Director &raquo; <?php e($title_for_layout); ?></title>
+		<?php
+			// Grab CSS and JS files
+			e($asset->css('base'));
+			
+			/// Bring in IE sheets if necessary
+			$agent = env('HTTP_USER_AGENT');
+			if (strpos($agent, 'MSIE 7.0') !== false):
+				e($html->css('ie7.css?' . DIR_VERSION) . "\n");
+			elseif (strpos($agent, 'MSIE 6.0') !== false):
+				e($html->css('ie6.css?' . DIR_VERSION) . "\n");
+			endif;
+			
+			e($director->css('default/default.css'));
+			
+			if (isset($javascript)):
+			    e('<script type="text/javascript" src="/js/translate"></script>');
+				e($asset->js('base'));
+			endif;
+			
+		?>		
+		
+	</head>
+	
+	<body>
+		<?php echo $content_for_layout ?>
+	</body>
+</html>

@@ -1,0 +1,6 @@
+<div id="footer">
+	<span>
+	<strong>SlideShowPro Director <?php e(DIR_VERSION); ?></strong>
+	&copy; 2005-<?php e(date('Y')); ?> Bradleyboy Productions LLC <?php __('and'); ?> Dominey Design Inc. <?php __('All Rights Reserved'); ?>. 
+	</span>
+</div>

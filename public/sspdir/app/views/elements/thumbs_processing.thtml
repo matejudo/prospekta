@@ -1,0 +1,34 @@
+<div class="right-col">
+	
+	<div class="right-col-inside">
+		
+			<div class="module">
+
+				<div class="module-head">
+					<h3>
+						<?php __('Album preview'); ?>
+						<span class="help">[?]<span><?php __('Generates thumbnail imagery for your slideshow using the original images you uploaded. Your settings will be saved and automatically reused when new images are added to this album.'); ?></span></span>
+					</h3>
+				</div>
+						
+				<div class="wrap">
+
+					<div class="content">						
+						
+						<div id="preview_pane">
+							<?php e($this->renderElement('preview_pane')); ?>
+						</div>
+						
+						</div> <!--close content-->
+
+					</div> <!--close wrap-->
+
+					<div class="module-footer">
+						<div>&nbsp;</div>
+					</div>
+
+			</div> <!--close module-->
+		
+	</div> <!--close right-col-inside-->
+
+</div> <!--close right-col-->

@@ -1,0 +1,196 @@
+<div id="container-wrap">
+
+	<div class="col-wrap">
+		
+		<?php e($this->renderElement('album_subnav')); ?>
+		
+		<div class="clear" style="height:1%;"></div>
+		
+		<p id="no-image-warn"<?php e(ife(count($images) == 0, '', ' style="display:none;"')); ?>><?php printf(__('You have not added any images to this album. Use the %s tab to add some now.', true), $html->link(__('Upload content', true), "/albums/edit/{$album['Album']['id']}/upload")); ?></p>
+					
+		<div id="edit-module" class="module"<?php e(ife(count($images) == 0, ' style="display:none;"', '')); ?>>
+			
+			<div class="module-head">
+				
+				<h3 class="yanker">&nbsp;</h3>
+			
+				<div id="edit-head">
+					
+					<div id="resize-thumbs-ctrl">
+					
+						<div id="slider"><div id="track1"><div id="handle1"></div></div></div>
+					
+						<div id="resize-label">
+							<?php __('Thumbnail size:'); ?>&nbsp;&nbsp;
+						</div>
+
+					</div>
+											
+					<div id="sort_type">
+						
+						<ul class="small-nav">
+
+							<li class="title"><?php __('Order:'); ?></li>
+							
+							<li>
+
+							<?php 
+								$sort = $album['Album']['sort_type']; 
+								$id = 	$album['Album']['id'];
+								$options = array(array('manual', __('Manual', true)), array('file name', __('File name', true)), array('date (newest first)', __('Date (newest first)', true)), array('date (oldest first)', __('Date (oldest first)', true)));
+								$o = array();
+								foreach($options as $option):
+									if ($sort == $option[0]):
+										$o[] = '<div class="radBttn"><a class="rb_module_head_sel"><span>' . $option[1] . '</span></a></div>';
+									else:
+										$o[] = '<div class="radBttn"><a href="#" onclick="change_order_type(' . $id . ', \'' . $option[0] . '\', \'' . $sort . '\'); return false;"><span>' . $option[1] . '</span></a></div>';
+									endif;
+								endforeach;
+		
+								e(join('  ', $o));
+								if ($sort == 'manual') {
+									$sorting = true;
+									$sort_s = 'true';
+								} else {
+									$sorting = false;
+									$sort_s = 'false';
+								}
+							?>
+							
+							</li>
+							
+						</ul>
+						
+					</div> <!--close sort_type-->
+
+				</div> <!--close edit-head-->
+				
+				<div class="clear"></div>
+		
+		</div> <!--close module-head-->
+		
+		<?php if (count($images) > 0): ?>
+			
+		<div class="wrap">
+			
+			<div class="content">
+		
+				<div id="image-view-wrap">
+		
+					<ul id="image-view">	
+						<?php
+							$eb_width = 132;
+							if (empty($other_albums)) {
+								$eb_width -= 21;
+							}
+							
+							if ($user['perms'] < 2) {
+								$eb_width -= 21;
+							}
+							
+							if (isset($_COOKIE['v_factor'])) {
+								$v = $_COOKIE['v_factor'];
+							} else {
+								$v = 0.15;
+							}
+							$w = 200*(.74 + ($v*0.3));
+						
+						?>
+						<?php $t = count($images); $n = 0; ?>
+						<?php foreach ($images as $i): ?>
+							<?php 
+								if (!$rotate || isNotImg($i['src'])) {
+									$_width = $eb_width - 42;
+									$_rotate = false;
+								} else {
+									$_width = $eb_width;
+									$_rotate = true;
+								}
+								
+								$n++; 
+								$src = $i['src'];
+								$path_to_i = ALBUMS . DS . $album['Album']['path'] . DS . 'director' . DS . $i['src'];
+								$path_to_lg = ALBUMS . DS . $album['Album']['path'] . DS . 'lg' . DS . $i['src'];
+								$source_folder = 'director';
+		
+								if (!file_exists($path_to_i)) {
+									$source_folder = 'lg';
+								}
+		
+								if (isNotImg($i['src'])) {
+									$filename = $director->getVidThumb($i['src'], $album['Album']['path'], 176, 132, 1, 70, 1, true);
+								} else { 
+									$arr = unserialize($i['anchor']);
+									if (empty($arr)) {
+										$arr['x'] = $arr['y'] = 50;
+									}
+									$filename = $director->p($i['src'], $album['Album']['path'], 176, 132, 1, 70, 1, $arr['x'], $arr['y'], true);
+								}
+			
+								if (in_array($sort, array('file name', 'manual', ''))) {
+									$sort_text = $i['src'];
+								} else {
+									$sort_text = r(' ', '&nbsp;', $director->_date(__('%m/%d/%Y %I:%M%p', true), $i['created']));
+								}
+											
+								$id = $i['id'];
+							?>
+							<li id="image_<?php e($id); ?>" class="on <?php e(ife(isNotImg($i['src']), 'video', 'image')); ?> <?php $i['active'] ? e('active') : e('inactive') ; ?>" onmousedown="image_select(<?php e($id) ?>); return false;" style="width:<?php e($w) ?>px">
+								
+								<div class="meta"><?php e($sort_text); ?></div>
+								
+								<div class="scale-image<?php $sorting ? e(' sort" onclick="kill_select(); return false"') : e('"'); ?>><div class="thumbimg"><span style="display:none;"><?php e($filename); ?></span><img id="drop_<?php e($id); ?>" src="<?php e(DIR_HOST); ?>/app/webroot/img/loading_ei.gif" class="wide" /><img src="<?php e(DIR_HOST); ?>/app/webroot/img/vid_overlay.gif" style="display:none;" class="video-overlay" width="15" height="15" /></div></div>
+								
+								<div class="<?php $i['active'] ? e('counter') : e('counter-off'); ?> a-counter" id="counter_<?php e($i['id']); ?>"><span<?php e(ife($i['src'] == $album['Album']['aTn'], ' class="is-preview"', '')); ?>>Inactive<?php e(ife($i['src'] == $album['Album']['aTn'], ' / Album Preview', '')); ?></span><span style="display:none">&nbsp;</span></div>
+								
+								<div class="info">
+									<div class="editBttns" style="width:<?php e($_width) ?>px">
+									<a title="<?php __('Edit'); ?>" class="edit-image-btn" href="#" onclick="edit_image('<?php e($id); ?>'); return false;"></a>
+									<a title="<?php $i['active'] ? __('Deactivate') : __('Activate'); ?>" class="active-image-btn" href="#" onclick="toggle_image_active(<?php e($id); ?>); return false;"></a>
+									<?php if ($_rotate): ?>
+									<a title="<?php __('Rotate image counter-clockwise'); ?>" class="rotleft-image-btn" href="#" onclick="rotate_img(<?php e($id . ', ' . $album['Album']['id'] . ', 90'); ?>); return false;"></a>
+									<a title="<?php __('Rotate image clockwise'); ?>" class="rotright-image-btn" href="#" onclick="rotate_img(<?php e($id . ', ' . $album['Album']['id'] . ', -90'); ?>); return false;"></a>
+									<?php endif; ?>
+									<?php if (!empty($other_albums)): ?><a title="<?php __('Copy to another album'); ?>" class="move-image-btn" href="#" onclick="init_copy(<?php e($i['id']); ?>); return false;"></a><?php endif; ?>
+									<?php if ($user['perms'] > 1): ?><a title="<?php __('Delete'); ?>" class="delete-image-btn" href="#" onclick="delete_image(<?php e($i['id']); ?>); return false;"></a><?php endif; ?>
+									</div>
+								</div>
+							
+							</li>
+						<?php endforeach; ?>
+					</ul>
+					
+					<script type="text/javascript" charset="utf-8">
+						scaleIt(<?php e($v); ?>);
+					</script>
+		
+		</div> <!--close image-view-wrap-->
+		
+		<div id="edit-images-scroll" style="display:none">
+			<div id="track"><div id="track_l"></div><div id="track_r"></div>
+				<div id="handle"><div id="handle_l"></div><div id="handle_r"></div>&nbsp;</div>
+			</div>
+		</div>
+		
+		<div id="edit-box" class="clearfix" style="display:none;">
+			<div id="target"></div>
+			<div class="clear"></div>
+		</div>
+		
+		<script type="text/javascript">slider_init = true; sorting = <?php e($sort_s); ?>;</script>
+		
+			</div> <!--close content -->
+			
+			</div> <!--close module wrap-->
+			
+			<?php endif; ?>
+			
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+		
+		</div> <!--close module-->
+		
+	</div> <!--close col-wrap-->
+
+</div> <!--close container-wrap-->

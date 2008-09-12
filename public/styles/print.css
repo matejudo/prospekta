@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document **************************/
+
+body 			{ font-family: 'Lucida Sans Unicode', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; font-size: 12px; padding: 0; }
+
+ul, ol, dl, h1, h2, h3, h4, h5, h6, td, th, caption, pre, p, blockquote, input, textarea 
+				{ line-height: 1.6em; font-weight: normal; color: #6C6C6C; text-align: left; }
+
+h1, h2, h3, 
+h4, h5, h6      { margin: 0; font-family: 'Helvetica Neue', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; font-weight: bold; color: #555; }
+h1              { font-size: 2.0em; padding-top: 10px; padding-bottom: 4px; text-transform: uppercase; }
+h2              { font-size: 1.8em; padding-top: 4px; padding-bottom: 4px; text-transform: uppercase; }
+h3              { font-size: 1.6em; padding-top: 4px; padding-bottom: 4px; }
+h4              { font-size: 1.4em; padding-top: 4px; padding-bottom: 4px; }
+h5              { font-size: 1.2em; padding-top: 4px; padding-bottom: 4px; }
+h6              { font-size: 1.0em; padding-top: 4px; padding-bottom: 4px; }
+
+a               { color: #4d83bb; text-decoration: none; }
+a:hover         { color: #F70; }
+em              { font-style: italic; }
+p               { margin: 0 0 18px 0; font-size: 1.3em;  }
+small           { font-size: 80%; }
+strong          { font-weight: bold; }
+
+ul, ol          { margin-top: 18px; margin-bottom: 18px; padding-left: 16px; list-style-position: outside; list-style-type: disc; font-size: 1.4em; }
+ol              { list-style-type: decimal; padding-left: 17px; }
+ul				{ list-style: square; }    
+dl              { margin-top: 18px; margin-bottom: 18px; font-size: 1.4em; }
+dl dt           { font-weight: bold; font-size: 1.4em; }
+
+blockquote      { border-left: 6px solid #ddd; margin-top: 18px; margin-bottom: 18px; padding-left: 17px; font-style: italic; font-size: 1.4em; }
+blockquote *    { color: #666; }
+
+textarea        { resize: none; } /* Prevents that little handle from showing up in Safari. */
+
+sup             { font-size: 70%; vertical-align: super; }
+
+.center			{ text-align: center; }
+
+/* Matej Udovičić **************************/
+
+#header, #menu, #topmenu, .sidebar, .path 		{ display: none; }
+#header .logo	{ display: block }

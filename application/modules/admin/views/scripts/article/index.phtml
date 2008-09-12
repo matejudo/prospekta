@@ -3,7 +3,7 @@
 <div class="toolbar">
 	<div class="container_12" id="midsection">
 			<ul>
-				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/article/new/category/<?= $this->category ?>">Novi članak</a></li>
+				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/article/new/">Novi članak</a></li>
 				<li class="separator"></li>
 				<li class="button delarticle" id="delete"><a href="#">Izbriši izabrane</a></li>
 				<li class="button pubarticle" id="publish"><a href='#'>Objavi izabrane</a></li>
@@ -94,6 +94,7 @@
 		    <select onchange="window.open(this.options[this.selectedIndex].value,'_top')" >
 		    	<option value="<?= $this->baseUrl ?>/admin/article/category/name/Novosti" <?php if($this->category == "Novosti") echo 'selected="selected"' ?>>Novosti</option>
 		    	<option value="<?= $this->baseUrl ?>/admin/article/category/name/Zanimljivosti" <?php if($this->category == "Zanimljivosti") echo 'selected="selected"' ?>>Zanimljivosti</option>		    
+		    	<option value="<?= $this->baseUrl ?>/admin/article/category/name/Feedback" <?php if($this->category == "Feedback") echo 'selected="selected"' ?>>Feedback</option>
 		    </select>
 		    </h2>
 			<?= $this->form("articles", array("method" => "post", "action" => "noaction")) ?>

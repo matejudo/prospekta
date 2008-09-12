@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>SlideShowPro Director &raquo; <?php e($title_for_layout); ?></title>
+		<script type="text/javascript" charset="utf-8">
+			var base_url = '<?php e($html->url('/')); ?>';
+		</script>
+		
+		<?php
+			// Grab CSS and JS files
+			e($asset->css('base'));
+			
+			// Apply theme CSS
+			if (isset($account)) {
+			    e($director->css($account['Account']['theme']));
+			} else {
+				e($director->css('/styles/default/default.css'));
+			}
+			
+			/// Bring in IE sheets if necessary
+			$agent = env('HTTP_USER_AGENT');
+			if (strpos($agent, 'MSIE 7.0') !== false):
+				e($html->css('ie7.css?' . DIR_VERSION) . "\n");
+			elseif (strpos($agent, 'MSIE 6.0') !== false):
+				e($html->css('ie6.css?' . DIR_VERSION) . "\n");
+			elseif (strpos($agent, 'Firefox') !== false):
+				e($html->css('firefox.css?' . DIR_VERSION) . "\n");
+			endif;
+			
+			if (isset($javascript)):
+				e('<script type="text/javascript" src="' . DIR_HOST . '/index.php?/js/translate/' . $account['Account']['lang'] . '"></script>');
+				e($asset->js('base'));
+			endif;
+			
+		?>
+	</head>
+	
+	<body onload="init();">
+		
+		<?php e($director->preDialogue('messenger-wrap')); ?>
+			<p id="messenger-p" class="clearfix">
+			<span class="accept" id="messenger-span">test</span>
+			<span id="progress_wrap" style="display:none;"><span id="progress_container"><span id="progress"></span></span></span>
+			</p>
+		<?php e($director->postDialogue()); ?>
+		
+		<div id="helper" style="display:none;">
+			<p>&nbsp;</p>
+		</div>
+		
+		<div id="pop-image" style="display:none;">
+			<ul>
+				<li><span id="filename">50</span></li>
+				<li><?php printf(__('Uploaded on %s', true), '<span id="uploaded-on">date</span>'); ?></li>
+				<li><?php printf(__('Part of the "%s" album', true), '<span id="part-of">album</span>'); ?></li>
+			</ul>
+		</div>
+
+		<div id="dummy" style="display:none;"></div>
+				
+		<?php e($this->renderElement('header')); ?>
+	
+		<?php echo $content_for_layout ?>
+		
+		<?php e($this->renderElement('footer')); ?>
+		
+		<iframe id="hidden" name="hidden" style="width:0; height:0;"></iframe>
+		
+		<div id="flash-container"></div>
+		<script type="text/javascript">
+			var swf = new SWFObject("<?php e($this->webroot . 'swf/clipboard.swf?' . DIR_VERSION); ?>", "_clip", "1", "1", "8", "#292929");
+			swf.addParam("allowScriptAccess", "always");
+			swf.write("flash-container");
+		</script>
+	</body>
+</html>

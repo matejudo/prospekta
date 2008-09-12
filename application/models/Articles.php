@@ -97,20 +97,34 @@ class Articles extends Zend_Db_Table
 		");	
 	}
 	
-	public function getBySlug($slug)
+	public function getBySlug($slug, $format = 0)
 	{
 		$db = Zend_Registry::get("db");
 		$stmt = $db->query("SELECT * FROM pros_article WHERE slug = '$slug'");
 		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
-		return $stmt->fetchObject();		
+		$item = $stmt->fetchObject();
+		if($format)
+		{
+			$item->text = str_replace("<!-- pagebreak --></p>", "</p><!-- pagebreak -->", $item->text);
+			$item->text = '<div class="intro">' . str_replace("<!-- pagebreak -->", "</div>", $item->text);
+			$end = strpos($item->text, "<!-- pagebreak -->");	
+		}
+		return $item;	
 	}
 	
-	public function getById($id)
+	public function getById($id, $format = 0)
 	{
 		$db = Zend_Registry::get("db");
 		$stmt = $db->query("SELECT * FROM pros_article WHERE id = $id");
 		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
-		return $stmt->fetchObject();		
+		$item = $stmt->fetchObject();
+		if($format)
+		{
+			$item->text = str_replace("<!-- pagebreak --></p>", "</p><!-- pagebreak -->", $item->text);
+			$item->text = '<div class="intro">' . str_replace("<!-- pagebreak -->", "</div>", $item->text);
+			$end = strpos($item->text, "<!-- pagebreak -->");	
+		}
+		return $item;
 	}
 	
 	public function getCategories()
@@ -120,6 +134,8 @@ class Articles extends Zend_Db_Table
 		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
 		return $stmt->fetchAll();
 	}
+	
+
 	
 	public function getArticles($category, $count = 1, $fulltext = 0)
 	{
@@ -131,6 +147,7 @@ class Articles extends Zend_Db_Table
 		{
 			$item->text = str_replace("<!-- pagebreak --></p>", "</p><!-- pagebreak -->", $item->text);
 		
+			
 			if(!$fulltext)
 			{
 				$end = strpos($item->text, "<!-- pagebreak -->");

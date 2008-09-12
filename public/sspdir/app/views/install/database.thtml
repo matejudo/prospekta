@@ -1,0 +1,121 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:600px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<ul id="process">
+				<li class="first complete"><span><?php __('Step 1'); ?></span></li>
+				<li class="complete"><span><?php __('Step 2'); ?></span></li>
+				<li class="prevactive"><span><?php __('Step 3'); ?></span></li>
+				<li class="active"><span><?php __('Step 4'); ?>: <?php __('Database setup'); ?></span></li>
+				<li class=""><span><?php __('Step 5'); ?></span></li>
+				<li class="last"><span><?php __('Step 6'); ?></span></li>
+			</ul>
+			
+			<h4><?php __('Installation and setup'); ?></h4>
+			
+			<div class="clear"></div>
+			
+			<div class="wrap">
+				
+				<div class="content">
+					<?php if ($conf_exists): ?>
+						<h6><?php __('Configuration exists'); ?></h6>
+						<p><?php printf(__('Your configuration file already exists. If it contains the right values, you may %s. If you would like to use this part of the installer to recreate the file, please delete it first.', true), $html->link(__('continue with installation', true), '/install/register')); ?> </p>
+					<?php else: ?>
+					
+						<?php if (is_writable($config_path)): ?>
+												
+							<form action="<?php e($this->here); ?>" method="post" style="margin:0;padding:0;" onsubmit="return validate_install();">
+								
+								<?php if ($connection_error || $db_select_error || $write_error): ?>
+									<h6 class="error"><?php __('Error'); ?></h6>					
+									<?php if ($connection_error): ?>
+									<p><?php __('Director could not connect to the database you specified. Please check your values below and try again.'); ?></p>
+									<?php elseif ($db_select_error): ?>
+									<p><?php __('Director could not find the database name you entered. Director was able to connect to the server correctly, however could not select the database. Check the database name and try again.'); ?></p>
+									<?php else: ?>
+									<p><?php __('Director could not write the configuration file. Usually this is due to the IUSR account not having the proper permissions. Check with your host to ensure this user account has the proper permissions to write files to the filesystem.'); ?></p>	
+									<?php endif; ?>
+									<p><?php __('The following MySQL error was encountered'); ?>: <strong><?php e($mysql_error); ?></strong>.</p>
+								<?php else: ?>
+									<p><?php __('Enter connection data for your MySQL database. Note: your database must already exist before completing this step. If you aren’t sure how to create one, please refer to the help documentation provided by your web hosting provider.'); ?></p>
+								<?php endif; ?>
+								
+								<table cellspacing="0" cellpadding="0" style="width:100%">
+									<tr>
+										<td style="width:50%;padding-right:15px">
+											<fieldset>
+												<label class="twin-top"><?php __('MySQL server hostname'); ?>:</label>
+												<label class="sub"><?php __('ex. mysql.server.com or localhost'); ?></label>
+												<?php e($form->text('db/server', array('class' => 'wide'))); ?>
+											</fieldset>
+										</td>
+										
+										<td>
+											<fieldset>
+												<label class="twin-top"><?php __('Database name'); ?>:</label>
+												<label class="sub"><?php __('Database must already exist!'); ?></label>
+												<?php e($form->text('db/name', array('class' => 'wide'))); ?>
+											</fieldset>
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="padding-right:15px">
+											<fieldset>
+												<label class="twin-top"><?php __('Database username'); ?>:</label>
+												<label class="sub"><?php __('Username used to log into this database.'); ?></label>
+												<?php e($form->text('db/user', array('class' => 'wide'))); ?>
+											</fieldset>
+										</td>
+										
+										<td>
+											<fieldset>
+												<label class="twin-top"><?php __('Database password'); ?>:</label>
+												<label class="sub"><?php __('Password used to log into this database.'); ?></label>
+												<?php e($form->text('db/pass', array('class' => 'wide'))); ?>
+											</fieldset>
+										</td>
+									</tr>
+									
+									<tr>
+										<td colspan="2" style="padding-right:30px;">
+											<fieldset>
+												<label class="twin-top"><?php __('Database table prefix'); ?>:</label>
+												<label class="sub"><?php __('Only change if “ssp_” conflicts with existing tables. Otherwise, leave this alone.'); ?></label>
+												<?php e($form->text('db/prefix', array('value' => 'ssp_', 'style' => 'width:50%'))); ?>
+											</fieldset>
+										</td>
+									</tr>
+								</table>
+								
+								<fieldset class="install-button">
+									<input type="submit" value="<?php __('Setup database'); ?> &rarr;" />
+								</fieldset>
+							</form>
+						<?php else: ?>
+							<h6 class="error"><?php __('Error'); ?></h6>
+							<p><?php __('Before continuing, Director must have the proper permissions to write to the config folder. Please set the permissions on this folder to 777.'); ?> (<?php __('The full path to this folder on your server is'); ?> <strong><?php e($config_path); ?></strong>)</p>
+
+							<p><?php printf(__('Once you have properly set the permissions on the config folder, %s', true), $html->link(__('click here', true), "/install/database")); ?>.</p>
+						<?php endif; ?>
+					<?php endif; ?>
+				</div> <!--close content-->
+
+			</div> <!--close module wrap-->
+
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+		
+		</div> <!--close module-->
+
+	</div> <!--close login-content-->
+
+</div> <!--close login-container-->

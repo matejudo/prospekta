@@ -1,0 +1,64 @@
+<?php e($this->renderElement('album_head')); ?>
+
+<div id="container-wrap">
+	
+	<div class="col-wrap">
+		
+		<?php e($this->renderElement('album_subnav')); ?>
+	
+		<div class="left-col">
+			
+			<div class="left-col-inside">
+
+			<div class="module">
+		
+				<div class="module-head"><h3><?php __('Album audio'); ?></h3></div>
+		
+				<div class="wrap">
+					
+					<div class="content">
+	
+					<form action="#" id="theForm" name="theForm" onsubmit="update_audio(<?php e($album['Album']['id']); ?>); return false;">
+						<input type="hidden" name="aid" value="57" />
+						<fieldset>
+							<label><?php __('Select an audio file:'); ?></label>
+							<div id="audio-select">
+								<?php if (count($mp3s) == 0): ?>
+									<?php __('No MP3 files in the album-audio folder'); ?>
+								<?php else: ?>
+									<select name="data[Album][audioFile]">
+										<option value="0"><?php __('No audio for this album'); ?></option>
+										<?php foreach($mp3s as $mp3): ?>
+											<option<?php e($album['Album']['audioFile'] == $mp3 ? ' selected="selected"' : ''); ?>><?php e($mp3); ?></option>
+										<?php endforeach; ?>
+									</select>
+								<?php endif; ?>
+							</div>
+						</fieldset>
+						<fieldset>
+							<label><?php __('Audio caption:'); ?></label>
+							<?php e($form->textarea('Album/audioCap', array('cols' => 40, 'rows' => 5, 'class' => 'wide'))); ?>
+						</fieldset>
+						<input class="field-input" id="save-button" type="submit" value="<?php __('Save changes'); ?>" />
+						<span id="audio-messenger" style="display:none;"></span>
+					</form>
+					
+					<span class="note"><strong><?php __('Note'); ?></strong>: <?php printf(__('For songs to show up in the drop-down above, they must be uploaded to the album-audio folder. This can be done via FTP or the %s tab.', true), '<a href="' . str_replace('audio', 'upload', $this->here) . '" title="' . __('Upload', true) . '">' . __('Upload', true) . '</a>'); ?></span>
+					
+					</div> <!--close content-->
+			
+				</div> <!--close wrap-->
+		
+				<div class="module-footer">
+					<div>&nbsp;</div>
+				</div>
+		
+			</div> <!--close module-->
+			
+			</div> <!--close left-col-inside-->
+	
+		</div> <!--close left-col-->
+
+	</div> <!--close col-wrap-->
+
+</div> <!--close container-wrap-->

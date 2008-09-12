@@ -1,0 +1,38 @@
+<table class="sortable" cellpadding="0" cellspacing="0">
+	<tr>
+		<th style="display:none"></th> <!-- Need this hack for the table sorting to work -->
+		<th class="title" colspan="2"><?php __('Additional users'); ?></th>
+		<th class="nosort"><?php __('Role'); ?></th>
+		<th class="tr nosort"><?php __('Action'); ?></th>
+	</tr>
+	
+	<?php if (empty($users)): ?>
+	<tr>
+		<td colspan="4" class="title">
+			<p><?php __('You are the sole user of Director. Use the form on the left side of this page to create a new user.'); ?></p>
+		</td>
+	</tr>
+	</table>
+	
+	<?php else: ?>
+	
+	<?php $alt = true; ?>
+	<?php foreach($users as $u): ?>
+		<tr<?php $alt ? e(' class="alt"') : ''; $alt ? $alt = false : $alt = true; ?>>
+			<td><?php e($director->avatar($u['User']['id'], 24, 24)); ?></td>
+			<td><?php e($u['User']['usr']); ?></td>
+			<td>
+				<?php e($form->select('User/perms', 
+											array(1 => __('Editor', true), 
+												  2 => __('Contributor', true), 
+												  3 => __('Administrator', true)),
+											$u['User']['perms'], 
+											array('onchange' => "update_user_perms(this, {$u['User']['id']})"), 
+											null, 
+											false)); ?>
+			</td>
+			<td><a href="#" onclick="delete_user(<?php e($u['User']['id']); ?>); return false;"><?php __('Delete user'); ?></a></td>
+		</tr>
+	<?php endforeach; ?>
+</table>
+<?php endif; ?>

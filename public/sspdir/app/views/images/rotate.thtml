@@ -1,0 +1,11 @@
+<?php 
+	$out = '';
+	foreach($images as $image): 
+		$arr = unserialize($image['Image']['anchor']);
+		if (empty($arr)) {
+			$arr['x'] = $arr['y'] = 50;
+		}
+		$out .= 'drop_' . $image['Image']['id'] . '~~__~~' . $director->p($image['Image']['src'], $image['Album']['path'], 176, 132, 1, 70, 1, $arr['x'], $arr['y'], true) . '||';
+	endforeach; 
+	e($out);
+?>

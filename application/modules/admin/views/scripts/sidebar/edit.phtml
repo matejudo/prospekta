@@ -1,0 +1,104 @@
+<div id="messagebar"><div id="message" style="display: none"><?= $this->message ?></div></div>
+<div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
+<div class="toolbar">
+	<div class="container_12" id="midsection">
+			<ul>
+			<li class="button save" id="save"><a href="#">Spremi</a></li>
+			<li class="button save" id="savecont"><a href="#">Spremi i nastavi</a></li>
+			<li class="button delarticle" id="delete"><a href="#">Odustani</a></li>
+		</ul>
+	</div>
+</div>
+<div class="container_12" id="midsection">
+	<script language="javascript" type="text/javascript">
+		<?php if($this->article->id == -1): ?>
+			var lock = false; 
+		<?php else: ?>
+			var lock = true;
+		<?php endif; ?>
+		$(document).ready(function() {
+			
+			$("#title").myslug({lock: lock });
+			$("#slug").myslug({lock: lock });
+			
+			$("#lock").click( function(event) {
+				if(lock == false)
+				{
+					$("#lock").attr("src", "<?= $this->baseUrl(); ?>/images/icon_lock.png");
+					$("#lock").attr("title", "Zaključano - Moguća je samo ručna promjena sluga.");
+					lock = true;
+				}
+				else
+				{
+					$("#lock").attr("src", "<?= $this->baseUrl(); ?>/images/icon_lock_unlock.png");
+					$("#lock").attr("title", "Otključano - Promjena naslova mjenja i slug");
+					lock = false;
+				}
+			});
+			
+			$("#save").click( function () {
+				if($("#slug").attr("value") == "" ) { showMessage("Ispunite polje za slug."); return; }
+				if($("#title").attr("value") == "" ) { showMessage("Ispunite polje za naslov."); return; }
+				$("#editor").submit();
+			} );
+			
+			$("#savecont").click( function () {
+			
+				$("#continue").attr("value", "1");
+				if($("#slug").attr("value") == "" ) { showMessage("Ispunite polje za slug."); return; }
+				if($("#title").attr("value") == "" ) { showMessage("Ispunite polje za naslov."); return; }
+				$("#editor").submit();
+			} );
+			
+			$("#title").focus(function() { 
+				if($("#title").attr("value") == "Naslov") $("#title").attr("value", "");
+			 });
+			 
+			$("#title").blur(function() { 
+				if($("#title").attr("value") == "") $("#title").attr("value", "Naslov");
+			 });
+			
+		});
+	
+		function generateSlug(text)
+		{
+		    var text_array = text.split(" ");
+		    text = text_array.join("-");
+		    text = text.toLowerCase()
+			return text;
+		}
+	</script>
+
+	<div class="grid_12">
+		<h2><?= ($this->sidebar->id == "-1") ? "Novi sidebar" : "Izmjena sidebara" ?></h2>
+		<form method="post" action="<?= $this->baseUrl(); ?>/admin/sidebar/save" class="editor" name="editor" id="editor">
+			<input type="hidden" name="category" value="<?= $this->sidebar->category; ?>" />
+			<input type="hidden" name="id" value="<?= $this->sidebar->id; ?>" />
+			<input type="hidden" name="oldslug" class="slug" value="<?= $this->sidebar->slug; ?>"  /> 
+			<div id="content" class="grid_5 alpha">
+				<p><input type="text" name="title" id="title" class="big" value="<?= ($this->sidebar->title != "") ? $this->sidebar->title : "Naslov" ; ?>" /></p>
+				<p><?= $this->editor ?></p>		
+				<h3>Slike i attachmenti</h3>
+				<p><a href="#" onclick="$('#filelist').toggle(); return false;">Dodaj sliku ili attachment u tekst</a> | <a href="#" onclick="$('#filelist').show(0); $('#filelist').contents().find('#uploadform').animate({ height: '80px' }, 'slow'); return false;">Upload nove datoteke</a></p>
+				<iframe src="<?= $this->baseUrl(); ?>/admin/file/folderclear" class="filelist" name="filelist" id="filelist" style="display: none;"></iframe>
+			</div>
+			<div id="content" class="grid_5">
+
+			</div>
+			<div class="grid_2 omega sidebar">
+				<h3>Opcije</h3>
+				<p>
+					<input type="checkbox" name="published" id="published" <?= $this->sidebar->published ? "checked='checked'" : ""; ?> value="1" /> <label for="published">Članak je objavljen</label><br/>
+				</p>
+				<h3>Pozicija sidebara</h3>
+				<p>
+					<select name="category">
+						<option value="Desno"<?php if($this->sidebar->position == "Desno") echo ' selected="selected"' ?>>Desno</option>
+						<option value="Lijevo"<?php if($this->sidebar->position == "Lijevo") echo ' selected="selected"' ?>>Lijevo</option>
+					</select>
+				</p>
+
+			</div>
+		</form>
+	</div>
+</div>

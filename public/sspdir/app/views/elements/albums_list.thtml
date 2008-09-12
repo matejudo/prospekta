@@ -1,0 +1,164 @@
+<div id="head">
+	
+	<div class="head-wrap">
+		
+		<div id="head-form">
+			
+			<?php if ($user['perms'] > 1 && $writable): ?>
+			<div class="icon-bump">
+
+				<form name="album_form" action="#" onsubmit="add_album(this); return false;">
+					<label class="inline"><?php __('Create a new album'); ?>:</label>&nbsp;&nbsp;
+					<?php e($form->text('Album/name', array('size' => 30, 'class' => 'inline', 'value' => __('Album title', true), 'onfocus' => "if (this.value == __('Album title')) this.value='';", 'onblur' => "if (this.value == '') this.value = __('Album title');"))); ?>&nbsp;&nbsp;<input type="submit" value="<?php __('Create'); ?>" />										
+				</form>
+				
+			</div>
+			<?php endif; ?>
+
+		</div>
+		
+		<h1 class="albums"><?php __('Albums'); ?></h1>
+	
+	</div>
+	
+	<div class="clear"></div>
+
+</div>
+
+<div id="container-wrap">
+
+	<div class="col-wrap">
+
+		<?php if (!$writable): ?>
+		
+		<div id="alert">
+			<div class="red">
+				<div class="tr"></div>
+				<div class="content">
+					<div class="fluid icon">
+						<?php printf(__("Before you can add a new album, the albums folder of your Director installation needs to be writable by the web server. The full path to this folder on your server is %s. For more information on how to set the permissions on this folder, consult the Director user guide.", true), ALBUMS); ?>
+					</div>
+				</div>
+				<div class="bl"><div class="br"></div></div>
+			</div>
+		</div>
+
+		<?php elseif (empty($albums)): ?>
+		
+		<div id="alert">
+			<div class="green">
+				<div class="tr"></div>
+				<div class="content">
+					<div class="fixed icon">
+						<?php if ($user['perms'] > 1): ?>
+							<?php __("You don't have any albums! Use the form at the top-right to create one."); ?>
+						<?php else: ?>
+							<?php __("You don't have any albums! A user with higher permissions will have to add one before you can continue."); ?>
+						<?php endif; ?>
+					</div>
+				</div>
+				<div class="bl"><div class="br"></div></div>
+			</div>
+		</div>
+		<?php else: ?>
+			<div class="header-radius">
+				<div class="tr"></div>
+				<div class="content">
+					<strong><?php __('Show'); ?>:</strong>&nbsp;&nbsp;<select id="album-filter" onchange="filter_albums_list()">
+						<option value="0"><?php __('All'); ?></option>
+						<option value="1"><?php __('Active'); ?></option>
+						<option value="2"><?php __('Inactive'); ?></option>
+					</select>
+					&nbsp;&nbsp;&nbsp;<strong><?php __('Search'); ?>:</strong>&nbsp;&nbsp;<input type="text" name="search" value="<?php __('Search'); ?>" id="search" onkeyup="search(true)" size="30" onfocus="if (this.value == __('Search')) this.value='';" onblur="if (this.value == '') this.value = __('Search');" /> <div id="search-spin" class="form-msg icon-spin" style="display:none;">&nbsp;</div>
+				</div>
+				<div class="bl"><div class="br"></div></div>
+			</div>
+						
+		<?php endif; ?>
+		
+		<table cellspacing="0" cellpadding="0" id="albums-table" class="sortable">
+			<tr>
+				<th class="title<?php $sort_on == __('Albums', true) ? e(" $sort_str") : '' ; ?>"><?php __('Albums'); ?> <span>(<?php __('Total'); ?>: <?php e(count($albums)); ?>)</span></th>
+				<th class="nosort"><?php __('Preview'); ?></th>
+				<th<?php $sort_on == __('Album type', true) ? e(" class=\"$sort_str\"") : '' ; ?>><?php __('Type'); ?></th>
+				<th class="number<?php $sort_on == __('Images', true) ? e(" $sort_str") : '' ; ?>"><?php __('Images'); ?></th>
+				<th<?php $sort_on == __('Modified', true) ? e(" class=\"$sort_str\"") : '' ; ?>><?php __('Modified'); ?></th>
+				<th<?php $sort_on == __('Created', true) ? e(" class=\"$sort_str\"") : '' ; ?>><?php __('Created'); ?></th>
+				<th class="nosort"><?php __('XML'); ?></th>
+				<th class="tr nosort"><?php __('Actions'); ?></th>
+			</tr>
+			
+			<?php if (empty($albums)): ?>
+			
+			<tr>
+				<td colspan="8" class="title end">
+					<?php __('You have no albums.'); ?>
+				</td>
+			</tr>
+			
+			<?php else: ?>
+		
+			<tr id="search-alert" style="display:none;">
+				<td colspan="8" class="title end">
+					<?php __('No albums that match your filter settings were found.'); ?>
+				</td>
+			</tr>
+				
+			<?php foreach($albums as $album): ?>
+
+				<tr id="album_<?php e($album['Album']['id']); ?>" class="<?php e(ife($album['Album']['active'],'publish', 'draft')); ?> content">
+
+					<td class="title">
+						<h4 class="icon_label_album"><a href="<?php e($html->url("/albums/edit/{$album['Album']['id']}")); ?>" title="<?php __('Edit album'); ?>"><?php e($album['Album']['name']); ?></a></h4><span><?php e(htmlspecialchars($album['Album']['description_clean'])); ?></span>
+					</td>
+					<td class="thumb">
+						<div class="album-thumb-bg" onclick="location.href='<?php e($html->url("/albums/edit/{$album['Album']['id']}")); ?>';" onmousemove="this.style.cursor='pointer';" onmouseout="this.style.cursor='normal';"><div class="album-thumb-img" style="background:<?php e($director->albumBg($album['Album']['aTn'], $album['Album']['path'])); ?>"></div></div>
+					</td>
+					<td>
+						<?php __('Custom'); ?>
+					</td>
+					<td>
+						<?php e($album['Album']['images_count']); ?>
+					</td>
+					<!-- Keep whitespace out of the following to cells, messes up sorting -->
+					<td><?php e($director->_date(__('%m/%d/%Y %I:%M%p', true), $album['Album']['modified'])); ?><span class="sort_this" style="display:none;"><?php e(strtotime($album['Album']['modified'])); ?></span></td>
+					<td><?php e($director->_date(__('%m/%d/%Y %I:%M%p', true), $album['Album']['created'])); ?><span class="sort_this" style="display:none;"><?php e(strtotime($album['Album']['created'])); ?></span></td>
+					
+
+					<td class="fix">
+						<div style="margin:0 auto;display:block;">
+							<div class="radBttn" style="margin-left:0;"><a class="rb_module_wrap" href="#" title="<?php __('Copy XML File Path to Clipboard'); ?>" onclick="Director.Utilities.copyToClipboard(this, true, '<?php e(DATA_LINK . '?album=' . $album['Album']['id']); ?>'); return false;"><span><?php __('Copy'); ?></span></a></div>
+									</div>			
+					</td>
+						
+					<td class="end">
+											
+						<div style="margin:0 auto;display:block;width:45px;">
+						
+											
+						<a title="<?php $album['Album']['active'] ? __('Deactivate album') : __('Activate album'); ?>" class="<?php $album['Album']['active'] ? '' : e('in'); ?>active-image-btn" href="#" onclick="toggle_album_active_index(<?php e($album['Album']['id']) ?>); return false;"></a>
+							
+							<?php if ($user['perms'] > 1): ?><a title="<?php __('Delete album'); ?>" class="delete-image-btn" href="#" onclick="delete_album(<?php e($album['Album']['id']); ?>); return false;"></a><?php endif; ?>
+								
+						</div>
+					</td>
+				
+				</tr>
+		
+			<?php endforeach; ?>
+		
+			<?php endif; ?>
+	
+		</table>
+	
+		<script type="text/javascript" charset="utf-8">
+			fix_col_widths();
+		</script>
+		
+	</div>
+
+</div> <!--close container-wrap-->
+
+<div id="container-footer">
+	<div>&nbsp;</div>
+</div>

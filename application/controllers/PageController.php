@@ -17,6 +17,11 @@ class PageController extends Zend_Controller_Action
 		$this->view->id = $this->_getParam("id");
 		$pages = new Pages();
 		$this->view->page = $pages->getById($this->view->id);
+		$this->view->path = array_reverse($pages->getBreadcrumbs($this->view->id));
+		
+		$sidebars = new Sidebar();
+		$this->view->leftsidebar = $sidebars->get($this->view->id, "left");
+		$this->view->rightsidebar = $sidebars->get($this->view->id, "right");
 		
 		$menu = new Menu();
 		$menuitems = $menu->getTree("Glavni");

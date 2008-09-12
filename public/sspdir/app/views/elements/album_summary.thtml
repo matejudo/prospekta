@@ -1,0 +1,205 @@
+<?php e($this->renderElement('album_head')); ?>
+
+<div id="container-wrap">
+	
+	<div class="col-wrap">
+		
+		<?php e($this->renderElement('album_subnav')); ?>
+
+		<?php if (!$album['Album']['active'] && !isset($_COOKIE['album_warning'])): ?>
+		<div id="alert">
+			<div class="green">
+				<div class="tr"></div>
+				<div class="content">
+					<div class="fixed icon">
+						<div class="radBttn"><a class="rb_sup" href="#" onclick="suppress_album_warning(); return false;" title="<?php __('Suppress warning'); ?>">
+						<span><?php __('Suppress this warning'); ?></span></a></div>
+						<?php __('This album is inactive. Set its Publish status to active to make it available to galleries.'); ?>
+					</div>
+				</div>
+				<div class="bl"><div class="br"></div></div>
+			</div>
+		</div>
+		<?php endif; ?>
+
+		<div style="float:left;width:100%;"> <!-- start lcol-parent-->
+			
+			<div style="margin-right:476px;"> <!-- start lcol-->
+				
+				<div class="module">
+
+					<div class="module-head">
+						<h3><?php __('Album title &amp; description'); ?></h3>
+					</div>
+
+					<div class="wrap">
+
+						<div class="content">
+
+							<form name="info_form" action="#" onsubmit="update_album(this, <?php e($html->tagValue('Album/id')); ?>); return false">
+								<fieldset>
+									<label><?php __('Album title:'); ?> <span class="help">[?]<span><?php __('This identifies this album within Director, and also appears as your album title in SlideShowPro\'s gallery.'); ?></span></span></label>
+									<?php e($form->text('Album/name', array('class' => 'wide'))); ?>
+								</fieldset>
+								<fieldset>
+									<label><?php __('Album description:'); ?> <span class="help">[?]<span><?php __('This description appears underneath the album title in SlideShowPro\'s gallery.'); ?></span></span></label>
+								<?php
+									e($form->textarea('Album/description', array('rows' => 5, 'class' => 'wide')));
+								?>
+								</fieldset>
+								
+								<input class="field-input" id="save-button" type="submit" value="<?php __('Save changes'); ?>" /> <span id="album-messenger" style="display:none;"></span>
+							</form>
+
+						</div> <!--close content-->
+
+					</div> <!--close wrap-->
+
+					<div class="module-footer">
+						<div>&nbsp;</div>
+					</div>
+
+				</div> <!--close module-->
+				
+				
+				<div class="module">
+
+					<div class="module-head"><h3><?php __('XML info'); ?></h3></div>
+
+					<div class="wrap">
+
+						<div class="content">
+								<form name="publish_state" action="#" onsubmit="Director.Utilities.copyToClipboard('xml_path'); return false;">
+
+								<fieldset>
+									<label><?php __('XML file path:'); ?> <span class="help">[?]<span><?php __('Copy this URL and paste it into SlideShowPro\'s "XML File Path" parameter field in the Component Inspector. SlideShowPro will then load content from this album.'); ?></span></span></label>
+									
+										<div class="rLink">
+													<div class="radBttn"><a class="rb_module_wrap" href="#" title="<?php __('Copy XML File Path to Clipboard'); ?>" onclick="Director.Utilities.copyToClipboard(this, true, '<?php e(DATA_LINK . '?album=' . $html->tagValue('Album/id')); ?>'); return false;"><span><?php __('Copy'); ?></span></a></div>
+												</div>
+									
+									<span id="xml_path"><?php e(DATA_LINK . '?album=' . $html->tagValue('Album/id')); ?></span>
+									
+								
+								
+								</fieldset>
+								
+								
+								<!-- <input class="field-input" type="submit" value="<?php __('Copy path to clipboard'); ?>" /><span id="clip-messenger" style="display:none;"></span> -->
+
+							</form>
+
+							<h6><?php __('Album ID:'); ?> <span class="help">[?]<span><?php __('This ID is used when loading specific albums in SlideShowPro with ActionScript. See the "loadAlbum()" method in SlideShowPro\'s Help documentation for more information.'); ?></span></span></h6> 
+							<p>album-<?php e($html->tagValue('Album/id')); ?></p>
+
+						</div> <!--close content-->
+
+					</div> <!--close wrap-->
+
+					<div class="module-footer">
+						<div>&nbsp;</div>
+					</div>
+
+				</div> <!--close module-->
+				
+				
+			</div>	<!-- close lcol-->
+			
+		</div> <!-- close lcol-parent-->
+			
+		<div style="float:left;margin-left:-460px;width:238px;">
+		
+			<?php if (!empty($album['Image'])): ?>
+
+			<div class="module">
+
+				<div class="module-head"><h3><?php __('Recent content'); ?></h3></div>
+
+				<div class="wrap">
+
+					<div class="content">
+
+						<?php e($director->recentList($recent_images, 9, 56, 41, true)); ?>
+
+					<p>
+						<span class="more"><?php e($html->link(__('All album content', true), "/albums/edit/{$album['Album']['id']}/content")); ?></span>
+					</p>
+
+					</div> <!--close content-->
+
+				</div> <!--close wrap-->
+
+				<div class="module-footer">
+					<div>&nbsp;</div>
+				</div>
+
+			</div> <!--close module-->
+			
+			<div class="module">
+
+				<div class="module-head"><h3><?php __('Album preview'); ?></h3></div>
+
+				<div class="wrap">
+
+					<div class="content">
+						<p>
+						<?php if (empty($album['Album']['aTn'])): ?>
+							<?php printf(__('You have not set an album preview yet. You may do so via the %s tab.', true), $html->link(__('Content', true), "/albums/edit/{$album['Album']['id']}/content")); ?>
+						<?php else: ?>
+							<?php
+							
+								$specs = getimagesize(ALBUMS . DS . $album['Album']['path'] . DS . 'lg' . DS . $album['Album']['aTn']);
+								if ($specs[1] < 206) {
+									$h = $specs[1];
+								} else {
+									$h = 206;
+								}
+							
+							?>
+							<img src="<?php e($director->p($album['Album']['aTn'], $album['Album']['path'], 206, $h, 0, 85, 1, 50, 50)); ?>" alt="Image" />
+						<?php endif; ?>
+						</p>
+					</div> <!--close content-->
+
+				</div> <!--close wrap-->
+
+				<div class="module-footer">
+					<div>&nbsp;</div>
+				</div>
+
+			</div> <!--close module-->
+			
+			<?php else: ?>
+
+			<div class="module">
+
+				<div class="module-head"><h3><?php __('Album content'); ?></h3></div>
+
+				<div class="wrap">
+
+					<div class="content">
+						<p>
+							<?php printf(__('You have not added any content to this album. Use the %s tab to add some now.', true), $html->link(__('Upload content', true), "/albums/edit/{$album['Album']['id']}/upload")); ?>
+						</p>
+					</div> <!--close content-->
+
+				</div> <!--close wrap-->
+
+				<div class="module-footer">
+					<div>&nbsp;</div>
+				</div>
+			
+			</div>
+
+			<?php endif; ?>
+			
+		</div>
+			
+		<div style="float:left;width:208px;margin-left:-208px;" id="summary-right">
+			<?php e($this->renderElement('album_summary_right')); ?>
+			
+		</div>
+						
+	</div> <!--close col-wrap-->
+
+</div> <!--close container-wrap-->

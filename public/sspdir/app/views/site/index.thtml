@@ -1,0 +1,290 @@
+<div id="page">
+
+	<div id="container">
+
+		<div id="head">	
+			<h1 class="snapshot"><?php __('Snapshot'); ?></h1>
+		</div>
+		
+		<div id="container-wrap">
+		
+			<div class="col-wrap">
+				
+				<?php if (!$writable): ?>
+
+				<div id="alert">
+					<div class="red">
+						<div class="tr"></div>
+						<div class="content">
+							<div class="fluid icon">
+								<?php printf(__("Before you can use Director to its fullest potential, the albums and album-audio folders in your installation need to be writable by the web server. For more information on how to set these permissions, consult the Director user guide.", true), ALBUMS); ?>
+							</div>
+						</div>
+						<div class="bl"><div class="br"></div></div>
+					</div>
+				</div>
+				
+				<script type="text/javascript" charset="utf-8">
+					new Effect.Pulsate('alert');
+				</script>
+				
+				<?php endif; ?>
+				
+				<div class="header-radius">
+					<div class="tr"></div>
+					<div class="content">
+						<?php e($director->avatar(CUR_USER_ID, 26, 26)); ?>
+						
+						<h6><?php __('Hello'); ?> <?php e($html->link($user['usr'], '/users/profile', array('title' => ''))); ?>!</h6>
+							<span class="subtext"><?php e($user['role']); ?>. <?php printf(__('You have uploaded %s images since your account was created on %s.', true), number_format($image_count), $director->_date(__('%m/%d/%Y', true), $user['created'])); ?> <?php if (isset($last_visit)): printf(__('The last time we saw you was on %s.', true), $director->_date(__('%m/%d/%Y', true), $last_visit)); endif; ?></span>
+					</div>
+					<div class="bl"><div class="br"></div></div>
+				</div>
+					
+				<div id="dash-left-col">
+					
+							<div class="inner-left">
+														
+								<div class="module">
+									
+									<div class="module-head">
+										<h3><?php __('Shortcuts'); ?></h3>
+									</div>
+									
+									<div class="wrap">
+										
+										<div class="content">
+
+											<ul class="dash-strip module-first">
+												<?php if ($writable): ?>
+												<li><a href="#" onclick="Messaging.dialogue('quick-upload'); return false;" title="<?php __('Upload content'); ?>" class="icon_label_uploadimg"><?php __('Upload content'); ?></a></li>
+												<?php endif; ?>
+												<?php if ($user['perms'] > 1 && $writable): ?>
+												<li><a href="#" onclick="Messaging.dialogue('add-album'); Director.Interface.focusDelay('AlbumName', 0.5); return false;" title="<?php __('Create a new album'); ?>" class="icon_label_newalbum"><?php __('Create a new album'); ?></a></li>
+												<?php endif; ?>
+												<?php if ($user['perms'] > 1): ?>
+												<li><a href="#" onclick="Messaging.dialogue('add-gallery'); Director.Interface.focusDelay('GalleryName', 0.5); return false;" title="<?php __('Create a new gallery'); ?>" class="icon_label_newgallery"><?php __('Create a new gallery'); ?></a></li>
+												<?php endif; ?>
+												<li><?php e($html->link(__('Edit your profile', true), '/users/profile', array('title' => __('Edit your profile', true), 'class' => 'icon_label_profile'))); ?></li>
+											</ul>
+											
+										</div> <!--close content-->
+
+									</div> <!--close module wrap-->
+
+									<div class="module-footer">
+										<div>&nbsp;</div>
+									</div>
+
+								</div> <!--close module-->
+
+							</div>
+						
+					
+						<div class="inner-right">
+					
+							<div class="module">
+							
+								<div class="module-head">
+									<h3><?php __('Recently uploaded content'); ?></h3>
+								</div>
+					
+								<div class="wrap">
+						
+									<div class="content">
+										
+										<?php $max = 24; ?>
+										<?php e($director->recentList($recent_images, $max, 84, 63)); ?>
+																
+									</div>
+									
+								</div> <!--close module wrap-->
+					
+								<div class="module-footer">
+									<div>&nbsp;</div>
+								</div>
+				
+							</div> <!--close module-->
+							
+						</div>
+									
+				</div> <!--close left-col-->
+		
+				<div id="dash-right-col">
+					
+					<div class="inner">
+						
+						<!-- GALLERY DATA FEEDS MODULE-->
+						<div class="module">
+							
+							<div class="module-head">
+								<h3><?php __('Gallery data feeds'); ?> <span class="help">[?]<span><?php __('Click the "Copy" button to copy the XML URL for a gallery to your clipboard. Assign it as SlideShowPro\'s XML File Path in the Component Inspector to load.'); ?></span></span></h3>
+							</div>
+							
+							<div class="wrap">
+
+								<div class="content" id="galleries-list">									
+									<?php e($this->renderElement('galleries_list_dash')); ?>
+								</div>
+
+							</div> <!--close module wrap-->
+
+							<div class="module-footer">
+								<div>&nbsp;</div>
+							</div>
+
+						</div> <!--close module-->
+						
+						
+						<!-- ALBUM DATA FEEDS MODULE-->
+						<div class="module">
+							
+							<div class="module-head">
+								<h3><?php __('Album data feeds'); ?> <span class="help">[?]<span><?php __('Click the "Copy" button to copy the XML URL for an album to your clipboard. Assign it as SlideShowPro\'s XML File Path in the Component Inspector to load.'); ?></span></span></h3>
+							</div>
+							
+							<div class="wrap">
+
+								<div class="content" id="albums-list">			
+									<?php e($this->renderElement('albums_list_dash')); ?>
+								</div>
+
+							</div> <!--close module wrap-->
+
+							<div class="module-footer">
+								<div>&nbsp;</div>
+							</div>
+
+						</div> <!--close module-->
+														
+					</div>
+				
+				</div> <!--close right-col-->
+
+			</div> <!--close colwrap-->
+			
+			<div class="clear"></div>
+
+		</div> <!--close container-wrap-->
+
+		<div id="container-footer">
+			<div>&nbsp;</div>
+		</div>
+
+	</div><!--close container-->
+
+</div> <!--close page-->
+
+<script type="text/javascript">
+	var cur_user = <?php e(CUR_USER_ID); ?>;
+	var aid = 0;
+</script>
+<?php
+	e($asset->js('upload'));
+?>
+
+<?php e($director->preDialogue('quick-upload')); ?>
+				
+	<h1><?php __('Upload content'); ?></h1>
+
+	<p><?php __('This shortcut is for quickly uploading images and videos to an existing album'); ?>.<?php if ($user['perms'] > 1): ?> <?php __('Need to create a new album?'); ?> <a href="#" onclick="Director.Interface.toggle('quick-up-form'); Director.Interface.focusDelay('AlbumName2', 0.5); return false;"><?php __('Click here'); ?></a>.</p><?php endif; ?>
+
+
+	<form id="quick-up-form" action="#" onsubmit="add_album_quick(this); return false;" style="display:none;">
+				
+		<fieldset>
+				<label><?php __('New album title'); ?>:</label>
+				<?php e($form->text('Album/name', array('id' => 'AlbumName2', 'class' => 'wide', 'onkeyup' => "if (this.value == '') { $('create-q-album-btn').disabled = true; } else { $('create-q-album-btn').disabled = false; }"))); ?>
+		</fieldset>
+
+		<fieldset>
+			<input id="create-q-album-btn" type="submit" value="<?php __('Create album and browse for images'); ?>" disabled="true" />
+		</fieldset>
+		
+	</form>
+
+	<div class="dialogue-spacer">
+
+	<fieldset>
+		<label><?php __('Choose an album'); ?>:&nbsp;&nbsp;</label>
+		<select id="upload-tgt" onchange="upload_set_aid($F('upload-tgt'))">
+			<?php e($this->renderElement('target_collection')); ?>
+		</select>
+	</fieldset>
+	
+	</div>
+	
+	<p id="upload-stat" style="display:none"></p>
+
+	<fieldset>
+		<input id="browse-button" type="button" value="<?php __('Browse for content'); ?>" onclick="browse_for_upload_dash();" disabled="true" /> <input id="upload-button" type="button" value="<?php __('Upload content'); ?>" onclick="upload_dash();" style="display:none;" /> <input type="button" value="<?php __('Cancel'); ?>" onclick="kill_quick_upload();" />
+	</fieldset>
+
+<?php e($director->postDialogue()); ?>
+
+<?php e($director->preDialogue('add-album')); ?>
+				
+	<h1><?php __('Add album'); ?></h1>
+
+	<form action="#" onsubmit="add_album_dash(this); return false;">
+		
+		<div class="dialogue-spacer">
+		
+		<fieldset>
+				<label class="white"><?php __('New album title'); ?>:</label>
+				<?php e($form->text('Album/name', array('class' => 'wide', 'onkeyup' => "if (this.value == '') { $('create-album-btn').disabled = true; } else { $('create-album-btn').disabled = false; }"))); ?>
+		</fieldset>
+		
+		<fieldset>
+			<input class="radio" type="checkbox" value="1" name="follow" checked="checked" /> <label class="inline white"><?php __('Edit album after it has been created'); ?></label>
+		</fieldset>
+		
+		</div>
+
+		<fieldset>
+			<input id="create-album-btn" type="submit" value="<?php __('Create album'); ?>" disabled="true" /> <input type="button" value="<?php __('Cancel'); ?>" onclick="Messaging.kill('add-album'); return false;" />	
+		</fieldset>
+	</form>
+
+<?php e($director->postDialogue()); ?>
+
+<?php e($director->preDialogue('add-gallery')); ?>
+				
+	<h1><?php __('Add gallery'); ?></h1>
+
+	<form action="#" onsubmit="add_gallery_dash(this); return false;">
+		
+		<div class="dialogue-spacer">
+			
+		<fieldset>
+				<label class="white"><?php __('New gallery title'); ?>:</label>
+				<?php e($form->text('Gallery/name', array('class' => 'wide', 'onkeyup' => "if (this.value == '') { $('create-gallery-btn').disabled = true; } else { $('create-gallery-btn').disabled = false; }"))); ?>
+		</fieldset>
+
+		<fieldset>
+			<input class="radio" type="checkbox" value="1" name="follow" checked="checked" /> <label class="inline white"><?php __('Edit gallery after it has been created'); ?></label>
+		</fieldset>
+		
+		</div>
+		
+		
+		<fieldset>
+			<input id="create-gallery-btn" type="submit" value="<?php __('Create gallery'); ?>" disabled="true" /> <input type="button" value="<?php __('Cancel'); ?>" onclick="Messaging.kill('add-gallery'); return false;" />	
+		</fieldset>
+	</form>
+
+<?php e($director->postDialogue()); ?>
+
+<div id="viewer" style="float:left;width:1px;height:1px;"></div>
+
+<script type="text/javascript">
+	// <![CDATA[
+	var swf = new SWFObject("<?php e($this->webroot . 'swf/upload.swf?' . DIR_VERSION); ?>", "_uploader", "1", "1", "8", "#292929");
+	swf.addVariable("aid", 0);
+	swf.addVariable("dash", 1);
+	swf.addVariable("max_size", <?php e(MAX_SIZE); ?>);
+	swf.addVariable("upload_url", '<?php e($html->url('/uploads/image/' . CUR_USER_ID)); ?>');
+	swf.addParam("allowScriptAccess", "always");
+	swf.write("viewer");
+	// ]]>
+</script>

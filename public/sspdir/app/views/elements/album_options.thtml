@@ -1,0 +1,211 @@
+<?php e($this->renderElement('album_head')); ?>
+
+<div id="container-wrap">
+	
+	<div class="col-wrap">
+		
+		<?php e($this->renderElement('album_subnav')); ?>
+	
+		<div class="left-col">
+			
+			<div class="left-col-inside">
+
+				<div class="module">
+
+					<div class="module-head">
+						<h3><?php __('Image metadata defaults'); ?>
+						<span class="help">[?]<span>
+						<?php __('All slideshow content in this album, both existing and uploaded later, will be assigned the titles, links, and captions you enter here. You can also edit these values individually in the Content tab.'); ?>
+						</span></span>
+						</h3>
+					</div>
+
+					<div class="wrap">
+
+						<div class="content">
+
+							<ul class="dash-strip module-first">
+								<li>
+									<div class="rLink"><div class="radBttn"><a class="rb_module_wrap" href="#" onclick="Director.Interface.toggle('populate-titles'); Director.Interface.focusDelay('AlbumTitleTemplate', 500); return false;" title="<?php __('Edit title settings'); ?>"><span><?php __('Edit'); ?></span></a></div></div>
+									<strong><?php __('Titles'); ?>:</strong> <span id="title-desc"><?php empty($album['Album']['title_template']) ? __('None') : __('Custom title'); ?></span>
+								</li>
+							</ul>
+
+						<div id="populate-titles" class="embed" style="display:none">
+
+							<p class="halfstep"><?php __('All content added to this album will be assigned the title you enter below.'); ?>
+							<br />
+								<?php __('Tags (click to add):'); ?>
+								<a href="#" onclick="fill_title_tag('[img_name]'); return false;">[img_name]</a>
+							</p>
+							
+							<input type="hidden" id="existing_titles" value="<?php empty($album['Album']['title_template']) ? e('0') : e('1'); ?>" />
+							<fieldset>
+								<?php e($form->text('Album/title_template', array('class' =>'wide'))); ?>
+							</fieldset>
+
+								<div id="title-clear" <?php e(count($title_check) == 0 ? 'style="display:none;"' : ''); ?>>
+									<span class="note"><strong><?php __('Warning'); ?></strong>: <?php __('Title settings have already been saved for this album.'); ?></span>
+							   	</div>
+
+							<fieldset>
+								<input class="nomargin" id="title-button" type="button" value="<?php __('Save'); ?>" onclick="prefill_titles(<?php e($html->tagValue('Album/id')); ?>)" />&nbsp;<input class="nomargin" id="title-clear-button" type="button" value="<?php __('Clear titles'); ?>" onclick="clear_titles(<?php e($html->tagValue('Album/id')); ?>)" /> <span id="title-messenger" style="display:none;"></span>
+							</fieldset>
+
+						</div> <!--close populate-titles-->
+
+						<ul class="dash-strip">
+							<li>
+								<div class="rLink"><div class="radBttn"><a class="rb_module_wrap" href="#" onclick="Director.Interface.toggle('populate-links'); return false;" title="<?php __('Edit link settings'); ?>"><span><?php __('Edit'); ?></span></a></div></div>
+								<strong><?php __('Links'); ?>:</strong> <span id="link-desc"><?php __($director->generateLinkTemplateDesc($album['Album']['link_template'])); ?></span>
+							</li>
+						</ul>  
+
+						<div id="populate-links" class="embed" style="display:none">
+
+							<p class="halfstep"><?php __('All content added to this album will be assigned a dynamic link using a template, or a static link to link them all to the same URL. See the User Guide to learn how to create your own dynamic link template.'); ?></p>
+
+								<fieldset>
+									<select id="AlbumLink" onchange="if ($F('AlbumLink') == 'c') { $('custom-link').show(); } else { $('custom-link').hide(); }">
+										<option value=""><?php __('No links populated'); ?></option>
+										<optgroup label="Link templates">
+									<?php $selected = false; $has_select = false; if (!empty($link_templates)): foreach ($link_templates as $link): ?>
+										<?php include(PLUGS . DS . 'links' . DS . $link); ?>
+										<?php 
+												$value = $template . '__~~__' . $target; 
+												if ($value == urldecode($album['Album']['link_template'])) {
+													$selected = $has_select = true;
+			 									} else { $selected = false; }
+										?>
+										<option value="<?php e(htmlentities(urlencode($value)) . ife($selected, '" selected="selected', '')); ?>"><?php e($displayName); ?></option>
+									<?php endforeach; endif; ?>
+										</optgroup>
+										<?php if (!empty($custom_link_templates)): ?>
+										<optgroup label="User supplied link templates">	
+											<?php foreach ($custom_link_templates as $link): if ($link != 'sample' && $link != '.svn'): ?>
+												<?php include(CUSTOM_PLUGS . DS . 'links' . DS . $link . DS . 'template.php'); ?>
+												<?php 
+														$value = $template . '__~~__' . $target; 
+														if ($value == urldecode($album['Album']['link_template'])) {
+															$selected = $has_select = true;
+					 									} else { $selected = false; }
+												?>
+												<option value="<?php e(htmlentities(urlencode($value)) . ife($selected, '" selected="selected', '')); ?>"><?php e($displayName); ?></option>
+											<?php endif; endforeach; ?>
+										</optgroup>
+										<?php endif ?>
+										<option value="c"<?php e(ife(!$has_select && !empty($album['Album']['link_template']), ' selected="selected"', '')); ?>><?php __('Static link'); ?></option>
+			 						</select>
+								</fieldset>
+							<div id="custom-link"<?php e(ife(!$has_select && !empty($album['Album']['link_template']), '', ' style="display:none;"')); ?>>
+
+							<label><?php __('Static link'); ?></label>
+
+							<p class="halfstep"><?php __('All content added to this album will be assigned the link you enter below.'); ?></p>
+
+							<input type="hidden" id="existing_links" value="<?php empty($album['Album']['link_template']) ? e('0') : e('1'); ?>" />
+							
+							<fieldset>
+								<?php $arr = explode('__~~__', $album['Album']['link_template']); $val = array_shift($arr); ?>
+								<?php e($form->text('link_template', array('class' => 'wide', 'value' => ife(empty($album['Album']['link_template']), 'Your URL', $val)))); ?>
+							</fieldset>
+							</div>
+							<div id="link-clear" <?php e(count($link_check) == 0 ? 'style="display:none;"' : ''); ?>>
+								<span class="note"><strong><?php __('Warning'); ?></strong>: <?php __('Link settings have already been saved for this album.'); ?></span>
+						   	</div>
+
+							<fieldset>
+								<input class="nomargin" id="links-button" type="button" value="<?php __('Save'); ?>" onclick="prefill_links(<?php e($html->tagValue('Album/id')); ?>)" />&nbsp;<input class="nomargin" id="links-clear-button" type="button" value="<?php __('Clear links'); ?>" onclick="clear_links(<?php e($html->tagValue('Album/id')); ?>)" /> <span id="links-messenger" style="display:none;"></span>
+							</fieldset>
+							
+						</div> <!--close populate-links-->
+
+						<ul class="dash-strip">
+							<li class="last">
+								<div class="rLink"><div class="radBttn"><a class="rb_module_wrap" href="#" onclick="Director.Interface.toggle('populate-captions'); Director.Interface.focusDelay('AlbumCaptionTemplate', 500); return false;" title="<?php __('Edit caption settings'); ?>"><span><?php __('Edit'); ?></span></a></div></div>
+								<strong><?php __('Captions'); ?>:</strong> <span id="caption-desc"><?php empty($album['Album']['caption_template']) ? __('None') : __('Custom caption'); ?></span>
+							</li>
+						</ul>  
+
+						<div id="populate-captions" class="embed" style="display:none">
+
+							<p class="halfstep"><?php __('All content added to this album will be assigned the caption you enter below.'); ?>
+								<br />
+								<?php __('Tags (click to add):'); ?>
+								<a href="#" onclick="fill_cap_tag('[img_name]'); return false;">[img_name]</a> 
+								<a href="#" onclick="fill_cap_tag('[iptc_caption]'); return false;">[iptc_caption]</a>
+							</p>
+
+							<input type="hidden" id="existing_captions" value="<?php empty($album['Album']['caption_template']) ? e('0') : e('1'); ?>" />
+							
+							<fieldset>
+								<?php e($form->textarea('Album/caption_template', array('cols' => 40, 'rows' => 5, 'class' => 'wide'))); ?>
+							</fieldset>
+
+							<div id="caption-clear" <?php e(count($captions_check) == 0 ? 'style="display:none;"' : ''); ?>>
+								<span class="note"><strong><?php __('Warning'); ?></strong>: <?php __('Caption settings have already been saved for this album.'); ?></span>
+						   	</div>
+
+							<fieldset>
+								<input class="nomargin" id="captions-button" type="button" value="<?php __('Save'); ?>" onclick="prefill_captions(<?php e($html->tagValue('Album/id')) ?>)" /> 
+								<input class="nomargin" id="captions-clear-button" type="button" value="<?php __('Clear captions'); ?>" onclick="clear_captions(<?php e($html->tagValue('Album/id')) ?>)" /> <span id="captions-messenger" style="display:none;"></span>
+							</fieldset>
+
+
+
+						</div> <!--close populate-captions-->
+
+
+						</div> <!--close content-->
+
+					</div> <!--close wrap-->
+
+					<div class="module-footer">
+						<div>&nbsp;</div>
+					</div>
+
+				</div> <!--close module-->
+				
+			</div> <!--close left-col-inside-->
+
+		</div> <!--close left-col-->
+
+	</div> <!--close col-wrap-->
+
+</div> <!--close container-wrap-->
+
+<?php e($director->preDialogue('save-title-settings')); ?>
+			
+	<h1><?php __('Fill image titles'); ?></h1>
+
+	<p><?php __('Would you like to regenerate this album\'s titles based on these settings or simply save them for content added after this point?'); ?></p>
+
+	<fieldset>
+		<input type="button" value="<?php __('Save and regenerate'); ?>" onclick="do_fill_titles(true); return false;" /> <input type="button" value="<?php __('Save only'); ?>" onclick="do_fill_titles(false); return false;" />
+	</fieldset>
+
+<?php e($director->postDialogue()); ?>
+
+<?php e($director->preDialogue('save-link-settings')); ?>
+			
+	<h1><?php __('Fill image links'); ?></h1>
+
+	<p><?php __('Would you like to regenerate this album\'s links based on these settings or simply save them for content added after this point?'); ?></p>
+
+	<fieldset>
+		<input type="button" value="<?php __('Save and regenerate'); ?>" onclick="do_prefill_links(true); return false;" /> <input type="button" value="<?php __('Save only'); ?>" onclick="do_prefill_links(false); return false;" />
+	</fieldset>
+
+<?php e($director->postDialogue()); ?>
+
+<?php e($director->preDialogue('save-caption-settings')); ?>
+			
+	<h1><?php __('Fill image captions'); ?></h1>
+
+	<p><?php __('Would you like to regenerate this album\'s captions based on these settings or simply save them for content added after this point?'); ?></p>
+
+	<fieldset>
+		<input type="button" value="Save and regenerate" onclick="do_fill_captions(true); return false;" /> <input type="button" value="<?php __('Save only'); ?>" onclick="do_fill_captions(false); return false;" />
+	</fieldset>
+
+<?php e($director->postDialogue()); ?>

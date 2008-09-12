@@ -1,0 +1,95 @@
+* html {height: 100%;}   
+
+body {height: 100%;}
+
+/* Upticks for Trebuchet */
+h1 {font-size:26px;}
+h3 {font-size:11px;}
+table.sortable th {font-size:11px;}
+
+div.scale-image div { 
+	display:block;
+	position:absolute;
+	left:50%;
+	top:50%;
+}                     
+                          
+div.scale-image div img.tall {         
+	position:relative; 
+	left:-50%;       
+	top:-50%;
+}  
+
+div.scale-image div img.wide {         
+	position:relative; 
+	left:-50%;       
+	top:-50%;
+}
+
+div.dialogue-wrap {
+	position:absolute;
+	width: expression( ( ignoreMe = document.documentElement.clientWidth));  
+	height: expression( ( ignoreMe = document.documentElement.clientHeight));
+	top: expression( ( ignoreMe = document.documentElement.scrollTop));
+	left:0;
+	background: url(../img/msg-bg.gif);
+	display:block;
+}                      
+
+div.dialogue {
+	position:absolute;
+	display:block;
+	left:50%;
+	top:50%;
+	text-align:center;
+}
+
+div.dialogue-content { 
+	display:block;
+	position:absolute;
+	top:-50%;
+	left:-50%;         
+	margin-left:-175px;
+}
+
+div#messenger-wrap span.stop {background: #76b41c url(../img/icon_stop-ie.png) no-repeat top left;}
+
+div#messenger-wrap span.exclamation {background: #76b41c url(../img/icon_exclamation-ie.png) no-repeat top left;}
+
+div#messenger-wrap span.accept {background: #76b41c url(../img/icon_accept-ie.png) no-repeat top left;}
+
+div#messenger-wrap span.hourglass {background: #76b41c url(../img/icon_loading_pie.gif) no-repeat top left;}
+
+ul#main-nav {margin-bottom:-2px;}
+
+div#header-links span {padding:3px 9px 8px 5px;}
+
+ul#main-nav li.first  {margin-left:15px;}
+
+ul#main-nav li a {padding:8px 10px 7px 3px;}
+
+ul#sub-nav {padding:1px 0 5px;}
+
+ul#sub-nav li a {padding:3px 9px 0 4px;}
+
+div.module-footer {height:10px;}
+
+div.module-head h3.yanker {height:auto;}
+
+div.counter, div.counter-off {line-height:1.6;}
+
+input.wide, textarea.wide {width:98%;}
+
+ul.dash-strip li {display:inline-block;}
+
+ul#process li {line-height:22px;}
+
+div.header-radius img.gray-edge {margin-top:4px;}
+
+div#head-form div.icon-bump {padding-top:14px;}
+
+div#rotator ul {width:280px;}
+
+div#multi-footer ul {width:420px;}
+
+div#resize-thumbs-ctrl {right:18px;}

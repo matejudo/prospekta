@@ -1,0 +1,56 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:600px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<ul id="process">
+				<li class="first complete"><span><?php __('Step 1'); ?></span></li>
+				<li class="complete"><span><?php __('Step 2'); ?></span></li>
+				<li class="complete"><span><?php __('Step 3'); ?></span></li>
+				<li class="complete"><span><?php __('Step 4'); ?></span></li>
+				<li class="prevactive"><span><?php __('Step 5'); ?></span></li>
+				<li class="active last"><span><?php __('Step 6'); ?>: <?php __('Install'); ?></span></li>
+			</ul>
+			
+			<h4><?php __('Installation and setup'); ?></h4>
+			
+			<div class="clear"></div>
+			
+			<div class="wrap">
+				
+				<div class="content">
+					<?php if (empty($error)): ?>
+						<h6 style="margin-bottom:10px"><?php __('Success!'); ?></h6>
+						<p class="accept"><?php __('Albums table written successfully...'); ?></p>
+						<p class="accept"><?php __('Images table written successfully...'); ?></p>
+						<p class="accept"><?php __('Users table written successfully...'); ?></p>
+						<p class="accept"><?php __('Gallery tables written successfully...'); ?></p>
+						<p class="accept"><?php __('Slide show tables written successfully...'); ?></p>
+						<p class="accept"><?php __('Preferences table written successfully...'); ?></p>
+
+						<p><?php __('Director was installed successfully.'); ?></p>
+						
+						<fieldset class="install-button">
+							<input type="button" name="redirect" value="<?php __('Login now'); ?> &rarr;" onclick="location.href='<?php e($html->url('/users/login')); ?>'" id="redirect">
+						</fieldset>
+					<?php else: ?>
+						<p class="error"><?php __('There was an error during installation'); ?>: <?php e($error); ?></p><p><?php print(__('Installation was not successful.', true)); ?></p>
+					<?php endif; ?>
+				</div> <!--close content-->
+
+			</div> <!--close module wrap-->
+
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+		
+		</div> <!--close module-->
+
+	</div> <!--close login-content-->
+
+</div> <!--close login-container-->

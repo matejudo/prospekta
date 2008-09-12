@@ -1,0 +1,19 @@
+div.dialogue {
+	position:absolute;
+	display:block;
+	left:0%;
+	top:50%;
+}
+
+div.scale-image {
+	display:block; 
+	position:relative;
+	text-align:left;
+}                     
+
+div.scale-image div { 
+	display:block;
+	position:absolute;
+	text-align:center;
+
+}                    

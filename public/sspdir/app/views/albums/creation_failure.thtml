@@ -1,0 +1,1 @@
+<?php e($html->image('transparent.gif', array('width' => 0, 'height' => 0, 'onload' => "album_creation_failure()"))); ?>

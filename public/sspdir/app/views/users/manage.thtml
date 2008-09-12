@@ -1,0 +1,88 @@
+<div id="page">
+	
+	<div id="container">
+		
+		<div id="head">
+			<h1 class="profile"><?php __('Manage users'); ?></h1>
+		</div>
+		
+		<div id="container-wrap">
+			
+			<div class="col-wrap">
+			
+				<div class="left-col">
+					
+					<div class="left-col-inside">
+					
+						<div class="module">
+				
+							<div class="module-head">
+								<h3><?php __('Add a user'); ?></h3>
+							</div>
+						
+							<div class="wrap">
+							
+								<div class="content">
+		
+									<form name="new_user_form" action="#" onsubmit="add_user(this); return false;">
+								
+										<fieldset>
+											<label><?php __('New user role:'); ?> <span class="help">[?]<span><?php __('<strong>Editors:</strong> can edit all data but cannot add or delete anything.<br /><br /><strong>Contributors:</strong> Same as editors, along with the ability to add or delete albums, images or galleries.<br /><br /><strong>Administrators:</strong> The same permissions you have. All of the above plus the ability to manage users.'); ?></span></span></label>
+											<?php e($form->select('User/perms', array(1 => __('Editor', true), 2 => __('Contributor', true), 3 => __('Administrator', true)), null, null, null, false)); ?>
+										</fieldset>
+									
+										<fieldset>
+											<label><?php __('New user email:'); ?> <span class="help">[?]<span><?php __('This will be their username. They will also receive a confirmation email at this address.'); ?></span></span></label>
+											<?php e($form->text('User/usr', array('class' =>'wide'))); ?>
+										</fieldset>
+		
+										<fieldset>
+											<label><?php __('Your email:'); ?> <span class="help">[?]<span><?php __('Will be shown as the "From" address with the confirmation email.'); ?></span></span></label>
+											<input class="wide" type="text" name="from_email" id="from_email" />
+										</fieldset>
+		
+										<fieldset>
+											<label><?php __('E-mail message:'); ?></label>
+											<textarea class="wide" name="message" rows="5" cols="40"></textarea>
+										</fieldset>
+		
+										<fieldset>
+											<input type="submit" value="<?php __('Add user'); ?>" />
+										</fieldset>
+									</form>
+							
+								</div> <!--close content-->
+							
+							</div> <!--close module wrap-->
+						
+							<div class="module-footer">
+								<div>&nbsp;</div>
+							</div>
+						
+						</div> <!--close module-->
+						
+					</div> <!--close left-col-inside-->
+	
+				</div> <!--close left-col-->
+				
+				<div class="right-col" id="fill">
+					
+					<div class="right-col-inside">
+					
+						<?php e($this->renderElement('user_list')); ?>
+				
+					</div> <!--close right-col-inside-->
+				
+				</div> <!--close right-col-->
+				
+			</div> <!--close col-wrap-->
+			
+		</div> <!--close container-wrap-->
+		
+		<div id="container-footer">
+			<div>&nbsp;</div>
+		</div>
+		
+	</div> <!--close container-->
+	
+</div> <!--close page-->

@@ -1,0 +1,15 @@
+msgid "Welcome to Director"
+msgstr "Willkommen bei Director"
+
+# NOTE: Replace english with the name of your language
+# If you are doing a specific translation (French canadian for instance - fr_ca),
+# make that part of your translation as well. 
+# ex: "Cliquez ici pour commencer l'installation en français (canadienne)." 
+msgid "Click here to begin the installation in english."
+msgstr "Klicke hier, um die Installation auf deutsch zu starten."
+
+# Identify the language name
+# This is what will appear in the language selection box on the preferences pane
+# ex: msgstr: "Français"
+msgid "Language"
+msgstr "Deutsch"

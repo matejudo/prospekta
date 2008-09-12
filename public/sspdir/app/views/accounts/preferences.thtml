@@ -1,0 +1,155 @@
+<div id="page">
+	
+	<div id="container">
+		
+		<div id="head">
+			<h1 class="profile"><?php __('Preferences'); ?></h1>
+		</div>
+	
+		<div id="container-wrap">
+
+			<div class="col-wrap">
+	
+				<div class="left-col">
+					
+					<div class="left-col-inside">
+		
+						<div class="module">
+			
+							<div class="module-head"><h3><?php __('Director options'); ?></h3></div>
+						
+							<div class="wrap">
+							
+								<div class="content">
+		   			
+								<ul class="dash-strip module-first">
+									
+									<li>
+										<?php __('Interface theme'); ?>:&nbsp; <select id="theme-switcher" onchange="change_theme()">
+											<optgroup label="Official themes">
+											<?php foreach($themes as $theme): if (file_exists(THEMES . DS . $theme . DS . $theme . '.css')): ?>
+											<?php $path = "/app/webroot/styles/$theme/$theme.css"; ?>
+											<option<?php e(ife(($path == $account['Account']['theme']), ' selected="selected"', '')) ; ?> value="app--webroot--styles--<?php e($theme . '--' . $theme); ?>"><?php e(ucfirst($theme)); ?></option>
+
+											<?php endif; endforeach; ?>
+											</optgroup>
+											<?php if (!empty($user_themes)): $row = true; foreach($user_themes as $theme): if (file_exists(USER_THEMES . DS . $theme . DS . $theme . '.css')): ?>	
+											<?php e(ife($row, '<optgroup label="Custom themes">', '')); $row = false; ?>
+											<?php $path = "/themes/$theme/$theme.css"; ?>
+											<option<?php ($path == $account['Account']['theme']) ? e(' selected="selected"') : '' ; ?> value="themes--<?php e($theme . '--' . $theme); ?>"><?php e(ucfirst($theme)); ?></option>
+											<?php endif; endforeach; e(ife(!$row, '</optgroup>', '')); endif; ?>
+											
+										</select>
+									</li>
+									
+									<li>
+										<?php __('Language'); ?>:&nbsp; <select id="lang-switcher" onchange="change_language()">
+											<?php 
+												foreach($langs as $lang): if (is_dir(ROOT . DS . 'locale' . DS . $lang) && strtolower($lang) != 'sample'): $val = r('_', '-', $lang);
+													if ($lang == 'eng') {
+														$name = 'English';
+													} else {
+														$contents = file_get_contents(ROOT . DS . 'locale' . DS . $lang . DS . 'welcome.po');
+														preg_match_all('/msgstr "(.*)"/', $contents, $matches);
+														$name = $matches[1][2];
+														if (empty($name)) {
+															$name = $lang;
+														}
+													}
+											?>
+												
+											<option<?php e(ife(($val == $account['Account']['lang']), ' selected="selected"', '')) ; ?> value="<?php e($val); ?>"><?php e($name); ?></option>
+											<?php endif; endforeach; ?>
+										</select>
+									</li>
+											
+								</ul>
+							
+								</div> <!--close content-->
+							
+							</div> <!--close module wrap-->
+						
+							<div class="module-footer">
+								<div>&nbsp;</div>
+							</div>
+					
+						</div> <!--close module-->
+						
+						<div class="module">
+			
+							<div class="module-head">
+								<h3><?php __('Album cache'); ?></h3>
+							</div>
+						
+							<div class="wrap">
+		   			
+								<div class="content">
+		
+								<ul class="dash-strip module-first">
+									<li><?php printf(__('%s to clear old files from your album cache.', true), $html->link(__('Click here', true), '#', array('onclick' => 'clear_cache(\'' . DIR_HOST . '\'); return false;'))); ?> <span class="help">[?]<span><?php __('Director caches copies of images that are requested at specific sizes by your slideshows. This action clears any image in the cache that has not been viewed for 1 week.'); ?></span></span></li>
+								</ul>
+							
+								</div> <!--close content-->
+							
+							</div> <!--close module wrap-->
+						
+							<div class="module-footer">
+								<div>&nbsp;</div>
+							</div>
+				
+						</div> <!--close module-->
+					
+					</div> <!--close left-col-inside-->
+				
+				</div> <!--close left-col-->
+		
+				<div class="right-col">
+					
+					<div class="right-col-inside">
+		
+						<div class="module">
+			
+							<div class="module-head">
+								<h3><?php __('About your installation'); ?></h3>
+							</div>
+						
+							<div class="wrap">
+		   			
+								<div class="content">
+		
+								<ul class="dash-strip module-first">
+									<li><?php printf(__('Your server is running PHP %s.', true), $info['php']); ?></li>
+									<?php if (empty($info['memory'])): ?>
+									<li><?php printf(__("No memory limit is set in PHP.", true), $info['memory']); ?></li>
+									<?php else: ?>
+									<li><?php printf(__("PHP's memory limit is set at %sB.", true), $info['memory']); ?></li>
+									<?php endif; ?>
+									<li><?php printf(__("You are using %s for image processing.", true), $info['processing']); ?></li>
+									<li><?php printf(__("The maximum size for an uploaded file is %sB.", true), $info['max_upload']); ?></li>
+								</ul>
+							
+								</div> <!--close content-->
+							
+							</div> <!--close module wrap-->
+						
+							<div class="module-footer">
+								<div>&nbsp;</div>
+							</div>
+				
+						</div> <!--close module-->
+					
+					</div> <!--close right-col-inside-->
+			
+				</div> <!--close right-col-->
+			
+			</div> <!--close col-wrap-->
+	
+		</div> <!--close container-wrap-->
+		
+		<div id="container-footer">
+			<div>&nbsp;</div>
+		</div>
+	
+	</div> <!--close container-->
+
+</div> <!--close page-->

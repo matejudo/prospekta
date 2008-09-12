@@ -1,0 +1,25 @@
+# BEGIN SlideShowPro Director
+
+# Rewrite Rules in the parent folder may cause
+# issues with Director, so let's turn off the
+# RewriteEngine for this directory.
+
+<IfModule mod_rewrite.c>  
+  RewriteEngine Off
+</IfModule>
+
+# Workaround mod_security to make sure flash
+# uploads work properly. Do not remove this
+# unless instructed by SlideShowPro support.
+#
+# If you still have upload issues, remove the
+# mod_security code below and replace it with:
+#
+# <IfModule mod_security.c>
+# 	SecFilterEngine Off
+# 	SecFilterScanPOST Off
+# </IfModule>
+
+<IfModule mod_security.c>  
+  SetEnvIfNoCase Content-Type "^multipart/form-data;" "MODSEC_NOPOSTBUFFERING=Do not buffer file uploads"  
+</IfModule>

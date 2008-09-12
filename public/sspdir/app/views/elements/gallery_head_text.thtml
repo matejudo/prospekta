@@ -1,0 +1,3 @@
+<h6><?php e(htmlspecialchars($gallery['Gallery']['name'])); ?></h6>
+
+<span class="subtext"><?php e(htmlspecialchars($gallery['Gallery']['description_clean'])); ?></span>

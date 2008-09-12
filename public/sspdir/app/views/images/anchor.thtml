@@ -1,0 +1,1 @@
+<?php e($director->p($image['Image']['src'], $image['Album']['path'], 176, 132, 1, 70, 1, $this->data['x'], $this->data['y'], true)); ?>

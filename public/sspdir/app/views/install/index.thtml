@@ -1,0 +1,50 @@
+<div id="login-container">
+	
+	<div id="login-content" style="width:350px;">
+	
+		<div class="module">
+			
+			<div class="module-head">
+				<h3 class="logo"></h3>
+			</div>
+			
+			<div class="clear"></div>
+			
+			<div class="wrap">
+				
+				<div class="content" style="text-align:center">
+
+					<div class="lang-btn">
+						<h4>Welcome to Director</h4>
+						<p><?php e($html->link('Click here to begin the installation in english.', "/install/lang/eng")); ?></p>
+					</div>
+					
+					<?php foreach($langs as $l): ?>
+						
+					<?php
+					
+						$contents = file_get_contents(ROOT . DS . 'locale' . DS . $l . DS . 'welcome.po');
+						preg_match_all('/msgstr "(.*)"/', $contents, $matches);
+					
+					?>
+				
+					<div class="lang-btn">
+						<h4><?php e($matches[1][0]); ?></h4>
+						<p><?php e($html->link($matches[1][1], "/install/lang/$l")); ?></p>
+					</div>
+					
+					<?php endforeach; ?>
+					
+				</div> <!--close content-->
+
+			</div> <!--close module wrap-->
+
+			<div class="module-footer">
+				<div>&nbsp;</div>
+			</div>
+		
+		</div> <!--close module-->
+
+	</div> <!--close login-content-->
+
+</div> <!--close login-container-->

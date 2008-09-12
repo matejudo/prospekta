@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Prospekta je organizacija usmjerena na edukaciju i zapošljavanje mladih. Kroz naše programe osobnog i profesionalnog razvoja stvaramo grupe mladih i uspješnih pojedinaca, koji su traženi na tržištu rada zbog svojih izuzetnih vještina i sposobnosti. Uz stručno vodstvo naših trenera, polaznici u Prospekti ostvaruju dodatnu vrijednost na svoje obrazovanje." />
+	<meta name="keywords" content="Studenti, Osobni razvoj, Zapošljavanje, Karijera, Edukacija, Soft skills, Profesionalno usmjeravanje, Radionice, Vizija, Timski rad" />
+	<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/styles/master.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="<?=$this->baseUrl()?>/scripts/jquery-1.2.6.min.js" type="text/javascript"></script>
+	<script language="javascript">AC_FL_RunContent = 0;</script>
+	<script src="<?php echo $this->baseUrl(); ?>/scripts/AC_RunActiveContent.js" language="javascript"></script>
+	<title>Prospekta - Edukacija i zapošljavanje mladih: <?=$this->escape($this->title)?></title>
+</head>
+<body>
+<script type="text/javascript">
+
+
+	$.fn.togglemenu = function()
+	{		
+		this.siblings(".submenu").fadeOut(200);
+		this.fadeIn(200);
+		$('#menu').animate( { height: "200px" });
+	}
+	
+	var hidetimeout = null;
+	var showtimeout = null;
+	var menushown = false;
+	
+	var visibletab = 1;
+	
+	$.fn.showmenu = function(tab)
+	{
+		clearTimeout(hidetimeout); 
+		if(!menushown) 
+		{ 
+			showtimeout = setTimeout("$('#menu').animate( { height: '200px' }); menushown = true; $('#subtab"+tab+"').siblings('.submenu').hide(); $('#subtab"+tab+"').show(); menushown = true;", 200); 
+			 
+		}
+		else
+		{
+			$("#subtab"+tab).siblings('.submenu').hide(); 
+			$('#subtab'+tab).show();
+		}
+	}
+	
+
+
+	$(document).ready(function() {
+		<?php for($i = 2; $i <= $this->menucounter; $i++): ?>
+			$('#menuitem<?= $i ?>').mouseover(function() { $('#subtab<?= $i ?>').showmenu(<?= $i ?>); });
+		<?php endfor; ?>
+		$('#menu').hover(function() { clearTimeout(hidetimeout); }, function() { menushown = false; clearTimeout(showtimeout); hidetimeout = setTimeout("$('#menu').animate( { height: '35px' }); $('.submenu').fadeOut();", 500);   });
+
+	});
+</script>
+<div id="header"><div class="logo"></div><h1>Prospekta - Edukacija i zapošljavanje mladih: <?=$this->escape($this->title); ?></h1></div>
+<div class="border-top"></div>
+<div id="menu" style="height: 35px; min-height: 0px;">		
+		<ul id="topmenu" >
+			<li class="topitem" id="menuitem1"><a href="<?= $this->baseUrl() ?>"><strong>Početna</strong></a></li>
+			<?= $this->topmenu ?>
+		</ul>
+		<!--  <div id="subtab1" class="submenu" style="display: none"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras volutpat nunc lacinia dolor. Mauris enim justo, vehicula et, commodo vel, tincidunt eget, ipsum. Donec justo orci, luctus sit čamet, placerat ćeu, malesuada sit amet, libero. Duis volutpat tempor lectus. Morbi placerat malesuada nulla. Duis viverra nisl at nibh. Nam eget sem sit amet šest varius auctor. Cras sem. Ut hendrerit, libero đut porta ornare, žipsum ipsum consectetuer est, ut tristique lectus mi ac eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque sit amet mauris sit amet urna bibendum faucibus. Vivamus lobortis ante quis nunc. Mauris ornare dolor ac nunc. Duis fringilla, lorem vel cursus gravida, augue augue hendrerit enim, sed imperdiet urna mauris sit amet quam.</p></div> -->
+		<?= $this->submenu ?>
+</div>
+
+<div class="border-bottom"></div>
+<?= $this->layout()->content; ?>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-189848-3");
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
