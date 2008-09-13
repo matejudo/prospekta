@@ -54,7 +54,7 @@ class Admin_PageController extends Zend_Controller_Action
 	public function newAction()
 	{
 		$editor = new TextEditor();
-		$this->view->editor = $editor->getHTML("text", "");
+		$this->view->editor = $editor->getHTML("text");
 		$this->view->page = new stdClass();
 		$this->view->page->title = "";
 		$this->view->page->slug = "";

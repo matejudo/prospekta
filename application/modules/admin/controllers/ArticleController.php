@@ -54,7 +54,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 	{
 		$this->view->category = $this->currentCategory;
 		$editor = new TextEditor();
-		$this->view->editor = $editor->getHTML("text", "");
+		$this->view->editor = $editor->getHTML("text");
 		$this->view->article = new stdClass();
 		$this->view->article->title = "";
 		$this->view->article->slug = "";
@@ -187,7 +187,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 				'modified'		=> $date->toString("YYYY-MM-dd HH:mm:ss")
 			);			
 
-			if(($this->_request->getParam("slug") != $this->_request->getParam("oldslug")) && $pages->slugExists($this->_request->getParam("slug")))
+			if(($this->_request->getParam("slug") != $this->_request->getParam("oldslug")) && $articles->slugExists($this->_request->getParam("slug")))
 			{
 				$this->view->baseUrl();
 				$this->render("slug");
@@ -199,16 +199,18 @@ class Admin_ArticleController extends Zend_Controller_Action
 				if($this->_request->getParam("id") == "-1")
 				{
 					$articles->insert($data); 
+					$id = $articles->getAdapter()->lastInsertId();
 				}
 				// Existing article -> SQL update the data
 				else
 				{
 					$where = $articles->getAdapter()->quoteInto('id = ?', $this->_request->getParam("id"));			
 					$articles->update($data, $where);
+					$id = $this->_request->getParam("id");
 				}
 				
 				if($this->_request->getParam("continue") == "1")
-					$redirecturl = 'admin/article/edit/id/' . $this->_request->getParam("id");
+					$redirecturl = 'admin/article/edit/id/' . $id;
 				else
 					$redirecturl = '/admin/article/';
 			}

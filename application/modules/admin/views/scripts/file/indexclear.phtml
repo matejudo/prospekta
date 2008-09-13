@@ -3,7 +3,7 @@
 			<p id="uploadinputs">
 				<input type="hidden" name="curdir" value="<?= $this->folder ?>" />
 				<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
-				<input type="file" name="userfile" style="width: 300px; margin-top: 10px;" /> <input type="submit" value="Upload" class="button upload" style=" margin-top: 10px;" /> <small>(Max. 10MB, Za upload više datoteka koristite ZIP arhive.)</small>
+				<input type="file" name="userfile" style="margin-top: 10px;" /> <input type="submit" value="Upload" class="button upload" style=" margin-top: 10px;" /><br/><small>(Max. 10MB, Za upload više datoteka koristite ZIP arhive.)</small>
 			</p>
 			</form>
 			<?= $this->form("files", array("method" => "post", "action" => "noaction")) ?>

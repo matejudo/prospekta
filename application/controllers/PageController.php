@@ -17,6 +17,7 @@ class PageController extends Zend_Controller_Action
 		$this->view->id = $this->_getParam("id");
 		$pages = new Pages();
 		$this->view->page = $pages->getById($this->view->id);
+		$this->view->subelements = $pages->getChildrenById($this->view->id);
 		$this->view->path = array_reverse($pages->getBreadcrumbs($this->view->id));
 		
 		$sidebars = new Sidebar();

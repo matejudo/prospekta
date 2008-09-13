@@ -1,4 +1,5 @@
 RewriteEngine on
 RewriteCond %{REQUEST_URI} !/images.*
 RewriteCond %{REQUEST_URI} !/uploads.*
+RewriteCond %{REQUEST_URI} !/sspdir.*
 RewriteRule !\.(js|ico|gif|jpg|png|css|htm|swf)$ index.php

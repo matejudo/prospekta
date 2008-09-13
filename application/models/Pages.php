@@ -15,6 +15,18 @@ class Pages extends Zend_Db_Table
 		return $stmt->fetchAll();	
 	}
 	
+	
+	public function getChildrenById($id)
+	{
+		$db = Zend_Registry::get("db");
+		$stmt = $db->query("
+			SELECT * FROM pros_page WHERE parentid = $id ORDER BY ordering
+		");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		return $stmt->fetchAll();
+	}
+	
+	
 	public function getPath($slug)
 	{
 		$db = Zend_Registry::get("db");
@@ -220,18 +232,7 @@ class Pages extends Zend_Db_Table
 		$pieces = explode("/", $path);
 		return count($pieces);
 	}
-	
-	public function getAllChildren($slug)
-	{
-		// TODO:
-		$db = Zend_Registry::get("db");
-		$stmt = $db->query("
-			SELECT * FROM pros_page
-		");
-		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
-		return $stmt->fetchAll();
-	}
-	
+
 	
 	public function getDepths()
 	{

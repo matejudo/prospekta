@@ -166,4 +166,15 @@ class Articles extends Zend_Db_Table
 		}
 		return $return;
 	}
+	
+	public function slugExists($slug)
+	{
+		$db = Zend_Registry::get("db");
+		$stmt = $db->query("SELECT * FROM pros_article WHERE slug = '$slug'");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $stmt->fetchObject();
+		if($result == NULL)
+			return false;
+		return true;
+	}
 }

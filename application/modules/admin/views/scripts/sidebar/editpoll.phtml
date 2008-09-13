@@ -1,0 +1,114 @@
+<div id="messagebar"><div id="message" style="display: none"><?= $this->message ?></div></div>
+<div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl ?>/admin/auth/logout">Logout</a></p></div>
+<div class="toolbar">
+	<div class="container_12" id="midsection">
+			<ul>
+			<li class="button save" id="save"><a href="#">Spremi</a></li>
+			<li class="button delarticle" id="delete"><a href="<?= $this->baseUrl ?>/admin/sidebar">Odustani</a></li>
+		</ul>
+	</div>
+</div>
+<div class="container_12" id="midsection">
+	<script language="javascript" type="text/javascript">
+		$(document).ready(function() {
+			
+
+			
+			$("#save").click( function () {
+				if($("#title").attr("value") == "" ) { showMessage("Ispunite polje za naslov."); return; }
+				$("#editor").submit();
+			} );
+			
+
+			
+			$("#title").focus(function() { 
+				if($("#title").attr("value") == "Naslov") $("#title").attr("value", "");
+			 });
+			 
+			$("#title").blur(function() { 
+				if($("#title").attr("value") == "") $("#title").attr("value", "Naslov");
+			 });
+			 
+	    	$("#checkall").click( function ()
+	    	{
+				if($("#checkall").attr("checked"))
+					$("#pages input[@type='checkbox']").check('on');
+				else
+					$("#pages input[@type='checkbox']").check('off');
+	    	});
+	    	
+	    	$("#multiple").change(function ()
+	    	{
+	    		if($("#multiple").attr("checked")) $("#multiplespan").show(0);
+	    		else $("#multiplespan").hide(0);
+	    	});
+			
+			
+		});
+	
+		function generateSlug(text)
+		{
+		    var text_array = text.split(" ");
+		    text = text_array.join("-");
+		    text = text.toLowerCase()
+			return text;
+		}
+	</script>
+
+	<div class="grid_12">
+		<h2><?= ($this->sidebar->id == "-1") ? "Novi sidebar (anketa)" : "Izmjena sidebara (anketa)" ?></h2>
+		<form method="post" action="<?= $this->baseUrl; ?>/admin/sidebar/savepoll" class="editor" name="editor" id="editor">
+			<input type="hidden" name="id" value="<?= $this->sidebar->id; ?>" />
+			<input type="hidden" name="type" value="Anketa" />
+			<input type="hidden" name="pollid" value="<?= $this->poll->id; ?>" />
+			<p><input type="text" name="title" id="title" class="big" value="<?= ($this->sidebar->title != "") ? $this->sidebar->title : "Naslov" ; ?>" style="width: 100%;"/></p>
+			<div id="content" class="grid_5 alpha">
+				<h2>Pitanje</h2>
+				<p><textarea name="question" rows="3" style="width: 100%; margin-top: 10px; border: 1px solid #ddd; padding: 5px;"><?= $this->poll->question ?></textarea></p>
+				<h2>Odgovori</h2>
+				<p>
+				<label for="multiple" style="display: block; width: 80%; float: left; padding: 3px 8px; vertical-align: middle;">Omogućiti višestruke odgovore?</label> <input type="checkbox" name="multiple" id="multiple" <?php if($this->poll->multiple) echo 'checked="checked"' ?> style="margin-bottom: 6px; vertical-align: middle;" value="1" /><br style="clear: both" />
+				<span id="multiplespan" <?php if(!$this->poll->multiple) echo 'style="display: none;"' ?>><label for="pollcount" style="display: block; width: 80%; float: left; padding: 3px 8px; vertical-align: middle;">Broj osoba koje su odgovorile</label> <input type="text" name="pollcount" id="pollcount" style="width: 10%; margin-bottom: 6px; text-align: right;  vertical-align: middle;" value="<?= $this->poll->count ?>"/><br/></span>
+				<?php
+					$counter = 0;
+					foreach($this->answers as $answer):
+				?>
+					<input type="text" name="answers[]" style="width: 80%; margin-bottom: 6px;" value="<?= $answer->answer ?>"/> <input type="text" name="answerscount[]" value="<?= $answer->count ?>" style="width: 10%; margin-bottom: 6px; text-align: right;"/><br/>
+				<?php
+					$counter++;
+					endforeach;
+					echo str_repeat('<input type="text" name="answers[]" style="width: 80%; margin-bottom: 6px;" /> <input type="text" name="answerscount[]" style="width: 10%; margin-bottom: 6px; text-align: right;"/><br/>', 12-$counter);
+				?>
+				</p>
+			</div>
+			<div id="content" class="grid_5" style="height: 450px;">
+				<div id="pages" style="overflow: scroll; height: 460px; margin-top: 10px; border: 1px solid #ddd; padding: 5px;">
+					<h2>Prikaži na stranicama</h2>
+					<p>
+					<input type="checkbox" id="checkall"/> <strong>Sve stranice</strong><br/><br/>
+					<input type="checkbox" name="page[]" value="-1" <?php if(in_array("-1", $this->showpages)) echo 'checked="checked"' ?>/> Članci: Novosti<br/>
+					<input type="checkbox" name="page[]" value="-2" <?php if(in_array("-2", $this->showpages)) echo 'checked="checked"' ?>/> Članci: Zanimljivosti<br/><br/>
+					<?php foreach($this->pages as $page): ?>
+						<input type="checkbox" name="page[]" id="page<?= $page->id ?>" value="<?= $page->id ?>" <?php if(in_array($page->id, $this->showpages)) echo 'checked="checked"' ?>/> <?= str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $page->depth-1) ?> <label for="page<?= $page->id ?>"><?= $page->title; ?></label><br/>
+					<?php endforeach; ?>
+					</p>
+				</div>
+			</div>
+			<div class="grid_2 omega sidebar">
+				<h3>Opcije</h3>
+				<p>
+					<input type="checkbox" name="published" id="published" <?= $this->sidebar->published ? "checked='checked'" : ""; ?> value="1" /> <label for="published">Anketa je objavljena</label><br/>
+				</p>
+				<h3>Pozicija sidebara</h3>
+				<p>
+					<select name="position">
+						<option value="Desno"<?php if($this->sidebar->position == "Desno") echo ' selected="selected"' ?>>Desno</option>
+						<option value="Lijevo"<?php if($this->sidebar->position == "Lijevo") echo ' selected="selected"' ?>>Lijevo</option>
+					</select>
+				</p>
+
+			</div>
+		</form>
+	</div>
+</div>
+<div style="display: none"><?= $this->baseUrl(); ?></div>

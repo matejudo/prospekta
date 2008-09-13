@@ -27,15 +27,15 @@ $.fn.checkCount = function() {
 };
 
 
-   	function delayFadeOut()
-   	{
-   		setTimeout('$("#message").fadeOut(2000)', 4000);
-   	}
-
-  	function showMessage(message)
+  	function delayFadeOut()
   	{
-  				$("#message").fadeOut(0);
-  				$("#message").text(message);
-  				$("#message").fadeIn(0);
-  				delayFadeOut();
+  		setTimeout('$("#message").fadeOut(2000)', 4000);
   	}
+
+ 	function showMessage(message)
+ 	{
+ 				$("#message").fadeOut(0);
+ 				$("#message").text(message);
+ 				$("#message").fadeIn(0);
+ 				delayFadeOut();
+ 	}

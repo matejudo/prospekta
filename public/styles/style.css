@@ -91,7 +91,7 @@ ul.submenu li a {  }
 
 .program img	{ border: 2px solid white; margin-top: 5px; margin-bottom: 5px; }
 
-.sidebar		{ padding-top: 50px; }
+.sidebar		{ margin-top: 10px; }
 .sidebar p		{ text-align: left; font-size: 1.2em; line-height: 1.3em; margin-bottom: 6px;  }
 .sidebar h2		{ text-transform: none; font-size: 1.7em; }
 

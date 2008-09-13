@@ -2,7 +2,25 @@
 
 class TextEditor
 {
-	public function getHTML($name, $content = null)
+	protected $toolbar = array();
+	
+	function __construct()
+	{
+		$this->toolbar["default"] = '
+						theme_advanced_buttons1 : "bold,italic,underline,strikethrough,forecolor,backcolor,separator,formatselect,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,outdent,indent,link,unlink,image",
+						theme_advanced_buttons2 : "undo,redo,tablecontrols,separator,removeformat,separator,code,separator,pagebreak",
+						theme_advanced_buttons3 : "",
+		';
+		
+		$this->toolbar["simple"] = '
+						theme_advanced_buttons1 : "bold,italic,underline,strikethrough,forecolor,backcolor,separator,formatselect",
+						theme_advanced_buttons2 : "justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,outdent,indent,link,unlink,image",
+						theme_advanced_buttons3 : "undo,redo,separator,removeformat,separator,code,separator,pagebreak",
+		';
+	
+	}
+
+	public function getHTML($name, $content = null, $tb = "default")
 	{
 		$html = '
 			<script language="javascript" type="text/javascript">
@@ -10,9 +28,7 @@ class TextEditor
 					mode : "textareas",
 					theme : "advanced",
 					plugins : "pagebreak,table,contextmenu,media", 
-					theme_advanced_buttons1 : "bold,italic,underline,strikethrough,separator,formatselect,separator,justifyleft,justifycenter,justifyright,justifyfull,bullist,numlist,undo,redo,link,unlink,image,removeformat,separator,code,separator,pagebreak",
-					theme_advanced_buttons2 : "tablecontrols,separator,forecolor,backcolor",
-					theme_advanced_buttons3 : "",
+					' . $this->toolbar[$tb] . '
 					theme_advanced_toolbar_location : "top",
 					theme_advanced_toolbar_align : "left",
 					theme_advanced_statusbar_location : "bottom",
@@ -33,4 +49,6 @@ class TextEditor
 		
 		return $html;
 	}
+	
+
 }

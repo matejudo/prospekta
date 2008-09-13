@@ -3,7 +3,8 @@
 <div class="toolbar">
 	<div class="container_12" id="midsection">
 			<ul>
-				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/article/new/">Novi članak</a></li>
+				<li class="button newarticle" id="newtext"><a href="<?= $this->baseUrl() ?>/admin/sidebar/newtext/">Novi tekst</a></li>
+				<li class="button newarticle" id="newpoll"><a href="<?= $this->baseUrl() ?>/admin/sidebar/newpoll/">Nova anketa</a></li>
 				<li class="separator"></li>
 				<li class="button delarticle" id="delete"><a href="#">Izbriši izabrane</a></li>
 				<li class="button pubarticle" id="publish"><a href='#'>Objavi izabrane</a></li>
@@ -24,10 +25,7 @@
 			    			else showMessage("Greška: Nije selektiran ni jedan članak."); 
 			    			
 			    			event.preventDefault(); 
-			    		});
-			    		
-
-			    	
+			    		});   	
 			    		
 			    	$("#unpublish").click(
 			    		function(event) { 
@@ -36,9 +34,7 @@
 			    			else showMessage("Greška: Nije selektiran ni jedan članak."); 
 			    			event.preventDefault(); 
 			    		});
-			    	
-
-			    	
+			    		
 			    	$("#delete").click(
 			    		function(event) {
 			    			$("#sidebars").attr({action: "<?= $this->baseUrl . "/admin/sidebar/delete" ?>"});  
@@ -46,9 +42,7 @@
 			    			else showMessage("Greška: Nije selektiran ni jedan članak."); 
 			    			event.preventDefault(); 
 			    		});
-			    	
-
-   	
+			    		
 			    	$("#checkall").click( function ()
 			    	{
 						if($("#checkall").attr("checked"))
@@ -56,8 +50,6 @@
 						else
 							$("input[@type='checkbox']").check('off');
 			    	});
-			    	
-			    	
 			    	
 			    	function testCheckboxes()
 			    	{
@@ -97,12 +89,12 @@
 						
 						<th width="3%" class="center">#</th>
 						<th width="3%" class="center"><?= $this->formCheckbox('checkall', '', array('title' => 'Uključi/isključi sve', 'class' => 'nocount')); ?></th>
-						<th width="3%" class="center"><acronym title="Objavljen - Pokazuje da li je članak objavljen ili ne.">Obj.</acronym></th>
+						<th width="5%" class="center"><acronym title="Objavljen - Pokazuje da li je članak objavljen ili ne.">Obj.</acronym></th>
+						<th width="8%">Tip</th>
 						<th width="51%">Naslov</th>
 						<th width="5%">Red.</th>
-						<th width="10%">Prikazan na</th>
-						<th width="10%">Pozicija</th>
-						<th width="10%">Tip</th>
+						<th width="10%" class="center">Prikazan na</th>
+						<th width="10%" class="center">Pozicija</th>
 
 					</tr>
 					<?php $i = 1; ?>
@@ -130,17 +122,26 @@
 						$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);
 						$created = $date->toString("dd.MM.YY. HH:mm");
 						
+						if($item->count % 10 > 1 && $item->count % 10 < 5)
+							$str = "stranice";
+						else
+							$str = "stranica"; 
+							
+							if($item->type == "Tekst")
+								$link = $this->baseUrl() . "/admin/sidebar/edittext/id/" . $item->id;
+							elseif($item->type == "Anketa")
+								$link = $this->baseUrl() . "/admin/sidebar/editpoll/id/" . $item->id;
 						?>
 	
 					<tr<?= $c ?>>					
 						<td width="3%" class="center"><?= $i ?>.</td>
 						<td width="3%" class="center"><?= $this->formCheckbox('id'.$item->id, '1'); ?></td>
-						<td width="3%" class="center"><a href="<?= $this->baseUrl() . "/admin/sidebar/" . $a . "/id/" . $item->id; ?>" title="<?= $t ?>"><img src="<?= $this->baseUrl() . "/images/" . $p; ?>" /></a></td>
-						<td width="51%"><a href="<?= $this->baseUrl() . "/admin/sidebar/edit/id/" . $item->id; ?>" title="Izmjeni sidebar"><?= $item->title; ?></a></td>
+						<td width="5%" class="center"><a href="<?= $this->baseUrl() . "/admin/sidebar/" . $a . "/id/" . $item->id; ?>" title="<?= $t ?>"><img src="<?= $this->baseUrl() . "/images/" . $p; ?>" /></a></td>
+						<td width="8%"><?= $item->type ?></td>
+						<td width="51%"><a href="<?= $link ?>" title="Izmjeni sidebar"><?= $item->title; ?></a></td>
 						<td width="5%"><?= $arrows; ?></td>
-						<td width="10%">3 stranice</td>
-						<td width="10%">Desno</td>
-						<td width="10%">Tekst</td>
+						<td width="10%" class="center"><?= $item->count ?> <?= $str ?></td>
+						<td width="10%" class="center"><?= $item->position ?></td>
 						<?php $i++; ?>
 					</tr>
 					<?php endforeach; ?>
