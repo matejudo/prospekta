@@ -29,7 +29,7 @@ ul				{ list-style: square; }
 dl              { margin-top: 18px; margin-bottom: 18px; font-size: 1.4em; }
 dl dt           { font-weight: bold; font-size: 1.4em; }
 
-blockquote      { border-left: 6px solid #ddd; margin-top: 18px; margin-bottom: 18px; padding-left: 17px; font-style: italic; font-size: 1.4em; }
+blockquote      { border-left: 6px solid #ddd; margin-top: 18px; margin-bottom: 18px; padding-left: 17px; font-style: italic; }
 blockquote *    { color: #666; }
 
 textarea        { resize: none; } /* Prevents that little handle from showing up in Safari. */
@@ -92,15 +92,15 @@ ul.submenu li a {  }
 .program img	{ border: 2px solid white; margin-top: 5px; margin-bottom: 5px; }
 
 .sidebar		{ margin-top: 10px; }
-.sidebar p		{ text-align: left; font-size: 1.2em; line-height: 1.3em; margin-bottom: 6px;  }
-.sidebar h2		{ text-transform: none; font-size: 1.7em; }
+.sidebar p		{ text-align: left; font-size: 1.2em; line-height: 1.3em; margin-top: 0px; margin-bottom: 10px; }
+.sidebar h2		{ text-transform: none; font-size: 1.7em; color: #cd4b0f; margin-top: 20px; margin-bottom: 5px;  }
+.sidebar h3		{ color: #cd4b0f; margin-top: 20px; margin-bottom: 0px; padding-bottom: 0px; margin-bottom: 5px; }
 
 .sidebar ul.sidemenu {  border-bottom: 1px solid #ddd; margin: 5px 5px; }
 .sidebar .sidemenu	{ list-style: none; padding: 0; height: auto; }
 
-.sidebar .icon	{ margin: 6px; margin-right: 12px; vertical-align: middle; display: block; float: left; }
 
-.sidebar .sidemenu li a	{ display: block; width: 100%;  padding: 8px 0px 8px 0px; margin: 0px; font-size: 13px; line-height: 13px; border-top: 1px solid #ddd;}
+.sidebar .sidemenu li a	{ display: block; padding: 8px 0px 8px 0px; margin: 0px; font-size: 13px; line-height: 13px; border-top: 1px solid #ddd;}
 .sidebar .sidemenu li a:hover { color: black; }
 
 .sidebar .sidesubmenu	{ list-style: none; padding: 0; height: auto; margin: 0px; margin-bottom: 4px; }
@@ -134,7 +134,11 @@ ul.submenu li a {  }
 #programi 		{ border-top: 2px solid white; margin-left: auto; padding: 16px 0px; }
 #programi p		{ line-height: 1.3em; text-align: justify; }
 
-#footer			{ padding: 16px 0px; }
+.overlay a		{ text-decoration: none; }
+.overlay a:hover { color: #e27d1c; text-decoration: none; }
+
+.footer			{ padding: 16px 0px; }
+.whitefooter	{ padding: 20px 0px 30px 0px; color: #999; }
 
 .filelist		{ height: 200px; overflow: scroll; border: 1px solid #ddd; }
 
@@ -144,3 +148,14 @@ ul.submenu li a {  }
 .intro			{ font-style: italic; border-bottom: 1px solid #ddd; font-family: Georgia; padding: 0px; margin-bottom: 10px; padding-bottom: 10px;}
 .intro p		{ margin: 4px 0px; }
 .article h1		{  }
+
+.userform label { width: 150px; display: block; float: left; }
+.userform span { display: block; height: 22px; margin-bottom: 4px; clear: both; }
+.userform .text { width: 300px; border: 1px solid #ddd;}
+.userform .text:hover { border: 1px solid #bbb;}
+.userform .text:focus { border: 1px solid #bbb; background: #eee; }
+.userform textarea { width: 450px; height: 100px; border: 1px solid #ddd;}
+.userform textarea:hover { border: 1px solid #bbb;}
+.userform textarea:focus { border: 1px solid #bbb; background: #eee; }
+.userform .button { width: 100px; border: 1px solid #ddd; text-align: center; }
+.userform .button:hover { width: 100px; border: 1px solid #bbb; text-align: center; }

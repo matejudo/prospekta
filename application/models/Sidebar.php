@@ -17,6 +17,76 @@ class Sidebar extends Zend_Db_Table
 		return $stmt->fetchAll();
 	}
 	
+	public function render($pageid, $position = "Desno", $baseurl = "/")
+	{
+		$db = Zend_Registry::get("db");
+		$stmt = $db->query("SELECT s.* FROM pros_sidebar s, pros_sidebar_page p WHERE s.id = p.sidebar_id AND p.page_id = $pageid AND s.position = '$position' AND s.published = 1 ORDER BY s.ordering ASC");
+		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
+		$all = $stmt->fetchAll();
+		
+		$return = "";
+		
+		foreach($all as $item)
+		{
+			switch($item->type)
+			{
+			case "Tekst":
+				$return .= "<h3>" . $item->title . "</h3>" . $item->text;
+				break;
+			case "Anketa":				
+				$stmt = $db->query("SELECT * FROM pros_poll WHERE id = $item->text");
+				$poll = $stmt->fetchObject();
+				$return .= "<h3>" . $item->title . "</h3>";
+				$return .= "<p><strong>" . $poll->question . "</strong></p>";
+				$stmt = $db->query("SELECT * FROM pros_poll_answer WHERE poll_id = $item->text ORDER BY id");
+				$answers = $stmt->fetchAll();
+				if(isset($_COOKIE['prospoll'.$poll->id]))
+				{
+					// Person has already voted
+					$topcount = 0;
+					foreach($answers as $answer)
+					{
+						if($answer->count > $topcount) $topcount = $answer->count;
+					}
+					$return .= "<p>";
+					foreach($answers as $answer)
+					{
+						$perc = round(100 * $answer->count / $poll->count);
+						$perc .= "%";
+						$width = round(100 * $answer->count / $topcount);
+						$width .= "%";
+						$return .= $answer->answer . ' ' . $perc;
+						$return .= '<span style="display: block; width: 100%; height:10px; border: 1px solid #cd4b0f;"><span style="width: ' . $width . '; background-color: #cd4b0f; height: 10px; display: block; margin-bottom: 5px;"></span></span>';
+					}
+					$return .= "</p>";
+					
+				}
+				else
+				{
+					$return .= '<form name="prospoll'.$item->id.'" action="'.$baseurl.'/anketa/vote" method="post">';
+					$return .= '<input type="hidden" name="pollid" value="' . $poll->id . '" />';
+					$return .= '<input type="hidden" name="returnto" value="' . $_SERVER['REQUEST_URI'] . '" />';
+					foreach($answers as $answer)
+					{
+						$return .= "<p>";
+						if($poll->multiple)
+							$return .= '<input type="checkbox" name="answer[]" id="answer' . $answer->id . '" value="' . $answer->id . '" /> ';
+						else
+							$return .= '<input type="radio" name="answer[]" id="answer' . $answer->id . '" value="' . $answer->id . '" /> ';
+						$return .= '<label for="answer' . $answer->id . '">' . $answer->answer . '</label></p>';
+					}
+						$return .= '<input type="submit" value="Pošalji &raquo" />';
+						$return .= '</form>';
+				}
+				break;
+			default:
+				$return .= "No content";
+				break;
+			}
+		}
+		return $return;
+	}
+	
 	public function getById($id)
 	{
 		$db = Zend_Registry::get("db");

@@ -35,4 +35,24 @@ class Polls extends Zend_Db_Table
 
 		return $i;
 	}
+	
+	public function vote($pollid, $vote)
+	{
+		$db = Zend_Registry::get("db");
+		$db->query("UPDATE pros_poll SET count = count + 1 WHERE id = $pollid");
+		
+		$inlist = "(";		
+		foreach($vote as $id)
+		{
+			$inlist .= "$id, ";
+		}
+		$inlist = substr($inlist, 0, strlen($inlist)-2);
+		$inlist .= ")";
+		$db->query("
+			UPDATE pros_poll_answer
+				SET count = count + 1
+				WHERE id in $inlist
+				AND poll_id = $pollid
+		");
+	}
 }

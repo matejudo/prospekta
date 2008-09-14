@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Prospekta je organizacija usmjerena na edukaciju i zapošljavanje mladih. Kroz naše programe osobnog i profesionalnog razvoja stvaramo grupe mladih i uspješnih pojedinaca, koji su traženi na tržištu rada zbog svojih izuzetnih vještina i sposobnosti. Uz stručno vodstvo naših trenera, polaznici u Prospekti ostvaruju dodatnu vrijednost na svoje obrazovanje." />
 	<meta name="keywords" content="Studenti, Osobni razvoj, Zapošljavanje, Karijera, Edukacija, Soft skills, Profesionalno usmjeravanje, Radionice, Vizija, Timski rad" />
-
+	<meta name="author" content="Matej Udovičić" />
 	<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/styles/master.css" type="text/css" media="screen" charset="utf-8" />
 	<script src="<?=$this->baseUrl()?>/scripts/jquery-1.2.6.min.js" type="text/javascript"></script>
 	<title>Prospekta - Edukacija i zapošljavanje mladih: <?=$this->escape($this->title)?></title>
@@ -13,8 +13,8 @@
 <script type="text/javascript">
 	$.fn.togglemenu = function()
 	{
-		this.siblings(".submenu").fadeOut(200);
-		this.fadeIn(200);
+		this.siblings(".submenu").hide(0);
+		this.show(0);
 	}
 	
 	var images = new Array("pol1_inovativnost.jpg", "pol2_edukacija.jpg", "pol1_kreativnost.jpg", "pol2_entuzijazam.jpg", "pol1_profesionalnost.jpg", "pol2_interakt.jpg", "pol1_vizionarstvo.jpg", "pol2_pouzdanost.jpg", "pol1_zajednistvo.jpg", "pol2_timskirad.jpg", "pol2_zabava.jpg");
@@ -70,7 +70,7 @@
 			<?= $this->topmenu ?>
 		</ul>
 		<div id="subtab1" class="submenu">
-			<div class="introtext"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras volutpat nunc lacinia dolor. Mauris enim justo, vehicula et, commodo vel, tincidunt eget, ipsum. Donec justo orci, luctus sit čamet, placerat ćeu, malesuada sit amet, libero. Duis volutpat tempor lectus. Morbi placerat malesuada nulla. Duis viverra nisl at nibh. Nam eget sem sit amet šest varius auctor. Cras sem. Ut hendrerit, libero đut porta ornare, žipsum ipsum consectetuer est, ut tristique lectus mi ac eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque sit amet mauris sit amet urna bibendum faucibus. Vivamus lobortis ante quis nunc. Mauris ornare dolor ac nunc. </p></div>
+			<div class="introtext"><p><?= $this->intro ?></p></div>
 			<div class="polaroids"><div style="" id="polaroid1" ></div><div style="display: none;" id="polaroid2" ></div></div>
 		</div>
 		<?= $this->submenu ?>
@@ -80,18 +80,28 @@
 	<div class="container_12" style="margin-left: auto; margin-right: auto;">
 		<div id="prog1" class="grid_4 alpha program">
 			<h2>Career Coaching Program</h2>
+			<?php if($this->career_date != ""): ?>
+				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/prijave">Početak programa: <?= $this->career_date ?></a></div>
+			<?php endif; ?>
 			<a href="#"><img src="<?php echo $this->baseUrl(); ?>/images/prog1_career.jpg" /></a>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras volutpat nunc lacinia dolor. Mauris enim justo, vehicula et, commodo vel, tincidunt eget, ipsum.</p>
+			<p><?= $this->career ?></p>
 		</div>
 		<div id="prog2" class="grid_4 program">
 			<h2>Self-Development Program</h2>
+			<?php if($this->self_date != ""): ?>
+				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/prijave">Početak programa: <?= $this->self_date ?></a></div>
+			<?php endif; ?>
 			<a href="#"><img src="<?php echo $this->baseUrl(); ?>/images/prog2_selfdev.jpg" /></a>
-			<p> Donec justo orci, luctus sit čamet, placerat ćeu, malesuada sit amet, libero. Duis volutpat tempor lectus. Morbi placerat malesuada nulla. Duis viverra nisl at nibh. </p>
+			<p><?= $this->self ?></p>
 		</div>
 		<div id="prog3" class="grid_4 omega program">
 			<h2>Student Management Program</h2>
+			<?php if($this->student_date != ""): ?>
+				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/prijave">Početak programa: <?= $this->student_date ?></a></div>
+			<?php endif; ?>
 			<a href="#"><img src="<?php echo $this->baseUrl(); ?>/images/prog3_student.jpg" /></a>
-			<p>Nam eget sem sit amet šest varius auctor. Cras sem. Ut hendrerit, libero đut porta ornare, žipsum ipsum consectetuer est, ut tristique lectus mi ac eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+			<p><?= $this->student ?></p>
+
 		</div>
 	</div>
 	<span class="clear"></span>
@@ -104,7 +114,7 @@
 <span class="clear"></span>
 
 <div class="border-top"></div>
-<div id="footer" class="orange"> 
+<div id="footer" class="footer orange"> 
 	<div class="container_12">
 		<div class="grid_3 alpha"><h2>Preporuči prijatelju</h2>
 			<form action="/mail/preporuka" method="post">
@@ -128,7 +138,7 @@
 	<span class="clear"></span>
 </div>
 <div class="border-bottom"></div>
-<div class="prijava"><a href="#" title="Prijavi se još danas!"><img src="<?= $this->baseUrl() ?>/images/ui_prijava.jpg" alt="Prijavi se još danas!"/></a></div>
+<div class="prijava"><a href="<?= $this->baseUrl() ?>/prijave" title="Prijavi se još danas!"><img src="<?= $this->baseUrl() ?>/images/ui_prijava.jpg" alt="Prijavi se još danas!"/></a></div>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
