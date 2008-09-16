@@ -90,7 +90,7 @@ class Sidebar extends Zend_Db_Table
 	public function getById($id)
 	{
 		$db = Zend_Registry::get("db");
-		$stmt = $db->query("SELECT * FROM pros_sidebar WHERE id = $id ORDER BY ordering");
+		$stmt = $db->query("SELECT * FROM pros_sidebar WHERE id = $id");
 		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
 		return $stmt->fetchObject();
 	}
@@ -216,6 +216,10 @@ class Sidebar extends Zend_Db_Table
 		$stmt = $db->query("
 			DELETE FROM pros_sidebar
 				WHERE id IN $inlist;
+		");	
+		$stmt = $db->query("
+			DELETE FROM pros_sidebar_page
+				WHERE sidebar_id IN $inlist;
 		");	
 	}
 	

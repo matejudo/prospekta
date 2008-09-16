@@ -5,6 +5,27 @@
 		this.toggle("slow");
 	}
 </script>
+<script type="text/javascript">
+        $().ready(function() {
+                // validate signup form on keyup and submit
+                $("#comment").validate({
+                        rules: {
+                                fullname: "required",
+                                email: {
+                                        required: true,
+                                        email: true
+                                }
+                        },
+                        messages: {
+                                fullname: "<span style='color:red;font-weight:bold'>* obavezno</span>",
+                                email: {
+                                	required: "<span style='color:red;font-weight:bold'>* obavezno</span>",
+                                	email: "<span style='color:red;font-weight:bold'>* neispravan email</span>"
+                                }
+                        }
+                });
+        });
+</script>
 <div class="container_16" id="midsection">
 	<div class="grid_3 alpha sidebar">
 		<ul class="sidemenu">
@@ -14,7 +35,36 @@
 	<div class="grid_10 article">
 		<h1><?= $this->article->title ?></h1>
 		<?= $this->article->text ?>
-		<h2>Komentari</h2>
+		<?php if(!isset($this->article->error)): ?>
+			<?php if($this->article->comments): ?>
+				<h1>Komentiraj članak</h1>
+				<form action="<?= $this->baseUrl ?>/article/comment" method="post" class="userform" id="comment">
+					<p>Sva polja su obavezna. Email neće biti prikazan.</p>
+					<p>
+						<input type="hidden" name="slug" value="<?= $this->article->slug ?>" />
+						<input type="hidden" name="article_id" value="<?= $this->article->id ?>" />
+						<span><label for="fullname">Ime</label><input type="text" name="fullname" id="fullname" class="text" /></span>
+						<span><label for="email">E-Mail</label><input type="text" name="email" id="email" class="text" /></span>
+						<span><label for="website">Web stranica</label><input type="text" name="website" id="website" value="http://" class="text" /></span>
+					</p>
+					<p><textarea name="text" style="width: 100%;"></textarea><br style="clear: both;" /></p>
+					<p>&nbsp;</p>
+					<p><input type="submit" value="Pošalji &raquo;" class="button" /></p>
+				</form>
+			<?php else: ?>
+				<h1>Komentiranje ovog članka nije omogućeno</h1>
+			<?php endif; ?>
+			<?php if($this->comments != NULL): ?>
+				<h1>Komentari</h1>
+				<?php foreach($this->comments as $comment): ?>
+					<?php if($comment->website) $comment->fullname = '<a href="'.$comment->website.'">' . $comment->fullname . '</a>'; ?>
+					<h3><?= $comment->fullname ?> <small>(<?php echo date("d.m.Y. H:i", strtotime($comment->created)) ?>)</small></h3>
+					<div class="comment">
+						<p><?= str_replace("\n", "</p><p>", $comment->text); ?></p>
+					</div>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		<?php endif; ?>
 	</div>
 	<div class="grid_3 omega sidebar">
 		<p>

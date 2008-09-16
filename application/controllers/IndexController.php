@@ -16,6 +16,7 @@ class IndexController extends Zend_Controller_Action
 		$articles = new Articles();
 		$this->view->novosti = $articles->getArticles("Novosti", 3, 0);
 		$this->view->zanimljivosti = $articles->getArticles("Zanimljivosti", 3, 0);
+		$this->view->feedback = $articles->getArticles("Feedback", 8, 1);
 		
 		$settings = new Settings();
 		$this->view->intro = $settings->get("front_intro");

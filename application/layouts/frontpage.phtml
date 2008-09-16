@@ -45,6 +45,17 @@
 		setTimeout("slideshow("+counter+")", 5000);
 	}
 	
+	var feedback = new Array();
+	<?php $i=0; foreach($this->feedback as $item): ?>
+	feedback[<?= $i ?>] = "<?= $item->text ?>";
+	<?php $i++; endforeach; ?>
+
+	function feedbackRotation(item)
+	{		
+		$("#feedback").fadeOut(1000).fadeTo(1000, 1).html(feedback[item % feedback.length]).fadeIn(1000);
+		item++;
+		setTimeout("feedbackRotation("+item+")", 4000);
+	}
 
 
 	$(document).ready(function() {
@@ -56,6 +67,8 @@
 
 		$('#menu').hover(function() {}, function() { $('#subtab1').togglemenu(); });
 		
+		feedbackRotation(0);
+		
 		slideshow(Math.floor(Math.random() * (images.length)));
 	});
 </script>
@@ -66,7 +79,7 @@
 
 <div id="menu">		
 		<ul id="topmenu" >
-			<li class="topitem" id="menuitem1"><a href="<?= $this->baseUrl() ?>"><strong>Početna</strong></a></li>
+			<li class="topitem" id="menuitem1"><a href="<?= $this->baseUrl() ?>/"><strong>Početna</strong></a></li>
 			<?= $this->topmenu ?>
 		</ul>
 		<div id="subtab1" class="submenu">
@@ -83,7 +96,7 @@
 			<?php if($this->career_date != ""): ?>
 				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/prijave">Početak programa: <?= $this->career_date ?></a></div>
 			<?php endif; ?>
-			<a href="#"><img src="<?php echo $this->baseUrl(); ?>/images/prog1_career.jpg" /></a>
+			<a href="<?php echo $this->baseUrl(); ?>/programi/career-coaching"><img src="<?php echo $this->baseUrl(); ?>/images/prog1_career.jpg" /></a>
 			<p><?= $this->career ?></p>
 		</div>
 		<div id="prog2" class="grid_4 program">
@@ -91,7 +104,7 @@
 			<?php if($this->self_date != ""): ?>
 				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/prijave">Početak programa: <?= $this->self_date ?></a></div>
 			<?php endif; ?>
-			<a href="#"><img src="<?php echo $this->baseUrl(); ?>/images/prog2_selfdev.jpg" /></a>
+			<a href="<?php echo $this->baseUrl(); ?>/programi/self-development"><img src="<?php echo $this->baseUrl(); ?>/images/prog2_selfdev.jpg" /></a>
 			<p><?= $this->self ?></p>
 		</div>
 		<div id="prog3" class="grid_4 omega program">
@@ -99,7 +112,7 @@
 			<?php if($this->student_date != ""): ?>
 				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/prijave">Početak programa: <?= $this->student_date ?></a></div>
 			<?php endif; ?>
-			<a href="#"><img src="<?php echo $this->baseUrl(); ?>/images/prog3_student.jpg" /></a>
+			<a href="<?php echo $this->baseUrl(); ?>/programi/student-management"><img src="<?php echo $this->baseUrl(); ?>/images/prog3_student.jpg" /></a>
 			<p><?= $this->student ?></p>
 
 		</div>
@@ -117,21 +130,22 @@
 <div id="footer" class="footer orange"> 
 	<div class="container_12">
 		<div class="grid_3 alpha"><h2>Preporuči prijatelju</h2>
-			<form action="/mail/preporuka" method="post">
-				<div><label for="ime">Tvoje ime </label><br /><input type="text" id="ime" class="text" /><br /></div>
-				<div><label for="email">e-mail prijatelja </label><br /><input type="text" id="email" class="text" /></div>
+			<form action="<?= $this->baseUrl ?>/kontakt/preporuka" method="post">
+				<div><label for="ime">Tvoje ime </label><br /><input type="text" name="name" id="ime" class="text" /><br /></div>
+				<div><label for="email">e-mail prijatelja </label><br /><input name="email" type="text" id="email" class="text" /></div>
 				<div class="button"><input type="submit" value="Pošalji &raquo;" class="button" /></div>
 			</form>
 		</div>
 		<div class="grid_6">
 			<h2>Feedback naših polaznika</h2>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras volutpat nunc lacinia dolor. Mauris enim justo, vehicula et, commodo vel, tincidunt eget, ipsum. Donec justo orci, luctus sit čamet, placerat ćeu, malesuada sit amet, libero. Duis volutpat tempor lectus. Morbi placerat malesuada nulla. Duis viverra nisl at nibh.</p>
-		</div>
+			<div id="feedback" display="none" style="height: 150px"></div>
+			
+		</div>	
 		<div class="grid_3 omega"><h2>Prijavi se na newsletter</h2>
-			<form action="/mail/preporuka" method="post">
-				<div><label for="newsime">Ime </label><input type="text" id="newsime" class="text" /><br /></div>
-				<div><label for="newsemail">e-mail </label><input type="text" id="newsemail" class="text" /></div>
-				<div class="button"><input type="submit" value="Pošalji &raquo;" class="button" /><br /><br /><a href="#">Odjavi se</a></div>
+			<form action="http://mail.prospekta.net/mailman/subscribe/newsletter_prospekta.net" method="post">
+				<div><label for="fullname">Ime </label><input type="text" name="fullname" id="fullname" class="text" /><br /></div>
+				<div><label for="email">e-mail </label><input type="text" name="email" id="email" class="text" /></div>
+				<div class="button"><input type="submit" name="email-button" value="Pošalji &raquo;" class="button" /><br /><br /><a href="http://mail.prospekta.net/mailman/listinfo/newsletter_prospekta.net">Odjavi se</a></div>
 			</form>
 		</div>
 	</div>

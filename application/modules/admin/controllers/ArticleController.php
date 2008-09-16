@@ -75,6 +75,11 @@ class Admin_ArticleController extends Zend_Controller_Action
 		$this->view->categories = $articles->getCategories();
 		$editor = new TextEditor();		
 		$this->view->editor = $editor->getHTML("text", $this->view->article->text);
+		if(!isset($this->view->article->error))
+		{
+			$comments = new Comments();
+			$this->view->comments = $comments->get($this->view->article->id);
+		}
 	}
 	
 	public function publishAction()
@@ -237,6 +242,16 @@ class Admin_ArticleController extends Zend_Controller_Action
 			}
 		}
 		return $return;
+	}
+	
+	public function delcomAction()
+	{
+		$comments = new Comments();
+		$articles = new Articles();
+		$comid = $this->_getParam("id");
+		$comment = $comments->getById($comid);
+		$comments->delete($comid);
+		$this->_redirect("/admin/article/edit/id/" . $comment->article_id);
 	}
 }
 

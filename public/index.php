@@ -78,6 +78,12 @@
 															'action' => 'index'));
 		$router->addRoute("article", $route);
 		
+		$route = new Zend_Controller_Router_Route(	'article/comment/',
+													array(	'module' => 'default',
+															'controller' => 'article', 
+															'action' => 'comment'));
+		$router->addRoute("comment", $route);
+		
 		$route = new Zend_Controller_Router_Route(	'anketa/:action/*',
 													array(	'module' => 'default',
 															'controller' => 'poll'));

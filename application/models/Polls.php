@@ -55,4 +55,11 @@ class Polls extends Zend_Db_Table
 				AND poll_id = $pollid
 		");
 	}
+	
+	public function delete($id)
+	{
+		$db = Zend_Registry::get("db");
+		$db->query("DELETE FROM pros_poll WHERE id = $id");
+		$db->query("DELETE FROM pros_poll_answer WHERE poll_id = $id");
+	}
 }

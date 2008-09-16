@@ -83,7 +83,17 @@
 				<h3>Slike i attachmenti</h3>
 				<p><a href="#" onclick="$('#filelist').toggle(); return false;">Dodaj sliku ili attachment u tekst</a> | <a href="#" onclick="$('#filelist').show(0); $('#filelist').contents().find('#uploadform').animate({ height: '80px' }, 'slow'); return false;">Upload nove datoteke</a></p>
 				<iframe src="<?= $this->baseUrl(); ?>/admin/file/folderclear" class="filelist" name="filelist" id="filelist" style="display: none;"></iframe>
-				<h3>Komentari</h3>
+				<?php if($this->comments): ?>
+					<h3>Komentari</h3>
+					<p><strong>Brisanje komentara poništava sve promjene u članku ukoliko nisu spremljene</strong></p>
+					<?php foreach($this->comments as $comment): ?>
+						<?php if($comment->website) $comment->fullname = '<a href="'.$comment->website.'">' . $comment->fullname . '</a>'; ?>
+						<p class="small">
+						<strong><a href="<?= $this->baseUrl ?>/admin/article/delcom/id/<?= $comment->id ?>" class="red">Izbriši</a> - <?= $comment->fullname ?> (<?php echo date("d.m.Y. H:i", strtotime($comment->created)) ?>)</strong><br/>
+							<?= $comment->text; ?>
+						</p>						
+					<?php endforeach; ?>
+				<?php endif; ?>
 			</div>
 
 			<div class="grid_3 omega sidebar">

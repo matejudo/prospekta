@@ -149,6 +149,10 @@ ul.submenu li a {  }
 .intro p		{ margin: 4px 0px; }
 .article h1		{  }
 
+.comment	{ border-bottom: 1px solid #bbb; padding-bottom: 10px; margin-bottom: 10px; }
+
+small		{ color: #999; }
+
 .userform label { width: 150px; display: block; float: left; }
 .userform span { display: block; height: 22px; margin-bottom: 4px; clear: both; }
 .userform .text { width: 300px; border: 1px solid #ddd;}

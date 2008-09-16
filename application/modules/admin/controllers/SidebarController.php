@@ -272,6 +272,30 @@ class Admin_SidebarController extends Zend_Controller_Action
 		$this->_redirect($redirecturl);
 	}
 	
-	
+	public function deleteAction()
+	{
+		if($this->getRequest()->isPost())
+		{
+			$sidebars = new Sidebar();
+			$data = array();
+			$params = $this->_request->getParams();			
+			foreach($params as $key => $value)
+			{
+				if($value == "1")
+				{
+					$id = substr($key, 2);
+					$sidebar = $sidebars->getById($id);
+					if($sidebar->type == "Anketa")
+					{
+						$polls = new Polls();
+						$polls->delete($sidebar->text);
+					}
+					array_push($data, $id);
+				}
+			}
+			$sidebars->delete($data, 0);
+		}
+		$this->_redirect('admin/sidebar');
+	}
 	
 }
