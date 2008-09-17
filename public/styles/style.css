@@ -140,6 +140,9 @@ ul.submenu li a {  }
 .footer			{ padding: 16px 0px; }
 .whitefooter	{ padding: 20px 0px 30px 0px; color: #999; clear: both; }
 
+.subelements	{ margin: 0px; padding: 0px; }
+.subelements li { list-style: none; padding: 0px; }
+
 .filelist		{ height: 200px; overflow: scroll; border: 1px solid #ddd; }
 
 .news h1, .news h2, .news h3, .news h4, .news h5, .news h6
@@ -170,3 +173,5 @@ textarea { font-family: 'Lucida Sans Unicode', Helvetica, "Trebuchet MS", Tahoma
 .userform textarea:focus { border: 1px solid #bbb; background: #eee; }
 .userform .button { width: 100px; border: 1px solid #ddd; text-align: center; }
 .userform .button:hover { width: 100px; border: 1px solid #bbb; text-align: center; }
+.userform input.required { border: 1px solid #ff6666; }
+.userform p.required { color: #ff3333; }

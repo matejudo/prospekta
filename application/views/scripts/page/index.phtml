@@ -8,16 +8,19 @@
 	</div>
 	<div class="grid_10">
 		<h1><?= $this->page->title ?></h1>
+		<?php if($this->page->showsub):  ?>
+			<ul class="subelements">
+				<?php foreach($this->subelements as $item): ?>				
+					<li><a href="<?= $this->baseUrl() . "/" . $item->path ?>"><?= $item->title ?></a></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
 		<?php
 			if($this->page->text != "")
 				echo $this->page->text;
 			else
 			{
-				foreach($this->subelements as $item):
-				?>
-					<p><a href="<?= $this->baseUrl() . "/" . $this->page->slug . "/" . $item->slug ?>"><?= $item->title ?></a></p>
-				<?php
-				endforeach;
+
 			}
 		?>
 	</div>

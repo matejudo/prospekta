@@ -143,7 +143,7 @@
 		</div>
 		<div class="grid_6">
 			<h2>Feedback naših polaznika</h2>
-			<div id="feedback" display="none" style="height: 150px">
+			<div id="feedback" display="none">
 				<?php $i=0; foreach($this->feedback as $item): ?>
 				<p style="display: none" class="p<?= $i ?>"><?= strip_tags($item->text) ?></p>
 				<?php $i++; endforeach; ?>

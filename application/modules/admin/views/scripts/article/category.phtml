@@ -1,0 +1,150 @@
+<div id="messagebar"><div id="message" style="display: none"><?= $this->message ?></div></div>
+<div id="userinfo"><p>Dobrodošli, <?= $this->user->fullname ?> | <a href="<?= $this->baseUrl() ?>/admin/auth/logout">Logout</a></p></div>
+<div class="toolbar">
+	<div class="container_12" id="midsection">
+			<ul>
+				<li class="button newarticle" id="new"><a href="<?= $this->baseUrl() ?>/admin/article/new/category/<?= $this->category ?>">Novi članak</a></li>
+				<li class="separator"></li>
+				<li class="button delarticle" id="delete"><a href="#">Izbriši izabrane</a></li>
+				<li class="button pubarticle" id="publish"><a href='#'>Objavi izabrane</a></li>
+				<li class="button unpubarticle" id="unpublish"><a href="#">Makni izabrane</a></li>
+			</ul>
+	</div>
+</div>
+
+<div class="container_12" id="midsection">
+	<div id="content" class="grid_12">
+		    <script type="text/javascript">	    
+		    
+		    
+		    	 $(document).ready(function() {
+			    	$("#publish").click(
+			    		function(event) { 
+			    			$("#articles").attr({action: "<?= $this->baseUrl . "/admin/article/publish" ?>"});  
+			    			if($("input[@type='checkbox']").checkCount()) $("#articles").submit(); 
+			    			else showMessage("Greška: Nije selektiran ni jedan članak."); 
+			    			
+			    			event.preventDefault(); 
+			    		});
+			    		
+
+			    	
+			    		
+			    	$("#unpublish").click(
+			    		function(event) { 
+			    			$("#articles").attr({action: "<?= $this->baseUrl . "/admin/article/unpublish" ?>"});  
+			    			if($("input[@type='checkbox']").checkCount()) $("#articles").submit(); 
+			    			else showMessage("Greška: Nije selektiran ni jedan članak."); 
+			    			event.preventDefault(); 
+			    		});
+			    	
+
+			    	
+			    	$("#delete").click(
+			    		function(event) {
+			    			$("#articles").attr({action: "<?= $this->baseUrl . "/admin/article/delete" ?>"});  
+			    			if($("input[@type='checkbox']").checkCount()) $("#articles").submit(); 
+			    			else showMessage("Greška: Nije selektiran ni jedan članak."); 
+			    			event.preventDefault(); 
+			    		});
+			    	
+
+   	
+			    	$("#checkall").click( function ()
+			    	{
+						if($("#checkall").attr("checked"))
+							$("input[@type='checkbox']").check('on');
+						else
+							$("input[@type='checkbox']").check('off');
+			    	});
+			    	
+			    	
+			    	
+			    	function testCheckboxes()
+			    	{
+			    		var i = 1;		    		
+			    		while($("#id"+i).length)
+			    		{
+			    			if($("#id"+i+":checked").length) return true;
+			    			i++;
+			    		}
+			    		return false;
+			    	}
+			    	
+			    	function checkAll()
+			    	{
+			    		var i = 1;	
+			    		var ch = "";
+			    		if($("#checkall").attr("checked")) ch = "checked"; else ch = "";	    		
+			    		while($("#id"+i).length)
+			    		{
+			    			$("#id"+i).attr("checked", ch);
+			    			i++;
+			    		}
+			    	}
+			    	
+			    	function countChecked()
+			    	{
+						var res = $("input[@type=checkbox][@checked]").length;
+						if($("#checkall[@checked]").length) res--;
+						return res;
+			    	}
+			    });
+		    </script>
+		    <h2>Kategorija: <?= $this->category ?></h2>
+			<?= $this->form("articles", array("method" => "post", "action" => "noaction")) ?>
+				<table width="100%" class="list">
+					<tr>					
+						
+						<th width="3%" class="center">#</th>
+						<th width="3%" class="center"><?= $this->formCheckbox('checkall', '', array('title' => 'Uključi/isključi sve', 'class' => 'nocount')); ?></th>
+						<th width="3%" class="center"><acronym title="Objavljen - Pokazuje da li je članak objavljen ili ne.">Obj.</acronym></th>
+						<th width="34%">Naslov</th>
+						<th width="21%"><acronym title="Kratki naslov za članak bez razmaka i specijalnih znakova. Mora biti jedinstven.">Slug</acronym></th>
+						<th width="5%">Red.</th>
+						<th width="10%">Zad. promjena</th>
+						<th width="15%">Autor</th>
+					</tr>
+					<?php $i = 1; ?>
+					<?php foreach($this->articles as $article):
+						if($article->published == 1):
+							$p = "icon_light_bulb.png"; $t = "Makni"; $a = "unpublish";
+						else:
+							$p = "icon_light_bulb_off.png"; $t = "Objavi"; $a = "publish";
+						endif;
+						
+						if($i % 2 == 0):
+							$c = ' class="hilite" ';
+						else:
+							$c = '';
+						endif;
+						
+						$arrows = "";
+						if($i != 1):
+							$arrows .= '<a href="'.$this->baseUrl() . "/admin/article/moveup/id/". $article->id . '"><img src="'.$this->baseUrl(). "/images/icon_arrow_small_up.png" . '" title="Pomakni gore" /></a>';
+						else: $arrows .= '<img src="'.$this->baseUrl(). "/images/icon_spacer.png" . '" />'; endif;
+						if($i != count($this->articles)):
+							$arrows .= '<a href="'.$this->baseUrl() . "/admin/article/movedown/id/". $article->id . '"><img src="'.$this->baseUrl(). "/images/icon_arrow_small_down.png" . '" /></a>';
+						endif; 
+						
+						$date = new Zend_Date(Zend_Date::now(), Zend_Date::ISO_8601);
+						$created = $date->toString("dd.MM.YY. HH:mm");
+						
+						?>
+	
+					<tr<?= $c ?>>					
+						<td width="3%" class="center"><?= $i ?>.</td>
+						<td width="3%" class="center"><?= $this->formCheckbox('id'.$article->id, '1'); ?></td>
+						<td width="3%" class="center"><a href="<?= $this->baseUrl() . "/admin/article/" . $a . "/id/" . $article->id; ?>" title="<?= $t ?>"><img src="<?= $this->baseUrl() . "/images/" . $p; ?>" /></a></td>
+						<td width="36%"><a href="<?= $this->baseUrl() . "/admin/article/edit/id/" . $article->id; ?>" title="Izmjeni članak"><?= $article->title; ?></a></td>
+						<td width="20%"><?= $article->slug; ?></td>
+						<td width="5%"><?= $arrows; ?></td>
+						<td width="15%"><?= $created; ?></td>
+						<td width="15%"><?= $article->fullname; ?></td>
+						<?php $i++; ?>
+					</tr>
+					<?php endforeach; ?>
+				</table>
+			</form>
+	</div>
+</div>

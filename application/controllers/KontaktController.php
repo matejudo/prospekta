@@ -164,7 +164,7 @@ class KontaktController extends Zend_Controller_Action
 			$selfdev = $this->_getParam("selfdev");
 			$student = $this->_getParam("student");
 			
-			if($ime == "" || $prezime == "" || $email == "" || $tel == "")
+			if($ime == "" || $prezime == "" || $email == "")
 			{
 				$this->view->result = "<h1>Greška =(</h1><p>Potrebno je ispuniti sva polja osobnih podataka.</p>";
 			}

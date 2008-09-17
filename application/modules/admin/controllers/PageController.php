@@ -63,6 +63,7 @@ class Admin_PageController extends Zend_Controller_Action
 		$this->view->page->id = "-1";
 		$this->view->page->parentid = "-1";
 		$this->view->page->ordering = "0";
+		$this->view->page->showsub = "1";
 		$pages = new Pages();
 		$this->view->paths = $pages->getAllPaths();		
 		$files = new Files();
@@ -98,7 +99,8 @@ class Admin_PageController extends Zend_Controller_Action
 				'ordering'		=> $this->_request->getParam("ordering"),
 				'published'		=> $this->_request->getParam("published"),
 				'modified'		=> $date->toString("YYYY-MM-dd HH:mm:ss"),
-				'author'		=> Zend_Auth::getInstance()->getIdentity()->fullname
+				'author'		=> Zend_Auth::getInstance()->getIdentity()->fullname,
+				'showsub'		=> $this->_request->getParam("showsub")
 			);			
 		
 			if(($this->_request->getParam("slug") != $this->_request->getParam("oldslug")) && $pages->slugExists($this->_request->getParam("slug")))

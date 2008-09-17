@@ -112,8 +112,9 @@ class Pages extends Zend_Db_Table
 				$return[$i]["title"] = $result->title;
 				$return[$i]["path"] = $result->slug;
 				if($result->parentid === NULL) $done = 1;
+				$i++;
 			}
-			$i++;
+			
 		}
 		return $return;
 	}
