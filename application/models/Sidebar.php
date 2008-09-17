@@ -51,6 +51,8 @@ class Sidebar extends Zend_Db_Table
 					$return .= "<p>";
 					foreach($answers as $answer)
 					{
+						if($poll->count == 0) $poll->count = 1;
+						if($topcount == 0) $topcount = 1;
 						$perc = round(100 * $answer->count / $poll->count);
 						$perc .= "%";
 						$width = round(100 * $answer->count / $topcount);

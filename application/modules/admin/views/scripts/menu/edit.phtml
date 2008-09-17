@@ -77,14 +77,14 @@
 					<input type="radio" name="type" value="link" id="radiolink" <?= ("link" == $this->menu->type) ? 'checked="checked"' : ""; ?> onclick="$('#targetpage').hide().attr('name', ''); $('#targetlink').show().attr('name', 'target');"/><label for="radiolink">Link</label>
 				</p>
 				<p>
-					<select name="target" id="targetpage" <?= ($this->menu->type == "link") ? 'style="display: none;"' : ""; ?>>
+					<select name="<?php if($this->menu->type == "page") echo "target"; else echo "targetx"; ?>" id="targetpage" <?= ($this->menu->type == "link") ? 'style="display: none;"' : ""; ?>>
 						<option value="-2">Bez linka</option>
 						<option value="-1">Početna stranica</option>
 						<optgroup label="Ostale stranice">
 							<?php foreach($this->pages as $curpage): ?><option value="<?= $curpage["id"] ?>" <?= ($curpage["id"] == $this->menu->target) ? 'selected="selected"' : ""; ?>><?= str_replace("/", " &raquo; ", $curpage["path"]) ?></option><?php endforeach; ?>
 						</optgroup>
 					</select>
-					<input type="text" name="targetx" id="targetlink" value="<?= $this->menu->target ?>" <?= ($this->menu->type == "page") ? 'style="display: none;"' : ""; ?> />
+					<input type="text" name="<?php if($this->menu->type == "link") echo "target"; else echo "targetx"; ?>" id="targetlink" value="<?= $this->menu->target ?>" <?= ($this->menu->type == "page") ? 'style="display: none;"' : ""; ?> />
 				</p>		
 			</div>
 

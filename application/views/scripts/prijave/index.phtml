@@ -1,20 +1,24 @@
 <div class="container_16" id="midsection">
-	<div class="grid_3 sidebar alpha">	
+	<div class="grid_3 sidebar alpha">
+		<ul class="sidemenu">
+			<?= $this->leftmenu; ?>
+		</ul>
 	</div>
 	<div class="grid_10">
 		<h1>Prijavi se!</h1>
-		<form class="userform" action="<?= $this->baseUrl ?>/prijave/save" method="post">
+		<form class="userform" action="<?= $this->baseUrl ?>/prijave/posalji" method="post">
 			<h3>Osobni podaci</h3>
 			<p>
 				<span><label for="ime">Ime</label><input type="text" name="ime" id="ime" class="text" /></span>
 				<span><label for="prezime">Prezime</label><input type="text" name="prezime" id="prezime" class="text" /></span>
 				<span><label for="email">E-Mail</label><input type="text" name="email" id="email" class="text" /></span>
+				<span><label for="tel">Tel/Mob</label><input type="text" name="tel" id="tel" class="text" /></span>
 			</p>
 			<h3>Programi</h3>
 			<p>
-				<span><label for="career">Career Coaching</label><input type="checkbox" name="career" id="career" /></span>
-				<span><label for="selfdev">Self-development</label><input type="checkbox" name="selfdev" id="selfdev" /></span>
-				<span><label for="student">Student management</label><input type="checkbox" name="student" id="student" /></span>
+				<span><label for="career">Career Coaching</label><input type="checkbox" name="career" id="career" value="1" /></span>
+				<span><label for="selfdev">Self-development</label><input type="checkbox" name="selfdev" id="selfdev" value="1" /></span>
+				<span><label for="student">Student management</label><input type="checkbox" name="student" id="student" value="1" /></span>
 			</p>
 			<h3>Dodatne informacije, komentari</h3>
 				<p><textarea name="info"></textarea><br style="clear: both;" /></p>

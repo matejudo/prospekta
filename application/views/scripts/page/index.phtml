@@ -1,11 +1,3 @@
-<script type="text/javascript">	 
-	$.fn.showsubmenu = function()
-	{
-		$(".sidesubmenu").hide("slow");
-		this.toggle("slow");
-	}
-</script>
-
 <div class="container_16" id="midsection">
 	<div class="grid_3 sidebar alpha">	
 	
@@ -23,7 +15,7 @@
 			{
 				foreach($this->subelements as $item):
 				?>
-					<p><a href="<?= $this->baseUrl() . "/" . $item->slug ?>"><?= $item->title ?></a></p>
+					<p><a href="<?= $this->baseUrl() . "/" . $this->page->slug . "/" . $item->slug ?>"><?= $item->title ?></a></p>
 				<?php
 				endforeach;
 			}

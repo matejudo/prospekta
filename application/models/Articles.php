@@ -127,6 +127,15 @@ class Articles extends Zend_Db_Table
 		$stmt = $db->query("SELECT * FROM pros_article WHERE id = $id");
 		$stmt->setFetchMode(Zend_Db::FETCH_OBJ);
 		$item = $stmt->fetchObject();
+		if($item == NULL)
+		{
+			$item = new stdClass();
+			$item->title = "Traženi članak ne postoji";
+			$item->text = "";
+			$item->error = 1;
+			$item->slug = "";
+			return $item;
+		}
 		if($format)
 		{
 			$item->text = str_replace("<!-- pagebreak --></p>", "</p><!-- pagebreak -->", $item->text);

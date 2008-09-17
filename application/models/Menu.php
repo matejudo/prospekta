@@ -292,4 +292,118 @@ class Menu extends Zend_Db_Table
 	}
 	
 	
+	
+	public function render($tree, $baseUrl)
+	{
+		if($tree == "Glavni")
+		{
+			$menuitems = $this->getTree("Glavni");
+			$pages = new Pages();
+			$this->view = new stdClass();
+			$this->view->topmenu = "";
+			$this->view->submenu = "";
+			$counter = 1;
+			foreach($menuitems as $item)
+			{
+				$counter++;
+				if($item->type == "")
+					$path = "#";
+				if($item->type == "link")
+					$path = $item->target;
+				if($item->type == "page")
+				{
+					if($item->target == "-2")
+						$path = "#";
+					elseif($item->target == "-1")
+						$path = $baseUrl;
+					else
+						$path = $baseUrl . "/" . $pages->getPathById($item->target);
+				}
+				$this->view->topmenu .= '<li class="topitem" id="menuitem' . $counter . '"><a href="' . $path . '"><strong>' . $item->title . '</strong></a></li>';
+				
+				$this->view->submenu .= '<ul class="submenu" id="subtab' . $counter . '" style="display: none">';
+				foreach($item->children as $subitem)
+				{
+					if($subitem->type == "")
+						$path = "#";
+					if($subitem->type == "link")
+						$path = $subitem->target;
+					if($subitem->type == "page")
+					{
+						if($subitem->target == "-2")
+							$path = "#";
+						elseif($subitem->target == "-1")
+							$path = $baseUrl;
+						else
+							$path = $baseUrl . "/" . $pages->getPathById($subitem->target);
+					}
+					$this->view->submenu .= '<li><a href="' . $path . '"><strong>' . $subitem->title . '</strong>' . (($subitem->description != "") ? (" - " . $subitem->description) : "") . '</a></li>';
+				}
+				$this->view->submenu .= '</ul>';			
+			}
+			$this->view->counter = $counter;
+			return $this->view;
+		}
+		
+		if($tree == "Lijevi")
+		{
+			$leftmenuitems = $this->getTree("Lijevi");
+			$pages = new Pages();
+			$this->view = new stdClass();
+			$this->view->leftmenu = "";
+			$counter = 1;
+			foreach($leftmenuitems as $item)
+			{
+				$counter++;
+				if($item->type == "")
+					$path = "#";
+				if($item->type == "link")
+					$path = $item->target;
+				if($item->type == "page")
+				{
+					if($item->target == "-2")
+						$path = "#";
+					elseif($item->target == "-1")
+						$path = $baseUrl;
+					else
+						$path = $baseUrl . "/" . $pages->getPathById($item->target);
+				}
+				
+				if($item->children)
+				{
+					$this->view->leftmenu .= '<li style="background: url(\''.$baseUrl . '/images/' . $item->description.'\') 0px 8px no-repeat;">';
+					$this->view->leftmenu .= '<a style="padding-left: 20px;" href="#" onclick="$(\'#sidesubtab'.$counter.'\').showsubmenu(); return false;">' . $item->title . '</a>';
+					$this->view->leftmenu .= '<ul class="sidesubmenu" id="sidesubtab'.$counter.'" style="display: none;">';			
+						foreach($item->children as $subitem)
+						{
+							if($subitem->type == "")
+								$path = "#";
+							if($subitem->type == "link")
+								$path = $subitem->target;
+							if($subitem->type == "page")
+							{
+								if($subitem->target == "-2")
+									$path = "#";
+								elseif($subitem->target == "-1")
+									$path = $baseUrl;
+								else
+									$path = $baseUrl . "/" . $pages->getPathById($subitem->target);
+							}
+							$this->view->leftmenu .= '<li><a href="' . $path . '">' . $subitem->title . '</a></li>';
+						}
+					$this->view->leftmenu .= '</ul>';
+					$this->view->leftmenu .= '</li>';
+				}
+				else
+				{
+					$this->view->leftmenu .= '<li style="background: url(\'' . $baseUrl . '/images/' . $item->description.'\') 0px 8px no-repeat;">';
+					$this->view->leftmenu .= '<a style="padding-left: 20px;" href="' . $path . '">' . $item->title . '</a></li>';
+				}									
+			}
+			
+			return $this->view->leftmenu;
+		}
+	}
+	
+	
 }

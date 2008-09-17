@@ -1,0 +1,21 @@
+<div class="container_16" id="midsection">
+	<div class="grid_3 sidebar alpha">	
+		<ul class="sidemenu">
+			<?= $this->leftmenu; ?>
+		</ul>
+	</div>
+	<div class="grid_10">
+		<h1>Preporuči Prospektu prijatelju</h1>
+			<form class="userform" action="<?= $this->baseUrl ?>/kontakt/preporuka" method="post">
+			<p>
+				<span><label for="ime">Tvoje ime</label><input type="text" name="name" id="ime" class="text" /></span>
+				<span><label for="prezime">Email prijatelja</label><input name="email" type="text" id="email" class="text" /></span>
+			</p>
+			<p>
+				<span><input type="submit" value="Pošalji &raquo;" class="button" /></span>
+			</p>
+			</form>
+	</div>
+	<div class="grid_3 omega sidebar">
+	</div>
+</div>

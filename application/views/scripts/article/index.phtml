@@ -39,7 +39,7 @@
 			<?php if($this->article->comments): ?>
 				<h1>Komentiraj članak</h1>
 				<form action="<?= $this->baseUrl ?>/article/comment" method="post" class="userform" id="comment">
-					<p>Sva polja su obavezna. Email neće biti prikazan.</p>
+					<p>Polja ime i email su obavezna. Email neće biti prikazan.</p>
 					<p>
 						<input type="hidden" name="slug" value="<?= $this->article->slug ?>" />
 						<input type="hidden" name="article_id" value="<?= $this->article->id ?>" />
@@ -69,7 +69,7 @@
 	<div class="grid_3 omega sidebar">
 		<p>
 			<a href="#" onclick="window.print(); return false;"><img src="<?= $this->baseUrl; ?>/images/icon_print.png" style="vertical-align: text-top" /> Ispiši</a>
-		</p><p>	<a href="#"><img src="<?= $this->baseUrl; ?>/images/icon_mail_send.png" style="vertical-align: text-top" /> Pošalji prijatelju</a>
+		</p><p>	<a href="<?= $this->baseUrl; ?>/kontakt/posalji/id/<?= $this->article->id; ?>"><img src="<?= $this->baseUrl; ?>/images/icon_mail_send.png" style="vertical-align: text-top" /> Pošalji prijatelju</a>
 		</p>
 	</div>
 </div>

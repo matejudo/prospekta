@@ -52,7 +52,7 @@ link, script	{ display: none; margin: 0; padding: 0; position: absolute; }
 #header .logo	{ background: url("../images/ui_logo.gif"); width: 382px; height: 105px; position: absolute;
 				  left: 50%; margin-left: -460px; top: 20px; }
 				  
-.prijava		{ position: absolute; top: 20px; left: 50%; margin-left: 100px; }
+.prijava		{ position: absolute; top: 50px; left: 50%; margin-left: 70px; }
 				  
 #midsection 	{ margin-top: 10px; }
 
@@ -138,7 +138,7 @@ ul.submenu li a {  }
 .overlay a:hover { color: #e27d1c; text-decoration: none; }
 
 .footer			{ padding: 16px 0px; }
-.whitefooter	{ padding: 20px 0px 30px 0px; color: #999; }
+.whitefooter	{ padding: 20px 0px 30px 0px; color: #999; clear: both; }
 
 .filelist		{ height: 200px; overflow: scroll; border: 1px solid #ddd; }
 
@@ -152,6 +152,13 @@ ul.submenu li a {  }
 .comment	{ border-bottom: 1px solid #bbb; padding-bottom: 10px; margin-bottom: 10px; }
 
 small		{ color: #999; }
+
+.matej		{ color: #ccc; line-height: normal;  }
+.matej:hover { color: #000; }
+.matej .info { display: none; }
+.matej:hover .info { display: inline; }
+
+textarea { font-family: 'Lucida Sans Unicode', Helvetica, "Trebuchet MS", Tahoma, Arial, sans-serif; }
 
 .userform label { width: 150px; display: block; float: left; }
 .userform span { display: block; height: 22px; margin-bottom: 4px; clear: both; }

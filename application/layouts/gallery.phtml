@@ -52,6 +52,12 @@
 		$('#menu').hover(function() { clearTimeout(hidetimeout); }, function() { menushown = false; clearTimeout(showtimeout); hidetimeout = setTimeout("$('#menu').animate( { height: '35px' }); $('.submenu').fadeOut();", 500);   });
 
 	});
+	
+	$.fn.showsubmenu = function()
+	{
+		$(".sidesubmenu").hide("slow");
+		this.toggle("slow");
+	}
 </script>
 <div id="header"><div class="logo"></div><h1>Prospekta - Edukacija i zapošljavanje mladih: <?=$this->escape($this->title); ?></h1></div>
 <div class="border-top"></div>
@@ -66,6 +72,7 @@
 
 <div class="border-bottom"></div>
 <?= $this->layout()->content; ?>
+<p class="center whitefooter">&copy; 2008 Prospekta | <a href="<?= $this->baseUrl ?>/kontakt/kako-do-nas">Kontakt</a><br/><a href="http://www.udovicic.com" class="matej">Design &amp; Development <span class="info"><br/>by Matej Udovičić</span></a></p>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
