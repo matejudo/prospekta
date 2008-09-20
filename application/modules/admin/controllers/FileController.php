@@ -169,5 +169,13 @@ class Admin_FileController extends Zend_Controller_Action
 		$this->_redirect("/admin/file/folder/$curdir");
 	}
 	
+	public function resizeAction()
+	{
+//		$file = $this->getParam("curdir") . "/" . $this->getParam("image");
+//		$path = pathinfo($_SERVER["PHP_SELF"]);
+//		$file = realpath($_SERVER["DOCUMENT_ROOT"] . "/" . $path["dirname"] . "/uploads/" . $file);
+//		if(is_file($file))
+	}
+	
 	
 }

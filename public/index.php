@@ -1,6 +1,6 @@
 <?php
-	error_reporting(E_ALL|E_STRICT);
-	ini_set('display_errors', 1);
+	error_reporting(0);
+	ini_set('display_errors', 0);
 	date_default_timezone_set('Europe/Zagreb');
 
 	
@@ -37,6 +37,9 @@
 	
 		// Front Controller
 		$frontController = Zend_Controller_Front::getInstance();
+		
+		
+		
 		$router = $frontController->getRouter();
 	
 		$frontController->addModuleDirectory('../application/modules');
@@ -45,18 +48,7 @@
 														"admin" => "../application/modules/admin/controllers"
 													));
 													
-		$defaultModules = array(
-			'../application',
-			'../application/modules/admin'
-		);
-													
-		foreach($defaultModules as $key => $module) {	 
-			// add default controller directories
-			$frontController->addControllerDirectory($module . DIRECTORY_SEPARATOR . 'controllers', $key);	 
-			// add models directory to include path
-			set_include_path(get_include_path() . PATH_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'models');
-	 
-		}									
+								
 		
 		// učitaj strukturu stranice		
 		$pages = new Pages();
@@ -114,9 +106,14 @@
 		
 		//Zend_Debug::dump($router);
 	
+		$frontController->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
+		    'module'     => 'default',
+		    'controller' => 'error',
+		    'action'     => 'error'
+		)));
 		
 		// setup controller
-		$frontController->throwExceptions(true);
+		//$frontController->throwExceptions(true);
 		Zend_Layout::startMvc(array('layoutPath'=>'../application/layouts'));
 		
 		// run!

@@ -186,8 +186,8 @@ class KontaktController extends Zend_Controller_Action
 				$mail = new Zend_Mail();					  
 				$mail->setBodyText($body);
 				$mail->setFrom('noreply@prospekta.net', 'Prospekta');
-				$mail->addTo("matej.udo@gmail.com", "Ivana Pezic"); //ivanap@horizont.hr
-				$mail->setSubject("[Web Prijava] ");
+				$mail->addTo("ivanap@horizont.hr", "Ivana Pezic"); //ivanap@horizont.hr
+				$mail->setSubject("[Web Prijava]");
 				try
 				{
 					$mail->send();

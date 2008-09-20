@@ -84,7 +84,7 @@
 
 <div id="menu">		
 		<ul id="topmenu" >
-			<li class="topitem" id="menuitem1"><a href="<?= $this->baseUrl() ?>/"><strong>Početna</strong></a></li>
+			<li class="topitem" id="menuitem1"><a href="<?= $this->baseUrl ?>/"><strong>Početna</strong></a></li>
 			<?= $this->topmenu ?>
 		</ul>
 		<div id="subtab1" class="submenu">
@@ -99,7 +99,7 @@
 		<div id="prog1" class="grid_4 alpha program">
 			<h2>Career Coaching Program</h2>
 			<?php if($this->career_date != ""): ?>
-				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/prijave">Početak programa: <?= $this->career_date ?></a></div>
+				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/kontakt/prijave">Početak programa: <?= $this->career_date ?></a></div>
 			<?php endif; ?>
 			<a href="<?php echo $this->baseUrl(); ?>/programi/career-coaching"><img src="<?php echo $this->baseUrl(); ?>/images/prog1_career.jpg" /></a>
 			<p><?= $this->career ?></p>
@@ -107,7 +107,7 @@
 		<div id="prog2" class="grid_4 program">
 			<h2>Self-Development Program</h2>
 			<?php if($this->self_date != ""): ?>
-				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/prijave">Početak programa: <?= $this->self_date ?></a></div>
+				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/kontakt/prijave">Početak programa: <?= $this->self_date ?></a></div>
 			<?php endif; ?>
 			<a href="<?php echo $this->baseUrl(); ?>/programi/self-development"><img src="<?php echo $this->baseUrl(); ?>/images/prog2_selfdev.jpg" /></a>
 			<p><?= $this->self ?></p>
@@ -115,7 +115,7 @@
 		<div id="prog3" class="grid_4 omega program">
 			<h2>Student Management Program</h2>
 			<?php if($this->student_date != ""): ?>
-				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/prijave">Početak programa: <?= $this->student_date ?></a></div>
+				<div class="overlay" style="position: absolute; width: 160px; text-align: center; margin-left: 128px; margin-top: 62px; padding: 5px; background: url('<?= $this->baseUrl ?>/images/blacktrans.png'); font-weight: bold;"><a title="Prijavi se!" href="<?= $this->baseUrl ?>/kontakt/prijave">Početak programa: <?= $this->student_date ?></a></div>
 			<?php endif; ?>
 			<a href="<?php echo $this->baseUrl(); ?>/programi/student-management"><img src="<?php echo $this->baseUrl(); ?>/images/prog3_student.jpg" /></a>
 			<p><?= $this->student ?></p>

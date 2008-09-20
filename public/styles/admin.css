@@ -50,6 +50,7 @@ p				{ font-size: 1.3em; }
 .toolbar li.archive a		{ background: url("../images/icon_archive.png") no-repeat 3px center; }
 .toolbar li.extract a		{ background: url("../images/icon_extract.png") no-repeat 3px center; }
 .toolbar li.compress a		{ background: url("../images/icon_compress.png") no-repeat 3px center; }
+.toolbar li.resize a		{ background: url("../images/icon_image.png") no-repeat 3px center; }
 
 table.list		{ font-size: 13px; border-top: 3px solid #ddd; border-left: 1px solid #ddd; border-bottom: 1px solid #ddd; border-right: 1px solid #ddd; margin-top: 20px; clear: both; }
 table.list th	{ border-bottom: 3px solid #ddd; padding: 6px 2px; font-weight: bold; color: black; background: #eee; }
